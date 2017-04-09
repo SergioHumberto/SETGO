@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17BE5A35-A9F8-4D96-B1E5-79DCC9FDC2B1}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		WebApplicationTemplate.vsmdi = WebApplicationTemplate.vsmdi
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTemplate.Web", "WebApplicationTemplate.Web\WebApplicationTemplate.Web.csproj", "{CE4031E0-8625-45D2-A3B1-6BC1A868CBF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTemplate.Util", "WebApplicationTemplate.Util\WebApplicationTemplate.Util.csproj", "{BB51DB4D-A15F-4EB8-B7CB-D69C6665086A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTemplate.Objects", "WebApplicationTemplate.Objects\WebApplicationTemplate.Objects.csproj", "{E91F65CF-8274-4F5F-8E45-F87FA5CD109E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTemplate.BLL", "WebApplicationTemplate.BLL\WebApplicationTemplate.BLL.csproj", "{B2FE6A15-E257-48DE-9B34-495D25F7EE34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTemplate.DAL", "WebApplicationTemplate.DAL\WebApplicationTemplate.DAL.csproj", "{EDE075CC-5FE1-4558-BA73-281B29E9BD61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationTemplate.Test", "WebApplicationTemplate.Test\WebApplicationTemplate.Test.csproj", "{AE4267D2-F004-4E91-9BFC-FCE4EA545EB7}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApplicationTemplate.Database", "WebApplicationTemplate.Database\WebApplicationTemplate.Database.sqlproj", "{EA85F729-BE9E-44C5-8E9E-CA04E350A88B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE4031E0-8625-45D2-A3B1-6BC1A868CBF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE4031E0-8625-45D2-A3B1-6BC1A868CBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE4031E0-8625-45D2-A3B1-6BC1A868CBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE4031E0-8625-45D2-A3B1-6BC1A868CBF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB51DB4D-A15F-4EB8-B7CB-D69C6665086A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB51DB4D-A15F-4EB8-B7CB-D69C6665086A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB51DB4D-A15F-4EB8-B7CB-D69C6665086A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB51DB4D-A15F-4EB8-B7CB-D69C6665086A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E91F65CF-8274-4F5F-8E45-F87FA5CD109E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E91F65CF-8274-4F5F-8E45-F87FA5CD109E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E91F65CF-8274-4F5F-8E45-F87FA5CD109E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E91F65CF-8274-4F5F-8E45-F87FA5CD109E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2FE6A15-E257-48DE-9B34-495D25F7EE34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FE6A15-E257-48DE-9B34-495D25F7EE34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FE6A15-E257-48DE-9B34-495D25F7EE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FE6A15-E257-48DE-9B34-495D25F7EE34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDE075CC-5FE1-4558-BA73-281B29E9BD61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDE075CC-5FE1-4558-BA73-281B29E9BD61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDE075CC-5FE1-4558-BA73-281B29E9BD61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDE075CC-5FE1-4558-BA73-281B29E9BD61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE4267D2-F004-4E91-9BFC-FCE4EA545EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE4267D2-F004-4E91-9BFC-FCE4EA545EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE4267D2-F004-4E91-9BFC-FCE4EA545EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE4267D2-F004-4E91-9BFC-FCE4EA545EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA85F729-BE9E-44C5-8E9E-CA04E350A88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA85F729-BE9E-44C5-8E9E-CA04E350A88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA85F729-BE9E-44C5-8E9E-CA04E350A88B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = WebApplicationTemplate.vsmdi
+	EndGlobalSection
+EndGlobal

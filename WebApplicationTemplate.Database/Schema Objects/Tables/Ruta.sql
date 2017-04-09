@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Ruta]
+(
+	[IdRuta] INT NOT NULL PRIMARY KEY,
+	[Nombre] VARCHAR(100) NOT NULL,
+	[DistanciaKM] DECIMAL(18,2) NOT NULL
+)

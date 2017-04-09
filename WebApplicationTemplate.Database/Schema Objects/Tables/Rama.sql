@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Rama]
+(
+	[IdRama] INT NOT NULL PRIMARY KEY,
+	[Nombre] VARCHAR(100) NOT NULL
+)

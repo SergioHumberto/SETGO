@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+	<alias>
+		<typeAlias alias="Interface" type="WebApplicationTemplate.Objects.Security.Interface" />
+	</alias>
+
+	<statements>
+
+		<select id="SearchInterfaces" resultClass="Interface">
+			SELECT * FROM [Interface]
+			WHERE [Code] LIKE #codeLike#
+		</select>
+
+	</statements>
+</sqlMap>

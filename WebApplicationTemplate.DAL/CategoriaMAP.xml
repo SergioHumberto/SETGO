@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="CategoriaOBJ" type="WebApplicationTemplate.Objects.CategoriaOBJ" />
+  </alias>
+
+  <statements>
+
+    <insert id="InsertarCategoria" parameterClass="CategoriaOBJ">
+
+      INSERT INTO Categoria
+      ()
+      VALUES
+      ()
+
+      <selectKey type="post" resultClass="int" property="IdCategoria">
+        SELECT @@IDENTITY
+      </selectKey>
+
+    </insert>
+
+  </statements>
+
+</sqlMap>

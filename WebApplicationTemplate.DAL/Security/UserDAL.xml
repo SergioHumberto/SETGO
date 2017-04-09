@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+	<alias>
+		<typeAlias alias="User" type="WebApplicationTemplate.Objects.Security.User" />
+	</alias>
+
+	<statements>
+
+    <insert id="InsertUser">
+		INSERT INTO [User]
+		(
+		Username
+		,IsSuperUser
+		,MacrolynkGUID
+		)
+		VALUES
+		(
+		#username#
+		,#isSuperUser#
+		,#macrolynkGUID#
+		)
+
+		<selectKey type="post" resultClass="int" property="IdUser">
+			SELECT @@IDENTITY
+		</selectKey>
+    </insert>
+    
+	<select id="SelectUserByUsername" resultClass="User">
+      SELECT * FROM [User] Where Username = #username#
+    </select>
+
+    <select id="SelectUserByMacrolynkGUID" resultClass="User">
+      SELECT * FROM [User] Where MacrolynkGUID = #macrolynkGUID#
+    </select>
+
+    <select id="SelectUserById" resultClass="User">
+      SELECT * FROM [User] Where IdUser = #idUser#
+    </select>
+    
+    <select id="SelectUserByUsernameAndSessionToken" resultClass="User">
+      SELECT * FROM [User] Where Username = #username# AND SessionToken = #sessionToken#
+    </select>
+    
+    <update id="UpdateSessionToken">
+      UPDATE [User] 
+      SET SessionToken = #sessionToken#
+      WHERE IdUser = #idUser#
+    </update>
+	</statements>
+</sqlMap>

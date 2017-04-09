@@ -1,0 +1,464 @@
+﻿/* elements */
+
+body
+{
+	font-family: Arial,Helvetica,sans-serif;
+	font-weight: normal;
+	font-size: 8pt;
+	color: #000000;
+	background-color: White;
+}
+
+form
+{
+	width: 65%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1
+{
+	font-size: 17pt;
+	font-weight: bold;
+	color: #506a85;
+	letter-spacing: normal;
+}
+
+h2
+{
+	font-size: 11pt;
+	color: #061a3d;
+}
+
+
+h3
+{
+	font-size: 10pt;
+	color: #1f4f73;
+}
+
+label
+{
+	font-weight: bold;
+}
+
+a
+{
+	color: #0c1a35;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+a:hover
+{
+	text-decoration: none;
+}
+
+/* inputs */
+
+input, button, textarea, select
+{
+	text-decoration: none;
+	border-color: #00145f;
+	border-width: thin;
+	border-style: solid;
+	font-size: 8pt;
+	font-family: Arial,Helvetica,sans-serif;
+}
+
+input[type="text"], textarea
+{
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+textarea
+{
+	resize: none;
+	overflow-y: hidden;
+}
+
+input[type="password"]
+{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+input[type="submit"], input[type="button"], button
+{
+	color: #0c1a35;
+	font-weight: bold;
+	padding-left: 1ex;
+	padding-right: 1ex;
+	background-image: url('Images/button-background.jpg' );
+	background-repeat: repeat;
+	background-position: center;
+	background-color: #AFBACC;
+}
+
+input[disabled="disabled"], button[disabled="disabled"], select[disabled="disabled"]
+{
+	color: Gray;
+}
+
+/* field classes */
+
+.RequiredField
+{
+	background-color: #e5e7ec;
+}
+
+.WarningRequiredField
+{
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background: url(Images/RequiredField.gif);
+	border-style: none;
+}
+
+/* special button classes */
+
+input.ButtonSearch
+{
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url('Images/icon-search.en.jpg');
+	border-style: none;
+	width: 60px;
+	height: 18px;
+}
+
+input.ButtonSearch:hover
+{
+	background-image: url('Images/icon-search-hover.en.jpg');
+}
+
+input.ButtonSearchES
+{
+	background-position: center center;
+	background-image: url('Images/icon-search.es.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 18px;
+}
+
+input.ButtonSearchES:hover
+{
+	background-image: url('Images/icon-search-hover.es.jpg');
+}
+
+input.ButtonNew
+{
+	background-position: center center;
+	background-image: url('Images/icon-new.en.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 44px;
+	height: 18px;
+}
+
+input.ButtonNew:hover
+{
+	background-image: url('Images/icon-new-hover.en.jpg');
+}
+
+input.ButtonNewES
+{
+	background-position: center center;
+	background-image: url('Images/icon-new.es.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 18px;
+}
+
+input.ButtonNewES:hover
+{
+	background-image: url('Images/icon-new-hover.es.jpg');
+}
+
+input.ButtonClearFields
+{
+	background-position: center center;
+	background-image: url('Images/icon-clear.en.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 89px;
+	height: 18px;
+}
+
+input.ButtonClearFields:hover
+{
+	background-image: url('Images/icon-clear-hover.en.jpg');
+}
+
+input.ButtonClearFieldsES
+{
+	background-position: center center;
+	background-image: url('Images/icon-clear.es.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 112px;
+	height: 18px;
+}
+
+input.ButtonClearFieldsES:hover
+{
+	background-image: url('Images/icon-clear-hover.es.jpg');
+}
+
+input.ButtonPrint
+{
+	background-position: center center;
+	background-image: url('Images/icon-print.en.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 53px;
+	height: 18px;
+}
+
+input.ButtonPrint:hover
+{
+	background-image: url('Images/icon-print-hover.en.jpg');
+}
+
+input.ButtonPrintES
+{
+	background-position: center center;
+	background-image: url('Images/icon-print.es.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 70px;
+	height: 18px;
+}
+
+input.ButtonPrintES:hover
+{
+	background-image: url('Images/icon-print-hover.es.jpg');
+}
+
+input.ButtonClose
+{
+	background-position: center center;
+	background-image: url('Images/icon-close.en.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 59px;
+	height: 18px;
+}
+
+input.ButtonClose:hover
+{
+	background-image: url('Images/icon-close-hover.en.jpg');
+}
+
+input.ButtonCloseES
+{
+	background-position: center center;
+	background-image: url('Images/icon-close.es.jpg');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 62px;
+	height: 18px;
+}
+
+input.ButtonCloseES:hover
+{
+	background-image: url('Images/icon-close-hover.es.jpg');
+}
+
+input.ButtonImage
+{
+	background-position: center center;
+	background-image: url('Images/icon-image.png');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	width: 21px;
+	height: 18px;
+	cursor: pointer;
+}
+
+input.ButtonCalendar
+{
+	background-position: center center;
+	background-image: url('Images/Calendar.png');
+	border-style: none;
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+/* main menu classes */
+
+table.MainMenu
+{
+	white-space: nowrap !important;
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+}
+
+td.MainMenuLeft
+{
+	background-image: url('Images/menu-left.png');
+	background-position: right;
+	background-repeat: no-repeat;
+	height: 38px;
+	width: 10px;
+}
+
+td.MainMenuCenter
+{
+	background-image: url('Images/menu-center.png');
+	background-position: center;
+	background-repeat: repeat-x;
+	height: 38px;
+	width: auto;
+	vertical-align: middle;
+}
+
+td.MainMenuRight
+{
+	background-image: url('Images/menu-right.png');
+	background-position: left;
+	background-repeat: no-repeat;
+	height: 38px;
+	width: 10px;
+}
+
+table.MainMenu a
+{
+	font-size: 12px;
+	font-weight: normal;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+table.MainMenu a + a
+{
+	margin-left: 1em;
+}
+
+table.MainMenu a:hover
+{
+	color: #006892;
+	text-decoration: underline;
+}
+
+/* menu option classes */
+
+div.MenuOption
+{
+	border-width: thin;
+	border-style: solid solid none solid;
+	border-color: #CCCCCC;
+}
+
+div.MenuOption a
+{
+	display: block;
+	color: #006892;
+	background-color: #FFFFFF;
+	text-decoration: none;
+	font-weight: normal;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+	padding: 2pt;
+}
+
+div.MenuOption a:hover
+{
+	color: #FFFFFF;
+	background-color: #006892;
+}
+
+/* table class*/
+
+table.TableData
+{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.TableData, table.TableData th, table.TableData td
+{
+	border: 1pt solid #dbdfe6;
+	border-spacing: 0;
+}
+
+table.TableData th, table.TableData td
+{
+	padding: 2pt 4pt;
+}
+
+tr.TableHeader
+{
+	background-image: url('Images/header-background.gif');
+	background-repeat: repeat-x;
+	background-color: #AFBACC;
+	font-weight: bold;
+	text-align: center;
+	color: #0c1a35;
+}
+
+tr.TableFooter
+{
+	background-image: url('Images/footer-background.gif');
+	background-repeat: repeat-x;
+	background-position: left top;
+	background-color: #d0d6da;
+}
+
+tr.TableRowSelected
+{
+	background-color: #DCDFE2;
+}
+
+tr.TableRow
+{
+	background-color: #ffffff;
+}
+
+tr.TableRowAlternate
+{
+	background-color: #e5e7ec;
+}
+
+
+/* message classes */
+
+.Message
+{
+	color: #0000ff;
+}
+
+.MessageError
+{
+	color: #ff0000;
+	font-weight: bold;
+}
+
+.MessageWarning
+{
+	color: #FF6600;
+	font-weight: bold;
+}

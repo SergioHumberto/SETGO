@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+	<alias>
+		<typeAlias alias="Element" type="WebApplicationTemplate.Objects.Security.Element" />
+	</alias>
+  <statements>
+
+    <select id="HasElementByUser" resultClass="bool">
+      IF EXISTS (
+      SELECT * FROM ProfileElement AS PE
+      INNER JOIN Element AS EL ON EL.IdElement = PE.IdElement
+      INNER JOIN ProfileUser AS PU ON PU.IdProfile = PE.IdProfile
+      WHERE PU.IdUser = #idUser# AND EL.Code = #code#
+      )
+      SELECT  1
+      ELSE
+      SELECT 0
+    </select>
+
+  </statements>
+</sqlMap>

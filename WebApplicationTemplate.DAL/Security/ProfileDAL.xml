@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+	<alias>
+		<typeAlias alias="Profile" type="WebApplicationTemplate.Objects.Security.Profile" />
+	</alias>
+
+	<statements>
+		<insert id="InsertProfile">
+			INSERT INTO [Profile]([Name])
+			VALUES(#Name#)
+      
+			<selectKey type="post" resultClass="int" property="IdProfile">
+				SELECT @@IDENTITY
+			</selectKey>
+		</insert>
+	</statements>
+</sqlMap>
