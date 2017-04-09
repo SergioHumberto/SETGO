@@ -5,10 +5,4 @@
     <typeAlias alias="CategoriaXCarreraOBJ" type="WebApplicationTemplate.Objects.CategoriaXCarreraOBJ" />
   </alias>
 
-  <statements>
-
-    
-
-  </statements>
-
 </sqlMap>

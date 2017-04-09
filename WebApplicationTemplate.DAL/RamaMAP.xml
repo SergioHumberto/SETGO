@@ -5,8 +5,4 @@
     <typeAlias alias="RamaOBJ" type="WebApplicationTemplate.Objects.RamaOBJ" />
   </alias>
 
-  <statements>
-
-  </statements>
-
 </sqlMap>

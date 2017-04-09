@@ -5,8 +5,4 @@
     <typeAlias alias="RutaOBJ" type="WebApplicationTemplate.Objects.RutaOBJ" />
   </alias>
 
-  <statements>
-
-  </statements>
-
 </sqlMap>

@@ -5,8 +5,4 @@
     <typeAlias alias="EquipoOBJ" type="WebApplicationTemplate.Objects.EquipoOBJ" />
   </alias>
 
-  <statements>
-
-  </statements>
-
 </sqlMap>

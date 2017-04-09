@@ -5,8 +5,4 @@
     <typeAlias alias="RamaXCarreraOBJ" type="WebApplicationTemplate.Objects.RamaXCarreraOBJ" />
   </alias>
 
-  <statements>
-
-  </statements>
-
 </sqlMap>

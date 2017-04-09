@@ -5,8 +5,4 @@
     <typeAlias alias="ParticipantesOBJ" type="WebApplicationTemplate.Objects.ParticipantesOBJ" />
   </alias>
 
-  <statements>
-
-  </statements>
-
 </sqlMap>
