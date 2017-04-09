@@ -8,7 +8,13 @@ using WebApplicationTemplate.DAL;
 
 namespace WebApplicationTemplate.BLL
 {
-	public class ParticipantesBLL
-	{
-	}
+	public class ParticipantesBLL : BaseBLL
+    {
+        public ParticipantesBLL(UserSession session) : base(session) { /* do nothing */ }
+
+        public void InsertParticipante(ParticipantesOBJ participante)
+        {
+            ParticipantesDAL.InsertParticipante(participante);
+        }
+    }
 }

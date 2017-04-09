@@ -24,7 +24,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Nombres *</label>
-                <asp:TextBox ID="txtNombres" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNombres" MaxLength="50" CssClass="form-control" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="reqNombres" ControlToValidate="txtNombres" Display="Dynamic" SetFocusOnError="true" ForeColor="Red" ErrorMessage="Se requiere nombre" runat="server"></asp:RequiredFieldValidator>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Apellido paterno *</label>
-                <asp:TextBox ID="txtApellidoPaterno" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtApellidoPaterno" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="reqApellidoPaterno" ControlToValidate="txtApellidoPaterno" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere apellido paterno" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
             </div>
@@ -45,7 +45,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Apellido materno</label>
-                <asp:TextBox ID="txtApellidoMaterno" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtApellidoMaterno" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
             </div>
         </div>
     </div>
@@ -54,7 +54,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Edad</label>
-                <asp:TextBox ID="txtEdad" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEdad" CssClass="form-control" MaxLength="2" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revtxtEdad" runat="server" SetFocusOnError="true" 
+                    ErrorMessage="Debe ser un valor numerico"
+                    ControlToValidate="txtEdad" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -63,7 +66,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Domicilio</label>
-                <asp:TextBox ID="txtDomicilio" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDomicilio" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
         </div>
     </div>
@@ -72,7 +75,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Socio</label>
-                <asp:TextBox ID="txtSocio" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtSocio" MaxLength="50" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
         </div>
     </div>
@@ -81,7 +84,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Invitado</label>
-                <asp:TextBox ID="txtInvitado" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtInvitado" MaxLength="2" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
         </div>
     </div>
@@ -90,7 +93,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>No. de Acción</label>
-                <asp:TextBox ID="txtNoAccion" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNoAccion" CssClass="form-control" MaxLength="10" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revTxtNoAccion" runat="server" SetFocusOnError="true" 
+                    ErrorMessage="Debe ser un valor numerico"
+                    ControlToValidate="txtNoAccion" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -99,7 +105,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Telefono personal</label>
-                <asp:TextBox ID="txtTelefonoPersonal" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTelefonoPersonal" CssClass="form-control" MaxLength="12" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revtxtTelefonoPersonal" runat="server" SetFocusOnError="true" 
+                    ErrorMessage="Debe ser un valor numerico"
+                    ControlToValidate="txtTelefonoPersonal" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -108,7 +117,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Email *</label>
-                <asp:TextBox ID="txtEmail" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" runat="server"></asp:TextBox>
 
                 <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true" 
                     ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
@@ -123,7 +132,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Telefono de emergencia</label>
-                <asp:TextBox ID="txtTelefonoEmergencia" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTelefonoEmergencia" CssClass="form-control" MaxLength="12" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revtxtTelefonoEmergencia" runat="server" SetFocusOnError="true" 
+                    ErrorMessage="Debe ser un valor numerico"
+                    ControlToValidate="txtTelefonoEmergencia" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -165,7 +177,7 @@
         <div class="col-md-6">
             <asp:CheckBox ID="chkAcepto" Text="Acepto" runat="server"/>
             <br />
-            <asp:CustomValidator ID="CustomValidator1" runat="server" 
+            <asp:CustomValidator ID="cusChkAcepto" runat="server" 
                 ErrorMessage="Se requiere aceptar las condiciones" Display="Dynamic" ClientValidationFunction="ValidateCheckBox"
                  ForeColor="Red" SetFocusOnError="true" ></asp:CustomValidator>        
         </div>
@@ -181,7 +193,7 @@
     </div>
 
     
-    <asp:Button ID="btnEnviar" CssClass="btn btn-default" CausesValidation="true" Text="Enviar" runat="server" />
+    <asp:Button ID="btnEnviar" CssClass="btn btn-default" CausesValidation="true" Text="Enviar" OnClick="btnEnviar_Click" runat="server" />
 
     <script type="text/javascript">
 

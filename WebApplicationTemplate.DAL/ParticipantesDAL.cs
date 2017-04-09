@@ -10,5 +10,9 @@ namespace WebApplicationTemplate.DAL
 {
 	public static class ParticipantesDAL
 	{
+        public static void InsertParticipante(ParticipantesOBJ participante)
+        {
+            DAL.Insert("InsertParticipante", participante);
+        }
 	}
 }

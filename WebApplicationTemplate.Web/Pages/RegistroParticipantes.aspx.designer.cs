@@ -67,6 +67,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtEdad;
         
         /// <summary>
+        /// Control revtxtEdad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtEdad;
+        
+        /// <summary>
         /// Control txtDomicilio.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtNoAccion;
         
         /// <summary>
+        /// Control revTxtNoAccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revTxtNoAccion;
+        
+        /// <summary>
         /// Control txtTelefonoPersonal.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefonoPersonal;
+        
+        /// <summary>
+        /// Control revtxtTelefonoPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtTelefonoPersonal;
         
         /// <summary>
         /// Control txtEmail.
@@ -148,6 +175,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtTelefonoEmergencia;
         
         /// <summary>
+        /// Control revtxtTelefonoEmergencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtTelefonoEmergencia;
+        
+        /// <summary>
         /// Control rblRamas.
         /// </summary>
         /// <remarks>
@@ -175,13 +211,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.CheckBox chkAcepto;
         
         /// <summary>
-        /// Control CustomValidator1.
+        /// Control cusChkAcepto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
+        protected global::System.Web.UI.WebControls.CustomValidator cusChkAcepto;
         
         /// <summary>
         /// Control btnEnviar.

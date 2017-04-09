@@ -5,4 +5,44 @@
     <typeAlias alias="ParticipantesOBJ" type="WebApplicationTemplate.Objects.ParticipantesOBJ" />
   </alias>
 
+  <statements>
+    <insert id="InsertParticipante" parameterClass="ParticipantesOBJ">
+
+      INSERT INTO [Participante]
+      (
+      Nombre
+      , ApellidoPaterno
+      , ApellidoMaterno
+      , Edad
+      , Domicilio
+      , Invitado
+      , NumeroAccion
+      , Telefono
+      , Email
+      , TelefonoEmergencia
+      , IdEquipo
+      , Pagado
+      )
+      VALUES
+      (
+      #Nombre#
+      , #ApellidoPaterno#
+      , #ApellidoMaterno#
+      , #Edad#
+      , #Domicilio#
+      , #Invitado#
+      , #NumeroAccion#
+      , #Telefono#
+      , #Email#
+      , #TelefonoEmergencia#
+      , #IdEquipo#
+      , #Pagado#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdParticipante">
+        SELECT @@IDENTITY
+      </selectKey>
+    </insert>
+  </statements>
+  
 </sqlMap>

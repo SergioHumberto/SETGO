@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Participante]
 (
-	[IdParticipante] INT NOT NULL PRIMARY KEY,
+	[IdParticipante] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Nombre] VARCHAR(50) NOT NULL,
 	[ApellidoPaterno] VARCHAR(50) NOT NULL,
 	[ApellidoMaterno] VARCHAR(50) NOT NULL,
