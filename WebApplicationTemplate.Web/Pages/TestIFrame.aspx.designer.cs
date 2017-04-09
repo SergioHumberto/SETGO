@@ -7,9 +7,9 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace WebApplicationTemplate.Web.Controls {
+namespace WebApplicationTemplate.Web.Pages {
     
     
-    public partial class Menu {
+    public partial class TestIFrame {
     }
 }

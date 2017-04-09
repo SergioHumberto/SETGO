@@ -58,5 +58,15 @@ namespace WebApplicationTemplate.Web.Tools
 		{
 			return Abs("/Pages/SignOut.aspx");
 		}
+
+        public static String RegistroParticipantes()
+        {
+            return Abs("/Pages/RegistroParticipantes.aspx");
+        }
+
+        public static String TestIFrame()
+        {
+            return Abs("/Pages/TestIFrame.aspx");
+        }
     }
 }
