@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[RamaXCarrera]
 (
-	[IdRamaXCarrera] INT NOT NULL PRIMARY KEY,
+	[IdRamaXCarrera] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	[IdRama] INT NOT NULL FOREIGN KEY REFERENCES [Rama](IdRama),
 	[IdCarrera] INT NOT NULL FOREIGN KEY REFERENCES [Carrera](IdCarrera)
 )

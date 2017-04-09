@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Carrera]
 (
-	[IdCarrera] INT NOT NULL PRIMARY KEY,
+	[IdCarrera] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	[Nombre] VARCHAR(100) NOT NULL,
 	[Fecha] DATE NOT NULL,
 	[Hora] VARCHAR(5) NOT NULL,

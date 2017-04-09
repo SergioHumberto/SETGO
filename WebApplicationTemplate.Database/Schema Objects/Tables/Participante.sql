@@ -3,7 +3,7 @@
 	[IdParticipante] INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Nombre] VARCHAR(50) NOT NULL,
 	[ApellidoPaterno] VARCHAR(50) NOT NULL,
-	[ApellidoMaterno] VARCHAR(50) NOT NULL,
+	[ApellidoMaterno] VARCHAR(50) NULL,
 	[Edad] INT NOT NULL,
 	[Domicilio] VARCHAR(255) NOT NULL,
 	[Invitado] VARCHAR(2) NOT NULL,
