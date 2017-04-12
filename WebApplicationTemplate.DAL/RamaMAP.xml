@@ -5,4 +5,20 @@
     <typeAlias alias="RamaOBJ" type="WebApplicationTemplate.Objects.RamaOBJ" />
   </alias>
 
+  <statements>
+    <select id="SelectRama" parameterClass="RamaOBJ" resultClass="RamaOBJ">
+      <![CDATA[
+      
+      SELECT 
+      R.* 
+      FROM Rama R
+      LEFT JOIN RamaXCarrera RxC ON RxC.IdRama = R.IdRama
+      WHERE (#IdRama# <= 0 OR R.IdRama = #IdRama#)
+      AND (#IdCarrera# <= 0 OR RxC.IdCarrera = #IdCarrera#)
+      AND (#Nombre# IS NULL OR R.Nombre = #Nombre#)
+      
+      ]]>
+    </select>
+  </statements>
+
 </sqlMap>

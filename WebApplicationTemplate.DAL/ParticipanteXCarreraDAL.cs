@@ -10,5 +10,9 @@ namespace WebApplicationTemplate.DAL
 {
 	public static class ParticipanteXCarreraDAL
 	{
+        public static void InsertParticipanteXCarrera(ParticipanteXCarreraOBJ p_ParticipanteXCarrera)
+        {
+            Mapper.Instance().Insert("InsertParticipanteXCarrera", p_ParticipanteXCarrera);
+        }
 	}
 }

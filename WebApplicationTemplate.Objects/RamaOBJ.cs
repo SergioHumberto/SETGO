@@ -9,5 +9,6 @@ namespace WebApplicationTemplate.Objects
     {
         public int IdRama { get; set; }
         public string Nombre { get; set; }
+        public int IdCarrera { get; set; }
     }
 }

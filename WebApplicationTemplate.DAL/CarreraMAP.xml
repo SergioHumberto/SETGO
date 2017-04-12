@@ -10,15 +10,57 @@
     <insert id="InsertarCarrera" parameterClass="CarreraOBJ">
 
       INSERT INTO Carrera
-      ()
+      (
+      Nombre
+      , Fecha
+      , Hora
+      , Precio
+      , CategoriaEvento
+      , PaginaWeb
+      , PalabrasClave
+      , URLMapa
+      , Ubicacion
+      , ContenidoHtml
+      )
       VALUES
-      ()
+      (
+      #Nombre#
+      , #Fecha#
+      , #Hora#
+      , #Precio#
+      , #CategoriaEvento#
+      , #PaginaWeb#
+      , #PalabrasClave#
+      , #URLMapa#
+      , #Ubicacion#
+      , #ContenidoHtml#
+      )
 
       <selectKey type="post" resultClass="int" property="IdCarrera">
         SELECT @@IDENTITY
       </selectKey>
 
     </insert>
+
+    <select id="SelectCarrera" resultClass="CarreraOBJ" parameterClass="CarreraOBJ" >
+      
+      <![CDATA[
+      
+      SELECT 
+      * 
+      FROM Carrera C
+      WHERE (#IdCarrera# <= 0 OR C.IdCarrera = #IdCarrera#)
+      AND (LEN(#Nombre#) = 0 OR C.Nombre = #Nombre#)
+      
+      ]]>
+      
+    </select>
+
+    <select id="SelectCarreraObject" parameterClass="int" resultClass="CarreraOBJ" >
+      
+      SELECT C.* FROM Carrera C WHERE C.IdCarrera = #value#
+      
+    </select>
     
   </statements>
   

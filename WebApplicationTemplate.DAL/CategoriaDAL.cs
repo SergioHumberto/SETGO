@@ -14,5 +14,12 @@ namespace WebApplicationTemplate.DAL
 		{
 			Mapper.Instance().Insert("InsertarCategoria", categoriaOBJ);
 		}
-	}
+
+        public static IList<CategoriaOBJ> SelectCategoria(CategoriaOBJ p_CategoriaOBJ)
+        {
+            IList<CategoriaOBJ> lstCategorias = Mapper.Instance().QueryForList<CategoriaOBJ>("SelectCategoria", p_CategoriaOBJ);
+            return lstCategorias;
+        }
+
+    }
 }

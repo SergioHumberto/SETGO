@@ -12,5 +12,6 @@
 	[Email] VARCHAR(100) NULL,
 	[TelefonoEmergencia] VARCHAR(12) NULL,
 	[IdEquipo] INT NULL  FOREIGN KEY REFERENCES [Equipo](IdEquipo),
-	[Pagado] BIT NOT NULL
+	[Pagado] BIT NOT NULL,
+	[Socio] VARCHAR(100) NULL
 )

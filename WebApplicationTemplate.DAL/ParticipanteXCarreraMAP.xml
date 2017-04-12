@@ -5,4 +5,24 @@
     <typeAlias alias="ParticipanteXCarreraOBJ" type="WebApplicationTemplate.Objects.ParticipanteXCarreraOBJ" />
   </alias>
 
+  <statements>
+    <insert id="InsertParticipanteXCarrera" parameterClass="ParticipanteXCarreraOBJ" >
+
+      INSERT INTO [ParticipanteXCarrera]
+      (
+      IdParticipante
+      , IdCarrera
+      )
+      VALUES
+      (
+      #IdParticipante#
+      , #IdCarrera#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdParticipanteXCarrera">
+        SELECT @@IDENTITY
+      </selectKey>
+    </insert>
+  </statements>
+
 </sqlMap>

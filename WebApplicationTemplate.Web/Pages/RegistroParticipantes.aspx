@@ -16,9 +16,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
 
+    <div id="divHtmlRender" runat="server" >
+    </div>
 
-    <h1>¡INSCRIBETE AHORA!</h1>
-    <h4>1a. Carrera 5k / 10k RACE IN ONE LA LOMA GOLF 2017</h4>
+     <div class="has-error">
+         <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" ForeColor="Red" ></asp:CustomValidator>
+     </div>
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -53,8 +56,10 @@
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label>Edad</label>
+                <label>Edad *</label>
                 <asp:TextBox ID="txtEdad" CssClass="form-control" MaxLength="2" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqTxtEdad" ControlToValidate="txtEdad" SetFocusOnError="true" 
+                    ForeColor="Red" ErrorMessage="Se requiere indicar edad" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revtxtEdad" runat="server" SetFocusOnError="true" 
                     ErrorMessage="Debe ser un valor numerico"
                     ControlToValidate="txtEdad" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
@@ -145,10 +150,6 @@
             <div class="form-group">
             <label>Rama:</label>
                 <asp:RadioButtonList ID="rblRamas" runat="server">
-                    <asp:ListItem Text="Varonil 5K" Value="V5K"></asp:ListItem>
-                    <asp:ListItem Text="Varonil 10K" Value="V10K"></asp:ListItem>
-                    <asp:ListItem Text="Femenil 5K" Value="F5K"></asp:ListItem>
-                    <asp:ListItem Text="Femenil 10K" Value="F10K"></asp:ListItem>
                 </asp:RadioButtonList>
             </div>
         </div>
@@ -159,11 +160,11 @@
         <div class="col-md-6">
             <label>Carrera:</label>
             <asp:RadioButtonList ID="rblCarrera" runat="server">
-                <asp:ListItem Text="Infantil $246" Value="246"></asp:ListItem>
-                <asp:ListItem Text="Adulto $296" Value="296"></asp:ListItem>
             </asp:RadioButtonList>
         </div>
     </div>
+
+    <br />
 
     <div class="row">
         <div class="col-md-12">
@@ -195,7 +196,18 @@
     
     <asp:Button ID="btnEnviar" CssClass="btn btn-default" CausesValidation="true" Text="Enviar" OnClick="btnEnviar_Click" runat="server" />
 
+    <br />
+
+    <asp:Label ID="lblMessage" runat="server"></asp:Label>
+
     <script type="text/javascript">
+
+        $('#btnEnviar').click(function () {
+            if (Page_ClientValidate()) {
+                this.enable = false;
+                this.value = 'Procesando espere por favor';
+            }
+        });
 
         $(document).ready(function () {
             

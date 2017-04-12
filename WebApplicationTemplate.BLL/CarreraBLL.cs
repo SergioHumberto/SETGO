@@ -8,11 +8,23 @@ using WebApplicationTemplate.DAL;
 
 namespace WebApplicationTemplate.BLL
 {
-    public class CarreraBLL
+    public class CarreraBLL : BaseBLL
     {
+        public CarreraBLL(UserSession session) : base(session) { /* do nothing */ }
+
         public void InsertarCarrera(CarreraOBJ carreraOBJ)
         {
 			CarreraDAL.InsertarCarrera(carreraOBJ);
+        }
+
+        public IList<CarreraOBJ> SelectCarrera(CarreraOBJ p_CarreraOBJ)
+        {
+            return CarreraDAL.SelectCarrera(p_CarreraOBJ);
+        }
+
+        public CarreraOBJ SelectCarreraObject(int IdCarrera)
+        {
+            return CarreraDAL.SelectCarreraObject(IdCarrera);
         }
     }
 }

@@ -118,9 +118,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="Services\Test.asmx" />
-    <None Include="Properties.config">
+    <Content Include="Properties.config">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <Content Include="Services\Users.asmx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -248,6 +248,10 @@
     <ProjectReference Include="..\WebApplicationTemplate.BLL\WebApplicationTemplate.BLL.csproj">
       <Project>{B2FE6A15-E257-48DE-9B34-495D25F7EE34}</Project>
       <Name>WebApplicationTemplate.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApplicationTemplate.DAL\WebApplicationTemplate.DAL.csproj">
+      <Project>{ede075cc-5fe1-4558-ba73-281b29e9bd61}</Project>
+      <Name>WebApplicationTemplate.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApplicationTemplate.Objects\WebApplicationTemplate.Objects.csproj">
       <Project>{E91F65CF-8274-4F5F-8E45-F87FA5CD109E}</Project>

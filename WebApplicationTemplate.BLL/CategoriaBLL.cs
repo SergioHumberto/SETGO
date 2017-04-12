@@ -8,11 +8,18 @@ using WebApplicationTemplate.DAL;
 
 namespace WebApplicationTemplate.BLL
 {
-	public class CategoriaBLL
+	public class CategoriaBLL : BaseBLL
 	{
-		public void InsertarCategoria(CategoriaOBJ categoriaOBJ)
+        public CategoriaBLL(UserSession session) : base(session) { /* do nothing */ }
+
+        public void InsertarCategoria(CategoriaOBJ categoriaOBJ)
 		{
 			CategoriaDAL.InsertarCategoria(categoriaOBJ);
 		}
-	}
+
+        public IList<CategoriaOBJ> SelectCategoria(CategoriaOBJ p_CategoriaOBJ)
+        {
+            return CategoriaDAL.SelectCategoria(p_CategoriaOBJ);
+        }
+    }
 }

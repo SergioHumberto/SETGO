@@ -12,7 +12,20 @@ namespace WebApplicationTemplate.DAL
     {
         public static void InsertarCarrera(CarreraOBJ carreraOBJ)
         {
-			Mapper.Instance().Insert("InsertarCarrera", carreraOBJ);
+            Mapper.Instance().Insert("InsertarCarrera", carreraOBJ);
         }
+
+        public static IList<CarreraOBJ> SelectCarrera(CarreraOBJ p_CarreraOBJ)
+        {
+            IList<CarreraOBJ> lstCarreras = Mapper.Instance().QueryForList<CarreraOBJ>("SelectCarrera", p_CarreraOBJ);
+            return lstCarreras;
+        }
+
+        public static CarreraOBJ SelectCarreraObject(int IdCarrera)
+        {
+            CarreraOBJ objCarreraResult = Mapper.Instance().QueryForObject<CarreraOBJ>("SelectCarreraObject", IdCarrera);
+            return objCarreraResult;
+        }
+
     }
 }

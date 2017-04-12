@@ -20,5 +20,6 @@ namespace WebApplicationTemplate.Objects
         public string TelefonoEmergencia { get; set; }
         public int? IdEquipo { get; set; }
         public bool Pagado { get; set; }
+        public string Socio { get; set; }
     }
 }
