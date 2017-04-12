@@ -96,6 +96,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             try
             {
+				Response.Redirect("~/Pages/PayPal.aspx");
                 InsertarParticipante();
                 lblMessage.Text = "Se guardó la informacion del participante";
                 LimpiarCampos();
