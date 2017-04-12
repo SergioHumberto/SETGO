@@ -8,12 +8,12 @@ using WebApplicationTemplate.Objects;
 
 namespace WebApplicationTemplate.DAL
 {
-	public static class CategoriaDAL
-	{
-		public static void InsertarCategoria(CategoriaOBJ categoriaOBJ)
-		{
-			Mapper.Instance().Insert("InsertarCategoria", categoriaOBJ);
-		}
+    public static class CategoriaDAL
+    {
+        public static void InsertarCategoria(CategoriaOBJ categoriaOBJ)
+        {
+            Mapper.Instance().Insert("InsertarCategoria", categoriaOBJ);
+        }
 
         public static IList<CategoriaOBJ> SelectCategoria(CategoriaOBJ p_CategoriaOBJ)
         {
@@ -21,5 +21,10 @@ namespace WebApplicationTemplate.DAL
             return lstCategorias;
         }
 
+        public static CategoriaOBJ SelectCategoriaObject(int IdCategoria)
+        {
+            CategoriaOBJ objCategoria = Mapper.Instance().QueryForObject<CategoriaOBJ>("SelectCategoriaObject", IdCategoria);
+            return objCategoria;
+        }
     }
 }

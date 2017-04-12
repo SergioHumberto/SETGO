@@ -35,6 +35,15 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
+        public string URLWSGetPrecioCategoria
+        {
+            get
+            {
+                string URL = Urls.Abs("~/Pages/RegistroParticipantes.aspx/WSGetPrecioCategoria");
+                return URL;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -72,7 +81,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                 rblCarrera.DataSource = GetListConcatCategoriasConPrecio(lstCategorias);
                 rblCarrera.DataTextField = "Nombre";
-                rblCarrera.DataValueField = "Precio";
+                rblCarrera.DataValueField = "IdCategoria";
                 rblCarrera.DataBind();
             }
         }
@@ -84,7 +93,7 @@ namespace WebApplicationTemplate.Web.Pages
             foreach (CategoriaOBJ itemCategoria in lstCategoriasXCarrera)
             {
                 CategoriaOBJ objCategoria = new CategoriaOBJ();
-                objCategoria.Precio = itemCategoria.Precio;
+                objCategoria.IdCategoria = itemCategoria.IdCategoria;
                 objCategoria.Nombre = itemCategoria.Nombre + " $" + itemCategoria.Precio;
                 lstCategoriasResult.Add(objCategoria);
             }
@@ -126,18 +135,19 @@ namespace WebApplicationTemplate.Web.Pages
 
         private void InsertarParticipante()
         {
-            UserSession session = HttpSecurity.CurrentSession;
-            ParticipantesOBJ objParticipante = FillParticipanteOBJ();
-            ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
-
             try
             {
+                UserSession session = HttpSecurity.CurrentSession;
+                ParticipantesOBJ objParticipante = FillParticipanteOBJ();
+                ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
+
                 DAL.DAL.BeginTransaction();
                 objParticipanteBLL.InsertParticipante(objParticipante);
+
                 InsertaParticipanteXCarrera(objParticipante.IdParticipante, IdCarreraProperty);
                 DAL.DAL.CommitTransaction();
             }
-            catch // (Exception ex)
+            catch (Exception ex)
             {
                 DAL.DAL.RollbackTransaction();
                 throw new Exception("Hubo un error al guardar participante");
@@ -151,7 +161,19 @@ namespace WebApplicationTemplate.Web.Pages
             ParticipanteXCarreraOBJ objParticipanteXCarreraOBJ = new ParticipanteXCarreraOBJ();
             objParticipanteXCarreraOBJ.IdCarrera = IdCarrera;
             objParticipanteXCarreraOBJ.IdParticipante = IdParticipante;
-            
+
+            int IdRama;
+            int.TryParse(rblRamas.SelectedValue, out IdRama);
+
+            int IdCategoria;
+            int.TryParse(rblCarrera.SelectedValue, out IdCategoria);
+
+            int? IdRuta = null;
+
+            objParticipanteXCarreraOBJ.IdCategoria = IdCategoria;
+            objParticipanteXCarreraOBJ.IdRama = IdRama;
+            objParticipanteXCarreraOBJ.IdRuta = IdRuta;
+
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
         }
 
@@ -192,6 +214,18 @@ namespace WebApplicationTemplate.Web.Pages
             }
             
             return objParticipante;
+        }
+
+        [System.Web.Services.WebMethod]
+        public static string WSGetPrecioCategoria(int IdCategoria)
+        {
+            CategoriaBLL objCategoriaBLL = new CategoriaBLL(HttpSecurity.CurrentSession);
+            CategoriaOBJ objCategoriaOBJ = objCategoriaBLL.SelectCategoriaObject(IdCategoria);
+
+            if (objCategoriaOBJ != null)
+                return objCategoriaOBJ.Precio.ToString();
+
+            return "";
         }
     }
 }

@@ -34,6 +34,10 @@
       ]]>     
     </select>
 
+      <select id="SelectCategoriaObject" parameterClass="int" resultClass="CategoriaOBJ" >
+          SELECT C.* FROM Categoria C WHERE C.IdCategoria = #value#
+      </select>
+
   </statements>
 
 </sqlMap>

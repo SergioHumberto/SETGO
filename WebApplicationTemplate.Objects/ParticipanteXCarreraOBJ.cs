@@ -10,5 +10,8 @@ namespace WebApplicationTemplate.Objects
         public int IdParticipanteXCarrera { get; set; }
         public int? IdParticipante { get; set; }
         public int? IdCarrera { get; set; }
+        public int? IdRama { get; set; }
+        public int? IdCategoria { get; set; }
+        public int? IdRuta { get; set; }
     }
 }
