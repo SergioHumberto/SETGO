@@ -8,18 +8,24 @@
   <statements>
     <insert id="InsertParticipanteXCarrera" parameterClass="ParticipanteXCarreraOBJ" >
 
-      INSERT INTO [ParticipanteXCarrera]
-      (
-      IdParticipante
-      , IdCarrera
-      )
-      VALUES
-      (
-      #IdParticipante#
-      , #IdCarrera#
-      )
+        INSERT INTO [ParticipanteXCarrera]
+        (
+        IdParticipante
+        , IdCarrera
+        , IdCategoria
+        , IdRama
+        , IdRuta
+        )
+        VALUES
+        (
+        #IdParticipante#
+        , #IdCarrera#
+        , #IdCategoria#
+        , #IdRama#
+        , #IdRuta#
+        )
 
-      <selectKey type="post" resultClass="int" property="IdParticipanteXCarrera">
+        <selectKey type="post" resultClass="int" property="IdParticipanteXCarrera">
         SELECT @@IDENTITY
       </selectKey>
     </insert>

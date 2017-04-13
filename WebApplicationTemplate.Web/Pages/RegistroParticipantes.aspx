@@ -214,9 +214,23 @@
             $("#<%= rblCarrera.ClientID %>").click(function () {
                 var radioSelect = $("#<%= rblCarrera.ClientID %> input:checked")
 
-                $("#lblTotal").text(radioSelect.val());
-            });
+                // $("#lblTotal").text(radioSelect.val());
 
+                    $.ajax({
+                    type: "POST",
+                    url: '<%= URLWSGetPrecioCategoria %>',
+                    data: '{IdCategoria: "' + radioSelect.val() + '" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    failure: function(response) {
+                        alert(response.d);
+                    },
+                    success: function (data) {
+                            $("#lblTotal").text(data.d);
+                            // $("#searchresultsA").html(data); // show the string that was returned, this will be the data inside the xml wrapper
+                        }
+                    });
+            });
         });
     </script>
 
