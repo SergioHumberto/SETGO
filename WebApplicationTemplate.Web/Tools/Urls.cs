@@ -8,17 +8,19 @@ namespace WebApplicationTemplate.Web.Tools
 {
 	public static class Urls
 	{
-		private static String Abs(String url)
+		public static String Abs(String url)
 		{
-			StringBuilder abs = new StringBuilder(HttpContext.Current.Request.ApplicationPath);
+            // StringBuilder abs = new StringBuilder("http://setgosrv-001-site1.ftempurl.com");
+            StringBuilder abs = new StringBuilder(HttpContext.Current.Request.ApplicationPath);
 
-			if (url.StartsWith("/"))
+            if (url.StartsWith("/"))
 			{
 				abs.Append(url);
 			}
 			else if (url.StartsWith("~"))
 			{
-				abs.Append(url.Substring(1));
+                abs.Append(url.Substring(1));
+                // return HttpContext.Current.Server.MapPath(url);
 			}
 			else
 			{
