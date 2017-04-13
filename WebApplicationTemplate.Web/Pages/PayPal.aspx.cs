@@ -11,10 +11,10 @@ namespace WebApplicationTemplate.Web.Pages
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			if (!IsPostBack)
-			{
-				ClientScript.RegisterStartupScript(GetType(), "doPostBack", "__doPostBack('','')", true);
-			}
+			//if (!IsPostBack)
+			//{
+			//	ClientScript.RegisterStartupScript(GetType(), "doPostBack", "__doPostBack('','')", true);
+			//}
 
 		}
 	}
