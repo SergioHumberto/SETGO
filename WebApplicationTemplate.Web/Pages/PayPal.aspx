@@ -6,28 +6,34 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
+    <h1>Espere un momento...</h1>
+
     <form name="formPayPal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_xclick"/>
-        <input type="hidden" name="business" value="humberto1_sergio-facilitator@hotmail.com"/>
-        <input type="hidden" name="item_name" value="Carrera"/>
+        <input type="hidden" name="business" value="<%= PayPalEmail %>"/>
+        <input type="hidden" name="item_name" value="<%= ItemName %>"/>
         <input type="hidden" name="item_number" value="1"/>
         <input type="hidden" name="currency_code" value="MXN"/>
-        <input type="hidden" value="1" name="no_note"/>
-        <input type="hidden" value="1" name="no_shipping"/>
-        <input type="hidden" name="amount" value="300"/>
-        <input type="hidden" name="return" value="http://localhost:61880/WebApplicationTemplate/Pages/Home.aspx"/>
-        <input type="hidden" name="cancel_return" value="http://localhost:61880/WebApplicationTemplate/Pages/TestIFrame.aspx"/>
-        <input type="hidden" name="notify_url" value="http://localhost:61880/WebApplicationTemplate/Pages/Home.aspx"/>
-        <%--<input type="image" src="http://www.paypal.com/es_XC/i/btn/x-click-but01.gif"
-               name="submit"
-               runat="server"
-               id="btnPagar"  />--%>
+        <input type="hidden" name="no_note" value="1"/>
+        <input type="hidden" name="no_shipping" value="1" />
+        <input type="hidden" name="amount" value="<%= Amount %>"/>
+        <input type="hidden" name="custom" value="<%= Custom %>" />
+        <input type="hidden" name="return" value="<%= ReturnURL %>"/>
+        <input type="hidden" name="cancel_return" value="<%= CancelURL %>"/>
+        
+        <input type="image" name="submit" src="http://www.paypal.com/es_XC/i/btn/x-click-but01.gif" />
     </form>
 
-    <script type='text/javascript'>
-        document.formPayPal.submit();
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            document.forms["formPayPal"].submit();
+        });
+
     </script>
 
 </body>

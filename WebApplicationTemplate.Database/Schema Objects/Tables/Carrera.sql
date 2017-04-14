@@ -10,5 +10,7 @@
 	[PalabrasClave] VARCHAR(255) NOT NULL,
 	[URLMapa] VARCHAR(MAX) NOT NULL,
 	[Ubicacion] VARCHAR(255) NOT NULL,
-	[ContenidoHtml] VARCHAR(MAX) NOT NULL
+	[ContenidoHtml] VARCHAR(MAX) NOT NULL,
+	[PayPalEmail] VARCHAR(MAX) NULL,
+	[TokenPaypalTDP] VARCHAR(MAX) NULL
 )

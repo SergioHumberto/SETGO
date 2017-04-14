@@ -29,6 +29,14 @@
         SELECT @@IDENTITY
       </selectKey>
     </insert>
+
+      <select id="SelectParticipanteXCarrera" resultClass="ParticipanteXCarreraOBJ">
+          SELECT 
+          PxC.* 
+          FROM ParticipanteXCarrera PxC 
+          WHERE PxC.IdParticipanteXCarrera = #value#
+      </select>
+    
   </statements>
 
 </sqlMap>

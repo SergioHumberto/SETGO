@@ -14,5 +14,11 @@ namespace WebApplicationTemplate.DAL
         {
             Mapper.Instance().Insert("InsertParticipanteXCarrera", p_ParticipanteXCarrera);
         }
-	}
+
+        public static ParticipanteXCarreraOBJ SelectParticipanteXCarrera(int IdParticipanteXCarrera)
+        {
+            ParticipanteXCarreraOBJ objParticipanteXCarreraOBJ = Mapper.Instance().QueryForObject<ParticipanteXCarreraOBJ>("SelectParticipanteXCarrera", IdParticipanteXCarrera);
+            return objParticipanteXCarreraOBJ;
+        }
+    }
 }

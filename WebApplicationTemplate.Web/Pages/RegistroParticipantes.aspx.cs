@@ -10,6 +10,8 @@ using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Web.Tools;
 using System.Text;
 using System.IO;
+using System.Net;
+using System.Net.Security;
 
 namespace WebApplicationTemplate.Web.Pages
 {
@@ -35,6 +37,50 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
+        private int IdParticipanteVSProperty
+        {
+            get
+            {
+                if (ViewState["IdParticipante"] != null)
+                {
+                    int id;
+                    if (int.TryParse(ViewState["IdParticipante"].ToString(), out id))
+                    {
+                        return id;
+                    }
+                }
+
+                return -1;
+            }
+
+            set
+            {
+                ViewState["IdParticipante"] = value;
+            }
+        }
+
+        private int IdParticipanteXCarreraProperty
+        {
+            get
+            {
+                if (ViewState["IdParticipanteXCarreraProperty"] != null)
+                {
+                    int id;
+                    if (int.TryParse(ViewState["IdParticipanteXCarreraProperty"].ToString(), out id))
+                    {
+                        return id;
+                    }
+                }
+
+                return -1;
+            }
+
+            set
+            {
+                ViewState["IdParticipanteXCarreraProperty"] = value;
+            }
+        }
+
         public string URLWSGetPrecioCategoria
         {
             get
@@ -51,6 +97,11 @@ namespace WebApplicationTemplate.Web.Pages
                 if (IdCarreraProperty > 0)
                 {
                     LoadCarrera(IdCarreraProperty);
+
+                    if (Request.QueryString["tx"] != null)
+                    {
+                        ProcesaRespuestaPayPal();
+                    }
                 }
             }
         }
@@ -105,10 +156,10 @@ namespace WebApplicationTemplate.Web.Pages
         {
             try
             {
-				Response.Redirect("~/Pages/PayPal.aspx");
                 InsertarParticipante();
-                lblMessage.Text = "Se guardó la informacion del participante";
-                LimpiarCampos();
+                // lblMessage.Text = "Se guardó la informacion del participante";
+                // LimpiarCampos();    
+                PaypalDelegateForm();
             }
             catch(Exception ex)
             {
@@ -147,6 +198,8 @@ namespace WebApplicationTemplate.Web.Pages
 
                 InsertaParticipanteXCarrera(objParticipante.IdParticipante, IdCarreraProperty);
                 DAL.DAL.CommitTransaction();
+
+                IdParticipanteVSProperty = objParticipante.IdParticipante;
             }
             catch (Exception ex)
             {
@@ -176,6 +229,8 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipanteXCarreraOBJ.IdRuta = IdRuta;
 
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
+
+            IdParticipanteXCarreraProperty = objParticipanteXCarreraOBJ.IdParticipanteXCarrera;
         }
 
         private ParticipantesOBJ FillParticipanteOBJ()
@@ -227,6 +282,148 @@ namespace WebApplicationTemplate.Web.Pages
                 return objCategoriaOBJ.Precio.ToString();
 
             return "";
+        }
+
+        protected void ddlTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private decimal GetPrecioXCategoria(int IdCategoria)
+        {
+            CategoriaBLL objCategoriaBLL = new CategoriaBLL(HttpSecurity.CurrentSession);
+            CategoriaOBJ objCategoriaOBJ = objCategoriaBLL.SelectCategoriaObject(IdCategoria);
+            if (objCategoriaOBJ != null)
+            {
+                return objCategoriaOBJ.Precio;
+            }
+
+            return 0;
+        }
+
+        private void PaypalDelegateForm()
+        {
+            string strCustom = "IdParticipante={0}";
+            strCustom = string.Format(strCustom, IdParticipanteVSProperty);
+
+            // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
+            string strURLReturn = "http://localhost:61880/WebApplicationTemplate/Pages/RegistroParticipantes.aspx?IdCarrera={0}";
+            strURLReturn = string.Format(strURLReturn, IdCarreraProperty);
+
+            ParticipanteXCarreraBLL objPxCBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+            ParticipanteXCarreraOBJ objPxC = objPxCBLL.SelectParticipanteXCarrera(IdParticipanteXCarreraProperty);
+
+            decimal dAmount = 0;
+            if (objPxC != null)
+            {
+                if (objPxC.IdCategoria.HasValue)
+                {
+                    dAmount = GetPrecioXCategoria(objPxC.IdCategoria.Value);
+                }
+            }
+
+            // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
+            string strCancelURL = "http://localhost:61880/WebApplicationTemplate/Pages/RegistroParticipantes.aspx?IdCarrera={0}";
+            strCancelURL = string.Format(strCancelURL, IdCarreraProperty);
+
+            SessionPayPal objSessionPayPal = new SessionPayPal()
+            {
+                IdCarrera = IdCarreraProperty
+                , amount = dAmount
+                , custom = strCustom
+                , item_name = "Carrera"
+                , returnURL = strURLReturn
+                , cancelURL = strCancelURL
+            };
+
+            Session.Add("objSessionPayPal", objSessionPayPal);
+
+            string url = Urls.Abs("~/Pages/PayPal.aspx");
+            
+            // string s = "window.open('" + url + "', 'popup_window', 'width=500,height=800,left=100,top=100,resizable=yes');";
+            // ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
+
+            Response.Redirect(url);
+        }
+
+        private void ProcesaRespuestaPayPal()
+        {
+            CarreraBLL objCarreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+            CarreraOBJ objCarreraOBJ = objCarreraBLL.SelectCarreraObject(IdCarreraProperty);
+
+            string authToken = string.Empty;
+            if (objCarreraOBJ != null)
+            {
+                // ejemplo: "wyws0SQYueHY3xZJte9l9nr4h1OT7FGixDL0a3bJwqwY0ABJbKoZkxzibR4"
+                authToken = objCarreraOBJ.TokenPaypalTDP;
+            }
+
+            string txToken = Request.QueryString["tx"];
+            string query = "cmd=_notify-synch&tx=" + txToken + "&at=" + authToken;
+
+            //Post back to either sandbox or live
+            string strSandbox = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+            string strLive = "https://www.paypal.com/cgi-bin/webscr";
+
+            //ServicePointManager.ServerCertificateValidationCallback =
+            //    delegate (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            //    { return true; };
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            ServicePointManager.ServerCertificateValidationCallback +=
+                new RemoteCertificateValidationCallback((sender, certificate, chain, policyErrors) => { return true; });
+
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(strSandbox);
+
+            //Set values for the request back
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.ContentLength = query.Length;
+
+            //Send the request to PayPal and get the response
+            StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII);
+            streamOut.Write(query);
+            streamOut.Close();
+            StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
+            string strResponse = streamIn.ReadToEnd();
+            streamIn.Close();
+
+            Dictionary<string, string> results = new Dictionary<string, string>();
+            if (strResponse != "")
+            {
+                divRespuestaPaypal.Visible = true;
+
+                StringReader reader = new StringReader(strResponse);
+                string line = reader.ReadLine();
+
+                if (line == "SUCCESS")
+                {
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        results.Add(line.Split('=')[0], line.Split('=')[1]);
+
+                    }
+
+                    lblTituloRespuesta.Text = "Tu orden ha sido recibida";
+                    lblNombre.Text = results["first_name"] + " " + results["last_name"];
+                    lblItem.Text = results["item_name"];
+
+                    // Response.Write("<li>Amount: " + results["payment_gross"] + "</li>");
+                    // Response.Write("<hr>");
+                }
+                else if (line == "FAIL")
+                {
+                    // Log for manual investigation
+                    lblTituloRespuesta.Text = "No se pudo recibir detalles de la transaccion";
+                }
+            }
+            else
+            {
+                //unknown error
+                Response.Write("ERROR");
+            }
         }
     }
 }

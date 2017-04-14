@@ -14,14 +14,53 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
 
     <div id="divHtmlRender" runat="server" >
     </div>
 
-     <div class="has-error">
+        <div id="divRespuestaPaypal" style="width:60%" class="row" runat="server" visible="false">
+            <asp:Label ID="lblTituloRespuesta" CssClass="h3" runat="server"></asp:Label>
+            <br />
+            <b><label>Detalles</label></b>
+            <br />
+            <div class="input-group">
+                <label class="input-group-addon">Nombre</label>
+                <asp:Label ID="lblNombre" CssClass="form-control" runat="server"></asp:Label>
+            </div>
+            <br />
+            <div class="input-group">
+                <label class="input-group-addon">Item</label>
+                <asp:Label ID="lblItem" runat="server" CssClass="form-control"></asp:Label>
+            </div>
+        </div>
+        <br />
+
+
+    <div class="has-error">
          <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" ForeColor="Red" ></asp:CustomValidator>
      </div>
+
+    <div  style="width:60%" class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <label class="input-group-addon">Tipo de registro</label>
+                <asp:DropDownList ID="ddlTipoRegistro" CssClass="form-control" OnSelectedIndexChanged="ddlTipoRegistro_SelectedIndexChanged" runat="server">
+                    <asp:ListItem Text="Individual" Value="Individual"></asp:ListItem>
+                    <asp:ListItem Text="Equipo" Value="Equipo"></asp:ListItem>
+                </asp:DropDownList>
+             </div>
+         </div>
+        <div class="col-md-6" id="divTipoEquipo" style="display:none">
+            <div class="input-group">
+                <label class="input-group-addon">Tipo de equipo</label>
+                <asp:DropDownList ID="ddlTipoEquipo" CssClass="form-control" runat="server" >
+                    <asp:ListItem Text="Valor1"></asp:ListItem>
+                    <asp:ListItem Text="Valor2"></asp:ListItem>
+                </asp:DropDownList>
+            </div>
+        </div>
+    </div>
+    <br />
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -242,6 +281,27 @@
                 args.IsValid = false;
             }
         }
+
+
+        $(document).ready(function () {
+
+            $("#ddlTipoRegistro").change(function () {
+                if (this.value == "Equipo")
+                {
+                    $("#divTipoEquipo").show();
+                }
+                else if (this.value == "Individual")
+                {
+                    $("#divTipoEquipo").hide();
+                }
+            });
+
+            $("#ddlTipoEquipo").change(function () {
+                // alert('hola');
+            });
+
+        });
+
     </script>
     </form>
 </body>

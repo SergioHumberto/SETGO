@@ -16,5 +16,10 @@ namespace WebApplicationTemplate.BLL
         {
             ParticipanteXCarreraDAL.InsertParticipanteXCarrera(p_ParticipanteXCarrera);
         }
+
+        public ParticipanteXCarreraOBJ SelectParticipanteXCarrera(int IdParticipanteXCarrera)
+        {
+            return ParticipanteXCarreraDAL.SelectParticipanteXCarrera(IdParticipanteXCarrera);
+        }
     }
 }

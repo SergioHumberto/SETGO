@@ -18,5 +18,7 @@ namespace WebApplicationTemplate.Objects
         public string URLMapa { get; set; }
         public string Ubicacion { get; set; }
         public string ContenidoHtml { get; set; }
+        public string PayPalEmail { get; set; }
+        public string TokenPaypalTDP { get; set; }
     }
 }
