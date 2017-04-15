@@ -691,6 +691,26 @@ namespace WebApplicationTemplate.Web.Pages
             lstParticipantes.Add(objParticipantesOBJ);
 
             lblNumParticipante.Text = "" + (lstParticipantes.Count + 1);
+
+
+            if (RegistroEnEquipo)
+            {
+                ViewState.Add("IdCategoria", rblCarrera.SelectedValue);
+                ViewState.Add("IdRama", rblRamas.SelectedValue);
+                rblCarrera.Enabled = false;
+                rblRamas.Enabled = false;
+
+                if (ViewState["IdCategoria"] != null)
+                {
+                    rblCarrera.SelectedValue = ViewState["IdCategoria"].ToString();
+                }
+
+                if (ViewState["IdRama"] != null)
+                {
+                    rblRamas.SelectedValue = ViewState["IdRama"].ToString();
+                }
+            }
+
             LimpiarCampos();
 
             Session.Add("lstParticipantesCache", lstParticipantes);

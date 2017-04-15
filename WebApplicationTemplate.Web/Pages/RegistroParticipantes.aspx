@@ -24,12 +24,12 @@
             <b><label>Detalles</label></b>
             <br />
             <div class="input-group">
-                <label class="input-group-addon">Nombre</label>
+                <label class="">Nombre</label>
                 <asp:Label ID="lblNombre" CssClass="form-control" runat="server"></asp:Label>
             </div>
             <br />
             <div class="input-group">
-                <label class="input-group-addon">Item</label>
+                <label class="">Item</label>
                 <asp:Label ID="lblItem" runat="server" CssClass="form-control"></asp:Label>
             </div>
         </div>
