@@ -43,7 +43,7 @@
     <div  style="width:60%" class="row">
         <div class="col-md-6">
             <div class="input-group">
-                <label class="input-group-addon">Tipo de registro</label>
+                <label class="">Tipo de registro</label>
                 <asp:DropDownList ID="ddlTipoRegistro" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoRegistro_SelectedIndexChanged" runat="server">
                     <asp:ListItem Text="Individual" Value="Individual"></asp:ListItem>
                     <asp:ListItem Text="Equipo" Value="Equipo"></asp:ListItem>
@@ -52,7 +52,7 @@
          </div>
         <div class="col-md-6" id="divTipoEquipo" runat="server" visible="false">
             <div class="input-group">
-                <label class="input-group-addon">Cantidad</label>
+                <label class="">Cantidad</label>
                 <asp:DropDownList ID="ddlTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEquipo_SelectedIndexChanged" CssClass="form-control" runat="server" >
                 </asp:DropDownList>
             </div>
@@ -62,7 +62,7 @@
 
         <div id="divNumParticipante" runat="server" visible="false" class="row" style="width:60%">
             <div  class="input-group" style="width:60%" >
-                <span class="input-group-addon">Participante</span>
+                <span class="">Participante</span>
                 <asp:Label runat="server" ID="lblNumParticipante" CssClass="form-control"></asp:Label>
             </div>
         </div>
@@ -205,7 +205,7 @@
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
-            <label>Carrera:</label>
+            <label>Categoria:</label>
             <asp:RadioButtonList ID="rblCarrera" runat="server">
             </asp:RadioButtonList>
             <asp:RequiredFieldValidator ID="reqCategoria" ControlToValidate="rblCarrera" SetFocusOnError="true" 

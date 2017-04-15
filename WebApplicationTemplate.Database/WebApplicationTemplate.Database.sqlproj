@@ -239,6 +239,7 @@
     <Build Include="Schema Objects\Tables\Resultados.sql" />
     <Build Include="Schema Objects\Tables\Ruta.sql" />
     <Build Include="Schema Objects\Tables\CategoriaXRuta.sql" />
+    <Build Include="Schema Objects\Programmability\Stored Procedures\ReporteRegistrados_PA.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

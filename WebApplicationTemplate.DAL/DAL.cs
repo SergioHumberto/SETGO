@@ -22,7 +22,12 @@ namespace WebApplicationTemplate.DAL
 
         /* public methods */
 
-		public static void BeginTransaction()
+        public static string ConnectionString
+        {
+            get { return Map.DataSource.ConnectionString; }
+        }
+
+        public static void BeginTransaction()
 		{
 			Map.BeginTransaction();
 		}

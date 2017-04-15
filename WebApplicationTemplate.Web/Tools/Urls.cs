@@ -70,5 +70,10 @@ namespace WebApplicationTemplate.Web.Tools
         {
             return Abs("/Pages/TestIFrame.aspx");
         }
+
+        public static String ReporteRegistrados()
+        {
+            return Abs("/Pages/ReporteRegistrados.aspx");
+        }
     }
 }

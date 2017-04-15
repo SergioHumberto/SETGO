@@ -50,7 +50,7 @@
       * 
       FROM Carrera C
       WHERE (#IdCarrera# <= 0 OR C.IdCarrera = #IdCarrera#)
-      AND (LEN(#Nombre#) = 0 OR C.Nombre = #Nombre#)
+      AND (#Nombre# IS NULL OR C.Nombre = #Nombre#)
       
       ]]>
       

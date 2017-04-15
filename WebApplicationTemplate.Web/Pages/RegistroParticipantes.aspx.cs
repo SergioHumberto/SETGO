@@ -133,13 +133,7 @@ namespace WebApplicationTemplate.Web.Pages
                 rblRamas.DataValueField = "IdRama";
                 rblRamas.DataBind();
 
-                CategoriaBLL objCategoriaBLL = new CategoriaBLL(session);
-                IList<CategoriaOBJ> lstCategorias = objCategoriaBLL.SelectCategoria(new CategoriaOBJ() { IdCarrera = IdCarrera });
-
-                rblCarrera.DataSource = GetListConcatCategoriasConPrecio(lstCategorias);
-                rblCarrera.DataTextField = "Nombre";
-                rblCarrera.DataValueField = "IdCategoria";
-                rblCarrera.DataBind();
+                LoadCategoriasRbl(IdCarrera);
 
                 TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
                 IList<TipoEquipoOBJ> lstTipoEquipo = objTipoEquipoBLL.SelectTipoEquipo(new TipoEquipoOBJ() { }); // Todos los tipos de equipo
@@ -148,6 +142,25 @@ namespace WebApplicationTemplate.Web.Pages
                 ddlTipoEquipo.DataValueField = "IdTipoEquipo";
                 ddlTipoEquipo.DataBind();
             }
+        }
+
+        private void LoadCategoriasRbl(int IdCarrera)
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+            CategoriaBLL objCategoriaBLL = new CategoriaBLL(session);
+            IList<CategoriaOBJ> lstCategorias = objCategoriaBLL.SelectCategoria(new CategoriaOBJ() { IdCarrera = IdCarrera });
+
+            if (RegistroEnEquipo)
+            {
+                rblCarrera.DataSource = lstCategorias;
+            }
+            else
+            {
+                rblCarrera.DataSource = GetListConcatCategoriasConPrecio(lstCategorias);
+            }
+            rblCarrera.DataTextField = "Nombre";
+            rblCarrera.DataValueField = "IdCategoria";
+            rblCarrera.DataBind();
         }
 
         private IList<CategoriaOBJ> GetListConcatCategoriasConPrecio(IList<CategoriaOBJ> lstCategoriasXCarrera)
@@ -478,6 +491,8 @@ namespace WebApplicationTemplate.Web.Pages
                     lblTotal.InnerText = "" + totalXEquipo;
                 }
             }
+
+            LoadCategoriasRbl(IdCarreraProperty);
         }
 
         private void EliminaVariablesDeSession()
