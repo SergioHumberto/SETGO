@@ -45,6 +45,29 @@
         SELECT @@IDENTITY
       </selectKey>
     </insert>
+      
+      <select id="SelectParticipanteObject" resultClass="ParticipantesOBJ"  parameterClass="int">
+          SELECT P.* FROM Participante P WHERE P.IdParticipante = #value#
+      </select>
+
+      <update id="UpdateParticipante" parameterClass="ParticipantesOBJ"  >
+          UPDATE Participante 
+          SET Pagado = #Pagado#
+          WHERE IdParticipante = #IdParticipante#
+      </update>
+
+      <select id="SelectParticipante" parameterClass="ParticipantesOBJ" resultClass="ParticipantesOBJ">
+          <![CDATA[
+          
+              SELECT 
+              P.* 
+              FROM Participante P
+              WHERE (#IdEquipo# <= 0 OR P.IdEquipo = #IdEquipo#)
+              AND (#IdParticipante# <= 0 OR P.IdParticipante = #IdParticipante#)
+              
+          ]]>
+      </select>
+      
   </statements>
   
 </sqlMap>

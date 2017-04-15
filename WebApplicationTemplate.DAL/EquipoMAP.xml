@@ -5,4 +5,20 @@
     <typeAlias alias="EquipoOBJ" type="WebApplicationTemplate.Objects.EquipoOBJ" />
   </alias>
 
+    <statements>
+        <insert id="InsertEquipo" parameterClass="EquipoOBJ">
+            INSERT INTO [Equipo]
+            (
+                IdTipoEquipo
+            )
+            VALUES
+            (
+                #IdTipoEquipo#
+            )
+            <selectKey type="post" resultClass="int" property="IdEquipo">
+                SELECT @@IDENTITY
+            </selectKey>
+        </insert>
+    </statements>
+
 </sqlMap>

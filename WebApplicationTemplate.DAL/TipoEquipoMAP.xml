@@ -5,4 +5,26 @@
     <typeAlias alias="TipoEquipoOBJ" type="WebApplicationTemplate.Objects.TipoEquipoOBJ" />
   </alias>
 
+    <statements>
+
+        <select id="SelectTipoEquipo" resultClass="TipoEquipoOBJ" parameterClass="TipoEquipoOBJ">
+        
+            <![CDATA[
+                SELECT 
+                TE.* 
+                FROM TipoEquipo TE 
+                WHERE ( #IdTipoEquipo# <= 0 OR TE.IdTipoEquipo = #IdTipoEquipo#)
+                AND ( #CantidadParticipantes# <= 0 OR TE.CantidadParticipantes = #CantidadParticipantes#)
+            ]]>
+        </select>
+
+        <select id="SelectTipoEquipoObject" parameterClass="int" resultClass="TipoEquipoOBJ">
+            SELECT 
+            TE.* 
+            FROM TipoEquipo TE
+            WHERE TE.IdTipoEquipo = #value#
+        </select>
+
+    </statements>
+
 </sqlMap>

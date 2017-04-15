@@ -8,7 +8,18 @@ using WebApplicationTemplate.DAL;
 
 namespace WebApplicationTemplate.BLL
 {
-	public class TipoEquipoBLL
+	public class TipoEquipoBLL : BaseBLL
 	{
-	}
+        public TipoEquipoBLL(UserSession session) : base(session) { /* do nothing */ }
+
+        public IList<TipoEquipoOBJ> SelectTipoEquipo(TipoEquipoOBJ p_TipoEquipo)
+        {
+            return TipoEquipoDAL.SelectTipoEquipo(p_TipoEquipo);
+        }
+
+        public TipoEquipoOBJ SelectTipoEquipoObject(int IdTipoEquipo)
+        {
+            return TipoEquipoDAL.SelectTipoEquipoObject(IdTipoEquipo);
+        }
+    }
 }

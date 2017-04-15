@@ -12,9 +12,31 @@ namespace WebApplicationTemplate.BLL
     {
         public ParticipantesBLL(UserSession session) : base(session) { /* do nothing */ }
 
-        public void InsertParticipante(ParticipantesOBJ participante)
+        public int InsertParticipante(ParticipantesOBJ participante)
         {
-            ParticipantesDAL.InsertParticipante(participante);
+            return ParticipantesDAL.InsertParticipante(participante);
+        }
+
+        public void InsertParticipanteConCarrera(ParticipantesOBJ participante)
+        {
+            participante.ParticipanteXCarrera.IdParticipante = InsertParticipante(participante);
+            ParticipanteXCarreraBLL objPxCBLL = new ParticipanteXCarreraBLL(session);
+            objPxCBLL.InsertParticipanteXCarrera(participante.ParticipanteXCarrera);
+        }
+
+        public ParticipantesOBJ SelectParticipanteObject(int IdParticipante)
+        {
+            return ParticipantesDAL.SelectParticipanteObject(IdParticipante);
+        }
+
+        public void UpdateParticipante(ParticipantesOBJ objParticipante)
+        {
+            ParticipantesDAL.UpdateParticipante(objParticipante);
+        }
+
+        public IList<ParticipantesOBJ> SelectParticipante(ParticipantesOBJ p_ParticipanteOBJ)
+        {
+            return ParticipantesDAL.SelectParticipante(p_ParticipanteOBJ);
         }
     }
 }

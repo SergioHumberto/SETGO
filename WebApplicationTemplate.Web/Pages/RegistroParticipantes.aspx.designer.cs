@@ -76,6 +76,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoRegistro;
         
         /// <summary>
+        /// Control divTipoEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTipoEquipo;
+        
+        /// <summary>
         /// Control ddlTipoEquipo.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,24 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoEquipo;
+        
+        /// <summary>
+        /// Control divNumParticipante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNumParticipante;
+        
+        /// <summary>
+        /// Control lblNumParticipante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumParticipante;
         
         /// <summary>
         /// Control txtNombres.
@@ -274,6 +301,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RadioButtonList rblRamas;
         
         /// <summary>
+        /// Control reqRama.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRama;
+        
+        /// <summary>
         /// Control rblCarrera.
         /// </summary>
         /// <remarks>
@@ -281,6 +317,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblCarrera;
+        
+        /// <summary>
+        /// Control reqCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCategoria;
         
         /// <summary>
         /// Control chkAcepto.
@@ -299,6 +344,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cusChkAcepto;
+        
+        /// <summary>
+        /// Control lblTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTotal;
         
         /// <summary>
         /// Control btnEnviar.

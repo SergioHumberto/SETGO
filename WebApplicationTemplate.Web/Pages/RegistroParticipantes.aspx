@@ -44,23 +44,29 @@
         <div class="col-md-6">
             <div class="input-group">
                 <label class="input-group-addon">Tipo de registro</label>
-                <asp:DropDownList ID="ddlTipoRegistro" CssClass="form-control" OnSelectedIndexChanged="ddlTipoRegistro_SelectedIndexChanged" runat="server">
+                <asp:DropDownList ID="ddlTipoRegistro" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoRegistro_SelectedIndexChanged" runat="server">
                     <asp:ListItem Text="Individual" Value="Individual"></asp:ListItem>
                     <asp:ListItem Text="Equipo" Value="Equipo"></asp:ListItem>
                 </asp:DropDownList>
              </div>
          </div>
-        <div class="col-md-6" id="divTipoEquipo" style="display:none">
+        <div class="col-md-6" id="divTipoEquipo" runat="server" visible="false">
             <div class="input-group">
-                <label class="input-group-addon">Tipo de equipo</label>
-                <asp:DropDownList ID="ddlTipoEquipo" CssClass="form-control" runat="server" >
-                    <asp:ListItem Text="Valor1"></asp:ListItem>
-                    <asp:ListItem Text="Valor2"></asp:ListItem>
+                <label class="input-group-addon">Cantidad</label>
+                <asp:DropDownList ID="ddlTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEquipo_SelectedIndexChanged" CssClass="form-control" runat="server" >
                 </asp:DropDownList>
             </div>
         </div>
     </div>
     <br />
+
+        <div id="divNumParticipante" runat="server" visible="false" class="row" style="width:60%">
+            <div  class="input-group" style="width:60%" >
+                <span class="input-group-addon">Participante</span>
+                <asp:Label runat="server" ID="lblNumParticipante" CssClass="form-control"></asp:Label>
+            </div>
+        </div>
+        
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -190,6 +196,8 @@
             <label>Rama:</label>
                 <asp:RadioButtonList ID="rblRamas" runat="server">
                 </asp:RadioButtonList>
+                <asp:RequiredFieldValidator ID="reqRama" ControlToValidate="rblRamas" SetFocusOnError="true" 
+                    ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una rama" runat="server"></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
@@ -200,6 +208,8 @@
             <label>Carrera:</label>
             <asp:RadioButtonList ID="rblCarrera" runat="server">
             </asp:RadioButtonList>
+            <asp:RequiredFieldValidator ID="reqCategoria" ControlToValidate="rblCarrera" SetFocusOnError="true" 
+                    ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una categoria" runat="server"></asp:RequiredFieldValidator>
         </div>
     </div>
 
@@ -226,7 +236,7 @@
     <div style="width:60%" class="row">
         <div class="col-md-12">
             <div style="float:right">
-                <h4>Mex$<span id="lblTotal">0.00</span></h4>
+                <h4>Mex$<span id="lblTotal" runat="server">0.00</span></h4>
                 <h5 style="text-align:center; margin:0;" >TOTAL</h5>
             </div>
         </div>
@@ -253,22 +263,26 @@
             $("#<%= rblCarrera.ClientID %>").click(function () {
                 var radioSelect = $("#<%= rblCarrera.ClientID %> input:checked")
 
-                // $("#lblTotal").text(radioSelect.val());
+                var registroEnEquipo = '<%= RegistroEnEquipo %>';
+                if(registroEnEquipo == "False")
+                {
+                    // $("#lblTotal").text(radioSelect.val());
 
                     $.ajax({
-                    type: "POST",
-                    url: '<%= URLWSGetPrecioCategoria %>',
-                    data: '{IdCategoria: "' + radioSelect.val() + '" }',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    failure: function(response) {
-                        alert(response.d);
-                    },
-                    success: function (data) {
+                        type: "POST",
+                        url: '<%= URLWSGetPrecioCategoria %>',
+                        data: '{IdCategoria: "' + radioSelect.val() + '" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        failure: function(response) {
+                            alert(response.d);
+                        },
+                        success: function (data) {
                             $("#lblTotal").text(data.d);
                             // $("#searchresultsA").html(data); // show the string that was returned, this will be the data inside the xml wrapper
                         }
                     });
+                }
             });
         });
     </script>
@@ -283,24 +297,24 @@
         }
 
 
-        $(document).ready(function () {
+        //$(document).ready(function () {
 
-            $("#ddlTipoRegistro").change(function () {
-                if (this.value == "Equipo")
-                {
-                    $("#divTipoEquipo").show();
-                }
-                else if (this.value == "Individual")
-                {
-                    $("#divTipoEquipo").hide();
-                }
-            });
+        //    $("#ddlTipoRegistro").change(function () {
+        //        if (this.value == "Equipo")
+        //        {
+        //            $("#divTipoEquipo").show();
+        //        }
+        //        else if (this.value == "Individual")
+        //        {
+        //            $("#divTipoEquipo").hide();
+        //        }
+        //    });
 
-            $("#ddlTipoEquipo").change(function () {
-                // alert('hola');
-            });
+        //    $("#ddlTipoEquipo").change(function () {
+        //        // alert('hola');
+        //    });
 
-        });
+        //});
 
     </script>
     </form>
