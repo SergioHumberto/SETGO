@@ -52,7 +52,7 @@
          </div>
         <div class="col-md-6" id="divTipoEquipo" runat="server" visible="false">
             <div class="input-group">
-                <label class="">Cantidad</label>
+                <label class="">Cantidad de participantes</label>
                 <asp:DropDownList ID="ddlTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEquipo_SelectedIndexChanged" CssClass="form-control" runat="server" >
                 </asp:DropDownList>
             </div>
@@ -62,8 +62,8 @@
 
         <div id="divNumParticipante" runat="server" visible="false" class="row" style="width:60%">
             <div  class="input-group" style="width:60%" >
-                <span class="">Participante</span>
-                <asp:Label runat="server" ID="lblNumParticipante" CssClass="form-control"></asp:Label>
+                <span class="">Participante </span>
+                <asp:Label runat="server" ID="lblNumParticipante"></asp:Label>
             </div>
         </div>
         
