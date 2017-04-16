@@ -8,14 +8,36 @@
             </div>
         </div>
         <div class="alert alert-danger" runat="server" id="lblError" visible="false"></div>
-        <asp:GridView runat="server" ID="grdEquipos" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowCancelingEdit="grdEquipos_RowCancelingEdit" OnRowDeleting="grdEquipos_RowDeleting" OnRowEditing="grdEquipos_RowEditing" OnRowUpdating="grdEquipos_RowUpdating" ShowHeaderWhenEmpty="true">
+        <asp:GridView runat="server" ID="grdEquipos" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowCancelingEdit="grdEquipos_RowCancelingEdit" OnRowDeleting="grdEquipos_RowDeleting" OnRowEditing="grdEquipos_RowEditing" OnRowUpdating="grdEquipos_RowUpdating" ShowHeaderWhenEmpty="true" OnRowDataBound="grdEquipos_RowDataBound" OnDataBinding="grdEquipos_DataBinding">
             <Columns>
-                <asp:BoundField DataField="IdTipoEquipo" HeaderText="Id" ReadOnly="true" ItemStyle-Width="10%"/>
-                <asp:BoundField DataField="IdCategoria" HeaderText="Categoría" ItemStyle-Width="20%" />
-                <asp:BoundField DataField="CantidadParticipantes" HeaderText="Cant. Participantes" ItemStyle-Width="20%"/>
-                <asp:BoundField DataField="Precio" HeaderText="Precio" ItemStyle-Width="20%"/>
-                <asp:CommandField ShowEditButton="true" ItemStyle-Width="20%"/>
-                <asp:CommandField ShowDeleteButton="true" ItemStyle-Width="10%"/>
+                <asp:BoundField DataField="IdTipoEquipo" HeaderText="Id" ReadOnly="true" ItemStyle-Width="10%" ControlStyle-CssClass="form-control" />
+                <asp:TemplateField HeaderText="Categoría" ItemStyle-Width="20%">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hdnIdCategoria" runat="server" Value='<%#Bind("IdCategoria") %>' />
+                        <asp:Label ID="lblCategoria" runat="server" Text='<%#Bind("IdCategoria") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:HiddenField ID="hdnIdCategoria" runat="server" Value='<%#Bind("IdCategoria") %>' />
+                        <asp:DropDownList ID="ddlCategoria" runat="server" class="form-control"></asp:DropDownList>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="CantidadParticipantes" HeaderText="Cant. Participantes" ItemStyle-Width="20%" ControlStyle-CssClass="form-control" />
+                <asp:TemplateField ItemStyle-Width="20%" HeaderText="Precio">
+                    <ItemTemplate>
+                        <div class="input-group">
+                        <span>$&nbsp;</span>
+                        <asp:Label ID="lblPrecio" runat="server" Text='<%#Bind("Precio") %>'></asp:Label>
+                            </div>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <asp:TextBox ID="txtPrecio" runat="server" Text='<%#Bind("Precio") %>' class="form-control"></asp:TextBox>
+                        </div>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField ShowEditButton="true" ItemStyle-Width="20%" />
+                <asp:CommandField ShowDeleteButton="true" ItemStyle-Width="10%" />
             </Columns>
         </asp:GridView>
         <div class="form-group">

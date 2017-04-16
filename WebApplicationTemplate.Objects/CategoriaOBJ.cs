@@ -5,6 +5,7 @@ using System.Text;
 
 namespace WebApplicationTemplate.Objects
 {
+    [Serializable]
     public class CategoriaOBJ
     {
         public int IdCategoria { get; set; }

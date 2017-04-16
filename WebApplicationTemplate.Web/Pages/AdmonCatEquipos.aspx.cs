@@ -85,7 +85,7 @@ namespace WebApplicationTemplate.Web.Pages
                 return false;
             }
             else
-                return true;                
+                return true;
         }
 
         protected void grdEquipos_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -101,8 +101,10 @@ namespace WebApplicationTemplate.Web.Pages
                 int.TryParse(e.NewValues["CantidadParticipantes"].ToString(), out CantidadParticipantes);
                 decimal precio;
                 decimal.TryParse(e.NewValues["Precio"].ToString(), out precio);
+
+                DropDownList ddlCategoria = grdRow.FindControl("ddlCategoria") as DropDownList;
                 int IdCategoria;
-                int.TryParse(e.NewValues["IdCategoria"].ToString(), out IdCategoria);
+                int.TryParse(ddlCategoria.SelectedItem.Value, out IdCategoria);
 
                 TipoEquipoOBJ tipoEquipoObj = new TipoEquipoOBJ();
                 tipoEquipoObj.IdTipoEquipo = IdTipoEquipo;
@@ -180,6 +182,73 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 ViewState.Add("Nuevo", true);
                 grdEquipos.SetEditRow(grdEquipos.Rows.Count);
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void obtieneDatosCategorias()
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+            CategoriaBLL categoriaBLL = new CategoriaBLL(session);
+            IList<CategoriaOBJ> lstCategorias = categoriaBLL.SelectCategoria(new CategoriaOBJ());
+            ViewState.Remove("lstCategorias");
+            ViewState.Add("lstCategorias", lstCategorias);
+        }
+
+        protected void grdEquipos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    DropDownList ddlCountries = (e.Row.FindControl("ddlCategoria") as DropDownList);
+                    if (ddlCountries != null)
+                    {
+                        IList<CategoriaOBJ> lstCategorias = (IList<CategoriaOBJ>)ViewState["lstCategorias"];
+                        if (lstCategorias.Count > 0)
+                        {
+                            ddlCountries.DataSource = lstCategorias;
+                            ddlCountries.DataTextField = "Nombre";
+                            ddlCountries.DataValueField = "IdCategoria";
+                            ddlCountries.DataBind();
+                        }
+                        ddlCountries.Items.Insert(0, new ListItem("< Seleccionar >"));
+                        string IdCategoria = (e.Row.FindControl("hdnIdCategoria") as HiddenField).Value;
+                        ListItem selectedItem = ddlCountries.Items.FindByValue(IdCategoria);
+                        if (selectedItem != null)
+                            selectedItem.Selected = true;
+                    }
+
+                    Label lblCategoria = (e.Row.FindControl("lblCategoria") as Label);
+                    if (lblCategoria != null)
+                    {
+                        IList<CategoriaOBJ> lstCategorias = (IList<CategoriaOBJ>)ViewState["lstCategorias"];
+                        int IdCategoria;
+                        int.TryParse((e.Row.FindControl("hdnIdCategoria") as HiddenField).Value, out IdCategoria);
+                        if (lstCategorias.Count > 0)
+                        {
+                            CategoriaOBJ categoria = lstCategorias.Where(i => i.IdCategoria == IdCategoria).FirstOrDefault();
+                            lblCategoria.Text = categoria.Nombre;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void grdEquipos_DataBinding(object sender, EventArgs e)
+        {
+            try
+            {
+                obtieneDatosCategorias();
             }
             catch (Exception ex)
             {
