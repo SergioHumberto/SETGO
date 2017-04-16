@@ -93,10 +93,10 @@ input[type="submit"], input[type="button"], button
 	font-weight: bold;
 	padding-left: 1ex;
 	padding-right: 1ex;
-	background-image: url('Images/button-background.jpg' );
+	/*background-image: url('Images/button-background.jpg' );*/
 	background-repeat: repeat;
 	background-position: center;
-	background-color: #AFBACC;
+	/*background-color: #AFBACC;*/
 }
 
 input[disabled="disabled"], button[disabled="disabled"], select[disabled="disabled"]

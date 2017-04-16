@@ -21,5 +21,20 @@ namespace WebApplicationTemplate.DAL
             TipoEquipoOBJ objTipoEquipo = DAL.QueryForObject<TipoEquipoOBJ>("SelectTipoEquipoObject", idTipoEquipo);
             return objTipoEquipo;
         }
+
+        public static void InsertaTipoEquipo(TipoEquipoOBJ p_tipoEquipoOBJ)
+        {
+            Mapper.Instance().Insert("InsertarTipoEquipo", p_tipoEquipoOBJ);
+        }
+
+        public static void UpdateTipoEquipo(TipoEquipoOBJ p_tipoEquipoOBJ)
+        {
+            Mapper.Instance().Update("UpdateTipoEquipo", p_tipoEquipoOBJ);
+        }
+
+        public static void DeleteTipoEquipo(TipoEquipoOBJ p_tipoEquipoOBJ)
+        {
+            Mapper.Instance().Delete("DeleteTipoEquipo", p_tipoEquipoOBJ);
+        }
     }
 }

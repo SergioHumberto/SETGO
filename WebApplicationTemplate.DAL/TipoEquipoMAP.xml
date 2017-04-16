@@ -5,26 +5,58 @@
     <typeAlias alias="TipoEquipoOBJ" type="WebApplicationTemplate.Objects.TipoEquipoOBJ" />
   </alias>
 
-    <statements>
+  <statements>
 
-        <select id="SelectTipoEquipo" resultClass="TipoEquipoOBJ" parameterClass="TipoEquipoOBJ">
-        
-            <![CDATA[
+    <select id="SelectTipoEquipo" resultClass="TipoEquipoOBJ" parameterClass="TipoEquipoOBJ">
+
+      <![CDATA[
                 SELECT 
                 TE.* 
                 FROM TipoEquipo TE 
                 WHERE ( #IdTipoEquipo# <= 0 OR TE.IdTipoEquipo = #IdTipoEquipo#)
                 AND ( #CantidadParticipantes# <= 0 OR TE.CantidadParticipantes = #CantidadParticipantes#)
             ]]>
-        </select>
+    </select>
 
-        <select id="SelectTipoEquipoObject" parameterClass="int" resultClass="TipoEquipoOBJ">
-            SELECT 
-            TE.* 
-            FROM TipoEquipo TE
-            WHERE TE.IdTipoEquipo = #value#
-        </select>
+    <select id="SelectTipoEquipoObject" parameterClass="int" resultClass="TipoEquipoOBJ">
+      SELECT
+      TE.*
+      FROM TipoEquipo TE
+      WHERE TE.IdTipoEquipo = #value#
+    </select>
 
-    </statements>
+    <insert id="InsertarTipoEquipo" parameterClass="TipoEquipoOBJ">
+      INSERT INTO TipoEquipo
+      (
+      CantidadParticipantes
+      , Precio
+      ,IdCategoria
+      )
+      VALUES
+      (
+      #CantidadParticipantes#
+      , #Precio#
+      , #IdCategoria#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdTipoEquipo">
+        SELECT @@IDENTITY
+      </selectKey>
+    </insert>
+
+    <update id="UpdateTipoEquipo" parameterClass="TipoEquipoOBJ">
+      UPDATE TipoEquipo
+      SET
+      CantidadParticipantes = #CantidadParticipantes#
+      , Precio = #Precio#
+      , IdCategoria = #IdCategoria#
+      WHERE IdTipoEquipo = #IdTipoEquipo#
+    </update>
+
+    <delete id="DeleteTipoEquipo" parameterClass="TipoEquipoOBJ">
+      DELETE FROM TipoEquipo
+      WHERE IdTipoEquipo = #IdTipoEquipo#
+    </delete>
+  </statements>
 
 </sqlMap>

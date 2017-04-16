@@ -86,6 +86,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Masters\PublicPage.Master" />
     <Content Include="Masters\PrivatePage.Master" />
+    <Content Include="Pages\AdmonCatEquipos.aspx" />
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\PayPal.aspx" />
@@ -214,6 +215,13 @@
     </Compile>
     <Compile Include="Masters\PrivatePage.Master.designer.cs">
       <DependentUpon>PrivatePage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdmonCatEquipos.aspx.cs">
+      <DependentUpon>AdmonCatEquipos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AdmonCatEquipos.aspx.designer.cs">
+      <DependentUpon>AdmonCatEquipos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Demo.aspx.cs">
       <DependentUpon>Demo.aspx</DependentUpon>

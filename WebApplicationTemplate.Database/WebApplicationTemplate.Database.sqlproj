@@ -247,8 +247,12 @@
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
+    <None Include="Scripts\Pre-Deployment\TipoEquipo_IdCategoríaFK.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="WebApplicationTemplate.Database.refactorlog" />
   </ItemGroup>
 </Project>

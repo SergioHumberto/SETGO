@@ -10,5 +10,6 @@ namespace WebApplicationTemplate.Objects
         public int IdTipoEquipo { get; set; }
         public int CantidadParticipantes { get; set; }
         public Decimal Precio { get; set; }
+        public int IdCategoria { get; set; }
     }
 }
