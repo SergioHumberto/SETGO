@@ -614,7 +614,7 @@ namespace WebApplicationTemplate.Web.Pages
 
             Session.Add("objSessionPayPal", objSessionPayPal);
 
-            string url = Urls.Abs("~/Pages/PayPal.aspx");
+            string url = Urls.PayPalPage();
             
             // string s = "window.open('" + url + "', 'popup_window', 'width=500,height=800,left=100,top=100,resizable=yes');";
             // ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);

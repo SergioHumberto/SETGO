@@ -75,5 +75,11 @@ namespace WebApplicationTemplate.Web.Tools
         {
             return Abs("/Pages/ReporteRegistrados.aspx");
         }
+
+        public static String PayPalPage()
+        {
+            return Abs("~/PublicPages/PayPal.aspx");
+        }
+
     }
 }
