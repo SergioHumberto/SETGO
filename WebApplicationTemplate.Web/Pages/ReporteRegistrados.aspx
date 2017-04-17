@@ -28,7 +28,7 @@
 
     <br />
 
-    <asp:Button ID="btnGenerar" Text="Generar reporte" OnClick="btnGenerar_Click" runat="server" />
+    <asp:Button ID="btnGenerar" Text="Generar reporte" CssClass="btn btn-default" OnClick="btnGenerar_Click" runat="server" />
 
     <br />
 

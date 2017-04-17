@@ -86,6 +86,7 @@ namespace WebApplicationTemplate.Web.Pages
             ReportViewer2.LocalReport.DataSources.Add(rds);
             ReportViewer2.LocalReport.ReportPath = HttpContext.Current.Server.MapPath("~/Reports/ReporteRegistrados.rdlc");
             ReportViewer2.LocalReport.ReportEmbeddedResource = HttpContext.Current.Server.MapPath("~/Reports/ReporteRegistrados.rdlc");
+            ReportViewer2.LocalReport.SetParameters(new ReportParameter("NombreCarrera", ddlCarrera.SelectedItem.Text));
             ReportViewer2.LocalReport.Refresh();
         }
     }
