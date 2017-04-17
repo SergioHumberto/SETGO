@@ -586,11 +586,14 @@ namespace WebApplicationTemplate.Web.Pages
             }
 
             // Urls.Abs("~/Pages/PaymentProcess.aspx")
-            string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
+            // string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
+            string strURLReturn = Urls.Abs("~/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}");
+
             strURLReturn = string.Format(strURLReturn, IdCarreraProperty, IdParticipanteVSProperty);
 
             // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
-            string strCancelURL = "http://localhost:61880/WebApplicationTemplate/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}";
+            // string strCancelURL = "http://localhost:61880/WebApplicationTemplate/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}";
+            string strCancelURL = Urls.Abs("~/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}");
             strCancelURL = string.Format(strCancelURL, IdCarreraProperty);
 
             CarreraBLL objCarerraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
