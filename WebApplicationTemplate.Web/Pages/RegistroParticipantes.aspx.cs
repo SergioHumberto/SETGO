@@ -109,6 +109,12 @@ namespace WebApplicationTemplate.Web.Pages
                         ProcesaRespuestaPayPal();
                     }
                 }
+                else
+                {
+                    cusError.ErrorMessage = "No ha seleccionado una carrera";
+                    cusError.IsValid = false;
+                    btnEnviar.Visible = false;
+                }
             }
         }
 
@@ -134,14 +140,21 @@ namespace WebApplicationTemplate.Web.Pages
                 rblRamas.DataBind();
 
                 LoadCategoriasRbl(IdCarrera);
+                LoadTipoEquipoDdl();
 
-                TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
-                IList<TipoEquipoOBJ> lstTipoEquipo = objTipoEquipoBLL.SelectTipoEquipo(new TipoEquipoOBJ() { }); // Todos los tipos de equipo
-                ddlTipoEquipo.DataSource = lstTipoEquipo;
-                ddlTipoEquipo.DataTextField = "CantidadParticipantes";
-                ddlTipoEquipo.DataValueField = "IdTipoEquipo";
-                ddlTipoEquipo.DataBind();
+                lblPoliticas.Text = objCarrera.DescripcionPoliticas;
             }
+        }
+
+        private void LoadTipoEquipoDdl()
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+            TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+            IList<TipoEquipoOBJ> lstTipoEquipo = objTipoEquipoBLL.SelectTipoEquipo(new TipoEquipoOBJ() { }); // Todos los tipos de equipo
+            ddlTipoEquipo.DataSource = lstTipoEquipo;
+            ddlTipoEquipo.DataTextField = "CantidadParticipantes";
+            ddlTipoEquipo.DataValueField = "IdTipoEquipo";
+            ddlTipoEquipo.DataBind();
         }
 
         private void LoadCategoriasRbl(int IdCarrera)
@@ -152,15 +165,35 @@ namespace WebApplicationTemplate.Web.Pages
 
             if (RegistroEnEquipo)
             {
-                rblCarrera.DataSource = lstCategorias;
+                TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+
+                foreach (CategoriaOBJ itemCategoria in lstCategorias)
+                {
+                    int numParticipantes = 0;
+                    if(!string.IsNullOrEmpty(ddlTipoEquipo.SelectedValue))
+                    {
+                        int.TryParse(ddlTipoEquipo.SelectedItem.Text, out numParticipantes);
+                    }
+                    
+
+                    IList<TipoEquipoOBJ> lstTipoEquipos = objTipoEquipoBLL.SelectTipoEquipo(
+                        new TipoEquipoOBJ() { IdCategoria = itemCategoria.IdCategoria, CantidadParticipantes = numParticipantes });
+
+                    if (lstTipoEquipos.Count == 1)
+                    {
+                        itemCategoria.Precio = lstTipoEquipos[0].Precio;
+                    }
+                    else
+                    {
+                        itemCategoria.Precio = 0;
+                    }
+                }
             }
-            else
-            {
-                rblCarrera.DataSource = GetListConcatCategoriasConPrecio(lstCategorias);
-            }
-            rblCarrera.DataTextField = "Nombre";
-            rblCarrera.DataValueField = "IdCategoria";
-            rblCarrera.DataBind();
+            
+            rblCategoria.DataSource = GetListConcatCategoriasConPrecio(lstCategorias);
+            rblCategoria.DataTextField = "Nombre";
+            rblCategoria.DataValueField = "IdCategoria";
+            rblCategoria.DataBind();
         }
 
         private IList<CategoriaOBJ> GetListConcatCategoriasConPrecio(IList<CategoriaOBJ> lstCategoriasXCarrera)
@@ -206,7 +239,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                 List<ParticipantesOBJ> lstParticipantes = (List<ParticipantesOBJ>)Session["lstParticipantesCache"];
 
-                if (lstParticipantes.Count + 1 == cantidadEquipo)
+                if (lstParticipantes.Count == cantidadEquipo)
                 {
                     return true;
                 }
@@ -219,11 +252,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             if (RegistroEnEquipo)
             {
-                GuardarRegistroParticipante();
-                if (EsUltimoParticipanteEnEquipo())
-                {
-                    btnEnviar.Text = "Enviar";
-                }
+                FillRamaCategoriaRutaDeEquipo();
             }
 
             if (!RegistroEnEquipo || EstaEquipoCompleto())
@@ -244,12 +273,13 @@ namespace WebApplicationTemplate.Web.Pages
                     decimal Amount = 0;
                     if (RegistroEnEquipo)
                     {
-                        int IdTipoEquipo;
-                        if (Session["IdTipoEquipo"] != null)
-                        {
-                            int.TryParse(Session["IdTipoEquipo"].ToString(), out IdTipoEquipo);
-                            Amount = GetPrecioXEquipo(IdTipoEquipo);
-                        }
+                        Amount = GetPrecioEquipoXCategoria();
+                        //int IdTipoEquipo;
+                        //if (Session["IdTipoEquipo"] != null)
+                        //{
+                        //    int.TryParse(Session["IdTipoEquipo"].ToString(), out IdTipoEquipo);
+                        //    Amount = GetPrecioXEquipo(IdTipoEquipo);
+                        //}
                     }
                     else
                     {
@@ -275,6 +305,33 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
+        private void FillRamaCategoriaRutaDeEquipo()
+        {
+            int IdRama;
+            int.TryParse(rblRamas.SelectedValue, out IdRama);
+
+            int IdCategoria;
+            int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
+
+            int? IdRuta = null;
+
+            List<ParticipantesOBJ> lstParticipantes = new List<ParticipantesOBJ>();
+
+            if (Session["lstParticipantesCache"] != null)
+            {
+                lstParticipantes = (List<ParticipantesOBJ>)Session["lstParticipantesCache"];
+
+                foreach (ParticipantesOBJ objParticipante in lstParticipantes)
+                {
+                    objParticipante.ParticipanteXCarrera.IdRama = IdRama;
+                    objParticipante.ParticipanteXCarrera.IdCategoria = IdCategoria;
+                    objParticipante.ParticipanteXCarrera.IdRuta = IdRuta;
+                }
+
+                Session.Add("lstParticipantesCache", lstParticipantes);
+            }
+        }
+
         private void LimpiarCampos()
         {
             txtNombres.Text = string.Empty;
@@ -287,7 +344,7 @@ namespace WebApplicationTemplate.Web.Pages
             txtTelefonoPersonal.Text = string.Empty;
             txtEmail.Text = string.Empty;
             txtTelefonoEmergencia.Text = string.Empty;
-            rblCarrera.ClearSelection();
+            rblCategoria.ClearSelection();
             rblRamas.ClearSelection();
             chkAcepto.Checked = false;
         }
@@ -366,7 +423,7 @@ namespace WebApplicationTemplate.Web.Pages
             int.TryParse(rblRamas.SelectedValue, out IdRama);
 
             int IdCategoria;
-            int.TryParse(rblCarrera.SelectedValue, out IdCategoria);
+            int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
 
             int? IdRuta = null;
 
@@ -423,7 +480,7 @@ namespace WebApplicationTemplate.Web.Pages
             int.TryParse(rblRamas.SelectedValue, out IdRama);
 
             int IdCategoria;
-            int.TryParse(rblCarrera.SelectedValue, out IdCategoria);
+            int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
 
             int? IdRuta = null;
 
@@ -465,7 +522,6 @@ namespace WebApplicationTemplate.Web.Pages
         {
             if (!RegistroEnEquipo) // individual
             {
-                btnEnviar.Text = "Enviar";
                 divNumParticipante.Visible = false;
                 lblNumParticipante.Text = "1"; // Cuando seleccione otra vez individual entonces se pierden los registros gruardados de equipos
                 divTipoEquipo.Visible = false;
@@ -476,22 +532,23 @@ namespace WebApplicationTemplate.Web.Pages
                 }
 
                 EliminaVariablesDeSession();
+
+                btnGuardarParticipante.Visible = false;
+                btnEnviar.Visible = true;
+                phRamaCategoriaRuta.Visible = true;
             }
             else // equipo
             {
                 divNumParticipante.Visible = true;
                 lblNumParticipante.Text = "1";
-                btnEnviar.Text = "Guardar y continuar";
                 divTipoEquipo.Visible = true;
 
-                int IdTipoEquipo;
-                if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))
-                {
-                    decimal totalXEquipo = GetPrecioXEquipo(IdTipoEquipo);
-                    lblTotal.InnerText = "" + totalXEquipo;
-                }
+                phRamaCategoriaRuta.Visible = false;
+                btnGuardarParticipante.Visible = true;
+                btnEnviar.Visible = false;
             }
 
+            lblTotal.InnerText = "0.00";
             LoadCategoriasRbl(IdCarreraProperty);
         }
 
@@ -558,7 +615,8 @@ namespace WebApplicationTemplate.Web.Pages
             // string s = "window.open('" + url + "', 'popup_window', 'width=500,height=800,left=100,top=100,resizable=yes');";
             // ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
 
-            Response.Redirect(url);
+            Response.Redirect(url, false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         private void ProcesaRespuestaPayPal()
@@ -693,23 +751,31 @@ namespace WebApplicationTemplate.Web.Pages
             lblNumParticipante.Text = "" + (lstParticipantes.Count + 1);
 
 
-            if (RegistroEnEquipo)
-            {
-                ViewState.Add("IdCategoria", rblCarrera.SelectedValue);
-                ViewState.Add("IdRama", rblRamas.SelectedValue);
-                rblCarrera.Enabled = false;
-                rblRamas.Enabled = false;
+            //if (RegistroEnEquipo)
+            //{
+            //    ViewState.Add("IdCategoria", rblCategoriaSelectedValue);
+            //    ViewState.Add("IdRama", rblRamas.SelectedValue);
 
-                if (ViewState["IdCategoria"] != null)
-                {
-                    rblCarrera.SelectedValue = ViewState["IdCategoria"].ToString();
-                }
+            //    if (ViewState["IdCategoria"] != null)
+            //    {
+            //        int IdCategoria;
+            //        if (int.TryParse(ViewState["IdCategoria"].ToString(), out IdCategoria))
+            //        {
+            //            rblCategoria.SelectedValue = ViewState["IdCategoria"].ToString();
+            //        }
+            //    }
 
-                if (ViewState["IdRama"] != null)
-                {
-                    rblRamas.SelectedValue = ViewState["IdRama"].ToString();
-                }
-            }
+            //    if (ViewState["IdRama"] != null)
+            //    {
+            //        int IdRama;
+            //        if (int.TryParse(ViewState["IdRama"].ToString(), out IdRama))
+            //        {
+            //            rblRamas.SelectedValue = ViewState["IdRama"].ToString();
+            //        }
+            //    }
+            //}
+            ddlTipoRegistro.Enabled = false; // una vez guardado un registro de un participante de equipo
+                                             // no podrá cambiar a registro individual
 
             LimpiarCampos();
 
@@ -724,11 +790,61 @@ namespace WebApplicationTemplate.Web.Pages
 
         protected void ddlTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        protected void btnGuardarParticipante_Click(object sender, EventArgs e)
+        {
+            GuardarRegistroParticipante();
+            if (EsUltimoParticipanteEnEquipo()) 
+            {
+                btnEnviar.Visible = true;
+                btnGuardarParticipante.Visible = false;
+                phInformacionPersonal.Visible = false;
+                phRamaCategoriaRuta.Visible = true;
+                LoadCategoriasRbl(IdCarreraProperty);
+            }
+        }
+
+        protected void rblCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!RegistroEnEquipo)
+            {
+                int IdCategoria;
+                if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
+                {
+                    lblTotal.InnerText = "" + GetPrecioXCategoria(IdCategoria);
+                }
+            }
+            else
+            {
+                lblTotal.InnerText = "" + GetPrecioEquipoXCategoria();
+            }
+        }
+
+        private decimal GetPrecioEquipoXCategoria()
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+
             int IdTipoEquipo;
             if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))
             {
-                lblTotal.InnerText = "" + GetPrecioXEquipo(IdTipoEquipo);
+                int IdCategoria;
+                if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
+                {
+                    TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+                    IList<TipoEquipoOBJ> lstTiposEquipo = objTipoEquipoBLL.SelectTipoEquipo(
+                        new TipoEquipoOBJ() { IdTipoEquipo = IdTipoEquipo, IdCategoria = IdCategoria });
+
+                    if (lstTiposEquipo.Count == 1)
+                    {
+                        return lstTiposEquipo[0].Precio;
+                    }
+                }
             }
+
+            return 0;
         }
+
     }
 }

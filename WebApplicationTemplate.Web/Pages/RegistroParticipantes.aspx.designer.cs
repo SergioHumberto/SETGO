@@ -13,6 +13,15 @@ namespace WebApplicationTemplate.Web.Pages {
     public partial class RegistroParticipantes {
         
         /// <summary>
+        /// Control ScriptManager1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// Control divHtmlRender.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.Label lblItem;
         
         /// <summary>
+        /// Control upCusError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upCusError;
+        
+        /// <summary>
         /// Control cusError.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoEquipo;
+        
+        /// <summary>
+        /// Control phInformacionPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phInformacionPersonal;
         
         /// <summary>
         /// Control divNumParticipante.
@@ -292,6 +319,24 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtTelefonoEmergencia;
         
         /// <summary>
+        /// Control btnGuardarParticipante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardarParticipante;
+        
+        /// <summary>
+        /// Control phRamaCategoriaRuta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phRamaCategoriaRuta;
+        
+        /// <summary>
         /// Control rblRamas.
         /// </summary>
         /// <remarks>
@@ -310,13 +355,22 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRama;
         
         /// <summary>
-        /// Control rblCarrera.
+        /// Control upCategoria.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblCarrera;
+        protected global::System.Web.UI.UpdatePanel upCategoria;
+        
+        /// <summary>
+        /// Control rblCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblCategoria;
         
         /// <summary>
         /// Control reqCategoria.
@@ -326,6 +380,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCategoria;
+        
+        /// <summary>
+        /// Control lblPoliticas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPoliticas;
         
         /// <summary>
         /// Control chkAcepto.
@@ -344,6 +407,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator cusChkAcepto;
+        
+        /// <summary>
+        /// Control upTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upTotal;
         
         /// <summary>
         /// Control lblTotal.

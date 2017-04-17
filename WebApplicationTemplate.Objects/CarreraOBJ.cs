@@ -20,5 +20,6 @@ namespace WebApplicationTemplate.Objects
         public string ContenidoHtml { get; set; }
         public string PayPalEmail { get; set; }
         public string TokenPaypalTDP { get; set; }
+        public string DescripcionPoliticas { get; set; }
     }
 }

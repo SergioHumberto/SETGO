@@ -15,6 +15,8 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <div id="divHtmlRender" runat="server" >
     </div>
 
@@ -35,12 +37,15 @@
         </div>
         <br />
 
-
-    <div class="has-error">
-         <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" ForeColor="Red" ></asp:CustomValidator>
-     </div>
-
-    <div  style="width:60%" class="row">
+    <asp:UpdatePanel ID="upCusError" runat="server" UpdateMode="Always">
+        <ContentTemplate>
+            <div class="has-error">
+                <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" ForeColor="Red" ></asp:CustomValidator>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
+    <div  style="width:60%;display:none;" class="row">
         <div class="col-md-6">
             <div class="input-group">
                 <label class="">Tipo de registro</label>
@@ -60,13 +65,16 @@
     </div>
     <br />
 
-        <div id="divNumParticipante" runat="server" visible="false" class="row" style="width:60%">
-            <div  class="input-group" style="width:60%" >
-                <span class="">Participante </span>
+    <asp:PlaceHolder ID="phInformacionPersonal" runat="server">
+
+    <div id="divNumParticipante" runat="server" visible="false" style="width:60%" class="row">
+        <div class="col-md-6">
+            <div  class="form-group" style="width:60%" >
+                <span class="">Información del participante </span>
                 <asp:Label runat="server" ID="lblNumParticipante"></asp:Label>
             </div>
         </div>
-        
+    </div>        
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -189,6 +197,11 @@
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
+    
+    <asp:Button ID="btnGuardarParticipante" CssClass="btn btn-default" Text="Guardar y continuar" OnClick="btnGuardarParticipante_Click" runat="server" Visible="false" />
+
+    <asp:PlaceHolder runat="server" ID="phRamaCategoriaRuta">
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -202,24 +215,27 @@
         </div>
     </div>
 
-
-    <div style="width:60%" class="row">
-        <div class="col-md-6">
-            <label>Categoria:</label>
-            <asp:RadioButtonList ID="rblCarrera" runat="server">
-            </asp:RadioButtonList>
-            <asp:RequiredFieldValidator ID="reqCategoria" ControlToValidate="rblCarrera" SetFocusOnError="true" 
-                    ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una categoria" runat="server"></asp:RequiredFieldValidator>
-        </div>
-    </div>
-
+    <asp:UpdatePanel ID="upCategoria" UpdateMode="Always" runat="server">
+        <ContentTemplate>
+            <div style="width:60%" class="row">
+                <div class="col-md-6">
+                    <label>Categoria:</label>
+                    <asp:RadioButtonList ID="rblCategoria" AutoPostBack="true" OnSelectedIndexChanged="rblCategoria_SelectedIndexChanged" runat="server">
+                    </asp:RadioButtonList>
+                    <asp:RequiredFieldValidator ID="reqCategoria" ControlToValidate="rblCategoria" SetFocusOnError="true" 
+                            ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una categoria" runat="server"></asp:RequiredFieldValidator>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
     <br />
 
     <div class="row">
         <div class="col-md-12">
-            <label>
+            <asp:Label ID="lblPoliticas" runat="server">
                 En pleno uso de mis facultades, declaro estar sano y apto para participar en el evento, reconozco los riesgos inherentes a la práctica deportiva, por lo que voluntariamente y con conocimiento pleno de esto, acepto y asumo la responsabilidad de mi integridad física, y libero de toda responsabilidad al Club de Golg La Loma S.A. DE C.V. y al comité organizador. *
-            </label>
+            </asp:Label>
         </div>
     </div>
 
@@ -233,14 +249,20 @@
         </div>
     </div>
 
-    <div style="width:60%" class="row">
-        <div class="col-md-12">
-            <div style="float:right">
-                <h4>Mex$<span id="lblTotal" runat="server">0.00</span></h4>
-                <h5 style="text-align:center; margin:0;" >TOTAL</h5>
+    <asp:UpdatePanel runat="server" ID="upTotal" UpdateMode="Always">
+        <ContentTemplate>
+            <div style="width:60%" class="row">
+                <div class="col-md-12">
+                    <div style="float:right">
+                        <h4>Mex$<span id="lblTotal" runat="server">0.00</span></h4>
+                        <h5 style="text-align:center; margin:0;" >TOTAL</h5>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    </asp:PlaceHolder>
 
     
     <asp:Button ID="btnEnviar" CssClass="btn btn-default" CausesValidation="true" Text="Enviar" OnClick="btnEnviar_Click" runat="server" />
@@ -258,10 +280,10 @@
             }
         });
 
-        $(document).ready(function () {
+        <%--$(document).ready(function () {
             
-            $("#<%= rblCarrera.ClientID %>").click(function () {
-                var radioSelect = $("#<%= rblCarrera.ClientID %> input:checked")
+            $("#<%= rblCategoria.ClientID %>").click(function () {
+                var radioSelect = $("#<%= rblCategoria.ClientID %> input:checked")
 
                 var registroEnEquipo = '<%= RegistroEnEquipo %>';
                 if(registroEnEquipo == "False")
@@ -284,7 +306,7 @@
                     });
                 }
             });
-        });
+        });--%>
     </script>
 
     <script type = "text/javascript">

@@ -15,6 +15,7 @@
                 FROM TipoEquipo TE 
                 WHERE ( #IdTipoEquipo# <= 0 OR TE.IdTipoEquipo = #IdTipoEquipo#)
                 AND ( #CantidadParticipantes# <= 0 OR TE.CantidadParticipantes = #CantidadParticipantes#)
+                AND (#IdCategoria# <= 0 OR TE.IdCategoria = #IdCategoria#)
             ]]>
     </select>
 
