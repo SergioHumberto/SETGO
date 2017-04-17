@@ -90,7 +90,7 @@
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\PayPal.aspx" />
-    <Content Include="Pages\RegistroParticipantes.aspx" />
+    <Content Include="PublicPages\RegistroParticipantes.aspx" />
     <Content Include="Pages\ReporteRegistrados.aspx" />
     <Content Include="Pages\SignOut.aspx" />
     <Content Include="Pages\TestIFrame.aspx" />
@@ -244,11 +244,11 @@
     <Compile Include="Pages\PayPal.aspx.designer.cs">
       <DependentUpon>PayPal.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RegistroParticipantes.aspx.cs">
+    <Compile Include="PublicPages\RegistroParticipantes.aspx.cs">
       <DependentUpon>RegistroParticipantes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\RegistroParticipantes.aspx.designer.cs">
+    <Compile Include="PublicPages\RegistroParticipantes.aspx.designer.cs">
       <DependentUpon>RegistroParticipantes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReporteRegistrados.aspx.cs">
@@ -329,7 +329,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="PublicPages\" />
     <Folder Include="Resources\Scripts\" />
   </ItemGroup>
   <ItemGroup>

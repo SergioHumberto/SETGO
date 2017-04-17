@@ -63,7 +63,7 @@ namespace WebApplicationTemplate.Web.Tools
 
         public static String RegistroParticipantes()
         {
-            return Abs("/Pages/RegistroParticipantes.aspx");
+            return Abs("/PublicPages/RegistroParticipantes.aspx");
         }
 
         public static String TestIFrame()
