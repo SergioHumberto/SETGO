@@ -21,6 +21,8 @@ namespace WebApplicationTemplate.Objects
         public int? IdEquipo { get; set; }
         public bool Pagado { get; set; }
         public string Socio { get; set; }
+        public string TransactionNumber { get; set; }
+        public string StatusPaypal { get; set; }
 
         // only saves relations
         public ParticipanteXCarreraOBJ ParticipanteXCarrera { get; set; }

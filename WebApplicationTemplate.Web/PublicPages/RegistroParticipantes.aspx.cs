@@ -103,11 +103,6 @@ namespace WebApplicationTemplate.Web.Pages
                 if (IdCarreraProperty > 0)
                 {
                     LoadCarrera(IdCarreraProperty);
-
-                    if (Request.QueryString["tx"] != null)
-                    {
-                        ProcesaRespuestaPayPal();
-                    }
                 }
                 else
                 {
@@ -590,20 +585,29 @@ namespace WebApplicationTemplate.Web.Pages
                 strCustom = string.Format(strCustom, IdParticipanteVSProperty);
             }
 
-            // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
-            string strURLReturn = "http://localhost:61880/WebApplicationTemplate/Pages/RegistroParticipantes.aspx?IdCarrera={0}";
-            strURLReturn = string.Format(strURLReturn, IdCarreraProperty);
+            // Urls.Abs("~/Pages/PaymentProcess.aspx")
+            string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
+            strURLReturn = string.Format(strURLReturn, IdCarreraProperty, IdParticipanteVSProperty);
 
             // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
-            string strCancelURL = "http://localhost:61880/WebApplicationTemplate/Pages/RegistroParticipantes.aspx?IdCarrera={0}";
+            string strCancelURL = "http://localhost:61880/WebApplicationTemplate/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}";
             strCancelURL = string.Format(strCancelURL, IdCarreraProperty);
+
+            CarreraBLL objCarerraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+            CarreraOBJ objCarrera = objCarerraBLL.SelectCarreraObject(IdCarreraProperty);
+
+            string strNombreCarrera = string.Empty;
+            if (objCarrera != null)
+            {
+                strNombreCarrera = objCarrera.Nombre;
+            }
 
             SessionPayPal objSessionPayPal = new SessionPayPal()
             {
                 IdCarrera = IdCarreraProperty
                 , amount = p_Amount
                 , custom = strCustom
-                , item_name = "Carrera"
+                , item_name = strNombreCarrera
                 , returnURL = strURLReturn
                 , cancelURL = strCancelURL
             };
@@ -619,86 +623,7 @@ namespace WebApplicationTemplate.Web.Pages
             Context.ApplicationInstance.CompleteRequest();
         }
 
-        private void ProcesaRespuestaPayPal()
-        {
-            CarreraBLL objCarreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-            CarreraOBJ objCarreraOBJ = objCarreraBLL.SelectCarreraObject(IdCarreraProperty);
-
-            string authToken = string.Empty;
-            if (objCarreraOBJ != null)
-            {
-                // ejemplo: "wyws0SQYueHY3xZJte9l9nr4h1OT7FGixDL0a3bJwqwY0ABJbKoZkxzibR4"
-                authToken = objCarreraOBJ.TokenPaypalTDP;
-            }
-
-            string txToken = Request.QueryString["tx"];
-            string query = "cmd=_notify-synch&tx=" + txToken + "&at=" + authToken;
-
-            //Post back to either sandbox or live
-            string strSandbox = "https://www.sandbox.paypal.com/cgi-bin/webscr";
-            string strLive = "https://www.paypal.com/cgi-bin/webscr";
-
-            //ServicePointManager.ServerCertificateValidationCallback =
-            //    delegate (object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-            //    { return true; };
-
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            ServicePointManager.ServerCertificateValidationCallback +=
-                new RemoteCertificateValidationCallback((sender, certificate, chain, policyErrors) => { return true; });
-
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(strSandbox);
-
-            //Set values for the request back
-            req.Method = "POST";
-            req.ContentType = "application/x-www-form-urlencoded";
-            req.ContentLength = query.Length;
-
-            //Send the request to PayPal and get the response
-            StreamWriter streamOut = new StreamWriter(req.GetRequestStream(), System.Text.Encoding.ASCII);
-            streamOut.Write(query);
-            streamOut.Close();
-            StreamReader streamIn = new StreamReader(req.GetResponse().GetResponseStream());
-            string strResponse = streamIn.ReadToEnd();
-            streamIn.Close();
-
-            Dictionary<string, string> results = new Dictionary<string, string>();
-            if (strResponse != "")
-            {
-                divRespuestaPaypal.Visible = true;
-
-                StringReader reader = new StringReader(strResponse);
-                string line = reader.ReadLine();
-
-                if (line == "SUCCESS")
-                {
-
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        results.Add(line.Split('=')[0], line.Split('=')[1]);
-
-                    }
-
-                    lblTituloRespuesta.Text = "Tu orden ha sido recibida";
-                    lblNombre.Text = results["first_name"] + " " + results["last_name"];
-                    lblItem.Text = results["item_name"];
-
-                    UpdatePayment(results["custom"]);
-                    // Response.Write("<li>Amount: " + results["payment_gross"] + "</li>");
-                    // Response.Write("<hr>");
-                }
-                else if (line == "FAIL")
-                {
-                    // Log for manual investigation
-                    lblTituloRespuesta.Text = "No se pudo recibir detalles de la transaccion";
-                }
-            }
-            else
-            {
-                //unknown error
-                Response.Write("ERROR");
-            }
-        }
+        
 
         private void UpdatePayment(string customVariable)
         {

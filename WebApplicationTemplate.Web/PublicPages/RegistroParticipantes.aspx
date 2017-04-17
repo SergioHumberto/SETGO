@@ -20,23 +20,6 @@
     <div id="divHtmlRender" runat="server" >
     </div>
 
-        <div id="divRespuestaPaypal" style="width:60%" class="row" runat="server" visible="false">
-            <asp:Label ID="lblTituloRespuesta" CssClass="h3" runat="server"></asp:Label>
-            <br />
-            <b><label>Detalles</label></b>
-            <br />
-            <div class="input-group">
-                <label class="">Nombre</label>
-                <asp:Label ID="lblNombre" CssClass="form-control" runat="server"></asp:Label>
-            </div>
-            <br />
-            <div class="input-group">
-                <label class="">Item</label>
-                <asp:Label ID="lblItem" runat="server" CssClass="form-control"></asp:Label>
-            </div>
-        </div>
-        <br />
-
     <asp:UpdatePanel ID="upCusError" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <div class="has-error">

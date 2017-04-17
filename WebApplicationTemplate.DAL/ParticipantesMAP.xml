@@ -53,6 +53,8 @@
       <update id="UpdateParticipante" parameterClass="ParticipantesOBJ"  >
           UPDATE Participante 
           SET Pagado = #Pagado#
+          , TransactionNumber = #TransactionNumber#
+          , StatusPaypal = #StatusPaypal#
           WHERE IdParticipante = #IdParticipante#
       </update>
 

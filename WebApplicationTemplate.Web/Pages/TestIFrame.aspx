@@ -2,7 +2,7 @@
 
 <asp:Content runat="server" ID="content1" ContentPlaceHolderID="Content">
 
-    <iframe width="600" height="1600" style="width:100%;border:none;height:1600px !important" allowtransparency="true" runat="server" frameborder="0" scrolling="no" src="RegistroParticipantes.aspx">
+    <iframe width="600" height="1600" style="width:100%;border:none;height:1600px !important" allowtransparency="true" runat="server" frameborder="0" scrolling="no" src="../PublicPages/RegistroParticipantes.aspx?IdCarrera=1">
 
     </iframe>
 
