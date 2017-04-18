@@ -8,9 +8,12 @@
             </div>
         </div>
         <div class="alert alert-danger" runat="server" id="lblError" visible="false"></div>
+        <div class="text-right">
+            <asp:LinkButton CssClass="" runat="server" ID="lnkShowInactive" OnClick="lnkShowInactive_Click"></asp:LinkButton>
+        </div>
         <asp:GridView runat="server" ID="grdEquipos" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowCancelingEdit="grdEquipos_RowCancelingEdit" OnRowDeleting="grdEquipos_RowDeleting" OnRowEditing="grdEquipos_RowEditing" OnRowUpdating="grdEquipos_RowUpdating" ShowHeaderWhenEmpty="true" OnRowDataBound="grdEquipos_RowDataBound" OnDataBinding="grdEquipos_DataBinding">
             <Columns>
-                <asp:BoundField DataField="IdTipoEquipo" HeaderText="Id" ReadOnly="true" ItemStyle-Width="10%" ControlStyle-CssClass="form-control" />
+                <asp:BoundField DataField="IdTipoEquipo" HeaderText="Id" ReadOnly="true" ItemStyle-Width="5%" ControlStyle-CssClass="form-control" />
                 <asp:TemplateField HeaderText="Categoría" ItemStyle-Width="20%">
                     <ItemTemplate>
                         <asp:HiddenField ID="hdnIdCategoria" runat="server" Value='<%#Bind("IdCategoria") %>' />
@@ -25,15 +28,23 @@
                 <asp:TemplateField ItemStyle-Width="20%" HeaderText="Precio">
                     <ItemTemplate>
                         <div class="input-group">
-                        <span>$&nbsp;</span>
-                        <asp:Label ID="lblPrecio" runat="server" Text='<%#Bind("Precio") %>'></asp:Label>
-                            </div>
+                            <span>$&nbsp;</span>
+                            <asp:Label ID="lblPrecio" runat="server" Text='<%#Bind("Precio") %>'></asp:Label>
+                        </div>
                     </ItemTemplate>
                     <EditItemTemplate>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
                             <asp:TextBox ID="txtPrecio" runat="server" Text='<%#Bind("Precio") %>' class="form-control"></asp:TextBox>
                         </div>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField ItemStyle-Width="5%" HeaderText="Activo">
+                    <ItemTemplate>
+                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Enabled="false" Checked='<%#Bind("Activo") %>' />
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Checked='<%#Bind("Activo") %>' />
                     </EditItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField ShowEditButton="true" ItemStyle-Width="20%" />

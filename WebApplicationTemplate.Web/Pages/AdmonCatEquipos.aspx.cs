@@ -15,7 +15,15 @@ namespace WebApplicationTemplate.Web.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
                 BindDataToEquiposGridView(getDataTipoEquipos());
+                lnkShowInactive.Text = getTextlnkShowInactive();
+            }                       
+        }
+
+        protected string getTextlnkShowInactive()
+        {
+            return (ViewState["ShowInactive"] != null && (bool)ViewState["ShowInactive"]) ? "Mostrar Activos" : "Mostrar Inactivos";
         }
 
         protected IList<TipoEquipoOBJ> getDataTipoEquipos()
@@ -23,16 +31,16 @@ namespace WebApplicationTemplate.Web.Pages
             UserSession session = HttpSecurity.CurrentSession;
             TipoEquipoBLL objTipoEquipoBll = new TipoEquipoBLL(session);
 
-            return objTipoEquipoBll.SelectTipoEquipos();
+            TipoEquipoOBJ tipoEquipoOBJ = new TipoEquipoOBJ();
+            tipoEquipoOBJ.Activo = (ViewState["ShowInactive"] != null && (bool)ViewState["ShowInactive"])? false : true;
+
+            return objTipoEquipoBll.SelectTipoEquipo(tipoEquipoOBJ);
         }
 
         protected void BindDataToEquiposGridView(IList<TipoEquipoOBJ> lstTipoEquipos)
-        {
-            if (lstTipoEquipos.Count > 0)
-            {
+        {           
                 grdEquipos.DataSource = lstTipoEquipos;
-                grdEquipos.DataBind();
-            }
+                grdEquipos.DataBind();            
         }
 
         protected void LimpiaErrores()
@@ -111,6 +119,7 @@ namespace WebApplicationTemplate.Web.Pages
                 tipoEquipoObj.CantidadParticipantes = CantidadParticipantes;
                 tipoEquipoObj.Precio = precio;
                 tipoEquipoObj.IdCategoria = IdCategoria;
+                tipoEquipoObj.Activo = (bool) e.NewValues["Activo"];
 
                 if (!validaTipoEquipo(tipoEquipoObj)) return;
 
@@ -255,6 +264,20 @@ namespace WebApplicationTemplate.Web.Pages
                 lblError.InnerText = ex.Message;
                 lblError.Visible = true;
             }
+        }
+
+        protected void lnkShowInactive_Click(object sender, EventArgs e)
+        {
+            if(ViewState["ShowInactive"] == null)
+            {
+                ViewState.Add("ShowInactive", true);                
+            }
+            else
+            {
+                ViewState.Add("ShowInactive", !(bool)ViewState["ShowInactive"]);                
+            }
+            lnkShowInactive.Text = getTextlnkShowInactive();
+            BindDataToEquiposGridView(getDataTipoEquipos());
         }
     }
 }

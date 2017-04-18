@@ -16,6 +16,7 @@
                 WHERE ( #IdTipoEquipo# <= 0 OR TE.IdTipoEquipo = #IdTipoEquipo#)
                 AND ( #CantidadParticipantes# <= 0 OR TE.CantidadParticipantes = #CantidadParticipantes#)
                 AND (#IdCategoria# <= 0 OR TE.IdCategoria = #IdCategoria#)
+                AND (TE.Activo = #Activo#)
             ]]>
     </select>
 
@@ -24,6 +25,7 @@
       TE.*
       FROM TipoEquipo TE
       WHERE TE.IdTipoEquipo = #value#
+      AND (TE.Activo = #Activo#)
     </select>
 
     <insert id="InsertarTipoEquipo" parameterClass="TipoEquipoOBJ">
@@ -31,13 +33,15 @@
       (
       CantidadParticipantes
       , Precio
-      ,IdCategoria
+      , IdCategoria
+      , Activo
       )
       VALUES
       (
       #CantidadParticipantes#
       , #Precio#
       , #IdCategoria#
+      , #Activo#
       )
 
       <selectKey type="post" resultClass="int" property="IdTipoEquipo">
@@ -51,6 +55,7 @@
       CantidadParticipantes = #CantidadParticipantes#
       , Precio = #Precio#
       , IdCategoria = #IdCategoria#
+      , Activo = #Activo#
       WHERE IdTipoEquipo = #IdTipoEquipo#
     </update>
 
