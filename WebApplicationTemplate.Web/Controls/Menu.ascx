@@ -1,20 +1,44 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Menu.ascx.cs" Inherits="WebApplicationTemplate.Web.Controls.Menu" %>
 <%@ Import Namespace="WebApplicationTemplate.Web.Tools" %>
-<table class="MainMenu">
-	<tr>
-		<td class="MainMenuLeft">
-			&nbsp;
-		</td>
-		<td class="MainMenuCenter">
-			<a href="<%= Urls.Home() %>">Home</a> 
-			<a href="<%= Urls.Demo() %>">Demo</a>
-            <a href="<%= Urls.RegistroParticipantes() %>">Registro de participantes</a>
-            <a href="<%= Urls.TestIFrame() %>">Test iframe</a>
-            <a href="<%= Urls.ReporteRegistrados() %>">Reporte Registrados</a>
-			<a href="<%= Urls.SignOut() %>">Sign out</a>
-		</td>
-		<td class="MainMenuRight">
-			&nbsp;
-		</td>
-	</tr>
-</table>
+
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Logo -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Desplegar navegación</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a href="<%= Urls.Home() %>">
+            <img class="navbar-brand" src="http://setgo.mx/wp-content/uploads/2016/05/Logo-trans2x-1.png" />
+        </a>
+    </div>
+
+    <!-- Items -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <%--<li class="active"><a href="#">Enlace #1</a></li>--%>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="<%= Urls.AdmonCatEquipos() %>">Equipos</a></li>                    
+                    <%--<li class="divider"></li>--%>                    
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registro<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="<%= Urls.RegistroParticipantes() %>">Registro (Sin iFrame)</a></li>        
+                    <li><a href="<%= Urls.TestIFrame() %>">Registro (Con iFrame)</a></li>                                 
+                    <%--<li class="divider"></li>--%>                    
+                </ul>
+            </li>
+            <li><a href="<%= Urls.ReporteRegistrados() %>">Reporte Registrados</a></li>
+            <li><a href="<%= Urls.SignOut() %>">Salir</a></li>
+        </ul>
+    </div>
+</nav>
