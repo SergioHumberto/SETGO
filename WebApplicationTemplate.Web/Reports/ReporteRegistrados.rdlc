@@ -15,7 +15,7 @@
               <Width>2.5cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.5cm</Width>
+              <Width>3.37312cm</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>6.87537cm</Width>
@@ -141,21 +141,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
+                    <Textbox Name="Textbox2">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Edad</Value>
+                              <Value>Fecha Nacimiento</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -536,21 +536,23 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Edad">
+                    <Textbox Name="FechaNacimiento">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Edad.Value</Value>
-                              <Style />
+                              <Value>=Fields!FechaNacimiento.Value</Value>
+                              <Style>
+                                <Format>d</Format>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Edad</rd:DefaultName>
+                      <rd:DefaultName>FechaNacimiento</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -868,7 +870,7 @@
         <DataSetName>RegistradosXCarrera</DataSetName>
         <Top>4.89162cm</Top>
         <Height>1.2cm</Height>
-        <Width>37.80141cm</Width>
+        <Width>38.67454cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -973,7 +975,7 @@
     <Height>3.22119in</Height>
     <Style />
   </Body>
-  <Width>15.11161in</Width>
+  <Width>15.22619in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -1013,9 +1015,9 @@
           <DataField>ApellidoMaterno</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Edad">
-          <DataField>Edad</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="FechaNacimiento">
+          <DataField>FechaNacimiento</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="Domicilio">
           <DataField>Domicilio</DataField>

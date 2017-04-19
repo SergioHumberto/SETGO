@@ -13,7 +13,7 @@
       Nombre
       , ApellidoPaterno
       , ApellidoMaterno
-      , Edad
+      , FechaNacimiento
       , Domicilio
       , Invitado
       , NumeroAccion
@@ -29,7 +29,7 @@
       #Nombre#
       , #ApellidoPaterno#
       , #ApellidoMaterno#
-      , #Edad#
+      , #FechaNacimiento#
       , #Domicilio#
       , #Invitado#
       , #NumeroAccion#

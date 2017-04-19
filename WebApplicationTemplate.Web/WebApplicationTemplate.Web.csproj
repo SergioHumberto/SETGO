@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\Menu.ascx" />
+    <Content Include="Controls\UserControls\DatePickerControl.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Masters\PublicPage.Master" />
     <Content Include="Masters\PrivatePage.Master" />
@@ -195,6 +196,13 @@
     </Compile>
     <Compile Include="Controls\Menu.ascx.designer.cs">
       <DependentUpon>Menu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UserControls\DatePickerControl.ascx.cs">
+      <DependentUpon>DatePickerControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\UserControls\DatePickerControl.ascx.designer.cs">
+      <DependentUpon>DatePickerControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

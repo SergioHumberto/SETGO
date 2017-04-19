@@ -248,6 +248,7 @@
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
     <None Include="Scripts\Pre-Deployment\TipoEquipo_IdCategoríaFK.sql" />
+    <None Include="Scripts\Pre-Deployment\Participante.0.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />

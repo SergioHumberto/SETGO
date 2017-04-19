@@ -285,7 +285,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             private global::System.Data.DataColumn columnApellidoMaterno;
             
-            private global::System.Data.DataColumn columnEdad;
+            private global::System.Data.DataColumn columnFechaNacimiento;
             
             private global::System.Data.DataColumn columnDomicilio;
             
@@ -364,9 +364,9 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EdadColumn {
+            public global::System.Data.DataColumn FechaNacimientoColumn {
                 get {
-                    return this.columnEdad;
+                    return this.columnFechaNacimiento;
                 }
             }
             
@@ -479,13 +479,13 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Nombre, string ApellidoPaterno, string ApellidoMaterno, int Edad, string Domicilio, string Invitado, string NumeroAccion, string Telefono, string Email, string TelefonoEmergencia, string Pagado, string Rama, string Categoria) {
+            public DataTable1Row AddDataTable1Row(string Nombre, string ApellidoPaterno, string ApellidoMaterno, System.DateTime FechaNacimiento, string Domicilio, string Invitado, string NumeroAccion, string Telefono, string Email, string TelefonoEmergencia, string Pagado, string Rama, string Categoria) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Nombre,
                         ApellidoPaterno,
                         ApellidoMaterno,
-                        Edad,
+                        FechaNacimiento,
                         Domicilio,
                         Invitado,
                         NumeroAccion,
@@ -520,7 +520,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 this.columnNombre = base.Columns["Nombre"];
                 this.columnApellidoPaterno = base.Columns["ApellidoPaterno"];
                 this.columnApellidoMaterno = base.Columns["ApellidoMaterno"];
-                this.columnEdad = base.Columns["Edad"];
+                this.columnFechaNacimiento = base.Columns["FechaNacimiento"];
                 this.columnDomicilio = base.Columns["Domicilio"];
                 this.columnInvitado = base.Columns["Invitado"];
                 this.columnNumeroAccion = base.Columns["NumeroAccion"];
@@ -541,8 +541,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 base.Columns.Add(this.columnApellidoPaterno);
                 this.columnApellidoMaterno = new global::System.Data.DataColumn("ApellidoMaterno", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnApellidoMaterno);
-                this.columnEdad = new global::System.Data.DataColumn("Edad", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEdad);
+                this.columnFechaNacimiento = new global::System.Data.DataColumn("FechaNacimiento", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFechaNacimiento);
                 this.columnDomicilio = new global::System.Data.DataColumn("Domicilio", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDomicilio);
                 this.columnInvitado = new global::System.Data.DataColumn("Invitado", typeof(string), null, global::System.Data.MappingType.Element);
@@ -751,17 +751,17 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Edad {
+            public System.DateTime FechaNacimiento {
                 get {
                     try {
-                        return ((int)(this[this.tableDataTable1.EdadColumn]));
+                        return ((global::System.DateTime)(this[this.tableDataTable1.FechaNacimientoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Edad\' de la tabla \'DataTable1\' es DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'FechaNacimiento\' de la tabla \'DataTable1\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.EdadColumn] = value;
+                    this[this.tableDataTable1.FechaNacimientoColumn] = value;
                 }
             }
             
@@ -947,14 +947,14 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsEdadNull() {
-                return this.IsNull(this.tableDataTable1.EdadColumn);
+            public bool IsFechaNacimientoNull() {
+                return this.IsNull(this.tableDataTable1.FechaNacimientoColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetEdadNull() {
-                this[this.tableDataTable1.EdadColumn] = global::System.Convert.DBNull;
+            public void SetFechaNacimientoNull() {
+                this[this.tableDataTable1.FechaNacimientoColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

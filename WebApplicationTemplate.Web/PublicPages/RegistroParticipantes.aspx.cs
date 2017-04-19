@@ -332,7 +332,7 @@ namespace WebApplicationTemplate.Web.Pages
             txtNombres.Text = string.Empty;
             txtApellidoPaterno.Text = string.Empty;
             txtApellidoMaterno.Text = string.Empty;
-            txtEdad.Text = string.Empty;
+            datePickerEdad.Text = string.Empty;
             txtDomicilio.Text = string.Empty;
             txtSocio.Text = string.Empty;
             txtNoAccion.Text = string.Empty;
@@ -438,9 +438,11 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipante.ApellidoPaterno = txtApellidoPaterno.Text.Trim();
             objParticipante.ApellidoMaterno = txtApellidoMaterno.Text.Trim();
 
-            int iEdad;
-            int.TryParse(txtEdad.Text.Trim(), out iEdad);
-            objParticipante.Edad = iEdad;
+            DateTime dEdad = DateTime.Now;
+            if (DateTime.TryParse(datePickerEdad.Value.Trim(), out dEdad))
+            {
+                objParticipante.FechaNacimiento = dEdad;
+            }
 
             objParticipante.Domicilio = txtDomicilio.Text.Trim();
 

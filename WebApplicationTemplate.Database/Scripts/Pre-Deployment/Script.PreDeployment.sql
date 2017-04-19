@@ -9,4 +9,5 @@
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r .\TipoEquipo_IdCategoríaFK.sql
+-- :r .\TipoEquipo_IdCategoríaFK.sql
+:r .\Participante.0.sql

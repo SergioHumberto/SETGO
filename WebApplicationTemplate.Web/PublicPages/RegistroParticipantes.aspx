@@ -14,6 +14,8 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        
 
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -91,15 +93,7 @@
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Edad *</label>
-                <asp:TextBox ID="txtEdad" CssClass="form-control" MaxLength="2" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqTxtEdad" ControlToValidate="txtEdad" SetFocusOnError="true" 
-                    ForeColor="Red" ErrorMessage="Se requiere indicar edad" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="revtxtEdad" runat="server" SetFocusOnError="true" 
-                    ErrorMessage="Debe ser un valor numerico"
-                    ControlToValidate="txtEdad" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
-            </div>
+            <UserControls:DatePicker ID="datePickerEdad" Text="Fecha de nacimiento*" IsRequired="true" SetFocusOnError="true" ErrorMessage="Debe seleccionar una fecha" runat="server" />
         </div>
     </div>
 
@@ -217,7 +211,6 @@
     <div class="row">
         <div class="col-md-12">
             <asp:Label ID="lblPoliticas" runat="server">
-                En pleno uso de mis facultades, declaro estar sano y apto para participar en el evento, reconozco los riesgos inherentes a la práctica deportiva, por lo que voluntariamente y con conocimiento pleno de esto, acepto y asumo la responsabilidad de mi integridad física, y libero de toda responsabilidad al Club de Golg La Loma S.A. DE C.V. y al comité organizador. *
             </asp:Label>
         </div>
     </div>
@@ -301,27 +294,8 @@
             }
         }
 
-
-        //$(document).ready(function () {
-
-        //    $("#ddlTipoRegistro").change(function () {
-        //        if (this.value == "Equipo")
-        //        {
-        //            $("#divTipoEquipo").show();
-        //        }
-        //        else if (this.value == "Individual")
-        //        {
-        //            $("#divTipoEquipo").hide();
-        //        }
-        //    });
-
-        //    $("#ddlTipoEquipo").change(function () {
-        //        // alert('hola');
-        //    });
-
-        //});
-
     </script>
+        
     </form>
 </body>
 </html>

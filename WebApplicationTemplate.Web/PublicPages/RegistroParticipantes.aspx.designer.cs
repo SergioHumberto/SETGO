@@ -148,31 +148,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtApellidoMaterno;
         
         /// <summary>
-        /// Control txtEdad.
+        /// Control datePickerEdad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEdad;
-        
-        /// <summary>
-        /// Control reqTxtEdad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTxtEdad;
-        
-        /// <summary>
-        /// Control revtxtEdad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtEdad;
+        protected global::WebApplicationTemplate.Web.Controls.UserControls.DatePickerControl datePickerEdad;
         
         /// <summary>
         /// Control txtDomicilio.

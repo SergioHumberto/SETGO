@@ -23,6 +23,7 @@ namespace WebApplicationTemplate.Objects
         public string Socio { get; set; }
         public string TransactionNumber { get; set; }
         public string StatusPaypal { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
         // only saves relations
         public ParticipanteXCarreraOBJ ParticipanteXCarrera { get; set; }

@@ -9,7 +9,7 @@ BEGIN
 	P.Nombre
 	, P.ApellidoPaterno
 	, P.ApellidoMaterno
-	, P.Edad
+	, P.FechaNacimiento
 	, P.Domicilio
 	, P.Invitado
 	, P.NumeroAccion
