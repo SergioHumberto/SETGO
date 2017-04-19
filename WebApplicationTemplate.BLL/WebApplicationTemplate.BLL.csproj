@@ -49,6 +49,7 @@
     <Compile Include="EquipoBLL.cs" />
     <Compile Include="ParticipantesBLL.cs" />
     <Compile Include="ParticipanteXCarreraBLL.cs" />
+    <Compile Include="PaypalConfigBLL.cs" />
     <Compile Include="Properties\Resources.es.Designer.cs">
       <DependentUpon>Resources.es.resx</DependentUpon>
       <AutoGen>True</AutoGen>

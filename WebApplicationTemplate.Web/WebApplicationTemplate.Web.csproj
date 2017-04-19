@@ -211,6 +211,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Email.cs" />
     <Compile Include="Masters\PublicPage.Master.cs">
       <DependentUpon>PublicPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

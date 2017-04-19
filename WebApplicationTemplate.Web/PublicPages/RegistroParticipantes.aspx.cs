@@ -254,9 +254,11 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 try
                 {
-                    if (!RegistroEnEquipo)
+					ParticipantesOBJ participanteOBJ = new ParticipantesOBJ();
+
+					if (!RegistroEnEquipo)
                     {
-                        InsertarParticipante();
+                        participanteOBJ = InsertarParticipante();
                     }
                     else
                     {
@@ -291,6 +293,40 @@ namespace WebApplicationTemplate.Web.Pages
                     }
 
                     PaypalDelegateForm(Amount);
+
+					RamaBLL ramaBLL = new RamaBLL(HttpSecurity.CurrentSession);
+					RamaOBJ ramaOBJ = new RamaOBJ();
+
+					ramaOBJ = ramaBLL.SelectRamaByIdParticipante(participanteOBJ.IdParticipante);
+
+					
+					List<string> lstCamposCorreo = new List<string>();
+
+					lstCamposCorreo.Add(ramaOBJ.Nombre);//Modalidad
+					lstCamposCorreo.Add(participanteOBJ.Nombre + 
+										" " +
+										participanteOBJ.ApellidoPaterno +
+										" " +
+										participanteOBJ.ApellidoPaterno);//Nombre
+					lstCamposCorreo.Add("");//Fecha de nacimiento
+					lstCamposCorreo.Add(participanteOBJ.Email);//Email
+					lstCamposCorreo.Add("");//Club
+					lstCamposCorreo.Add(participanteOBJ.Telefono);//Telefono personal
+					lstCamposCorreo.Add(participanteOBJ.TelefonoEmergencia);//Telefono emergencia
+					lstCamposCorreo.Add(participanteOBJ.Domicilio);//Dirección
+					lstCamposCorreo.Add(chkAcepto.Checked.ToString());//Terminos
+					lstCamposCorreo.Add(Amount.ToString());//Total
+					lstCamposCorreo.Add("");//Status
+					lstCamposCorreo.Add("");//PaymentID
+					lstCamposCorreo.Add("");//Payment Date
+					lstCamposCorreo.Add(participanteOBJ.Nombre +
+										" " +
+										participanteOBJ.ApellidoPaterno +
+										" " +
+										participanteOBJ.ApellidoPaterno);//Full name
+
+					Email email = new Email();
+					email.SendEmail(lstCamposCorreo);
                 }
                 catch (Exception ex)
                 {
@@ -383,7 +419,7 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
-        private void InsertarParticipante()
+        private ParticipantesOBJ InsertarParticipante()
         {
             try
             {
@@ -398,7 +434,10 @@ namespace WebApplicationTemplate.Web.Pages
                 DAL.DAL.CommitTransaction();
 
                 IdParticipanteVSProperty = objParticipante.IdParticipante;
-            }
+
+				return objParticipante;
+
+			}
             catch (Exception ex)
             {
                 DAL.DAL.RollbackTransaction();

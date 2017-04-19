@@ -12,7 +12,7 @@
 
     <h1>Espere un momento...</h1>
 
-    <form name="formPayPal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <form id="formPayPal" method="post" runat="server">
         <input type="hidden" name="cmd" value="_xclick"/>
         <input type="hidden" name="business" value="<%= PayPalEmail %>"/>
         <input type="hidden" name="item_name" value="<%= ItemName %>"/>

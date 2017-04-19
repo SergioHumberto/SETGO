@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -24,7 +25,14 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 if (Session["objSessionPayPal"] != null)
                 {
-                    SessionPayPal objSessionPayPal = (SessionPayPal)Session["objSessionPayPal"];
+					PaypalConfigOBJ paypalConfigOBJ = new PaypalConfigOBJ();
+					PaypalConfigBLL paypalConfigBLL = new PaypalConfigBLL();
+
+					paypalConfigOBJ = paypalConfigBLL.SelectActivePaypalConfigURL();
+
+					formPayPal.Action = paypalConfigOBJ.PaypalURL;
+
+					SessionPayPal objSessionPayPal = (SessionPayPal)Session["objSessionPayPal"];
                     CarreraBLL objCarreraBLL = new CarreraBLL(Tools.HttpSecurity.CurrentSession);
                     CarreraOBJ objCarreraOBJ = objCarreraBLL.SelectCarreraObject(objSessionPayPal.IdCarrera);
                     PayPalEmail = objCarreraOBJ.PayPalEmail;
@@ -33,11 +41,9 @@ namespace WebApplicationTemplate.Web.Pages
                     Custom = objSessionPayPal.custom;
                     ReturnURL = objSessionPayPal.returnURL;
                     CancelURL = objSessionPayPal.cancelURL;
-
-                    Session.Remove("objSessionPayPal");
-
-                    // ClientScript.RegisterStartupScript(GetType(), "doPostBack", "__doPostBack('','')", true);
-                }
+					
+					Session.Remove("objSessionPayPal");
+				}
             }
         }
     }

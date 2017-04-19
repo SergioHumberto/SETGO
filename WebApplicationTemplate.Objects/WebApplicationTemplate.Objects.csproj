@@ -44,6 +44,7 @@
     <Compile Include="CategoriaXCarreraOBJ.cs" />
     <Compile Include="CategoriaXRutaOBJ.cs" />
     <Compile Include="EquipoOBJ.cs" />
+    <Compile Include="PaypalConfigOBJ.cs" />
     <Compile Include="SessionPayPal.cs" />
     <Compile Include="ParticipantesOBJ.cs" />
     <Compile Include="ParticipanteXCarreraOBJ.cs" />

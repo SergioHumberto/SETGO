@@ -15,5 +15,10 @@ namespace WebApplicationTemplate.DAL
             IList<RamaOBJ> lstRamas = Mapper.Instance().QueryForList<RamaOBJ>("SelectRama", p_RamaOBJ);
             return lstRamas;
         }
-    }
+
+		public static RamaOBJ SelectRamaByIdParticipante(int IdParticipante)
+		{
+			return Mapper.Instance().QueryForObject<RamaOBJ>("SelectRamaByIdParticipante", IdParticipante);
+		}
+	}
 }

@@ -16,5 +16,10 @@ namespace WebApplicationTemplate.BLL
         {
             return RamaDAL.SelectRama(p_RamaOBJ);
         }
-    }
+
+		public RamaOBJ SelectRamaByIdParticipante(int idParticipante)
+		{
+			return RamaDAL.SelectRamaByIdParticipante(idParticipante);
+		}
+	}
 }

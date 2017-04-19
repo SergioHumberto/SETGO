@@ -240,6 +240,7 @@
     <Build Include="Schema Objects\Tables\Ruta.sql" />
     <Build Include="Schema Objects\Tables\CategoriaXRuta.sql" />
     <Build Include="Schema Objects\Programmability\Stored Procedures\ReporteRegistrados_PA.sql" />
+    <Build Include="Schema Objects\Tables\PaypalConfig.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />
