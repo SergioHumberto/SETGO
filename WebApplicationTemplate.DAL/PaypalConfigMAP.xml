@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="PaypalConfigOBJ" type="WebApplicationTemplate.Objects.PaypalConfigOBJ" />
+  </alias>
+
+  <statements>
+    <insert id="InsertPaypalConfig" parameterClass="PaypalConfigOBJ" >
+
+      INSERT INTO [PaypalConfig]
+      (
+      PaypalURL
+      ,Descripcion
+      ,Activo
+      )
+      VALUES
+      (
+      #PaypalURL#
+      ,#Descripcion#
+      ,#Activo#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdPaypalConfig">
+        SELECT @@IDENTITY
+      </selectKey>
+    </insert>
+
+    <select id="SelectActivePaypalConfigURL" resultClass="PaypalConfigOBJ">
+      SELECT P.*
+      FROM PaypalConfig P
+      WHERE P.Activo = 1
+    </select>
+
+  </statements>
+
+</sqlMap>
