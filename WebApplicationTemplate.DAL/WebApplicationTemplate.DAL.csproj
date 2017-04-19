@@ -32,10 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IBatisNet.Common">
-      <HintPath>..\Libraries\Ibatis.DataMapper.1.6.2.bin\IBatisNet.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Google Drive\SETGO\dll\Ibatis.DataMapper.1.6.2.bin\IBatisNet.Common.dll</HintPath>
     </Reference>
     <Reference Include="IBatisNet.DataMapper">
-      <HintPath>..\Libraries\Ibatis.DataMapper.1.6.2.bin\IBatisNet.DataMapper.dll</HintPath>
+      <HintPath>..\..\..\..\Google Drive\SETGO\dll\Ibatis.DataMapper.1.6.2.bin\IBatisNet.DataMapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +54,7 @@
     <Compile Include="EquipoDAL.cs" />
     <Compile Include="ParticipantesDAL.cs" />
     <Compile Include="ParticipanteXCarreraDAL.cs" />
+    <Compile Include="PaypalConfigDAL.cs" />
     <Compile Include="RamaDAL.cs" />
     <Compile Include="RamaXCarreraDAL.cs" />
     <Compile Include="ResultadosMAP.cs" />
@@ -113,7 +114,9 @@
     <EmbeddedResource Include="Providers.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CarreraMAP.xml" />
+    <EmbeddedResource Include="CarreraMAP.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CategoriaMAP.xml" />
@@ -147,6 +150,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TipoEquipoMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PaypalConfigMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
