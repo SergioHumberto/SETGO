@@ -21,6 +21,7 @@
       , URLMapa
       , Ubicacion
       , ContenidoHtml
+      , Activo
       )
       VALUES
       (
@@ -34,6 +35,7 @@
       , #URLMapa#
       , #Ubicacion#
       , #ContenidoHtml#
+      , #Activo#
       )
 
       <selectKey type="post" resultClass="int" property="IdCarrera">
@@ -51,6 +53,7 @@
       FROM Carrera C
       WHERE (#IdCarrera# <= 0 OR C.IdCarrera = #IdCarrera#)
       AND (#Nombre# IS NULL OR C.Nombre = #Nombre#)
+      AND C.Activo = #Activo#
       
       ]]>
       
@@ -58,7 +61,13 @@
 
     <select id="SelectCarreraObject" parameterClass="int" resultClass="CarreraOBJ" >
       
-      SELECT C.* FROM Carrera C WHERE C.IdCarrera = #value#
+      SELECT 
+        C.* 
+      FROM 
+        Carrera C 
+      WHERE 
+        C.IdCarrera = #value#
+        AND C.Activo = #Activo#
       
     </select>
     

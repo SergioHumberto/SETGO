@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[Rama]
 (
 	[IdRama] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[Nombre] VARCHAR(100) NOT NULL
+	[Nombre] VARCHAR(100) NOT NULL, 
+    [Activo] BIT NOT NULL DEFAULT 1
 )

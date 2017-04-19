@@ -30,12 +30,19 @@
       WHERE (#IdCategoria# <= 0 OR C.IdCategoria = #IdCategoria#)
       AND (#Nombre# IS NULL OR C.Nombre = #Nombre#)
       AND (#IdCarrera# <= 0 OR CxC.IdCarrera = #IdCarrera#)
+      AND C.Activo = #Activo#
 
       ]]>     
     </select>
 
       <select id="SelectCategoriaObject" parameterClass="int" resultClass="CategoriaOBJ" >
-          SELECT C.* FROM Categoria C WHERE C.IdCategoria = #value#
+          SELECT 
+            C.* 
+          FROM 
+            Categoria C 
+          WHERE 
+            C.IdCategoria = #value#
+            AND C.Activo = #Activo#
       </select>
 
   </statements>

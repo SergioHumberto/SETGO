@@ -7,6 +7,10 @@ namespace WebApplicationTemplate.Objects
 {
     public class CarreraOBJ
     {
+        public CarreraOBJ()
+        {
+            Activo = true;
+        }
         public int IdCarrera { get; set; }
         public string Nombre { get; set; }
         public DateTime Fecha { get; set; }
@@ -21,5 +25,6 @@ namespace WebApplicationTemplate.Objects
         public string PayPalEmail { get; set; }
         public string TokenPaypalTDP { get; set; }
         public string DescripcionPoliticas { get; set; }
+        public bool Activo { get; set; }
     }
 }
