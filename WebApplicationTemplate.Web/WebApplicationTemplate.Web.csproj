@@ -372,7 +372,7 @@
     <WCFMetadataStorage Include="Service References\MLWSUserValidations\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\ReporteRegistrados.rdlc" />
+    <Content Include="Reports\ReporteRegistrados.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
