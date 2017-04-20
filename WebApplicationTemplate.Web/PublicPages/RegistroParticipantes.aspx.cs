@@ -680,8 +680,8 @@ namespace WebApplicationTemplate.Web.Pages
             }
 
             // Urls.Abs("~/Pages/PaymentProcess.aspx")
-            string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
-            //string strURLReturn = Urls.Abs("~/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}");
+            //string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
+            string strURLReturn = Urls.Abs("~/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}");
 
             strURLReturn = string.Format(strURLReturn, IdCarreraProperty, IdParticipanteVSProperty);
 

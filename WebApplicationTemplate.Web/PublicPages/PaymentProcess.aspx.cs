@@ -110,7 +110,7 @@ namespace WebApplicationTemplate.Web.Pages
 						, ramaOBJ.Nombre								//Modalidad
 						, objParticipante.Nombre +" " +
 							objParticipante.ApellidoPaterno +" " +
-							objParticipante.ApellidoPaterno				//Nombre
+							objParticipante.ApellidoMaterno				//Nombre
 						, objParticipante.FechaNacimiento.ToShortDateString()   //Fecha de nacimiento
 						, objParticipante.Email							//Email
 						, objParticipante.Telefono						//Telefono personal
