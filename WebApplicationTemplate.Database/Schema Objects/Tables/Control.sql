@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Control]
+(
+	[IdControl] INT NOT NULL PRIMARY KEY IDENTITY(1,1)
+	, [IdControlASP] VARCHAR(100) NOT NULL
+)

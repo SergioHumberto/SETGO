@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+    <alias>
+        <typeAlias alias="ControlXCarreraOBJ" type="WebApplicationTemplate.Objects.ControlXCarreraOBJ" />
+    </alias>
+
+    <statements>
+
+        <insert id="InsertarControlXCarrera" parameterClass="ControlXCarreraOBJ">
+
+            INSERT INTO ControlXCarrera
+            (
+            IdControl
+            , IdCarrera
+            , Etiqueta
+            , Requerido
+            )
+            VALUES
+            (
+            #IdControl#
+            , #IdCarrera#
+            , #Etiqueta#
+            , #Requerido#
+            )
+
+            <selectKey type="post" resultClass="int" property="IdControlXCarrera">
+                SELECT @@IDENTITY
+            </selectKey>
+
+        </insert>
+
+        <select id="SelectControlXCarrera" resultClass="ControlXCarreraOBJ" parameterClass="ControlXCarreraOBJ" >
+
+            <![CDATA[
+      
+              SELECT 
+              CxC.* 
+              , C.IdControlASP
+              FROM ControlXCarrera CxC
+              INNER JOIN Control C ON C.IdControl = CxC.IdControl
+              WHERE (#IdCarrera# <= 0 OR CxC.IdCarrera = #IdCarrera#)
+              AND (#IdControl# <= 0 OR CXC.IdControl = #IdControl#)
+      
+              ]]>
+
+        </select>
+
+        <select id="SelectControlXCarreraObject" parameterClass="int" resultClass="ControlXCarreraOBJ" >
+
+            SELECT CxC.* FROM ControlXCarrera CxC WHERE CxC.IdControlXCarrera = #value#
+
+        </select>
+
+    </statements>
+
+</sqlMap>

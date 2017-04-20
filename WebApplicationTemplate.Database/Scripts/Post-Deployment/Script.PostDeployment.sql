@@ -9,3 +9,5 @@ Plantilla de script posterior a la implementación
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+:r .\PostData\Control.0.sql
+:r .\PostData\ControlXCarrera.0.sql

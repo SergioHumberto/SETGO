@@ -43,6 +43,7 @@
     <Compile Include="CategoriaOBJ.cs" />
     <Compile Include="CategoriaXCarreraOBJ.cs" />
     <Compile Include="CategoriaXRutaOBJ.cs" />
+    <Compile Include="ControlXCarreraOBJ.cs" />
     <Compile Include="EquipoOBJ.cs" />
     <Compile Include="PaypalConfigOBJ.cs" />
     <Compile Include="SessionPayPal.cs" />

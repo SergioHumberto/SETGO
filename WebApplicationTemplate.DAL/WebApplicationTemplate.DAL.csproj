@@ -49,6 +49,7 @@
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="CategoriaXCarreraDAL.cs" />
     <Compile Include="CategoriaXRutaDAL.cs" />
+    <Compile Include="ControlXCarreraDAL.cs" />
     <Compile Include="DAL.cs" />
     <Compile Include="DataAccessException.cs" />
     <Compile Include="EquipoDAL.cs" />
@@ -153,6 +154,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="PaypalConfigMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ControlXCarreraMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,6 +12,7 @@ using System.Text;
 using System.IO;
 using System.Net;
 using System.Net.Security;
+using System.Web.UI.HtmlControls;
 
 namespace WebApplicationTemplate.Web.Pages
 {
@@ -113,6 +114,94 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
+        public static Control[] FlattenHierachy(Control root)
+        {
+            List<Control> list = new List<Control>();
+            list.Add(root);
+            if (root.HasControls())
+            {
+                foreach (Control control in root.Controls)
+                {
+                    list.AddRange(FlattenHierachy(control));
+                }
+            }
+            return list.ToArray();
+        }
+
+        protected override void OnInit(EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                if (IdCarreraProperty > 0)
+                {
+                    Control[] allControls = FlattenHierachy(Page);
+
+                    ControlXCarreraBLL objControlXCarreraBLL = new ControlXCarreraBLL(HttpSecurity.CurrentSession);
+                    IList<ControlXCarreraOBJ> lstControlXCarrera = objControlXCarreraBLL.SelectControlXCarrera(new ControlXCarreraOBJ() { IdCarrera = IdCarreraProperty });
+
+                    foreach (ControlXCarreraOBJ itemControlXCarrera in lstControlXCarrera)
+                    {
+                        foreach (Control itemControl in allControls)
+                        {
+                            if (itemControl.ID == itemControlXCarrera.IdControlASP)
+                            {
+                                itemControl.Visible = true;
+
+                                Type typeControl = itemControl.GetType();
+
+                                if (typeControl == typeof(HtmlGenericControl))
+                                {
+                                    ((HtmlGenericControl)itemControl).InnerText = itemControlXCarrera.Etiqueta;
+                                }
+                                else if (typeControl == typeof(TextBox))
+                                {
+                                    ((TextBox)itemControl).Text = itemControlXCarrera.Etiqueta;
+                                }
+                                else if (typeControl == typeof(RequiredFieldValidator))
+                                {
+                                    ((RequiredFieldValidator)itemControl).ErrorMessage = itemControlXCarrera.Etiqueta;
+                                    ((RequiredFieldValidator)itemControl).Enabled = itemControlXCarrera.Requerido;
+                                }
+                                else if (typeControl == typeof(RegularExpressionValidator))
+                                {
+                                    ((RegularExpressionValidator)itemControl).ErrorMessage = itemControlXCarrera.Etiqueta;
+                                    ((RegularExpressionValidator)itemControl).Enabled = itemControlXCarrera.Requerido;
+                                }
+                                else if (typeControl == typeof(CustomValidator))
+                                {
+                                    ((CustomValidator)itemControl).ErrorMessage = itemControlXCarrera.Etiqueta;
+                                    ((CustomValidator)itemControl).Enabled = itemControlXCarrera.Requerido;
+                                }
+                                else if (typeControl == typeof(RadioButtonList))
+                                {
+
+                                }
+                                else if (typeControl == typeof(CheckBox))
+                                {
+                                    ((CheckBox)itemControl).Text = itemControlXCarrera.Etiqueta;
+                                }
+                                else if (typeControl == typeof(UpdatePanel))
+                                {
+                                    
+                                }
+                                else
+                                {
+                                    Web.Controls.UserControls.DatePickerControl datePickerControl = itemControl as Web.Controls.UserControls.DatePickerControl;
+                                    if (datePickerControl != null)
+                                    {
+                                        datePickerControl.Text = itemControlXCarrera.Etiqueta;
+                                        datePickerControl.IsRequired = itemControlXCarrera.Requerido;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            base.OnInit(e);
+        }
+
         private void LoadCarrera(int IdCarrera)
         {
             UserSession session = HttpSecurity.CurrentSession;
@@ -184,8 +273,8 @@ namespace WebApplicationTemplate.Web.Pages
                     }
                 }
             }
-            
-            rblCategoria.DataSource = GetListConcatCategoriasConPrecio(lstCategorias);
+
+            rblCategoria.DataSource = lstCategorias; // GetListConcatCategoriasConPrecio(lstCategorias);
             rblCategoria.DataTextField = "Nombre";
             rblCategoria.DataValueField = "IdCategoria";
             rblCategoria.DataBind();
@@ -454,15 +543,18 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipanteXCarreraOBJ.IdParticipante = IdParticipante;
 
             int IdRama;
-            int.TryParse(rblRamas.SelectedValue, out IdRama);
+            if(int.TryParse(rblRamas.SelectedValue, out IdRama))
+            {
+                objParticipanteXCarreraOBJ.IdRama = IdRama;
+            }
 
             int IdCategoria;
-            int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
+            if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
+            {
+                objParticipanteXCarreraOBJ.IdCategoria = IdCategoria;
+            }
 
-            int? IdRuta = null;
-
-            objParticipanteXCarreraOBJ.IdCategoria = IdCategoria;
-            objParticipanteXCarreraOBJ.IdRama = IdRama;
+            int? IdRuta = null;            
             objParticipanteXCarreraOBJ.IdRuta = IdRuta;
 
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);

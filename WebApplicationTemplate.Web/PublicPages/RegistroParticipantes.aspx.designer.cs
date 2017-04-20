@@ -103,22 +103,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.Label lblNumParticipante;
         
         /// <summary>
-        /// Control txtNombres.
+        /// Control lblApellidoPaterno.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombres;
-        
-        /// <summary>
-        /// Control reqNombres.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNombres;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblApellidoPaterno;
         
         /// <summary>
         /// Control txtApellidoPaterno.
@@ -139,6 +130,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqApellidoPaterno;
         
         /// <summary>
+        /// Control lblApellidoMaterno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblApellidoMaterno;
+        
+        /// <summary>
         /// Control txtApellidoMaterno.
         /// </summary>
         /// <remarks>
@@ -146,6 +146,42 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellidoMaterno;
+        
+        /// <summary>
+        /// Control reqApellidoMaterno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqApellidoMaterno;
+        
+        /// <summary>
+        /// Control lblEtiquetaNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEtiquetaNombre;
+        
+        /// <summary>
+        /// Control txtNombres.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombres;
+        
+        /// <summary>
+        /// Control reqNombres.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNombres;
         
         /// <summary>
         /// Control datePickerEdad.
@@ -157,13 +193,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::WebApplicationTemplate.Web.Controls.UserControls.DatePickerControl datePickerEdad;
         
         /// <summary>
-        /// Control txtDomicilio.
+        /// Control lblSocio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDomicilio;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSocio;
         
         /// <summary>
         /// Control txtSocio.
@@ -175,6 +211,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtSocio;
         
         /// <summary>
+        /// Control lblInvitado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblInvitado;
+        
+        /// <summary>
         /// Control txtInvitado.
         /// </summary>
         /// <remarks>
@@ -182,6 +227,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInvitado;
+        
+        /// <summary>
+        /// Control lblNoAccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblNoAccion;
         
         /// <summary>
         /// Control txtNoAccion.
@@ -202,22 +256,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revTxtNoAccion;
         
         /// <summary>
-        /// Control txtTelefonoPersonal.
+        /// Control lblEmail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefonoPersonal;
-        
-        /// <summary>
-        /// Control revtxtTelefonoPersonal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtTelefonoPersonal;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmail;
         
         /// <summary>
         /// Control txtEmail.
@@ -247,6 +292,51 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revEmail;
         
         /// <summary>
+        /// Control lblTelefonoPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTelefonoPersonal;
+        
+        /// <summary>
+        /// Control txtTelefonoPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTelefonoPersonal;
+        
+        /// <summary>
+        /// Control reqTelefonoPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTelefonoPersonal;
+        
+        /// <summary>
+        /// Control revtxtTelefonoPersonal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtTelefonoPersonal;
+        
+        /// <summary>
+        /// Control lblTelefonoEmergencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTelefonoEmergencia;
+        
+        /// <summary>
         /// Control txtTelefonoEmergencia.
         /// </summary>
         /// <remarks>
@@ -256,6 +346,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtTelefonoEmergencia;
         
         /// <summary>
+        /// Control reqTelefonoEmergencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTelefonoEmergencia;
+        
+        /// <summary>
         /// Control revtxtTelefonoEmergencia.
         /// </summary>
         /// <remarks>
@@ -263,6 +362,33 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtTelefonoEmergencia;
+        
+        /// <summary>
+        /// Control lblDomicilio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDomicilio;
+        
+        /// <summary>
+        /// Control txtDomicilio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDomicilio;
+        
+        /// <summary>
+        /// Control reqDomicilio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDomicilio;
         
         /// <summary>
         /// Control btnGuardarParticipante.
@@ -281,6 +407,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phRamaCategoriaRuta;
+        
+        /// <summary>
+        /// Control lblRama.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblRama;
         
         /// <summary>
         /// Control rblRamas.
@@ -308,6 +443,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upCategoria;
+        
+        /// <summary>
+        /// Control lblCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCategoria;
         
         /// <summary>
         /// Control rblCategoria.

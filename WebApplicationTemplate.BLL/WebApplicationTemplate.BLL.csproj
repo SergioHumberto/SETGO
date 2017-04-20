@@ -46,6 +46,7 @@
     <Compile Include="CategoriaBLL.cs" />
     <Compile Include="CategoriaXCarreraBLL.cs" />
     <Compile Include="CategoriaXRutaBLL.cs" />
+    <Compile Include="ControlXCarreraBLL.cs" />
     <Compile Include="EquipoBLL.cs" />
     <Compile Include="ParticipantesBLL.cs" />
     <Compile Include="ParticipanteXCarreraBLL.cs" />

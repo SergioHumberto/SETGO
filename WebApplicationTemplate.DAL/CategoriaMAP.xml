@@ -42,7 +42,7 @@
             Categoria C 
           WHERE 
             C.IdCategoria = #value#
-            AND C.Activo = #Activo#
+            <!--AND C.Activo = #Activo#-->
       </select>
 
   </statements>

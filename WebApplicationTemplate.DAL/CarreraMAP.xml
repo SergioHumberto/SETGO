@@ -67,7 +67,7 @@
         Carrera C 
       WHERE 
         C.IdCarrera = #value#
-        AND C.Activo = #Activo#
+        <!--AND C.Activo = #Activo#-->
       
     </select>
     
