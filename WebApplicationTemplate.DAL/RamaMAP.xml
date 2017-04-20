@@ -20,6 +20,13 @@
       
       ]]>
     </select>
+
+	  <select id="SelectRamaByIdParticipante" parameterClass="int" resultClass="RamaOBJ">
+		  SELECT R.* FROM ParticipanteXCarrera PXC
+		  INNER JOIN Rama R ON PXC.IdRama = R.IdRama
+		  WHERE PXC.IdParticipante = #value#
+	  </select>
+	  
   </statements>
 
 </sqlMap>

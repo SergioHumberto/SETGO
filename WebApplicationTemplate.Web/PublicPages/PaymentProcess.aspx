@@ -27,7 +27,13 @@
         <br />
 
         <asp:Button CssClass="btn btn-default" Text="Cerrar" OnClientClick="Window.Close();" runat="server" />
+
     </div>
+
+        <div id="tablaNotificacion" runat="server">
+
+        </div>
+
     </form>
 </body>
 </html>
