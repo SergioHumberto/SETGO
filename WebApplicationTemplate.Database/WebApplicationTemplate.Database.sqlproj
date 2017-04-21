@@ -16,7 +16,7 @@
     <Name>WebApplicationTemplate.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <ShowWizard>True</ShowWizard>
     <OutputType>Database</OutputType>
@@ -234,16 +234,14 @@
     <Build Include="Schema Objects\Tables\Carrera.sql" />
     <Build Include="Schema Objects\Tables\ParticipanteXCarrera.sql" />
     <Build Include="Schema Objects\Tables\Categoria.sql" />
-    <Build Include="Schema Objects\Tables\CategoriaXCarrera.sql" />
     <Build Include="Schema Objects\Tables\Rama.sql" />
-    <Build Include="Schema Objects\Tables\RamaXCarrera.sql" />
     <Build Include="Schema Objects\Tables\Resultados.sql" />
     <Build Include="Schema Objects\Tables\Ruta.sql" />
-    <Build Include="Schema Objects\Tables\CategoriaXRuta.sql" />
     <Build Include="Schema Objects\Programmability\Stored Procedures\ReporteRegistrados_PA.sql" />
     <Build Include="Schema Objects\Tables\PaypalConfig.sql" />
     <Build Include="Schema Objects\Tables\Control.sql" />
     <Build Include="Schema Objects\Tables\ControlXCarrera.sql" />
+    <Build Include="Schema Objects\Tables\SMTPConfig.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />
@@ -253,6 +251,7 @@
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
     <None Include="Scripts\Pre-Deployment\TipoEquipo_IdCategoríaFK.sql" />
     <None Include="Scripts\Pre-Deployment\Participante.0.sql" />
+    <None Include="Scripts\Pre-Deployment\BorrarTablasDeRelacion.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />

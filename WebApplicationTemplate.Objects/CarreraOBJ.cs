@@ -26,5 +26,7 @@ namespace WebApplicationTemplate.Objects
         public string TokenPaypalTDP { get; set; }
         public string DescripcionPoliticas { get; set; }
         public bool Activo { get; set; }
+        public string CC { get; set; }
+        public string BCC { get; set; }
     }
 }

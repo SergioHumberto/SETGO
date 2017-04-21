@@ -14,5 +14,7 @@
 	[PayPalEmail] VARCHAR(MAX) NULL,
 	[TokenPaypalTDP] VARCHAR(MAX) NULL,
 	[DescripcionPoliticas] VARCHAR(MAX) NULL, 
-    [Activo] BIT NOT NULL DEFAULT 1
+    [Activo] BIT NOT NULL DEFAULT 1, 
+    [CC] VARCHAR(MAX) NULL, 
+    [BCC] VARCHAR(MAX) NULL
 )

@@ -65,6 +65,7 @@
     <Compile Include="RamaXCarreraBLL.cs" />
     <Compile Include="ResultadosBLL.cs" />
     <Compile Include="RutaBLL.cs" />
+    <Compile Include="SMTPConfigBLL.cs" />
     <Compile Include="TipoEquipoBLL.cs" />
     <Compile Include="UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

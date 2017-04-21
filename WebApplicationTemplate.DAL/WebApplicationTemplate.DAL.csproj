@@ -31,11 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IBatisNet.Common">
-      <HintPath>..\..\..\..\Google Drive\SETGO\dll\Ibatis.DataMapper.1.6.2.bin\IBatisNet.Common.dll</HintPath>
+    <Reference Include="IBatisNet.Common, Version=1.6.2.0, Culture=neutral, PublicKeyToken=ed781d9fc396c6ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\IBatisNet.Common.dll</HintPath>
     </Reference>
-    <Reference Include="IBatisNet.DataMapper">
-      <HintPath>..\..\..\..\Google Drive\SETGO\dll\Ibatis.DataMapper.1.6.2.bin\IBatisNet.DataMapper.dll</HintPath>
+    <Reference Include="IBatisNet.DataMapper, Version=1.6.2.0, Culture=neutral, PublicKeyToken=ed781d9fc396c6ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\IBatisNet.DataMapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,8 +49,6 @@
   <ItemGroup>
     <Compile Include="CarreraDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
-    <Compile Include="CategoriaXCarreraDAL.cs" />
-    <Compile Include="CategoriaXRutaDAL.cs" />
     <Compile Include="ControlXCarreraDAL.cs" />
     <Compile Include="DAL.cs" />
     <Compile Include="DataAccessException.cs" />
@@ -57,7 +57,6 @@
     <Compile Include="ParticipanteXCarreraDAL.cs" />
     <Compile Include="PaypalConfigDAL.cs" />
     <Compile Include="RamaDAL.cs" />
-    <Compile Include="RamaXCarreraDAL.cs" />
     <Compile Include="ResultadosMAP.cs" />
     <Compile Include="RutaDAL.cs" />
     <Compile Include="Security\ElementDAL.cs" />
@@ -75,6 +74,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Security\UserDAL.cs" />
+    <Compile Include="SMTPConfigDAL.cs" />
     <Compile Include="TipoEquipoDAL.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,12 +123,6 @@
     <EmbeddedResource Include="CategoriaMAP.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CategoriaXCarreraMAP.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CategoriaXRutaMAP.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="EquipoMAP.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -139,9 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RamaMAP.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="RamaXCarreraMAP.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ResultadosMAP.xml" />
@@ -157,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ControlXCarreraMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SMTPConfigMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

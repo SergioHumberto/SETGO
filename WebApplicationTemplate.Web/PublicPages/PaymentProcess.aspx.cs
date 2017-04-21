@@ -126,7 +126,7 @@ namespace WebApplicationTemplate.Web.Pages
 					tablaNotificacion.InnerHtml = body;
 
 					Email email = new Email();
-					email.SendEmail(body, objParticipante.Email);
+					email.SendEmail(body, objParticipante.Email, carreraOBJ.CC,carreraOBJ.BCC);
 				}
 			}
         }
@@ -282,6 +282,11 @@ namespace WebApplicationTemplate.Web.Pages
                 //unknown error
                 Response.Write("ERROR");
             }
+        }
+       
+        protected void btnRegistraOtroParticipante_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/PublicPages/RegistroParticipantes.aspx?IdCarrera=" + Request.QueryString["IdCarrera"]);
         }
     }
 }

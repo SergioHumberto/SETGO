@@ -25,11 +25,10 @@
       
       SELECT 
       C.* 
-      FROM Categoria C
-      LEFT JOIN CategoriaXCarrera CxC ON CxC.IdCategoria = C.IdCategoria
+      FROM Categoria C      
       WHERE (#IdCategoria# <= 0 OR C.IdCategoria = #IdCategoria#)
       AND (#Nombre# IS NULL OR C.Nombre = #Nombre#)
-      AND (#IdCarrera# <= 0 OR CxC.IdCarrera = #IdCarrera#)
+      AND (#IdCarrera# <= 0 OR C.IdCarrera = #IdCarrera#)
       AND C.Activo = #Activo#
 
       ]]>     
@@ -41,8 +40,7 @@
           FROM 
             Categoria C 
           WHERE 
-            C.IdCategoria = #value#
-            <!--AND C.Activo = #Activo#-->
+            C.IdCategoria = #value#            
       </select>
 
   </statements>

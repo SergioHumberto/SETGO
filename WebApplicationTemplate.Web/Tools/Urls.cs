@@ -11,7 +11,7 @@ namespace WebApplicationTemplate.Web.Tools
 		public static String Abs(String url)
 		{
             //StringBuilder abs = new StringBuilder("http://setgosrv-001-site1.ftempurl.com");
-             StringBuilder abs = new StringBuilder(HttpContext.Current.Request.ApplicationPath);
+            StringBuilder abs = new StringBuilder(HttpContext.Current.Request.ApplicationPath);
 
             if (url.StartsWith("/"))
 			{

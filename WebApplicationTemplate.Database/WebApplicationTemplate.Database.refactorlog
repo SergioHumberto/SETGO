@@ -7,4 +7,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[FK_TipoEquipo_Categoria]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="79009bda-657d-4a4c-a91e-aa0764d8b132" ChangeDateTime="04/20/2017 04:41:43">
+    <Property Name="ElementName" Value="[dbo].[Ruta].[IdCategirua]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Ruta]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdCategoria" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="22c7a832-f6e4-4fb5-ae1c-ace7b3abebd4" ChangeDateTime="04/20/2017 19:41:34">
+    <Property Name="ElementName" Value="[dbo].[SMTPConfig].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SMTPConfig]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdSMTPConfig" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="63df853c-a196-492d-b5db-a76e2d57f50d" ChangeDateTime="04/20/2017 19:42:42">
+    <Property Name="ElementName" Value="[dbo].[SMTPConfig].[SMTPServer]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SMTPConfig]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Server" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="517173ca-e6fe-407d-8958-cea172a9cd34" ChangeDateTime="04/20/2017 19:42:44">
+    <Property Name="ElementName" Value="[dbo].[SMTPConfig].[SMTPPort]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SMTPConfig]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Port" />
+  </Operation>
 </Operations>

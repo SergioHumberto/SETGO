@@ -11,10 +11,9 @@
       
       SELECT 
       R.* 
-      FROM Rama R
-      LEFT JOIN RamaXCarrera RxC ON RxC.IdRama = R.IdRama
+      FROM Rama R      
       WHERE (#IdRama# <= 0 OR R.IdRama = #IdRama#)
-      AND (#IdCarrera# <= 0 OR RxC.IdCarrera = #IdCarrera#)
+      AND (#IdCarrera# <= 0 OR R.IdCarrera = #IdCarrera#)
       AND (#Nombre# IS NULL OR R.Nombre = #Nombre#)
       AND R.Activo = #Activo#
       

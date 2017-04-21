@@ -22,6 +22,8 @@
       , Ubicacion
       , ContenidoHtml
       , Activo
+      , CC
+      , BCC
       )
       VALUES
       (
@@ -36,6 +38,8 @@
       , #Ubicacion#
       , #ContenidoHtml#
       , #Activo#
+      , #CC#
+      , #BCC#
       )
 
       <selectKey type="post" resultClass="int" property="IdCarrera">

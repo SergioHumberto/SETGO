@@ -143,6 +143,8 @@
       <DependentUpon>ReporteRegistradosDS.xsd</DependentUpon>
     </Content>
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\SETGO-SMARTASP.pubxml" />
     <None Include="Reports\XSD\ReporteRegistradosDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
