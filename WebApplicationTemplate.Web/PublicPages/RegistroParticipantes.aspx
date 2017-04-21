@@ -10,8 +10,9 @@
             var txtbox = document.getElementById(txtbox);
           //Remove all white spaces from textbox using the regex
             txtbox.value = txtbox.value.replace(/\s/g, "");
-            txtbox.value = txtbox.value.replace(/[!"#$%&/()=?¡¨+;,.-]/g, "");
+            txtbox.value = txtbox.value.replace(/[!"#$%&/()=?¡¨+;,.-¿]/g, "");
             txtbox.value = txtbox.value.replace(/\*/g, "");
+            txtbox.value = txtbox.value.replace(/\'/g, "");
         }
     </script>
 </head>
