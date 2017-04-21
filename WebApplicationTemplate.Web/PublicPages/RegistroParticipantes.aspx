@@ -4,6 +4,16 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <script type="text/javascript">
+        function removeWhitespaces(txtbox) {            
+          //Get the value from textbox
+            var txtbox = document.getElementById(txtbox);
+          //Remove all white spaces from textbox using the regex
+            txtbox.value = txtbox.value.replace(/\s/g, "");
+            txtbox.value = txtbox.value.replace(/[!"#$%&/()=?¡¨+;,.-]/g, "");
+            txtbox.value = txtbox.value.replace(/\*/g, "");
+        }
+    </script>
 </head>
 <body>
     <form runat="server">
@@ -149,7 +159,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label id="lblTelefonoPersonal" visible="false" runat="server">Telefono personal</label>
-                <asp:TextBox ID="txtTelefonoPersonal" Visible="false" CssClass="form-control" MaxLength="12" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTelefonoPersonal" Visible="false" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoPersonal')"></asp:TextBox>
                 
                 <asp:RequiredFieldValidator Enabled="false" ID="reqTelefonoPersonal" ControlToValidate="txtTelefonoPersonal" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere telefono" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
@@ -165,7 +175,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label id="lblTelefonoEmergencia" visible="false" runat="server">Telefono de emergencia</label>
-                <asp:TextBox ID="txtTelefonoEmergencia" Visible="false" CssClass="form-control" MaxLength="12" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTelefonoEmergencia" Visible="false" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoEmergencia')"></asp:TextBox>
 
                 <asp:RequiredFieldValidator Enabled="false" ID="reqTelefonoEmergencia" ControlToValidate="txtTelefonoEmergencia" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere telefono de emergencia" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>

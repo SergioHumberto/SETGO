@@ -472,6 +472,14 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
+        private void validaParticipante(ParticipantesOBJ participanteOBJ)
+        {
+            if (participanteOBJ.FechaNacimiento < new DateTime(1900, 1, 1))
+            {
+                throw new Exception("La fecha de nacimiento debe ser mayor a 1/1/1900");
+            }
+        }
+
         private void InsertarParticipante()
         {
             try
@@ -481,6 +489,9 @@ namespace WebApplicationTemplate.Web.Pages
                 ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
 
                 DAL.DAL.BeginTransaction();
+
+                validaParticipante(objParticipante);
+
                 objParticipanteBLL.InsertParticipante(objParticipante);
 
                 InsertaParticipanteXCarrera(objParticipante.IdParticipante, IdCarreraProperty);
@@ -489,9 +500,9 @@ namespace WebApplicationTemplate.Web.Pages
                 IdParticipanteVSProperty = objParticipante.IdParticipante;
 			}
             catch (Exception ex)
-            {
+            {                
                 DAL.DAL.RollbackTransaction();
-                throw new Exception("Hubo un error al guardar participante");
+                throw new Exception("Hubo un error al guardar participante, detalle del error: " + ex.Message);
             }
         }
 
@@ -530,10 +541,10 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipante.ApellidoPaterno = txtApellidoPaterno.Text.Trim();
             objParticipante.ApellidoMaterno = txtApellidoMaterno.Text.Trim();
 
-            DateTime dEdad = DateTime.Now;
-            if (DateTime.TryParse(datePickerEdad.Value.Trim(), out dEdad))
+            DateTime dFechaNacimiento = DateTime.Now;
+            if (DateTime.TryParse(datePickerEdad.Value.Trim(), out dFechaNacimiento))
             {
-                objParticipante.FechaNacimiento = dEdad;
+                objParticipante.FechaNacimiento = dFechaNacimiento;
             }
 
             objParticipante.Domicilio = txtDomicilio.Text.Trim();
