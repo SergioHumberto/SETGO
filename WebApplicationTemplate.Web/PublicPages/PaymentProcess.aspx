@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -14,23 +14,24 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    
-    <div>
-        <label class="h3">¡Gracias por su pago!</label>
 
-        <br />
+        <div>
+            <label class="h3">¡Gracias, su pago está siendo procesado!</label>
 
-        <label class="">El estatus de su pago es: </label> <asp:Label CssClass="" ID="lblStatus" runat="server"></asp:Label>
+            <br />
 
-        <br />
-        
-    </div>
+            <label class="">El estatus de su pago es: </label>
+            <asp:Label CssClass="" ID="lblStatus" runat="server"></asp:Label>
 
-        <div id="tablaNotificacion" runat="server">
+            <br />
 
         </div>
-        <br />
-        <asp:Button CssClass="btn btn-default" Text="Registrar otro participante" runat="server" ID="btnRegistraOtroParticipante" OnClick="btnRegistraOtroParticipante_Click"/>
+
+        <div id="tablaNotificacion" runat="server">
+        </div>
+        <br />        
+        <button class="btn btn-default" runat="server" id="ccc" onserverclick="btnRegistraOtroParticipante_Click"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>Registrar otro participante</button>
+        <button class="btn btn-default" onclick="window.print();"><span class="glyphicon glyphicon-print">&nbsp;</span>Imprime esta confirmación</button>
     </form>
 </body>
 </html>
