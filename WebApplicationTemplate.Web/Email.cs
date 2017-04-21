@@ -21,9 +21,9 @@ namespace WebApplicationTemplate.Web
                 MailMessage mail = new MailMessage();
 
                 mail.From = new MailAddress(SMTPConfigOBJ.User);
-                mail.To.Add(correo);
-                if (CC != string.Empty) mail.CC.Add(CC);
-                if(BCC != string.Empty) mail.Bcc.Add(BCC);
+                if (correo != null && correo != string.Empty) mail.To.Add(correo);
+                if (CC != null && CC != string.Empty) mail.CC.Add(CC);
+                if(BCC != null && BCC != string.Empty) mail.Bcc.Add(BCC);
                 mail.Subject = "Confirmación de Registro";
                 mail.IsBodyHtml = true;
 
