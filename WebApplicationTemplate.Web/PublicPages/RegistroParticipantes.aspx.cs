@@ -13,6 +13,7 @@ using System.IO;
 using System.Net;
 using System.Net.Security;
 using System.Web.UI.HtmlControls;
+using System.Globalization;
 
 namespace WebApplicationTemplate.Web.Pages
 {
@@ -476,7 +477,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             if (participanteOBJ.FechaNacimiento < new DateTime(1900, 1, 1))
             {
-                throw new Exception("La fecha de nacimiento debe ser mayor a 1/1/1900");
+                throw new Exception("La fecha de nacimiento tiene un formato incorrecto o debe ser mayor a 1/1/1900");
             }
         }
 
@@ -542,7 +543,10 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipante.ApellidoMaterno = txtApellidoMaterno.Text.Trim();
 
             DateTime dFechaNacimiento = DateTime.Now;
-            if (DateTime.TryParse(datePickerEdad.Value.Trim(), out dFechaNacimiento))
+
+            CultureInfo ci = CultureInfo.CreateSpecificCulture("es-MX");
+            
+            if (DateTime.TryParse(datePickerEdad.Value.Trim(), ci.DateTimeFormat,DateTimeStyles.None, out dFechaNacimiento))
             {
                 objParticipante.FechaNacimiento = dFechaNacimiento;
             }
