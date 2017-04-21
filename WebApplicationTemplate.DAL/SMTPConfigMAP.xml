@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SMTPConfigOBJ" type="WebApplicationTemplate.Objects.SMTPConfigOBJ" />
+  </alias>
+
+  <statements>
+ 
+    <select id="SelectSMTPConfig" resultClass="SMTPConfigOBJ" parameterClass="SMTPConfigOBJ" >
+
+      <![CDATA[
+      
+      SELECT 
+      * 
+      FROM SMTPConfig s
+      WHERE (#IdSMTPConfig# <= 0 OR s.IdSMTPConfig = #IdSMTPConfig#)
+      AND (#Server# IS NULL OR s.Server = #Server#)
+      
+      ]]>
+
+    </select>
+  
+  </statements>
+
+</sqlMap>
