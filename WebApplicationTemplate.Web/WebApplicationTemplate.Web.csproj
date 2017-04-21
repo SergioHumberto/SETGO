@@ -176,9 +176,9 @@
     <None Include="Service References\MLWSUserValidations\WebApplicationTemplate.Web.MLWSUserValidations.UserInformation.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="WebSettings.config">
+    <Content Include="WebSettings.config">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <Content Include="Services\MacrolynkAuthentication.ashx" />
   </ItemGroup>
   <ItemGroup>

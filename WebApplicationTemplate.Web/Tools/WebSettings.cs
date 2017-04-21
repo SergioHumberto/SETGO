@@ -43,5 +43,13 @@ namespace WebApplicationTemplate.Web.Tools
                 return GetValue("MLAppAccessError");
             }
         }
+
+        /// <summary>
+        /// Regresa la URL del root de la aplicacion en web
+        /// </summary>
+        public static String URLApplicationPath
+        {
+            get { return GetValue("URLApplicationPath"); }
+        }
     }
 }
