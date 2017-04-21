@@ -299,11 +299,13 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             private global::System.Data.DataColumn columnTelefonoEmergencia;
             
-            private global::System.Data.DataColumn columnPagado;
-            
             private global::System.Data.DataColumn columnRama;
             
             private global::System.Data.DataColumn columnCategoria;
+            
+            private global::System.Data.DataColumn columnTransactionNumber;
+            
+            private global::System.Data.DataColumn columnStatusPaypal;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -420,14 +422,6 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PagadoColumn {
-                get {
-                    return this.columnPagado;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn RamaColumn {
                 get {
                     return this.columnRama;
@@ -439,6 +433,22 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             public global::System.Data.DataColumn CategoriaColumn {
                 get {
                     return this.columnCategoria;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TransactionNumberColumn {
+                get {
+                    return this.columnTransactionNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn StatusPaypalColumn {
+                get {
+                    return this.columnStatusPaypal;
                 }
             }
             
@@ -479,7 +489,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Nombre, string ApellidoPaterno, string ApellidoMaterno, System.DateTime FechaNacimiento, string Domicilio, string Invitado, string NumeroAccion, string Telefono, string Email, string TelefonoEmergencia, string Pagado, string Rama, string Categoria) {
+            public DataTable1Row AddDataTable1Row(string Nombre, string ApellidoPaterno, string ApellidoMaterno, System.DateTime FechaNacimiento, string Domicilio, string Invitado, string NumeroAccion, string Telefono, string Email, string TelefonoEmergencia, string Rama, string Categoria, string TransactionNumber, string StatusPaypal) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Nombre,
@@ -492,9 +502,10 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                         Telefono,
                         Email,
                         TelefonoEmergencia,
-                        Pagado,
                         Rama,
-                        Categoria};
+                        Categoria,
+                        TransactionNumber,
+                        StatusPaypal};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -527,9 +538,10 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 this.columnTelefono = base.Columns["Telefono"];
                 this.columnEmail = base.Columns["Email"];
                 this.columnTelefonoEmergencia = base.Columns["TelefonoEmergencia"];
-                this.columnPagado = base.Columns["Pagado"];
                 this.columnRama = base.Columns["Rama"];
                 this.columnCategoria = base.Columns["Categoria"];
+                this.columnTransactionNumber = base.Columns["TransactionNumber"];
+                this.columnStatusPaypal = base.Columns["StatusPaypal"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -555,12 +567,14 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 base.Columns.Add(this.columnEmail);
                 this.columnTelefonoEmergencia = new global::System.Data.DataColumn("TelefonoEmergencia", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTelefonoEmergencia);
-                this.columnPagado = new global::System.Data.DataColumn("Pagado", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPagado);
                 this.columnRama = new global::System.Data.DataColumn("Rama", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRama);
                 this.columnCategoria = new global::System.Data.DataColumn("Categoria", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCategoria);
+                this.columnTransactionNumber = new global::System.Data.DataColumn("TransactionNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTransactionNumber);
+                this.columnStatusPaypal = new global::System.Data.DataColumn("StatusPaypal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatusPaypal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -863,22 +877,6 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Pagado {
-                get {
-                    try {
-                        return ((string)(this[this.tableDataTable1.PagadoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Pagado\' de la tabla \'DataTable1\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDataTable1.PagadoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Rama {
                 get {
                     try {
@@ -906,6 +904,38 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 }
                 set {
                     this[this.tableDataTable1.CategoriaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string TransactionNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.TransactionNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'TransactionNumber\' de la tabla \'DataTable1\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.TransactionNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string StatusPaypal {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.StatusPaypalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'StatusPaypal\' de la tabla \'DataTable1\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.StatusPaypalColumn] = value;
                 }
             }
             
@@ -1031,18 +1061,6 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPagadoNull() {
-                return this.IsNull(this.tableDataTable1.PagadoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPagadoNull() {
-                this[this.tableDataTable1.PagadoColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsRamaNull() {
                 return this.IsNull(this.tableDataTable1.RamaColumn);
             }
@@ -1063,6 +1081,30 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCategoriaNull() {
                 this[this.tableDataTable1.CategoriaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTransactionNumberNull() {
+                return this.IsNull(this.tableDataTable1.TransactionNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTransactionNumberNull() {
+                this[this.tableDataTable1.TransactionNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsStatusPaypalNull() {
+                return this.IsNull(this.tableDataTable1.StatusPaypalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetStatusPaypalNull() {
+                this[this.tableDataTable1.StatusPaypalColumn] = global::System.Convert.DBNull;
             }
         }
         
