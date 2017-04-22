@@ -64,6 +64,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPal, Version=1.8.0.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.8.0\lib\net45\PayPal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -90,6 +98,7 @@
     <Content Include="Pages\AdmonCatEquipos.aspx" />
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
+    <Content Include="PublicPages\PayPalRestAPI.aspx" />
     <Content Include="PublicPages\PayPal.aspx" />
     <Content Include="PublicPages\PaymentProcess.aspx" />
     <Content Include="PublicPages\RegistroParticipantes.aspx" />
@@ -248,6 +257,13 @@
     </Compile>
     <Compile Include="Pages\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PublicPages\PayPalRestAPI.aspx.cs">
+      <DependentUpon>PayPalRestAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublicPages\PayPalRestAPI.aspx.designer.cs">
+      <DependentUpon>PayPalRestAPI.aspx</DependentUpon>
     </Compile>
     <Compile Include="PublicPages\PayPal.aspx.cs">
       <DependentUpon>PayPal.aspx</DependentUpon>
