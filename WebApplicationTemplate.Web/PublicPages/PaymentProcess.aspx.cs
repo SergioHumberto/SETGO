@@ -20,7 +20,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             if (!IsPostBack)
             {
-                if (Request.QueryString["tx"] != null)
+                if (Request.QueryString["paymentId"] != null)
                 {
                     ProcesaURL();
 					// CallWSPayPal();
@@ -30,10 +30,10 @@ namespace WebApplicationTemplate.Web.Pages
 
         private void ProcesaURL()
         {
-            string numeroTransaccion = Request.QueryString["tx"];
-            string statusPaypal = Request.QueryString["st"];
+            string numeroTransaccion = Request.QueryString["paymentId"];
+            string statusPaypal = Request.QueryString["st"] != null ? Request.QueryString["st"] : "";
             string strIdParticipante = Request.QueryString["IdParticipante"];
-			string strPrecio = Request.QueryString["amt"];
+			string strPrecio = Request.QueryString["amt"] != null ? Request.QueryString["amt"] : "1";
 			string strIdCarrera = Request.QueryString["IdCarrera"];
 
 			lblStatus.Text = statusPaypal;

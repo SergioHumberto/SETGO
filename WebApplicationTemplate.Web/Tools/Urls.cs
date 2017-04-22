@@ -79,7 +79,7 @@ namespace WebApplicationTemplate.Web.Tools
 
         public static String PayPalPage()
         {
-            return Abs("~/PublicPages/PayPal.aspx");
+            return Abs("~/PublicPages/PayPalRestAPI.aspx");
         }
 
         public static String AdmonCatEquipos()

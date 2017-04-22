@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 using PayPal.Api;
 using WebApplicationTemplate.Web.Tools;
 
+using WebApplicationTemplate.BLL;
+using WebApplicationTemplate.Objects;
+
 namespace WebApplicationTemplate.Web.Pages
 {
     public partial class PayPalRestAPI : System.Web.UI.Page
@@ -19,7 +22,11 @@ namespace WebApplicationTemplate.Web.Pages
                 {
                     ProcessURL();
                 }
-            }
+				else if (Session["objSessionPayPal"] != null)
+				{
+					TestMethod();
+				}
+			}
         }
 
         private void ProcessURL()
@@ -62,17 +69,19 @@ namespace WebApplicationTemplate.Web.Pages
             // System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-MX");
 
-            var apiContext = GetAPIContext();
+			SessionPayPal objSessionPayPal = (SessionPayPal)Session["objSessionPayPal"];
 
-            decimal postagePackingCost = 3.95m;
-            decimal examPaperPrice = 10.00m;
-            int quantityOfExamPapers = 2;
+			var apiContext = GetAPIContext();
+
+            decimal postagePackingCost = 0;
+            decimal examPaperPrice = objSessionPayPal.amount;
+            int quantityOfExamPapers = 1;
             decimal subTotal = (quantityOfExamPapers * examPaperPrice);
             decimal total = subTotal + postagePackingCost;
 
             var examPaperItem = new Item();
-            examPaperItem.name = "Past Examen paper";
-            examPaperItem.currency = "GBP";
+            examPaperItem.name = objSessionPayPal.item_name;
+            examPaperItem.currency = "MXN";
             examPaperItem.price = examPaperPrice.ToString();
             examPaperItem.sku = "PEPCO5027m15"; // code manufacture
             examPaperItem.quantity = quantityOfExamPapers.ToString();
@@ -83,12 +92,15 @@ namespace WebApplicationTemplate.Web.Pages
             transactionDetails.subtotal = subTotal.ToString("0.00");
 
             var transactionAmount = new Amount();
-            transactionAmount.currency = "GBP";
+            transactionAmount.currency = "MXN";
             transactionAmount.total = total.ToString("0.00");
             transactionAmount.details = transactionDetails;
+			
+			CarreraBLL objCarreraBLL = new CarreraBLL(Tools.HttpSecurity.CurrentSession);
+			CarreraOBJ objCarreraOBJ = objCarreraBLL.SelectCarreraObject(objSessionPayPal.IdCarrera);
 
-            var payee = new Payee();
-            payee.email = "humberto1_sergio-facilitator@hotmail.com"; // Este correo debe de venir de la base de datos.
+			var payee = new Payee();
+            payee.email = objCarreraOBJ.PayPalEmail; // Este correo debe de venir de la base de datos.
 
             var transaction = new Transaction();
             transaction.description = "your orden of past exam papers";
@@ -101,10 +113,12 @@ namespace WebApplicationTemplate.Web.Pages
             payer.payment_method = "paypal";
 
             var redirectUrls = new RedirectUrls();
-            redirectUrls.cancel_url = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando cancela el pago
-            redirectUrls.return_url = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando hace el pago
+			redirectUrls.cancel_url = objSessionPayPal.cancelURL;//Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando cancela el pago
+			redirectUrls.return_url = objSessionPayPal.returnURL;//Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando hace el pago
 
-            try
+			Session.Remove("objSessionPayPal");
+
+			try
             {
                 var payment = Payment.Create(apiContext, new Payment
                 {

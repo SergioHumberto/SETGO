@@ -380,7 +380,17 @@ namespace WebApplicationTemplate.Web.Pages
                         }
                     }
 
-                    PaypalDelegateForm(Amount);
+					CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+					CarreraOBJ carreraOBJ = new CarreraOBJ();
+
+					carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+
+					//Si existe un correo de Paypal, ingresa al método de pago.
+					//Si no, el pago es en efectivo u otro tipo de pago y no entra a Paypal.
+					if(!string.IsNullOrEmpty(carreraOBJ.PayPalEmail))
+					{
+						PaypalDelegateForm(Amount);
+					}
                 }
                 catch (Exception ex)
                 {
