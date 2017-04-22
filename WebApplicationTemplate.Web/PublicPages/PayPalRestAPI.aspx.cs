@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using PayPal.Api;
+using WebApplicationTemplate.Web.Tools;
 
 namespace WebApplicationTemplate.Web.Pages
 {
@@ -23,6 +24,7 @@ namespace WebApplicationTemplate.Web.Pages
 
         private void ProcessURL()
         {
+            // exmple url parameters: paymentId=PAY-82T48127285547200LD5W3LQ&token=EC-7WB48951HL5170437&PayerID=WF63RTAYUPJEN
             if (Session["paymentId"] != null)
             {
                 var paymentId = Session["paymentId"].ToString();
@@ -31,17 +33,28 @@ namespace WebApplicationTemplate.Web.Pages
                 var payerId = Request.QueryString["PayerID"];
                 var paymentExecution = new PaymentExecution() { payer_id = payerId  };
 
-                var config = ConfigManager.Instance.GetProperties();
-                config.Add("mode", "sandbox");
-                config.Add("clientId", "AQCXi-7ZYtxy_0MvMMeez-JCQx4xITJSmpwKj9m3EKsoWTBFHLN9ksnHtCxx2rG3UwrXoEj2mizbE4Pp");
-                config.Add("clientSecret", "EHr9h68sZYIqsIZVZcO1Xml_IOcRkt5u77jdYRJMO1UZ5POL43Pa821WJh5apDY_AyV3eiPwqNGqPzVV");
+                var apiContext = GetAPIContext();
 
-                var accessToken = new OAuthTokenCredential(config).GetAccessToken();
-
-                var apiContext = new APIContext(accessToken);
                 var executedPayment = payment.Execute(apiContext, paymentExecution);
+
                 litMessage.Text = "<p> you order has been completed </p>";
+
+                Session.Remove("paymentId");
             }
+        }
+
+        private APIContext GetAPIContext()
+        {
+            var config = ConfigManager.Instance.GetProperties();
+
+            config.Add("mode", WebSettings.ModePayPayRestAPI);
+            config.Add("clientId", WebSettings.ClientIDPayPalRestAPI); // "AQCXi-7ZYtxy_0MvMMeez-JCQx4xITJSmpwKj9m3EKsoWTBFHLN9ksnHtCxx2rG3UwrXoEj2mizbE4Pp");
+            config.Add("clientSecret", WebSettings.ClientSecretPayPalRestAPI); // "EHr9h68sZYIqsIZVZcO1Xml_IOcRkt5u77jdYRJMO1UZ5POL43Pa821WJh5apDY_AyV3eiPwqNGqPzVV");
+
+            var accessToken = new OAuthTokenCredential(config).GetAccessToken();
+
+            var apiContext = new APIContext(accessToken);
+            return apiContext;
         }
 
         private void TestMethod()
@@ -49,15 +62,7 @@ namespace WebApplicationTemplate.Web.Pages
             // System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-MX");
 
-            var config = ConfigManager.Instance.GetProperties();
-            config.Add("mode", "sandbox");
-            config.Add("clientId", "AQCXi-7ZYtxy_0MvMMeez-JCQx4xITJSmpwKj9m3EKsoWTBFHLN9ksnHtCxx2rG3UwrXoEj2mizbE4Pp");
-            config.Add("clientSecret", "EHr9h68sZYIqsIZVZcO1Xml_IOcRkt5u77jdYRJMO1UZ5POL43Pa821WJh5apDY_AyV3eiPwqNGqPzVV");
-
-            var accessToken = new OAuthTokenCredential(config).GetAccessToken();
-
-            var apiContext = new APIContext(accessToken);
-
+            var apiContext = GetAPIContext();
 
             decimal postagePackingCost = 3.95m;
             decimal examPaperPrice = 10.00m;
@@ -96,8 +101,8 @@ namespace WebApplicationTemplate.Web.Pages
             payer.payment_method = "paypal";
 
             var redirectUrls = new RedirectUrls();
-            redirectUrls.cancel_url = Tools.Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando cancela el pago
-            redirectUrls.return_url = Tools.Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando hace el pago
+            redirectUrls.cancel_url = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando cancela el pago
+            redirectUrls.return_url = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando hace el pago
 
             try
             {

@@ -51,5 +51,20 @@ namespace WebApplicationTemplate.Web.Tools
         {
             get { return GetValue("URLApplicationPath"); }
         }
+
+        public static String ClientIDPayPalRestAPI
+        {
+            get { return GetValue("ClientIDPayPalRestAPI"); }
+        }
+
+        public static String ClientSecretPayPalRestAPI
+        {
+            get { return GetValue("ClientSecretPayPalRestAPI"); }
+        }
+
+        public static String ModePayPayRestAPI
+        {
+            get { return GetValue("ModePayPayRestAPI"); }
+        }
     }
 }
