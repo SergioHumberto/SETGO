@@ -88,14 +88,14 @@ namespace WebApplicationTemplate.Web.Pages
             transactionAmount.details = transactionDetails;
 
             var payee = new Payee();
-            payee.email = "humberto1_sergio-facilitator@hotmail.com";
+            payee.email = "humberto1_sergio-facilitator@hotmail.com"; // Este correo debe de venir de la base de datos.
 
             var transaction = new Transaction();
             transaction.description = "your orden of past exam papers";
             transaction.invoice_number = Guid.NewGuid().ToString(); // autogenerado 
             transaction.amount = transactionAmount;
             transaction.item_list = new ItemList { items = new List<Item> { examPaperItem } };
-            transaction.payee = payee;
+            transaction.payee = payee; // el Email del beneficiado debe ir en la transaccion, no en el pago directamente.
 
             var payer = new Payer();
             payer.payment_method = "paypal";
