@@ -9,7 +9,7 @@
           //Get the value from textbox
             var txtbox = document.getElementById(txtbox);
           //Remove all white spaces from textbox using the regex
-            txtbox.value = txtbox.value.replace(/\s/g, "");            
+            txtbox.value = txtbox.value.replace(/\D/g, "");                    
         }
     </script>
 </head>
