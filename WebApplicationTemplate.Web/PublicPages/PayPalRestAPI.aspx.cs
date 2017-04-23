@@ -14,12 +14,15 @@ namespace WebApplicationTemplate.Web.Pages
 {
     public partial class PayPalRestAPI : System.Web.UI.Page
     {
+		private string status;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 if (Request.QueryString["PayerID"] != null)
                 {
+					status = string.Empty;
                     ProcessURL();
                 }
 				else if (Session["objSessionPayPal"] != null)
@@ -34,7 +37,9 @@ namespace WebApplicationTemplate.Web.Pages
             // exmple url parameters: paymentId=PAY-82T48127285547200LD5W3LQ&token=EC-7WB48951HL5170437&PayerID=WF63RTAYUPJEN
             if (Session["paymentId"] != null)
             {
-                var paymentId = Session["paymentId"].ToString();
+				SessionPayPal objSessionPayPal = (SessionPayPal)Session["objSessionPayPal"];
+
+				var paymentId = Session["paymentId"].ToString();
                 var payment = new Payment() { id = paymentId };
 
                 var payerId = Request.QueryString["PayerID"];
@@ -43,11 +48,80 @@ namespace WebApplicationTemplate.Web.Pages
                 var apiContext = GetAPIContext();
 
                 var executedPayment = payment.Execute(apiContext, paymentExecution);
+				status = executedPayment.payer.status;
 
-                litMessage.Text = "<p> you order has been completed </p>";
+				string numeroTransaccion = Request.QueryString["paymentId"];
+				int idParticipante = objSessionPayPal.IdParticipante;
+				decimal precio = objSessionPayPal.amount;
+				int idCarrera = objSessionPayPal.IdCarrera;
 
-                Session.Remove("paymentId");
-            }
+				if (idParticipante > 0)
+				{
+					ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
+					ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(idParticipante);
+
+					CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+					CarreraOBJ carreraOBJ = new CarreraOBJ();
+
+					carreraOBJ = carreraBLL.SelectCarreraObject(idCarrera);
+
+					if (objParticipante != null)
+					{
+						objParticipante.StatusPaypal = status;
+						objParticipante.TransactionNumber = numeroTransaccion;
+
+						objParticipanteBLL.UpdateParticipante(objParticipante);
+					}
+
+					//Cadena para enviar el correo.
+					string body = @"
+						<table>
+							<tr><td width=" + "50%" + @">Selecciona una modalidad:</td><td width=" + "50%" + @">{0}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Nombe:</td><td style=" + "background:#F3F7FB;" + @">{1}</td></tr>
+							<tr><td>Fecha de Nacimiento:</td><td>{2}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Email:</td><td style=" + "background:#F3F7FB;" + @">{3}</td></tr>
+							<tr><td>Teléfono Personal:</td><td>{4}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Teléfono de Contacto de Emergencia:</td><td style=" + "background:#F3F7FB;" + @">{5}</ td></tr>
+							<tr><td>Dirección:</td><td>{6}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">" + carreraOBJ.DescripcionPoliticas + @"</td><td style=" + "background:#F3F7FB;" + @">{7}</td></tr>
+							<tr><td>Total:</td><td>{8}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Status:</td><td style=" + "background:#F3F7FB;" + @">{9}</td></tr>
+							<tr><td>Payment ID:</td><td>{10}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Payment Date:</td><td style=" + "background:#F3F7FB;" + @">{11}</td></tr>
+						</table>
+						";
+
+					RamaBLL ramaBLL = new RamaBLL(HttpSecurity.CurrentSession);
+					RamaOBJ ramaOBJ = new RamaOBJ();
+
+					ramaOBJ = ramaBLL.SelectRamaByIdParticipante(objParticipante.IdParticipante);
+
+					body = string.Format(body
+						, ramaOBJ.Nombre                                //Modalidad
+						, objParticipante.Nombre + " " +
+							objParticipante.ApellidoPaterno + " " +
+							objParticipante.ApellidoMaterno             //Nombre
+						, objParticipante.FechaNacimiento.ToShortDateString()   //Fecha de nacimiento
+						, objParticipante.Email                         //Email
+						, objParticipante.Telefono                      //Telefono personal
+						, objParticipante.TelefonoEmergencia            //Telefono emergencia
+						, objParticipante.Domicilio                     //Dirección
+						, "Acepto"                                      //Terminos
+						, precio.ToString()								//Total
+						, status                                        //Status
+						, objParticipante.TransactionNumber             //PaymentID
+						, DateTime.Now.ToString()                       //Payment Date
+						);
+
+					tablaNotificacion.InnerHtml = body;
+
+					Email email = new Email();
+					email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC);
+				}
+				
+				Session.Remove("paymentId");
+
+			}
         }
 
         private APIContext GetAPIContext()
@@ -113,10 +187,10 @@ namespace WebApplicationTemplate.Web.Pages
             payer.payment_method = "paypal";
 
             var redirectUrls = new RedirectUrls();
-			redirectUrls.cancel_url = objSessionPayPal.cancelURL;//Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando cancela el pago
-			redirectUrls.return_url = objSessionPayPal.returnURL;//Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando hace el pago
+			redirectUrls.cancel_url = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando cancela el pago
+			redirectUrls.return_url = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx"); // URL cuando hace el pago
 
-			Session.Remove("objSessionPayPal");
+			//Session.Remove("objSessionPayPal");
 
 			try
             {
@@ -146,9 +220,11 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
-        protected void btnTestPayPayRest_Click(object sender, EventArgs e)
-        {
-            TestMethod();
-        }
+		protected void btnRegistraOtroParticipante_Click(object sender, EventArgs e)
+		{
+			SessionPayPal objSessionPayPal = (SessionPayPal)Session["objSessionPayPal"];
+			Response.Redirect("~/PublicPages/RegistroParticipantes.aspx?IdCarrera=" + objSessionPayPal.IdCarrera);
+			Session.Remove("objSessionPayPal");
+		}
     }
 }

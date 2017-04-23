@@ -15,9 +15,12 @@
 <body>
     <form id="form1" runat="server">
     
-    <div>
-        <asp:Button ID="btnTestPayPayRest" CssClass="btn btn-default" Text="Test API Rest" OnClick="btnTestPayPayRest_Click" runat="server" />
-    </div>
+        <div id="tablaNotificacion" runat="server"></div>
+
+        <div>
+            <button class="btn btn-default" runat="server" id="ccc" onserverclick="btnRegistraOtroParticipante_Click"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>Registrar otro participante</button>
+            <button class="btn btn-default" onclick="window.print();"><span class="glyphicon glyphicon-print">&nbsp;</span>Imprime esta confirmación</button>
+        </div>
 
         <asp:Literal ID="litMessage" runat="server"></asp:Literal>
 

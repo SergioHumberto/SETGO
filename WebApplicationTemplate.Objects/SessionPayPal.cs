@@ -13,5 +13,7 @@ namespace WebApplicationTemplate.Objects
         public string custom { get; set; }
         public string returnURL { get; set; }
         public string cancelURL { get; set; }
+
+		public int IdParticipante { get; set; }
     }
 }

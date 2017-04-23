@@ -723,8 +723,8 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 strNombreCarrera = objCarrera.Nombre;
             }
-
-            SessionPayPal objSessionPayPal = new SessionPayPal()
+			Session.Remove("objSessionPayPal");
+			SessionPayPal objSessionPayPal = new SessionPayPal()
             {
                 IdCarrera = IdCarreraProperty
                 , amount = p_Amount
@@ -732,6 +732,7 @@ namespace WebApplicationTemplate.Web.Pages
                 , item_name = strNombreCarrera
                 , returnURL = strURLReturn
                 , cancelURL = strCancelURL
+				, IdParticipante = this.IdParticipanteVSProperty
             };
 
             Session.Add("objSessionPayPal", objSessionPayPal);
