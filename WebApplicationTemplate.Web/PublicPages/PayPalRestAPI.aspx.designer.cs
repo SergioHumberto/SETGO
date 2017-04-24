@@ -31,13 +31,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tablaNotificacion;
         
         /// <summary>
-        /// Control ccc.
+        /// Control btnRegistraOtroParticipante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton ccc;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnRegistraOtroParticipante;
         
         /// <summary>
         /// Control litMessage.

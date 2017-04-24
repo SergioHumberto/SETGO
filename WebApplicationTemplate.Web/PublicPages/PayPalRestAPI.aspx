@@ -26,7 +26,7 @@
         <div id="tablaNotificacion" runat="server"></div>
         <br />
         <div>
-            <button class="btn btn-default" runat="server" id="ccc" onserverclick="btnRegistraOtroParticipante_Click"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>Registrar otro participante</button>
+            <button class="btn btn-default" runat="server" id="btnRegistraOtroParticipante" onserverclick="btnRegistraOtroParticipante_Click"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>Registrar otro participante</button>
             <button class="btn btn-default" onclick="window.print();"><span class="glyphicon glyphicon-print">&nbsp;</span>Imprime esta confirmación</button>
         </div>
 

@@ -66,5 +66,10 @@ namespace WebApplicationTemplate.Web.Tools
         {
             get { return GetValue("ModePayPayRestAPI"); }
         }
+
+        public static String DefaultRegistrationURL
+        {
+            get { return GetValue("DefaultRegistrationURL"); }
+        }
     }
 }

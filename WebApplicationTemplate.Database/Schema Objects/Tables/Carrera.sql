@@ -16,5 +16,6 @@
 	[DescripcionPoliticas] VARCHAR(MAX) NULL, 
     [Activo] BIT NOT NULL DEFAULT 1, 
     [CC] VARCHAR(MAX) NULL, 
-    [BCC] VARCHAR(MAX) NULL
+    [BCC] VARCHAR(MAX) NULL, 
+    [URLRegistro] VARCHAR(MAX) NULL
 )

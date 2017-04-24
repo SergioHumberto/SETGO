@@ -24,6 +24,7 @@
       , Activo
       , CC
       , BCC
+      , URLRegistro
       )
       VALUES
       (
@@ -40,6 +41,7 @@
       , #Activo#
       , #CC#
       , #BCC#
+      , #URLRegistro#
       )
 
       <selectKey type="post" resultClass="int" property="IdCarrera">
