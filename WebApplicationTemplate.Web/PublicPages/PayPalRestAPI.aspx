@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -14,9 +14,17 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    
-        <div id="tablaNotificacion" runat="server"></div>
+        <div>
+            <img src="http://setgo.mx/wp-content/uploads/2016/05/Logo-trans2x-1.png" height="50" />
+        </div>
+        <div>
+            <label class="h2">¡Gracias, su pago está siendo procesado!</label>
+            <br />
+            <br />
+        </div>
 
+        <div id="tablaNotificacion" runat="server"></div>
+        <br />
         <div>
             <button class="btn btn-default" runat="server" id="ccc" onserverclick="btnRegistraOtroParticipante_Click"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>Registrar otro participante</button>
             <button class="btn btn-default" onclick="window.print();"><span class="glyphicon glyphicon-print">&nbsp;</span>Imprime esta confirmación</button>
