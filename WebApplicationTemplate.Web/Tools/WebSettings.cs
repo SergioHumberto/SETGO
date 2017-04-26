@@ -71,5 +71,31 @@ namespace WebApplicationTemplate.Web.Tools
         {
             get { return GetValue("DefaultRegistrationURL"); }
         }
+
+        public static String ModePayPalClassic
+        {
+            get { return GetValue("ModePayPalClassic"); }
+        }
+
+        public static String ApiUsername
+        {
+            get { return GetValue("ApiUsername"); }
+        }
+
+        public static String ApiPassword
+        {
+            get { return GetValue("ApiPassword"); }
+        }
+
+        public static String ApiSignature
+        {
+            get { return GetValue("ApiSignature"); }
+        }
+
+        public static String PAYPAL_REDIRECT_URL
+        {
+            get { return GetValue("PAYPAL_REDIRECT_URL"); }
+        }
+
     }
 }

@@ -9,6 +9,8 @@ using WebApplicationTemplate.Web.Tools;
 
 using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
+using PayPal.PayPalAPIInterfaceService.Model;
+using PayPal.PayPalAPIInterfaceService;
 
 namespace WebApplicationTemplate.Web.Pages
 {
@@ -23,15 +25,159 @@ namespace WebApplicationTemplate.Web.Pages
                 if (Request.QueryString["PayerID"] != null)
                 {
                     status = string.Empty;
-                    ProcessURL();
+                    // ProcessURL();
+                    ProcessPaymentURL();
                 }
                 else if (Session["objSessionPayPal"] != null)
                 {
-                    TestMethod();
+                    // TestMethod();
+                    CallWSExpressCheckOut();
                 }
             }
         }
 
+
+        private void ProcessPaymentURL()
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-MX");
+
+            // example url: token=EC-58N52609DG781434X&PayerID=WF63RTAYUPJEN
+            string strToken = Request.QueryString["token"].ToString();
+            string strPayerID = Request.QueryString["PayerID"].ToString();
+            Dictionary<string, string> configurationMap = GetApiCredentialsClassic();
+
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
+            GetExpressCheckoutDetailsReq getECWrapper = new GetExpressCheckoutDetailsReq();
+            // (Required) A timestamped token, the value of which was returned by SetExpressCheckout response.
+            // Character length and limitations: 20 single-byte characters
+            getECWrapper.GetExpressCheckoutDetailsRequest = new GetExpressCheckoutDetailsRequestType(strToken);
+            // # API call 
+            // Invoke the GetExpressCheckoutDetails method in service wrapper object
+            GetExpressCheckoutDetailsResponseType getECResponse = service.GetExpressCheckoutDetails(getECWrapper);
+
+            // Create request object
+            DoExpressCheckoutPaymentRequestType request = new DoExpressCheckoutPaymentRequestType();
+            DoExpressCheckoutPaymentRequestDetailsType requestDetails = new DoExpressCheckoutPaymentRequestDetailsType();
+            request.DoExpressCheckoutPaymentRequestDetails = requestDetails;
+
+            requestDetails.PaymentDetails = getECResponse.GetExpressCheckoutDetailsResponseDetails.PaymentDetails;
+            // (Required) The timestamped token value that was returned in the SetExpressCheckout response and passed in the GetExpressCheckoutDetails request.
+            requestDetails.Token = strToken;
+            // (Required) Unique PayPal buyer account identification number as returned in the GetExpressCheckoutDetails response
+            requestDetails.PayerID = strPayerID;
+            // (Required) How you want to obtain payment. It is one of the following values:
+            // * Authorization – This payment is a basic authorization subject to settlement with PayPal Authorization and Capture.
+            // * Order – This payment is an order authorization subject to settlement with PayPal Authorization and Capture.
+            // * Sale – This is a final sale for which you are requesting payment.
+            // Note: You cannot set this value to Sale in the SetExpressCheckout request and then change this value to Authorization in the DoExpressCheckoutPayment request.
+            requestDetails.PaymentAction = PaymentActionCodeType.SALE;
+
+            // Invoke the API
+            DoExpressCheckoutPaymentReq wrapper = new DoExpressCheckoutPaymentReq();
+            wrapper.DoExpressCheckoutPaymentRequest = request;
+            // # API call 
+            // Invoke the DoExpressCheckoutPayment method in service wrapper object
+            DoExpressCheckoutPaymentResponseType doECResponse = service.DoExpressCheckoutPayment(wrapper);
+
+            if (doECResponse.Ack.Equals(AckCodeType.FAILURE) ||
+                (doECResponse.Errors != null && doECResponse.Errors.Count > 0))
+            {
+                foreach (ErrorType errorType in doECResponse.Errors)
+                {
+                    litMessage.Text += errorType.LongMessage + " ";
+                }
+            }
+            else
+            {
+                int IdParticipante;
+                int IdCarrera;
+                int.TryParse(Request.QueryString["IdParticipante"], out IdParticipante);
+                int.TryParse(Request.QueryString["IdCarrera"], out IdCarrera);
+                string strStatus = doECResponse.Ack.Value.ToString();
+                status = strStatus;
+
+                LoadParticipanteDetails(IdParticipante, IdCarrera, strToken, requestDetails.PaymentDetails, strStatus);
+            }
+        }
+
+        private void LoadParticipanteDetails(int IdParticipante, int IdCarrera, string strToken, List<PaymentDetailsType> lstPaymentDetails, string strStatus)
+        {
+            if (IdParticipante > 0 && IdCarrera > 0)
+            {
+                decimal precio = 0;
+                if (lstPaymentDetails.Count > 0)
+                {
+                    decimal.TryParse(lstPaymentDetails[0].ItemTotal.value, out precio);
+                }
+
+                ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
+                ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(IdParticipante);
+
+                CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+                CarreraOBJ carreraOBJ = new CarreraOBJ();
+
+                carreraOBJ = carreraBLL.SelectCarreraObject(IdCarrera);
+
+                if (objParticipante != null)
+                {
+                    objParticipante.StatusPaypal = strStatus;
+                    objParticipante.TransactionNumber = strToken;
+
+                    objParticipanteBLL.UpdateParticipante(objParticipante);
+                }
+
+                //Cadena para enviar el correo.
+                string body = @"
+						<table>
+							<tr><td width=" + "50%" + @">Selecciona una modalidad:</td><td width=" + "50%" + @">{0}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Nombe:</td><td style=" + "background:#F3F7FB;" + @">{1}</td></tr>
+							<tr><td>Fecha de Nacimiento:</td><td>{2}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Email:</td><td style=" + "background:#F3F7FB;" + @">{3}</td></tr>
+							<tr><td>Teléfono Personal:</td><td>{4}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Teléfono de Contacto de Emergencia:</td><td style=" + "background:#F3F7FB;" + @">{5}</ td></tr>
+							<tr><td>Dirección:</td><td>{6}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">" + carreraOBJ.DescripcionPoliticas + @"</td><td style=" + "background:#F3F7FB;" + @">{7}</td></tr>
+							<tr><td>Total:</td><td>{8}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Status:</td><td style=" + "background:#F3F7FB;" + @">{9}</td></tr>
+							<tr><td>Payment ID:</td><td>{10}</td></tr>
+							<tr><td style=" + "background:#F3F7FB;" + @">Payment Date:</td><td style=" + "background:#F3F7FB;" + @">{11}</td></tr>
+						</table>
+						";
+
+                RamaBLL ramaBLL = new RamaBLL(HttpSecurity.CurrentSession);
+                RamaOBJ ramaOBJ = new RamaOBJ();
+
+                ramaOBJ = ramaBLL.SelectRamaByIdParticipante(objParticipante.IdParticipante);
+
+                body = string.Format(body
+                    , ramaOBJ.Nombre                                //Modalidad
+                    , objParticipante.Nombre + " " +
+                        objParticipante.ApellidoPaterno + " " +
+                        objParticipante.ApellidoMaterno             //Nombre
+                    , objParticipante.FechaNacimiento.ToShortDateString()   //Fecha de nacimiento
+                    , objParticipante.Email                         //Email
+                    , objParticipante.Telefono                      //Telefono personal
+                    , objParticipante.TelefonoEmergencia            //Telefono emergencia
+                    , objParticipante.Domicilio                     //Dirección
+                    , "Acepto"                                      //Terminos
+                    , precio.ToString()                             //Total
+                    , status                                        //Status
+                    , objParticipante.TransactionNumber             //PaymentID
+                    , DateTime.Now.ToString()                       //Payment Date
+                    );
+
+                tablaNotificacion.InnerHtml = body;
+
+                Email email = new Email();
+                email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC);
+            }
+
+            Session.Remove("paymentId");
+        }
+
+        // este metodo se usa para rest api
         private void ProcessURL()
         {
             // exmple url parameters: paymentId=PAY-82T48127285547200LD5W3LQ&token=EC-7WB48951HL5170437&PayerID=WF63RTAYUPJEN
@@ -138,6 +284,7 @@ namespace WebApplicationTemplate.Web.Pages
             return apiContext;
         }
 
+        // Este metodo es de la manera de llamar a Rest API ( no disponible en nuestro pais MX)
         private void TestMethod()
         {
             // System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-MX");
@@ -245,5 +392,109 @@ namespace WebApplicationTemplate.Web.Pages
 
 
         }
+
+        private void CallWSExpressCheckOut()
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("es-MX");
+
+            // Create request object
+            SetExpressCheckoutRequestType request = new SetExpressCheckoutRequestType();
+            populateRequestObject(request);
+
+            // Invoke the API
+            SetExpressCheckoutReq wrapper = new SetExpressCheckoutReq();
+            wrapper.SetExpressCheckoutRequest = request;
+
+            Dictionary<string, string> configurationMap = GetApiCredentialsClassic();
+
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
+            // # API call 
+            // Invoke the SetExpressCheckout method in service wrapper object  
+            SetExpressCheckoutResponseType setECResponse = service.SetExpressCheckout(wrapper);
+
+            // Check for API return status
+            // HttpContext CurrContext = HttpContext.Current;
+            // CurrContext.Items.Add("paymentDetails", request.SetExpressCheckoutRequestDetails.PaymentDetails);
+            // setKeyResponseObjects(service, setECResponse);
+
+            if (setECResponse.Ack.Equals(AckCodeType.FAILURE) ||
+               (setECResponse.Errors != null && setECResponse.Errors.Count > 0))
+            {
+                foreach (ErrorType errorType in setECResponse.Errors)
+                {
+                    litMessage.Text += errorType.LongMessage + " ";
+                }
+            }
+            else
+            {
+                Response.Redirect(WebSettings.PAYPAL_REDIRECT_URL + "_express-checkout&token=" + setECResponse.Token, false);
+                Context.ApplicationInstance.CompleteRequest();
+
+                // string strLastResponse = service.getLastResponse();
+            }
+        }
+
+        private Dictionary<string, string> GetApiCredentialsClassic()
+        {
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = new Dictionary<string, string>(); // Configuration.GetAcctAndConfig();
+
+            configurationMap.Add("mode", WebSettings.ModePayPalClassic); // sandbox or live
+            configurationMap.Add("account1.apiUsername", WebSettings.ApiUsername); // ej. "contacto.SEI.tech-facilitator_api1.gmail.com"
+            configurationMap.Add("account1.apiPassword", WebSettings.ApiPassword); // ej. "PRR25LQPRV256SR6"
+            configurationMap.Add("account1.apiSignature", WebSettings.ApiSignature); // ej. "AFcWxV21C7fd0v3bYYYRCpSSRl31A8LpSbTMqDrbFwEIq6oR12I.bqi2"
+            return configurationMap;
+        }
+
+        private void populateRequestObject(SetExpressCheckoutRequestType request)
+        {
+            SessionPayPal objSessionPayPal = (SessionPayPal)Session["objSessionPayPal"];
+
+            SetExpressCheckoutRequestDetailsType ecDetails = new SetExpressCheckoutRequestDetailsType();
+            ecDetails.ReturnURL = objSessionPayPal.returnURL;
+            ecDetails.CancelURL = objSessionPayPal.cancelURL;
+            ecDetails.BuyerEmail = GetBuyerEmail(objSessionPayPal.IdCarrera);  // buyerEmail.Value;
+
+            /* Populate payment requestDetails. 
+             * SetExpressCheckout allows parallel payments of upto 10 payments. 
+             * This samples shows just one payment.
+             */
+            PaymentDetailsType paymentDetails = new PaymentDetailsType();
+            ecDetails.PaymentDetails.Add(paymentDetails);
+           
+            CurrencyCodeType currency = CurrencyCodeType.MXN; // moneda nacional mexicana
+
+            paymentDetails.PaymentAction = PaymentActionCodeType.SALE;
+
+            PaymentDetailsItemType itemDetails = new PaymentDetailsItemType();
+            itemDetails.Name = objSessionPayPal.item_name;
+            itemDetails.Amount = new BasicAmountType(currency, objSessionPayPal.amount.ToString());
+            itemDetails.Quantity = 1; // Convert.ToInt32(itemQuantity.Value);
+            itemDetails.ItemCategory = ItemCategoryType.PHYSICAL;
+
+            paymentDetails.PaymentDetailsItem.Add(itemDetails);
+
+            paymentDetails.ItemTotal = new BasicAmountType(currency, objSessionPayPal.amount.ToString());
+            paymentDetails.OrderTotal = new BasicAmountType(currency, objSessionPayPal.amount.ToString());
+
+            request.SetExpressCheckoutRequestDetails = ecDetails;
+        }
+
+        private string GetBuyerEmail(int IdCarrera)
+        {
+            CarreraBLL objCarreraBLL = new CarreraBLL(Tools.HttpSecurity.CurrentSession);
+            CarreraOBJ objCarreraOBJ = objCarreraBLL.SelectCarreraObject(IdCarrera);
+            if (objCarreraOBJ != null)
+            {
+                return objCarreraOBJ.PayPalEmail;
+            }
+
+            return string.Empty;
+        }
+
     }
 }

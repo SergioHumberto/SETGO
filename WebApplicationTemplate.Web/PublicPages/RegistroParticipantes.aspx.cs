@@ -183,8 +183,42 @@ namespace WebApplicationTemplate.Web.Pages
                                 }
                                 else if (typeControl == typeof(UpdatePanel))
                                 {
-                                    
+
                                 }
+                                /* else if (typeControl == typeof(PlaceHolder))
+                                {
+                                    string strNameControl = itemControlXCarrera.IdControlASP.Substring(2, itemControlXCarrera.IdControlASP.Length - 2);
+
+                                    string strPrefixLabel = "lbl";
+                                    Label lblGenericControl = itemControl.FindControl(strPrefixLabel + strNameControl) as Label;
+                                    if (lblGenericControl != null)
+                                    {
+                                        lblGenericControl.Text = itemControlXCarrera.Etiqueta;
+                                    }
+                                    else
+                                    {
+                                        HtmlGenericControl htmlGenericControl = itemControl.FindControl(strPrefixLabel + strNameControl) as HtmlGenericControl;
+                                        if (htmlGenericControl != null)
+                                        {
+                                            htmlGenericControl.InnerText = itemControlXCarrera.Etiqueta;
+                                        }
+                                    }
+
+                                    string strPrefixRequired = "req";
+                                    RequiredFieldValidator reqGenericControl = itemControl.FindControl(strPrefixRequired + strNameControl) as RequiredFieldValidator;
+                                    if (reqGenericControl != null)
+                                    {
+                                        reqGenericControl.Enabled = itemControlXCarrera.Requerido;
+                                        reqGenericControl.ErrorMessage = itemControlXCarrera.EtiquetaRequerido;
+                                    }
+
+                                    string strPrefixRegularExpression = "rev";
+                                    RegularExpressionValidator revGenericControl = itemControl.FindControl(strPrefixRegularExpression + strNameControl) as RegularExpressionValidator;
+                                    if (revGenericControl != null)
+                                    {
+                                        revGenericControl.ErrorMessage = itemControlXCarrera.RegularErrorMessage;
+                                    }
+                                }*/
                                 else
                                 {
                                     Web.Controls.UserControls.DatePickerControl datePickerControl = itemControl as Web.Controls.UserControls.DatePickerControl;
@@ -706,7 +740,7 @@ namespace WebApplicationTemplate.Web.Pages
 
             // Urls.Abs("~/Pages/PaymentProcess.aspx")
             //string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
-            string strURLReturn = Urls.Abs("~/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}");
+            string strURLReturn = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx?IdCarrera={0}&IdParticipante={1}");
 
             strURLReturn = string.Format(strURLReturn, IdCarreraProperty, IdParticipanteVSProperty);
 
