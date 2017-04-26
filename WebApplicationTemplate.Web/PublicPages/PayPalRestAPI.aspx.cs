@@ -457,13 +457,17 @@ namespace WebApplicationTemplate.Web.Pages
             SetExpressCheckoutRequestDetailsType ecDetails = new SetExpressCheckoutRequestDetailsType();
             ecDetails.ReturnURL = objSessionPayPal.returnURL;
             ecDetails.CancelURL = objSessionPayPal.cancelURL;
-            ecDetails.BuyerEmail = GetBuyerEmail(objSessionPayPal.IdCarrera);  // buyerEmail.Value;
+            // ecDetails.BuyerEmail = GetBuyerEmail(objSessionPayPal.IdCarrera);  // buyerEmail.Value;
 
             /* Populate payment requestDetails. 
              * SetExpressCheckout allows parallel payments of upto 10 payments. 
              * This samples shows just one payment.
              */
             PaymentDetailsType paymentDetails = new PaymentDetailsType();
+
+            paymentDetails.SellerDetails = new SellerDetailsType();
+            paymentDetails.SellerDetails.PayPalAccountID = GetBuyerEmail(objSessionPayPal.IdCarrera);
+
             ecDetails.PaymentDetails.Add(paymentDetails);
            
             CurrencyCodeType currency = CurrencyCodeType.MXN; // moneda nacional mexicana
