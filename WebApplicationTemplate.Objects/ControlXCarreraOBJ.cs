@@ -12,6 +12,10 @@ namespace WebApplicationTemplate.Objects
         public int IdCarrera { get; set; }
         public string Etiqueta { get; set; }
         public bool Requerido { get; set; }
+        public string EtiquetaRequerido { get; set; }
+        public bool RegularExpression { get; set; }
+        public string RegularErrorMessage { get; set; }
+        public string ValidationExpression { get; set; }
 
         public string IdControlASP { get; set; }
     }

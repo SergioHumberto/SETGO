@@ -150,42 +150,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                                 Type typeControl = itemControl.GetType();
 
-                                if (typeControl == typeof(HtmlGenericControl))
-                                {
-                                    ((HtmlGenericControl)itemControl).InnerText = itemControlXCarrera.Etiqueta;
-                                }
-                                else if (typeControl == typeof(TextBox))
-                                {
-                                    ((TextBox)itemControl).Text = itemControlXCarrera.Etiqueta;
-                                }
-                                else if (typeControl == typeof(RequiredFieldValidator))
-                                {
-                                    ((RequiredFieldValidator)itemControl).ErrorMessage = itemControlXCarrera.Etiqueta;
-                                    ((RequiredFieldValidator)itemControl).Enabled = itemControlXCarrera.Requerido;
-                                }
-                                else if (typeControl == typeof(RegularExpressionValidator))
-                                {
-                                    ((RegularExpressionValidator)itemControl).ErrorMessage = itemControlXCarrera.Etiqueta;
-                                    ((RegularExpressionValidator)itemControl).Enabled = itemControlXCarrera.Requerido;
-                                }
-                                else if (typeControl == typeof(CustomValidator))
-                                {
-                                    ((CustomValidator)itemControl).ErrorMessage = itemControlXCarrera.Etiqueta;
-                                    ((CustomValidator)itemControl).Enabled = itemControlXCarrera.Requerido;
-                                }
-                                else if (typeControl == typeof(RadioButtonList))
-                                {
-
-                                }
-                                else if (typeControl == typeof(CheckBox))
-                                {
-                                    ((CheckBox)itemControl).Text = itemControlXCarrera.Etiqueta;
-                                }
-                                else if (typeControl == typeof(UpdatePanel))
-                                {
-
-                                }
-                                /* else if (typeControl == typeof(PlaceHolder))
+                                if (typeControl == typeof(PlaceHolder))
                                 {
                                     string strNameControl = itemControlXCarrera.IdControlASP.Substring(2, itemControlXCarrera.IdControlASP.Length - 2);
 
@@ -204,6 +169,21 @@ namespace WebApplicationTemplate.Web.Pages
                                         }
                                     }
 
+                                    string strPrefixCheckBox = "chk";
+                                    CheckBox chkBoxControl = itemControl.FindControl(strPrefixCheckBox + strNameControl) as CheckBox;
+                                    if (chkBoxControl != null)
+                                    {
+                                        chkBoxControl.Text = itemControlXCarrera.Etiqueta;
+                                    }
+
+                                    string strPrefixCustomValidator = "cus";
+                                    CustomValidator cusValidatorControl = itemControl.FindControl(strPrefixCustomValidator + strNameControl) as CustomValidator;
+                                    if (cusValidatorControl != null)
+                                    {
+                                        cusValidatorControl.Text = itemControlXCarrera.EtiquetaRequerido;
+                                        cusValidatorControl.Enabled = itemControlXCarrera.Requerido;
+                                    }
+
                                     string strPrefixRequired = "req";
                                     RequiredFieldValidator reqGenericControl = itemControl.FindControl(strPrefixRequired + strNameControl) as RequiredFieldValidator;
                                     if (reqGenericControl != null)
@@ -216,16 +196,17 @@ namespace WebApplicationTemplate.Web.Pages
                                     RegularExpressionValidator revGenericControl = itemControl.FindControl(strPrefixRegularExpression + strNameControl) as RegularExpressionValidator;
                                     if (revGenericControl != null)
                                     {
+                                        revGenericControl.Enabled = itemControlXCarrera.RegularExpression;
                                         revGenericControl.ErrorMessage = itemControlXCarrera.RegularErrorMessage;
                                     }
-                                }*/
-                                else
-                                {
-                                    Web.Controls.UserControls.DatePickerControl datePickerControl = itemControl as Web.Controls.UserControls.DatePickerControl;
-                                    if (datePickerControl != null)
+
+                                    Control controlDatePickerEdad = itemControl.FindControl("datePickerEdad");
+                                    if (controlDatePickerEdad != null && itemControl.ID == "phDatePickerEdad")
                                     {
+                                        Web.Controls.UserControls.DatePickerControl datePickerControl = controlDatePickerEdad as Web.Controls.UserControls.DatePickerControl;
                                         datePickerControl.Text = itemControlXCarrera.Etiqueta;
                                         datePickerControl.IsRequired = itemControlXCarrera.Requerido;
+                                        datePickerControl.ErrorMessage = itemControlXCarrera.EtiquetaRequerido;
                                     }
                                 }
                             }

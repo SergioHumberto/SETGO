@@ -68,45 +68,52 @@
             </div>
         </div>
     </div>        
-
+    
+    <asp:PlaceHolder ID="phApellidoPaterno" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblApellidoPaterno" visible="false" runat="server">Apellido paterno *</label>
-                <asp:TextBox ID="txtApellidoPaterno" Visible="false" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator Enabled="false" ID="reqApellidoPaterno" ControlToValidate="txtApellidoPaterno" SetFocusOnError="true" 
+                <label id="lblApellidoPaterno" runat="server">Apellido paterno *</label>
+                <asp:TextBox ID="txtApellidoPaterno" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqApellidoPaterno" ControlToValidate="txtApellidoPaterno" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere apellido paterno" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phApellidoMaterno" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblApellidoMaterno" visible="false" runat="server">Apellido materno</label>
-                <asp:TextBox ID="txtApellidoMaterno" Visible="false" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator Enabled="false" ID="reqApellidoMaterno" ControlToValidate="txtApellidoMaterno" SetFocusOnError="true" 
+                <label id="lblApellidoMaterno" runat="server">Apellido materno</label>
+                <asp:TextBox ID="txtApellidoMaterno" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqApellidoMaterno" ControlToValidate="txtApellidoMaterno" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere apellido materno" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phNombres" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblEtiquetaNombre" visible="false" runat="server" />
-                <asp:TextBox ID="txtNombres" MaxLength="50"  Visible="false" CssClass="form-control" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator Enabled="false" ID="reqNombres" ControlToValidate="txtNombres" Display="Dynamic" SetFocusOnError="true" ForeColor="Red" ErrorMessage="Se requiere nombre" runat="server"></asp:RequiredFieldValidator>
+                <label id="lblNombres" runat="server" />
+                <asp:TextBox ID="txtNombres" MaxLength="50" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqNombres" ControlToValidate="txtNombres" Display="Dynamic" SetFocusOnError="true" ForeColor="Red" ErrorMessage="Se requiere nombre" runat="server"></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
-
+    <asp:PlaceHolder ID="phDatePickerEdad" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
-            <UserControls:DatePicker ID="datePickerEdad" Visible="false" Text="Fecha de nacimiento*" IsRequired="true" SetFocusOnError="true" ErrorMessage="Debe seleccionar una fecha" runat="server" />
+            <UserControls:DatePicker ID="datePickerEdad" Text="Fecha de nacimiento*" IsRequired="true" SetFocusOnError="true" ErrorMessage="Debe seleccionar una fecha" runat="server" />
         </div>
     </div>
+    </asp:PlaceHolder>
 
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -137,66 +144,73 @@
             </div>
         </div>
     </div>
-
+    
+    <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblEmail" visible="false" runat="server">Email *</label>
-                <asp:TextBox ID="txtEmail" Visible="false" CssClass="form-control" MaxLength="100" runat="server"></asp:TextBox>
+                <label id="lblEmail" runat="server">Email *</label>
+                <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" runat="server"></asp:TextBox>
 
-                <asp:RequiredFieldValidator Enabled="false" ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true" 
+                <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true" 
                     ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
                 
-                <asp:RegularExpressionValidator Enabled="false" ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
+                <asp:RegularExpressionValidator ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
                     ControlToValidate="txtEmail" Display="Dynamic" ForeColor="Red" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phTelefonoPersonal" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblTelefonoPersonal" visible="false" runat="server">Telefono personal</label>
-                <asp:TextBox ID="txtTelefonoPersonal" Visible="false" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoPersonal')"></asp:TextBox>
+                <label id="lblTelefonoPersonal" runat="server">Telefono personal</label>
+                <asp:TextBox ID="txtTelefonoPersonal" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoPersonal')"></asp:TextBox>
                 
-                <asp:RequiredFieldValidator Enabled="false" ID="reqTelefonoPersonal" ControlToValidate="txtTelefonoPersonal" SetFocusOnError="true" 
+                <asp:RequiredFieldValidator ID="reqTelefonoPersonal" ControlToValidate="txtTelefonoPersonal" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere telefono" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
 
-                <asp:RegularExpressionValidator ID="revtxtTelefonoPersonal" runat="server" SetFocusOnError="true" 
+                <asp:RegularExpressionValidator ID="revTelefonoPersonal" runat="server" SetFocusOnError="true" 
                     ErrorMessage="Debe ser un valor numerico"
                     ControlToValidate="txtTelefonoPersonal" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phTelefonoEmergencia" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblTelefonoEmergencia" visible="false" runat="server">Telefono de emergencia</label>
-                <asp:TextBox ID="txtTelefonoEmergencia" Visible="false" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoEmergencia')"></asp:TextBox>
+                <label id="lblTelefonoEmergencia" runat="server">Telefono de emergencia</label>
+                <asp:TextBox ID="txtTelefonoEmergencia" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoEmergencia')"></asp:TextBox>
 
-                <asp:RequiredFieldValidator Enabled="false" ID="reqTelefonoEmergencia" ControlToValidate="txtTelefonoEmergencia" SetFocusOnError="true" 
+                <asp:RequiredFieldValidator ID="reqTelefonoEmergencia" ControlToValidate="txtTelefonoEmergencia" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere telefono de emergencia" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
 
-                <asp:RegularExpressionValidator ID="revtxtTelefonoEmergencia" Enabled="false" runat="server" SetFocusOnError="true" 
+                <asp:RegularExpressionValidator ID="revtxtTelefonoEmergencia" runat="server" SetFocusOnError="true" 
                     ErrorMessage="Debe ser un valor numerico"
                     ControlToValidate="txtTelefonoEmergencia" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phDomicilio" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblDomicilio" visible="false" runat="server">Domicilio</label>
-                <asp:TextBox ID="txtDomicilio" Visible="false" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
+                <label id="lblDomicilio" runat="server">Domicilio</label>
+                <asp:TextBox ID="txtDomicilio" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
 
-                <asp:RequiredFieldValidator Enabled="false" ID="reqDomicilio" ControlToValidate="txtDomicilio" SetFocusOnError="true" 
+                <asp:RequiredFieldValidator ID="reqDomicilio" ControlToValidate="txtDomicilio" SetFocusOnError="true" 
                     ForeColor="Red" ErrorMessage="Se requiere domicilio" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
-
+    </asp:PlaceHolder>
 
     </asp:PlaceHolder>
     
@@ -204,31 +218,35 @@
 
     <asp:PlaceHolder runat="server" ID="phRamaCategoriaRuta">
 
+    <asp:PlaceHolder ID="phRamas" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-            <label id="lblRama" visible="false" runat="server">Rama:</label>
-                <asp:RadioButtonList ID="rblRamas" Visible="false" runat="server">
+            <label id="lblRamas" runat="server">Rama:</label>
+                <asp:RadioButtonList ID="rblRamas" runat="server">
                 </asp:RadioButtonList>
-                <asp:RequiredFieldValidator ID="reqRama" ControlToValidate="rblRamas" Enabled="false" SetFocusOnError="true" 
+                <asp:RequiredFieldValidator ID="reqRamas" ControlToValidate="rblRamas" SetFocusOnError="true" 
                     ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una rama" runat="server"></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phCategoria" Visible="false" runat="server">
     <asp:UpdatePanel ID="upCategoria" UpdateMode="Always" runat="server">
         <ContentTemplate>
             <div style="width:60%" class="row">
                 <div class="col-md-6">
-                    <label id="lblCategoria" visible="false" runat="server">Categoria:</label>
-                    <asp:RadioButtonList ID="rblCategoria" Visible="false" AutoPostBack="true" OnSelectedIndexChanged="rblCategoria_SelectedIndexChanged" runat="server">
+                    <label id="lblCategoria" runat="server">Categoria:</label>
+                    <asp:RadioButtonList ID="rblCategoria" AutoPostBack="true" OnSelectedIndexChanged="rblCategoria_SelectedIndexChanged" runat="server">
                     </asp:RadioButtonList>
-                    <asp:RequiredFieldValidator ID="reqCategoria" Enabled="false" ControlToValidate="rblCategoria" SetFocusOnError="true" 
+                    <asp:RequiredFieldValidator ID="reqCategoria" ControlToValidate="rblCategoria" SetFocusOnError="true" 
                             ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una categoria" runat="server"></asp:RequiredFieldValidator>
                 </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+    </asp:PlaceHolder>
     
     <br />
 
@@ -239,17 +257,20 @@
         </div>
     </div>
 
+    <asp:PlaceHolder ID="phAcepto" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
-            <asp:CheckBox ID="chkAcepto" Visible="false" Text="Acepto" runat="server"/>
+            <asp:CheckBox ID="chkAcepto" Text="Acepto" runat="server"/>
             <br />
-            <asp:CustomValidator Enabled="false" ID="cusChkAcepto" runat="server" 
+            <asp:CustomValidator ID="cusAcepto" runat="server" 
                 ErrorMessage="Se requiere aceptar las condiciones" Display="Dynamic" ClientValidationFunction="ValidateCheckBox"
                  ForeColor="Red" SetFocusOnError="true" ></asp:CustomValidator>        
         </div>
     </div>
+    </asp:PlaceHolder>
 
-    <asp:UpdatePanel runat="server" ID="upTotal" Visible="false" UpdateMode="Always">
+
+    <asp:UpdatePanel runat="server" ID="upTotal" UpdateMode="Always">
         <ContentTemplate>
             <div style="width:60%" class="row">
                 <div class="col-md-12">
