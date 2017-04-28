@@ -10,14 +10,16 @@
 		INSERT INTO [User]
 		(
 		Username
+		,Password
 		,IsSuperUser
-		,MacrolynkGUID
+		<!--,MacrolynkGUID-->
 		)
 		VALUES
 		(
 		#username#
+		,#password#
 		,#isSuperUser#
-		,#macrolynkGUID#
+		<!--,#macrolynkGUID#-->
 		)
 
 		<selectKey type="post" resultClass="int" property="IdUser">

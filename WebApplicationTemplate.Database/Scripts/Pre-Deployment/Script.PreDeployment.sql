@@ -12,3 +12,4 @@
 -- :r .\TipoEquipo_IdCategoríaFK.sql
 --:r .\Participante.0.sql
 :r .\BorrarTablasDeRelacion.sql
+:r .\User.sql

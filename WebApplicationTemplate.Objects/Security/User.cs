@@ -15,7 +15,8 @@ namespace WebApplicationTemplate.Objects.Security
 
         public bool IsSuperUser { get; set; }
 
-        public Nullable<Guid> MacrolynkGUID { get; set; }
+        //public Nullable<Guid> MacrolynkGUID { get; set; }
+		public string Password { get; set; }
         
         // TODO complete user data
 	}

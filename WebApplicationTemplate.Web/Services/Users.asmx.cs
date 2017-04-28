@@ -29,7 +29,7 @@ namespace WebApplicationTemplate.Web.Services
 			// prepare object to insert
 			User objUser = new User();
 			objUser.Username = userInfo.Username;
-			objUser.MacrolynkGUID = userInfo.MacrolynkGUID;
+			//objUser.MacrolynkGUID = userInfo.MacrolynkGUID;
 			
 			// insert new user
             bllUser.InsertUser(objUser);

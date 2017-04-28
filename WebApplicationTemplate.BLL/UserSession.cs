@@ -8,6 +8,8 @@ using WebApplicationTemplate.BLL.Security;
 using WebApplicationTemplate.Objects.Security;
 using WebApplicationTemplate.BLL.Properties;
 
+using System.Security.Cryptography;
+
 namespace WebApplicationTemplate.BLL
 {
     public class UserSession
@@ -26,8 +28,12 @@ namespace WebApplicationTemplate.BLL
             Validations.ValidatePassword(password);
 
             UserBLL objUserBLL = new UserBLL(this);
-
             User objUser = objUserBLL.SelectUserByUsername(username);
+
+			if(objUser == null || !(objUser.Username == username && MD5(password) == objUser.Password))
+			{
+				throw new BusinessLogicException(Resources.InvalidCredentials);
+			}
 
             // TODO add sign-in logic for password
             //if ( ... )
@@ -82,10 +88,21 @@ namespace WebApplicationTemplate.BLL
             idUser = objUser.IdUser;
         }
 
-        /// <summary>
-        /// Deauthenticate user
-        /// </summary>
-        public void Deauthenticate()
+		private string MD5(string word)
+		{
+			MD5 md5 = MD5CryptoServiceProvider.Create();
+			ASCIIEncoding encoding = new ASCIIEncoding();
+			byte[] stream = null;
+			StringBuilder sb = new StringBuilder();
+			stream = md5.ComputeHash(encoding.GetBytes(word));
+			for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+			return sb.ToString();
+		}
+
+		/// <summary>
+		/// Deauthenticate user
+		/// </summary>
+		public void Deauthenticate()
         {
             idUser = null;
         }
