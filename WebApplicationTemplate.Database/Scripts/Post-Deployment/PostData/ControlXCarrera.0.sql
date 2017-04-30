@@ -19,6 +19,7 @@ USING (
 	, ('phRamas', @IdCarrera, 'Ramas', 1, 'Se requiere una rama', 0, null, null)
 	, ('phCategoria', @IdCarrera, 'Categoria', 1, 'Se requiere una categoria', 0, null, null)
 	, ('phAcepto',  @IdCarrera, 'Acepto', 1, 'Se requiere aceptar los terminos', 0, null, null)
+	-- , ('phClub', @IdCarrera, 'Club', 0, '', 0, null, null) 
 
 	) AS S (IdControlASP, IdCarrera, Etiqueta, Requerido, EtiquetaRequerido, RegularExpression, RegularErrorMessage, ValidationExpression)
 	INNER JOIN [Control] C ON C.IdControlASP = S.IdControlASP

@@ -49,6 +49,7 @@ USING (
 	, ('phRamas')
 	, ('phCategoria')
 	, ('phAcepto')
+	-- , ('phClub')
 
 	) AS S (NameControl)  
 ON T.IdControlASP = S.NameControl 

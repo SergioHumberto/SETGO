@@ -144,6 +144,18 @@
             </div>
         </div>
     </div>
+
+    <asp:PlaceHolder ID="phClub" Visible="false" runat="server">
+    <div style="width:60%" class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label id="lblClub" runat="server"></label>
+                <asp:TextBox ID="txtClub" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqClub" ControlToValidate="txtClub" runat="server" SetFocusOnError="true"></asp:RequiredFieldValidator>
+            </div>
+        </div>
+    </div>
+    </asp:PlaceHolder>
     
     <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
     <div style="width:60%" class="row">

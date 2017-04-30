@@ -23,6 +23,7 @@
       , IdEquipo
       , Pagado
       , Socio
+      , Club
       )
       VALUES
       (
@@ -39,6 +40,7 @@
       , #IdEquipo#
       , #Pagado#
       , #Socio#
+      , #Club#
       )
 
       <selectKey type="post" resultClass="int" property="IdParticipante">

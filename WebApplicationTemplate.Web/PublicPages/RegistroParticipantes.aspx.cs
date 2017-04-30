@@ -613,6 +613,11 @@ namespace WebApplicationTemplate.Web.Pages
 
             int? IdRuta = null;
 
+            if (!string.IsNullOrEmpty(txtClub.Text.Trim()))
+            {
+                objParticipante.Club = txtClub.Text.Trim();
+            }
+
             objParticipanteXCarreraOBJ.IdCategoria = IdCategoria;
             objParticipanteXCarreraOBJ.IdRama = IdRama;
             objParticipanteXCarreraOBJ.IdRuta = IdRuta;

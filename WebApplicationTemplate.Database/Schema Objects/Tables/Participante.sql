@@ -16,5 +16,6 @@
 	[Pagado] BIT NOT NULL,
 	[Socio] VARCHAR(100) NULL,
 	[TransactionNumber] VARCHAR(MAX) NULL,
-	[StatusPaypal] VARCHAR(MAX)
+	[StatusPaypal] VARCHAR(MAX),
+	[Club] VARCHAR(50) NULL
 )
