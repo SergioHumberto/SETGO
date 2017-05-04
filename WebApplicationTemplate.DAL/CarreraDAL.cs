@@ -27,5 +27,11 @@ namespace WebApplicationTemplate.DAL
             return objCarreraResult;
         }
 
-    }
+		public static void UpdateSiguienteFolio(CarreraOBJ carreraOBJ)
+		{
+			DAL.Update("UpdateSiguienteFolio", carreraOBJ);
+		}
+
+
+	}
 }

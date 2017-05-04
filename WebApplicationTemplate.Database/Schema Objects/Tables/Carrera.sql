@@ -17,5 +17,7 @@
     [Activo] BIT NOT NULL DEFAULT 1, 
     [CC] VARCHAR(MAX) NULL, 
     [BCC] VARCHAR(MAX) NULL, 
-    [URLRegistro] VARCHAR(MAX) NULL
+    [URLRegistro] VARCHAR(MAX) NULL,
+	[FolioInicial] INT NOT NULL,
+	[SiguienteFolio] INT NOT NULL
 )

@@ -26,5 +26,11 @@ namespace WebApplicationTemplate.BLL
         {
             return CarreraDAL.SelectCarreraObject(IdCarrera);
         }
-    }
+
+		public void UpdateSiguienteFolio(CarreraOBJ carreraOBJ)
+		{
+			CarreraDAL.UpdateSiguienteFolio(carreraOBJ);
+		}
+
+	}
 }

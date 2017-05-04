@@ -624,6 +624,23 @@ namespace WebApplicationTemplate.Web.Pages
 
             objParticipante.ParticipanteXCarrera = objParticipanteXCarreraOBJ;
 
+			//Asigna el folio correspondiente
+
+			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+			CarreraOBJ carreraOBJ = new CarreraOBJ();
+
+			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+
+			if(carreraOBJ != null)
+			{
+				objParticipante.Folio = carreraOBJ.SiguienteFolio;
+
+				carreraOBJ.SiguienteFolio++;
+
+				carreraBLL.UpdateSiguienteFolio(carreraOBJ);
+			}
+
+
             return objParticipante;
         }
 

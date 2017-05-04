@@ -29,5 +29,7 @@ namespace WebApplicationTemplate.Objects
         // only saves relations
         public ParticipanteXCarreraOBJ ParticipanteXCarrera { get; set; }
         public int IdTipoEquipo { get; set; }
-    }
+
+		public int Folio { get; set; }
+	}
 }

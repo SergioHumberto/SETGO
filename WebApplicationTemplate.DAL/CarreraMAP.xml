@@ -76,6 +76,12 @@
         <!--AND C.Activo = #Activo#-->
       
     </select>
+
+		<update id="UpdateSiguienteFolio" parameterClass="CarreraOBJ" >
+			UPDATE Carrera
+			SET SiguienteFolio = #SiguienteFolio#
+			WHERE IdCarrera = #IdCarrera#
+		</update>
     
   </statements>
   

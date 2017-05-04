@@ -29,5 +29,8 @@ namespace WebApplicationTemplate.Objects
         public string CC { get; set; }
         public string BCC { get; set; }
         public string URLRegistro { get; set; }
-    }
+
+		public int FolioInicial { get; set; }
+		public int SiguienteFolio { get; set; }
+	}
 }

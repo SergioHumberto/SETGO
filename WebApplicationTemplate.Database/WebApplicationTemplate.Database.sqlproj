@@ -247,6 +247,7 @@
     <None Include="Debug.publish.xml" />
     <None Include="Release.publish.xml" />
     <None Include="Scripts\Pre-Deployment\User.sql" />
+    <None Include="Scripts\Pre-Deployment\Carrera.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />

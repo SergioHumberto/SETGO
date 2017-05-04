@@ -17,5 +17,6 @@
 	[Socio] VARCHAR(100) NULL,
 	[TransactionNumber] VARCHAR(MAX) NULL,
 	[StatusPaypal] VARCHAR(MAX),
-	[Club] VARCHAR(50) NULL
+	[Club] VARCHAR(50) NULL,
+	[Folio] INT NOT NULL
 )

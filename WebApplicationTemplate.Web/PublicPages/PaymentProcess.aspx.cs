@@ -126,7 +126,7 @@ namespace WebApplicationTemplate.Web.Pages
 					tablaNotificacion.InnerHtml = body;
 
 					Email email = new Email();
-					email.SendEmail(body, objParticipante.Email, carreraOBJ.CC,carreraOBJ.BCC);
+					email.SendEmail(body, objParticipante.Email, carreraOBJ.CC,carreraOBJ.BCC, objParticipante.Folio);
 				}
 			}
         }

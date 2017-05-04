@@ -35,3 +35,27 @@ BEGIN
 	ALTER TABLE [Participante] ALTER COLUMN [FechaNacimiento] DATE NOT NULL
 END 
 GO
+
+----------------------------------------------------------------------------------------------------
+IF NOT EXISTS(
+	SELECT * FROM INFORMATION_SCHEMA.COLUMNS
+	WHERE TABLE_NAME = 'Participante' AND COLUMN_NAME = 'Folio'
+)
+BEGIN
+	ALTER TABLE [Participante] ADD [Folio] INT NULL
+END
+
+GO
+
+IF EXISTS(
+	SELECT * FROM INFORMATION_SCHEMA.COLUMNS
+	WHERE TABLE_NAME = 'Participante' AND COLUMN_NAME = 'Folio' AND IS_NULLABLE = 'YES'
+)
+BEGIN
+	UPDATE [Participante]
+	SET [Folio] = 1001
+	WHERE [Folio] IS NULL
+
+	ALTER TABLE [Participante] ALTER COLUMN [Folio] INT NOT NULL
+END
+----------------------------------------------------------------------------------------------------
