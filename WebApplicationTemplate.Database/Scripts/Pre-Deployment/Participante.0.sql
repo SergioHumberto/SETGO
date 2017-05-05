@@ -47,15 +47,21 @@ END
 
 GO
 
+IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'Folio' AND TABLE_NAME = 'Participante'  AND IS_NULLABLE = 'YES')
+BEGIN	
+	UPDATE [Participante]
+	SET [Folio] = 1001
+	WHERE [Folio] IS NULL
+END
+
+GO
+
 IF EXISTS(
 	SELECT * FROM INFORMATION_SCHEMA.COLUMNS
 	WHERE TABLE_NAME = 'Participante' AND COLUMN_NAME = 'Folio' AND IS_NULLABLE = 'YES'
 )
-BEGIN
-	UPDATE [Participante]
-	SET [Folio] = 1001
-	WHERE [Folio] IS NULL
-
+BEGIN	
 	ALTER TABLE [Participante] ALTER COLUMN [Folio] INT NOT NULL
 END
+GO
 ----------------------------------------------------------------------------------------------------

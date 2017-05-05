@@ -8,20 +8,24 @@ BEGIN
 	ALTER TABLE [Carrera]
 	ADD [FolioInicial] INT NULL
 END
+GO
 
+IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'FolioInicial' AND TABLE_NAME = 'Carrera'  AND IS_NULLABLE = 'YES')
+BEGIN
+	UPDATE [Carrera]
+	SET [FolioInicial] = 1001
+	WHERE [FolioInicial] IS NULL
+END
 GO
 
 IF EXISTS(
 	SELECT * FROM INFORMATION_SCHEMA.COLUMNS
 	WHERE TABLE_NAME = 'Carrera' AND COLUMN_NAME = 'FolioInicial'
 )
-BEGIN
-	UPDATE [Carrera]
-	SET [FolioInicial] = 1001
-	WHERE [FolioInicial] IS NULL
-
+BEGIN	
 	ALTER TABLE [Carrera] ALTER COLUMN [FolioInicial] INT NOT NULL
 END
+GO
 
 IF NOT EXISTS(
 	SELECT * FROM INFORMATION_SCHEMA.COLUMNS
@@ -31,7 +35,14 @@ BEGIN
 	ALTER TABLE [Carrera]
 	ADD [SiguienteFolio] INT NULL
 END
+GO
 
+IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'SiguienteFolio' AND TABLE_NAME = 'Carrera'  AND IS_NULLABLE = 'YES')
+BEGIN
+	UPDATE [Carrera]
+	SET [SiguienteFolio] = 1001
+	WHERE [SiguienteFolio] IS NULL
+END
 GO
 
 IF EXISTS(
@@ -39,9 +50,6 @@ IF EXISTS(
 	WHERE TABLE_NAME = 'Carrera' AND COLUMN_NAME = 'SiguienteFolio' AND IS_NULLABLE = 'YES'
 )
 BEGIN
-	UPDATE [Carrera]
-	SET [SiguienteFolio] = 1001
-	WHERE [SiguienteFolio] IS NULL
-
 	ALTER TABLE [Carrera] ALTER COLUMN [SiguienteFolio] INT NOT NULL
 END
+GO
