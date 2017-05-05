@@ -26,5 +26,10 @@ namespace WebApplicationTemplate.BLL
         {
             return CategoriaDAL.SelectCategoriaObject(IdCategoria);
         }
+
+        public CategoriaOBJ SelectCategoriaByIdParticipante(int IdParticipante)
+        {
+            return CategoriaDAL.SelectCategoriaByIdParticipante(IdParticipante);
+        }
     }
 }

@@ -131,18 +131,19 @@ namespace WebApplicationTemplate.Web.Pages
                 //Cadena para enviar el correo.
                 string body = @"
 						<table>
-							<tr><td width=" + "50%" + @">Selecciona una modalidad:</td><td width=" + "50%" + @">{0}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Nombe:</td><td style=" + "background:#F3F7FB;" + @">{1}</td></tr>
-							<tr><td>Fecha de Nacimiento:</td><td>{2}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Email:</td><td style=" + "background:#F3F7FB;" + @">{3}</td></tr>
-							<tr><td>Teléfono Personal:</td><td>{4}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Teléfono de Contacto de Emergencia:</td><td style=" + "background:#F3F7FB;" + @">{5}</ td></tr>
-							<tr><td>Dirección:</td><td>{6}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">" + carreraOBJ.DescripcionPoliticas + @"</td><td style=" + "background:#F3F7FB;" + @">{7}</td></tr>
-							<tr><td>Total:</td><td>{8}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Status:</td><td style=" + "background:#F3F7FB;" + @">{9}</td></tr>
-							<tr><td>Payment ID:</td><td>{10}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Payment Date:</td><td style=" + "background:#F3F7FB;" + @">{11}</td></tr>
+                            <tr><td style='font-weight:bold; background:#9FD0FF;' width = '50%'>Folio de Registro:</td><td style='background:#9FD0FF;' width='50%'>{0}</td></tr>
+							<tr><td style='font-weight:bold;'>Modalidad:</td><td>{1}</td></tr>
+							<tr><td style='font-weight:bold;background:#9FD0FF;'>Nombre:</td><td style='background:#9FD0FF;'>{2}</td></tr>
+							<tr><td style='font-weight:bold;'>Fecha de Nacimiento:</td><td>{3}</td></tr>
+							<tr><td style='font-weight:bold;background:#9FD0FF;'>Email:</td><td style='background:#9FD0FF;'>{4}</td></tr>
+							<tr><td style='font-weight:bold;'>Teléfono Personal:</td><td>{5}</td></tr>
+							<tr><td style='font-weight:bold;background:#9FD0FF;'>Teléfono de Contacto de Emergencia:</td><td style='background:#9FD0FF;'>{6}</ td></tr>
+							<tr><td style='font-weight:bold;'>Dirección:</td><td>{7}</td></tr>
+							<tr><td style='background:#9FD0FF;'>" + carreraOBJ.DescripcionPoliticas + @"</td><td style='background:#9FD0FF;'>{8}</td></tr>
+							<tr><td style='font-weight:bold;'>Total:</td><td>{9}</td></tr>
+							<tr><td style='font-weight:bold;background:#9FD0FF;'>Status:</td><td style='background:#9FD0FF;'>{10}</td></tr>
+							<tr><td style='font-weight:bold;'>Payment ID:</td><td>{11}</td></tr>
+							<tr><td style='font-weight:bold; background:#9FD0FF;'>Payment Date:</td><td style='background:#9FD0FF;'>{12}</td></tr>
 						</table>
 						";
 
@@ -151,8 +152,21 @@ namespace WebApplicationTemplate.Web.Pages
 
                 ramaOBJ = ramaBLL.SelectRamaByIdParticipante(objParticipante.IdParticipante);
 
+                CategoriaBLL categoriaBLL = new CategoriaBLL(HttpSecurity.CurrentSession);
+                CategoriaOBJ categoria = categoriaBLL.SelectCategoriaByIdParticipante(objParticipante.IdParticipante);
+
+                RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
+                RutaOBJ ruta = rutaBLL.SelectRutaByIdParticipante(objParticipante.IdParticipante);
+
+                string modalidad = string.Empty;
+
+                modalidad = (ramaOBJ != null) ? ramaOBJ.Nombre : string.Empty;
+                modalidad += ((modalidad == string.Empty || categoria == null) ? string.Empty : ", " ) + ((categoria != null) ? categoria.Nombre : string.Empty);
+                modalidad += ((modalidad == string.Empty || ruta == null) ? string.Empty : ", ") + ((ruta != null) ? ruta.Nombre : string.Empty);
+
                 body = string.Format(body
-                    , ramaOBJ.Nombre                                //Modalidad
+                    , objParticipante.Folio                         //Folio
+                    , modalidad                                //Modalidad
                     , objParticipante.Nombre + " " +
                         objParticipante.ApellidoPaterno + " " +
                         objParticipante.ApellidoMaterno             //Nombre
@@ -178,6 +192,7 @@ namespace WebApplicationTemplate.Web.Pages
         }
 
         // este metodo se usa para rest api
+        [Obsolete]
         private void ProcessURL()
         {
             // exmple url parameters: paymentId=PAY-82T48127285547200LD5W3LQ&token=EC-7WB48951HL5170437&PayerID=WF63RTAYUPJEN
@@ -222,18 +237,18 @@ namespace WebApplicationTemplate.Web.Pages
                     //Cadena para enviar el correo.
                     string body = @"
 						<table>
-							<tr><td width=" + "50%" + @">Selecciona una modalidad:</td><td width=" + "50%" + @">{0}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Nombe:</td><td style=" + "background:#F3F7FB;" + @">{1}</td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @"width=" + "50%" + @">Selecciona una modalidad:</td><td width=" + "50%" + @">{0}</td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @">Nombe:</td><td style=" + "background:#9FD0FF;" + @">{1}</td></tr>
 							<tr><td>Fecha de Nacimiento:</td><td>{2}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Email:</td><td style=" + "background:#F3F7FB;" + @">{3}</td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @">Email:</td><td style=" + "background:#9FD0FF;" + @">{3}</td></tr>
 							<tr><td>Teléfono Personal:</td><td>{4}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Teléfono de Contacto de Emergencia:</td><td style=" + "background:#F3F7FB;" + @">{5}</ td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @">Teléfono de Contacto de Emergencia:</td><td style=" + "background:#9FD0FF;" + @">{5}</ td></tr>
 							<tr><td>Dirección:</td><td>{6}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">" + carreraOBJ.DescripcionPoliticas + @"</td><td style=" + "background:#F3F7FB;" + @">{7}</td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @">" + carreraOBJ.DescripcionPoliticas + @"</td><td style=" + "background:#9FD0FF;" + @">{7}</td></tr>
 							<tr><td>Total:</td><td>{8}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Status:</td><td style=" + "background:#F3F7FB;" + @">{9}</td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @">Status:</td><td style=" + "background:#9FD0FF;" + @">{9}</td></tr>
 							<tr><td>Payment ID:</td><td>{10}</td></tr>
-							<tr><td style=" + "background:#F3F7FB;" + @">Payment Date:</td><td style=" + "background:#F3F7FB;" + @">{11}</td></tr>
+							<tr><td style=" + "background:#9FD0FF;" + @">Payment Date:</td><td style=" + "background:#9FD0FF;" + @">{11}</td></tr>
 						</table>
 						";
 

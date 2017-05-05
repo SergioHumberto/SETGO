@@ -5,4 +5,14 @@
     <typeAlias alias="RutaOBJ" type="WebApplicationTemplate.Objects.RutaOBJ" />
   </alias>
 
+  <statements>
+
+    <select id="SelectRutaByIdParticipante" parameterClass="int" resultClass="RutaOBJ">
+      SELECT R.* FROM ParticipanteXCarrera PXC
+      INNER JOIN Ruta R ON PXC.IdRuta = R.IdRuta
+      WHERE PXC.IdParticipante = #value#
+    </select>
+
+  </statements>
+
 </sqlMap>

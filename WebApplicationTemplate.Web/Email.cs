@@ -24,7 +24,7 @@ namespace WebApplicationTemplate.Web
                 if (correo != null && correo != string.Empty) mail.To.Add(correo);
                 if (CC != null && CC != string.Empty) mail.CC.Add(CC);
                 if(BCC != null && BCC != string.Empty) mail.Bcc.Add(BCC);
-                mail.Subject = "Confirmación de Registro [" + folio + "]";
+                mail.Subject = @"Confirmación de Registro [#" + folio + "]";
                 mail.IsBodyHtml = true;
 
                 mail.Body = body;

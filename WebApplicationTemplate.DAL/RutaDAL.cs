@@ -10,5 +10,10 @@ namespace WebApplicationTemplate.DAL
 {
 	public static class RutaDAL
 	{
-	}
+        public static RutaOBJ SelectRutaByIdParticipante(int IdParticipante)
+        {
+            RutaOBJ objRuta = Mapper.Instance().QueryForObject<RutaOBJ>("SelectRutaByIdParticipante", IdParticipante);
+            return objRuta;
+        }
+    }
 }

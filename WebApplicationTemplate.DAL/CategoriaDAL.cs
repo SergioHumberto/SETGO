@@ -26,5 +26,11 @@ namespace WebApplicationTemplate.DAL
             CategoriaOBJ objCategoria = Mapper.Instance().QueryForObject<CategoriaOBJ>("SelectCategoriaObject", IdCategoria);
             return objCategoria;
         }
+
+        public static CategoriaOBJ SelectCategoriaByIdParticipante(int IdParticipante)
+        {
+            CategoriaOBJ objCategoria = Mapper.Instance().QueryForObject<CategoriaOBJ>("SelectCategoriaByIdParticipante", IdParticipante);
+            return objCategoria;
+        }
     }
 }
