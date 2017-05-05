@@ -749,8 +749,16 @@ namespace WebApplicationTemplate.Web.Pages
 
             // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
             // string strCancelURL = "http://localhost:61880/WebApplicationTemplate/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}";
-            string strCancelURL = Urls.Abs("~/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}");
-            strCancelURL = string.Format(strCancelURL, IdCarreraProperty);
+
+            /* Se borra esta linea para obtener la CancelURL desde la URL de 
+             * Registro configurada en la tabla Carrera en la BD
+             * 
+             * string strCancelURL = Urls.Abs("~/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}");
+             * 
+             * by Erik C
+             */
+
+            string strCancelURL = string.Empty;
 
             CarreraBLL objCarerraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
             CarreraOBJ objCarrera = objCarerraBLL.SelectCarreraObject(IdCarreraProperty);
@@ -759,6 +767,7 @@ namespace WebApplicationTemplate.Web.Pages
             if (objCarrera != null)
             {
                 strNombreCarrera = objCarrera.Nombre;
+                strCancelURL = objCarrera.URLRegistro; //Se obtiene desde la BD, la URL de registro ya trae el IdCarrera o la URL que enmascara e identifica la carrera
             }
 			Session.Remove("objSessionPayPal");
 			SessionPayPal objSessionPayPal = new SessionPayPal()
