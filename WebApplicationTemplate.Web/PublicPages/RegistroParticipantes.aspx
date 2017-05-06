@@ -23,7 +23,11 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         
-        
+       <style>
+           .AlertaRequerido {
+               color:red
+           }
+       </style> 
 
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -33,7 +37,7 @@
     <asp:UpdatePanel ID="upCusError" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <div class="has-error">
-                <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" ForeColor="Red" ></asp:CustomValidator>
+                <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" CssClass="AlertaRequerido" ></asp:CustomValidator>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -73,10 +77,10 @@
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblApellidoPaterno" runat="server">Apellido paterno *</label>
-                <asp:TextBox ID="txtApellidoPaterno" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
+                <label id="lblApellidoPaterno" runat="server" /> 
+                <asp:TextBox ID="txtApellidoPaterno" CssClass="form-control" MaxLength="50" runat="server" />
                 <asp:RequiredFieldValidator ID="reqApellidoPaterno" ControlToValidate="txtApellidoPaterno" SetFocusOnError="true" 
-                    ForeColor="Red" ErrorMessage="Se requiere apellido paterno" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
+                   CssClass="AlertaRequerido" runat="server" Display="Dynamic" />
             </div>
         </div>
     </div>
@@ -86,10 +90,10 @@
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label id="lblApellidoMaterno" runat="server">Apellido materno</label>
-                <asp:TextBox ID="txtApellidoMaterno" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
+                <label id="lblApellidoMaterno" runat="server" />
+                <asp:TextBox ID="txtApellidoMaterno" CssClass="form-control" MaxLength="50" runat="server" />
                 <asp:RequiredFieldValidator ID="reqApellidoMaterno" ControlToValidate="txtApellidoMaterno" SetFocusOnError="true" 
-                    ForeColor="Red" ErrorMessage="Se requiere apellido materno" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
+                    CssClass="AlertaRequerido" ErrorMessage="Se requiere apellido materno" runat="server" Display="Dynamic" />
             </div>
         </div>
     </div>
@@ -100,8 +104,9 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label id="lblNombres" runat="server" />
-                <asp:TextBox ID="txtNombres" MaxLength="50" CssClass="form-control" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqNombres" ControlToValidate="txtNombres" Display="Dynamic" SetFocusOnError="true" ForeColor="Red" ErrorMessage="Se requiere nombre" runat="server"></asp:RequiredFieldValidator>
+                <asp:TextBox ID="txtNombres" MaxLength="50" CssClass="form-control" runat="server" />
+                <asp:RequiredFieldValidator ID="reqNombres" ControlToValidate="txtNombres" Display="Dynamic" SetFocusOnError="true" 
+                    CssClass="AlertaRequerido" ErrorMessage="Se requiere nombre" runat="server" />
             </div>
         </div>
     </div>
@@ -140,7 +145,7 @@
                 <asp:TextBox ID="txtNoAccion" Visible="false" CssClass="form-control" MaxLength="10" runat="server"></asp:TextBox>
                 <asp:RegularExpressionValidator Enabled="false" ID="revTxtNoAccion" runat="server" SetFocusOnError="true" 
                     ErrorMessage="Debe ser un valor numerico"
-                    ControlToValidate="txtNoAccion" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
+                    ControlToValidate="txtNoAccion" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -151,7 +156,7 @@
             <div class="form-group">
                 <label id="lblClub" runat="server"></label>
                 <asp:TextBox ID="txtClub" CssClass="form-control" MaxLength="50" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="reqClub" ControlToValidate="txtClub" runat="server" SetFocusOnError="true"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="reqClub" ControlToValidate="txtClub" CssClass="AlertaRequerido" runat="server" SetFocusOnError="true"></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
@@ -165,10 +170,10 @@
                 <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" runat="server"></asp:TextBox>
 
                 <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true" 
-                    ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
+                    CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
                 
                 <asp:RegularExpressionValidator ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
-                    ControlToValidate="txtEmail" Display="Dynamic" ForeColor="Red" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
+                    ControlToValidate="txtEmail" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
             </div>
         </div>
     </div>
@@ -182,11 +187,11 @@
                 <asp:TextBox ID="txtTelefonoPersonal" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoPersonal')"></asp:TextBox>
                 
                 <asp:RequiredFieldValidator ID="reqTelefonoPersonal" ControlToValidate="txtTelefonoPersonal" SetFocusOnError="true" 
-                    ForeColor="Red" ErrorMessage="Se requiere telefono" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
+                    CssClass="AlertaRequerido" ErrorMessage="Se requiere telefono" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
 
                 <asp:RegularExpressionValidator ID="revTelefonoPersonal" runat="server" SetFocusOnError="true" 
                     ErrorMessage="Debe ser un valor numerico"
-                    ControlToValidate="txtTelefonoPersonal" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
+                    ControlToValidate="txtTelefonoPersonal" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -200,11 +205,11 @@
                 <asp:TextBox ID="txtTelefonoEmergencia" CssClass="form-control" MaxLength="12" runat="server" onkeyup="removeWhitespaces('txtTelefonoEmergencia')"></asp:TextBox>
 
                 <asp:RequiredFieldValidator ID="reqTelefonoEmergencia" ControlToValidate="txtTelefonoEmergencia" SetFocusOnError="true" 
-                    ForeColor="Red" ErrorMessage="Se requiere telefono de emergencia" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
+                    CssClass="AlertaRequerido" ErrorMessage="Se requiere telefono de emergencia" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
 
                 <asp:RegularExpressionValidator ID="revtxtTelefonoEmergencia" runat="server" SetFocusOnError="true" 
                     ErrorMessage="Debe ser un valor numerico"
-                    ControlToValidate="txtTelefonoEmergencia" Display="Dynamic" ForeColor="Red" ValidationExpression="\d+" />
+                    ControlToValidate="txtTelefonoEmergencia" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="\d+" />
             </div>
         </div>
     </div>
@@ -218,7 +223,7 @@
                 <asp:TextBox ID="txtDomicilio" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
 
                 <asp:RequiredFieldValidator ID="reqDomicilio" ControlToValidate="txtDomicilio" SetFocusOnError="true" 
-                    ForeColor="Red" ErrorMessage="Se requiere domicilio" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
+                    CssClass="AlertaRequerido" ErrorMessage="Se requiere domicilio" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
@@ -233,9 +238,9 @@
                     <label id="lblGeneric01" runat="server" />
                     <asp:TextBox ID="txtGeneric01" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric01" ControlToValidate="txtGeneric01" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric01" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric01" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric01" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -248,9 +253,9 @@
                     <label id="lblGeneric02" runat="server" />
                     <asp:TextBox ID="txtGeneric02" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric02" ControlToValidate="txtGeneric02" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric02" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric02" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric02" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -263,9 +268,9 @@
                     <label id="lblGeneric03" runat="server" />
                     <asp:TextBox ID="txtGeneric03" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric03" ControlToValidate="txtGeneric03" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric03" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric03" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric03" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -278,9 +283,9 @@
                     <label id="lblGeneric04" runat="server" />
                     <asp:TextBox ID="txtGeneric04" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric04" ControlToValidate="txtGeneric04" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric04" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric04" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric04" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -293,9 +298,9 @@
                     <label id="lblGeneric05" runat="server" />
                     <asp:TextBox ID="txtGeneric05" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric05" ControlToValidate="txtGeneric05" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric05" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric05" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric05" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -308,9 +313,9 @@
                     <label id="lblGeneric06" runat="server" />
                     <asp:TextBox ID="txtGeneric06" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric06" ControlToValidate="txtGeneric06" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric06" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric06" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric06" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -323,9 +328,9 @@
                     <label id="lblGeneric07" runat="server" />
                     <asp:TextBox ID="txtGeneric07" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric07" ControlToValidate="txtGeneric07" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric07" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric07" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric07" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -338,9 +343,9 @@
                     <label id="lblGeneric08" runat="server" />
                     <asp:TextBox ID="txtGeneric08" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric08" ControlToValidate="txtGeneric08" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric08" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric08" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric08" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -353,9 +358,9 @@
                     <label id="lblGeneric09" runat="server" />
                     <asp:TextBox ID="txtGeneric09" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric09" ControlToValidate="txtGeneric09" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric09" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric09" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric09" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -368,9 +373,9 @@
                     <label id="lblGeneric10" runat="server" />
                     <asp:TextBox ID="txtGeneric10" MaxLength="255" CssClass="form-control" runat="server"/>
                     <asp:RequiredFieldValidator ID="reqGeneric10" ControlToValidate="txtGeneric10" SetFocusOnError="true" 
-                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                        CssClass="AlertaRequerido" Enabled="false" runat="server" Display="Dynamic" />
                     <asp:RegularExpressionValidator Enabled="false" ID="revGeneric10" runat="server" 
-                        SetFocusOnError="true" ControlToValidate="txtGeneric10" Display="Dynamic" ForeColor="Red" />
+                        SetFocusOnError="true" ControlToValidate="txtGeneric10" Display="Dynamic" CssClass="AlertaRequerido" />
                 </div>
             </div>
         </div>
@@ -388,7 +393,7 @@
                 <asp:RadioButtonList ID="rblRamas" runat="server">
                 </asp:RadioButtonList>
                 <asp:RequiredFieldValidator ID="reqRamas" ControlToValidate="rblRamas" SetFocusOnError="true" 
-                    ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una rama" runat="server"></asp:RequiredFieldValidator>
+                    CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere una rama" runat="server"></asp:RequiredFieldValidator>
             </div>
         </div>
     </div>
@@ -403,7 +408,7 @@
                     <asp:RadioButtonList ID="rblCategoria" AutoPostBack="true" OnSelectedIndexChanged="rblCategoria_SelectedIndexChanged" runat="server">
                     </asp:RadioButtonList>
                     <asp:RequiredFieldValidator ID="reqCategoria" ControlToValidate="rblCategoria" SetFocusOnError="true" 
-                            ForeColor="Red" Display="Dynamic" ErrorMessage="Se requiere una categoria" runat="server"></asp:RequiredFieldValidator>
+                            CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere una categoria" runat="server"></asp:RequiredFieldValidator>
                 </div>
             </div>
         </ContentTemplate>
@@ -426,7 +431,7 @@
             <br />
             <asp:CustomValidator ID="cusAcepto" runat="server" 
                 ErrorMessage="Se requiere aceptar las condiciones" Display="Dynamic" ClientValidationFunction="ValidateCheckBox"
-                 ForeColor="Red" SetFocusOnError="true" ></asp:CustomValidator>        
+                 CssClass="AlertaRequerido" SetFocusOnError="true" ></asp:CustomValidator>        
         </div>
     </div>
     </asp:PlaceHolder>
