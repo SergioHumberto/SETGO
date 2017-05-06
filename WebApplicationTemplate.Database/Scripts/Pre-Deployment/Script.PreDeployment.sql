@@ -14,3 +14,4 @@
 :r .\BorrarTablasDeRelacion.sql
 :r .\User.sql
 :r .\Carrera.sql
+:r .\DeleteControlsWithOutUse.sql
