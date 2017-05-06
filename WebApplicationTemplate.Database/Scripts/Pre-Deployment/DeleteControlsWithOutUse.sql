@@ -33,6 +33,7 @@ WITH [DATA] AS (
 	, ('chkAcepto')
 	, ('cusChkAcepto')
 	, ('upTotal')
+	, ('phDatePickerEdad')
 ) AS D(IdControlASP)
   INNER JOIN Control C ON C.IdControlASP = D.IdControlASP
   INNER JOIN ControlXCarrera CxC ON CxC.IdControl = C.IdControl

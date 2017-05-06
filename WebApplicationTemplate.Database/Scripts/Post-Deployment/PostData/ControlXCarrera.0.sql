@@ -10,7 +10,7 @@ USING (
 	--, 
 	('phApellidoPaterno', @IdCarrera, 'Apellido paterno', 1, 'Se requiere apellido paterno', 0, null, null)
 	, ('phApellidoMaterno', @IdCarrera, 'Apellido materno', 0, 'Se requiere apellido materno', 0, null, null)
-	, ('phDatePickerEdad', @IdCarrera, 'Fecha nacimiento', 1, 'Se fecha de nacimiento', 0, null, null)
+	-- , ('phDatePickerEdad', @IdCarrera, 'Fecha nacimiento', 1, 'Se fecha de nacimiento', 0, null, null)
 	, ('phNombres', @IdCarrera, 'Nombre(s)', 1, 'Se requiere nombre', 0, null, null)
 	, ('phEmail', @IdCarrera, 'Email', 1, 'Se requiere email', 1, 'Debe insertar un email valido', '^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$')
 	, ('phTelefonoPersonal', @IdCarrera, 'Telefono personal', 1, 'Se requiere telefono personal', 1, 'Debe insertar un telefono valido', '\d+')
@@ -30,6 +30,7 @@ USING (
 	-- , ('phGeneric08', @IdCarrera, 'Generic08', 0, '', 0, null, null)
 	-- , ('phGeneric09', @IdCarrera, 'Generic09', 0, '', 0, null, null)
 	-- , ('phGeneric10', @IdCarrera, 'Generic10', 0, '', 0, null, null)
+	, ('phFechaNacimiento', @IdCarrera, 'Fecha nacimiento', 1, 'Se requiere fecha nacimiento', 0, null, null)
 
 	) AS S (IdControlASP, IdCarrera, Etiqueta, Requerido, EtiquetaRequerido, RegularExpression, RegularErrorMessage, ValidationExpression)
 	INNER JOIN [Control] C ON C.IdControlASP = S.IdControlASP

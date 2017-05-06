@@ -242,6 +242,8 @@ namespace WebApplicationTemplate.Web.Pages
                 LoadCategoriasRbl(IdCarrera);
                 LoadTipoEquipoDdl();
 
+                LoadValoresFechas();
+
                 lblPoliticas.Text = objCarrera.DescripcionPoliticas;
             }
         }
@@ -447,7 +449,7 @@ namespace WebApplicationTemplate.Web.Pages
             txtNombres.Text = string.Empty;
             txtApellidoPaterno.Text = string.Empty;
             txtApellidoMaterno.Text = string.Empty;
-            datePickerEdad.Text = string.Empty;
+            // datePickerEdad.Text = string.Empty;
             txtDomicilio.Text = string.Empty;
             txtSocio.Text = string.Empty;
             txtNoAccion.Text = string.Empty;
@@ -510,13 +512,12 @@ namespace WebApplicationTemplate.Web.Pages
         {
             try
             {
-                UserSession session = HttpSecurity.CurrentSession;
-                ParticipantesOBJ objParticipante = FillParticipanteOBJ();
-                ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
-
                 DAL.DAL.BeginTransaction();
 
-                validaParticipante(objParticipante);
+                UserSession session = HttpSecurity.CurrentSession;
+
+                ParticipantesOBJ objParticipante = FillParticipanteOBJ();
+                ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
 
                 objParticipanteBLL.InsertParticipante(objParticipante);
 
@@ -568,13 +569,21 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipante.ApellidoMaterno = txtApellidoMaterno.Text.Trim();
 
             DateTime dFechaNacimiento = DateTime.Now;
+            string strFecha = ddlDia.SelectedValue + "/" + ddlMes.SelectedValue + "/" + ddlAnio.SelectedValue;
 
-            CultureInfo ci = CultureInfo.CreateSpecificCulture("es-MX");
-            
-            if (DateTime.TryParse(datePickerEdad.Value.Trim(), ci.DateTimeFormat,DateTimeStyles.None, out dFechaNacimiento))
+            if (!DateTime.TryParse(strFecha, out dFechaNacimiento))
             {
-                objParticipante.FechaNacimiento = dFechaNacimiento;
+                throw new Exception("La fecha no tiene un formato válido");
             }
+
+            objParticipante.FechaNacimiento = dFechaNacimiento;
+
+            //CultureInfo ci = CultureInfo.CreateSpecificCulture("es-MX");
+
+            //if (DateTime.TryParse(datePickerEdad.Value.Trim(), ci.DateTimeFormat,DateTimeStyles.None, out dFechaNacimiento))
+            //{
+            //    objParticipante.FechaNacimiento = dFechaNacimiento;
+            //}
 
             objParticipante.Domicilio = txtDomicilio.Text.Trim();
 
@@ -949,6 +958,36 @@ namespace WebApplicationTemplate.Web.Pages
             }
 
             return 0;
+        }
+
+        private void LoadValoresFechas()
+        {
+            List<ListItem> lstItemsDias = new List<ListItem>();
+            for (int i = 1; i <= 31; i++)
+            {
+                // text, value
+                lstItemsDias.Add(new ListItem(i.ToString("00"), i.ToString("00")));
+            }
+
+            ddlDia.Items.AddRange(lstItemsDias.ToArray());
+
+            List<ListItem> lstItemsMeses = new List<ListItem>();
+            for (int i = 1; i <= 12; i++)
+            {
+                // text, value
+                string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(i);
+                lstItemsMeses.Add(new ListItem(monthName, i.ToString("00")));
+            }
+            ddlMes.Items.AddRange(lstItemsMeses.ToArray());
+
+            List<ListItem> lstItemsAnios = new List<ListItem>();
+            for (int i = DateTime.Now.Year; i > DateTime.Now.Year - 100; i--)
+            {
+                // text, value
+                lstItemsAnios.Add(new ListItem(i.ToString(), i.ToString()));
+            }
+
+            ddlAnio.Items.AddRange(lstItemsAnios.ToArray());
         }
 
     }

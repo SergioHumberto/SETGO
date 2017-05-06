@@ -112,12 +112,38 @@
     </div>
     </asp:PlaceHolder>
 
-    <asp:PlaceHolder ID="phDatePickerEdad" Visible="false" runat="server">
+    <%--<asp:PlaceHolder ID="phDatePickerEdad" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <UserControls:DatePicker ID="datePickerEdad" Text="Fecha de nacimiento*" IsRequired="true" SetFocusOnError="true" ErrorMessage="Debe seleccionar una fecha" runat="server" />
         </div>
     </div>
+    </asp:PlaceHolder>--%>
+
+    <asp:PlaceHolder ID="phFechaNacimiento" Visible="false" runat="server">
+        <label id="lblFechaNacimiento" runat="server" />
+        <div style="width:60%" class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label id="lblDia" runat="server">Dia</label>
+                    <asp:DropDownList ID="ddlDia" CssClass="form-control" runat="server" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label id="lblMes" runat="server">Mes</label>
+                    <asp:DropDownList ID="ddlMes" CssClass="form-control" runat="server" />
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label id="lblAnio" runat="server">Año</label>
+                    <asp:DropDownList ID="ddlAnio" CssClass="form-control" runat="server" />
+                </div>
+            </div>
+        </div>
     </asp:PlaceHolder>
 
     <asp:PlaceHolder ID="phSocio" Visible="false" runat="server">
@@ -167,8 +193,6 @@
         </div>
     </div>
     </asp:PlaceHolder>
-    
-    <br />
 
     <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
     <div style="width:60%" class="row">

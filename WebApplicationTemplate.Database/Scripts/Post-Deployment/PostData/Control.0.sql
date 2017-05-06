@@ -41,7 +41,7 @@ USING (
 	('phApellidoPaterno')
 	, ('phApellidoMaterno')
 	, ('phNombres')
-	, ('phDatePickerEdad')
+	-- , ('phDatePickerEdad')
 	, ('phEmail')
 	, ('phTelefonoPersonal')
 	, ('phTelefonoEmergencia')
@@ -60,7 +60,7 @@ USING (
 	-- , ('phGeneric08')
 	-- , ('phGeneric09')
 	-- , ('phGeneric10')
-
+	,('phFechaNacimiento')
 	) AS S (NameControl)  
 ON T.IdControlASP = S.NameControl 
 
