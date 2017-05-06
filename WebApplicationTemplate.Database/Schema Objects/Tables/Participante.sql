@@ -18,5 +18,15 @@
 	[TransactionNumber] VARCHAR(MAX) NULL,
 	[StatusPaypal] VARCHAR(MAX),
 	[Club] VARCHAR(50) NULL,
-	[Folio] INT NOT NULL
+	[Folio] INT NOT NULL,
+	[Generic01] VARCHAR(255) NULL,
+	[Generic02] VARCHAR(255) NULL,
+	[Generic03] VARCHAR(255) NULL,
+	[Generic04] VARCHAR(255) NULL,
+	[Generic05] VARCHAR(255) NULL,
+	[Generic06] VARCHAR(255) NULL,
+	[Generic07] VARCHAR(255) NULL,
+	[Generic08] VARCHAR(255) NULL,
+	[Generic09] VARCHAR(255) NULL,
+	[Generic10] VARCHAR(255) NULL
 )

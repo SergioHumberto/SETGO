@@ -50,6 +50,16 @@ USING (
 	, ('phCategoria')
 	, ('phAcepto')
 	-- , ('phClub')
+	-- , ('phGeneric01')
+	-- , ('phGeneric02')
+	-- , ('phGeneric03')
+	-- , ('phGeneric04')
+	-- , ('phGeneric05')
+	-- , ('phGeneric06')
+	-- , ('phGeneric07')
+	-- , ('phGeneric08')
+	-- , ('phGeneric09')
+	-- , ('phGeneric10')
 
 	) AS S (NameControl)  
 ON T.IdControlASP = S.NameControl 

@@ -225,7 +225,157 @@
     </asp:PlaceHolder>
 
     </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric01" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric01" runat="server" />
+                    <asp:TextBox ID="txtGeneric01" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric01" ControlToValidate="txtGeneric01" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric01" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric01" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric02" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric02" runat="server" />
+                    <asp:TextBox ID="txtGeneric02" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric02" ControlToValidate="txtGeneric02" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric02" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric02" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric03" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric03" runat="server" />
+                    <asp:TextBox ID="txtGeneric03" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric03" ControlToValidate="txtGeneric03" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric03" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric03" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
     
+    <asp:PlaceHolder ID="phGeneric04" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric04" runat="server" />
+                    <asp:TextBox ID="txtGeneric04" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric04" ControlToValidate="txtGeneric04" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric04" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric04" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric05" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric05" runat="server" />
+                    <asp:TextBox ID="txtGeneric05" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric05" ControlToValidate="txtGeneric05" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric05" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric05" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric06" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric06" runat="server" />
+                    <asp:TextBox ID="txtGeneric06" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric06" ControlToValidate="txtGeneric06" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric06" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric06" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric07" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric07" runat="server" />
+                    <asp:TextBox ID="txtGeneric07" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric07" ControlToValidate="txtGeneric07" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric07" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric07" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric08" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric08" runat="server" />
+                    <asp:TextBox ID="txtGeneric08" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric08" ControlToValidate="txtGeneric08" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric08" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric08" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+    
+    <asp:PlaceHolder ID="phGeneric09" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric09" runat="server" />
+                    <asp:TextBox ID="txtGeneric09" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric09" ControlToValidate="txtGeneric09" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric09" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric09" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phGeneric10" Visible="false" runat="server">
+        <div style="width:60%" class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label id="lblGeneric10" runat="server" />
+                    <asp:TextBox ID="txtGeneric10" MaxLength="255" CssClass="form-control" runat="server"/>
+                    <asp:RequiredFieldValidator ID="reqGeneric10" ControlToValidate="txtGeneric10" SetFocusOnError="true" 
+                        ForeColor="Red" Enabled="false" runat="server" Display="Dynamic" />
+                    <asp:RegularExpressionValidator Enabled="false" ID="revGeneric10" runat="server" 
+                        SetFocusOnError="true" ControlToValidate="txtGeneric10" Display="Dynamic" ForeColor="Red" />
+                </div>
+            </div>
+        </div>
+    </asp:PlaceHolder>
+
     <asp:Button ID="btnGuardarParticipante" CssClass="btn btn-default" Text="Guardar y continuar" OnClick="btnGuardarParticipante_Click" runat="server" Visible="false" />
 
     <asp:PlaceHolder runat="server" ID="phRamaCategoriaRuta">

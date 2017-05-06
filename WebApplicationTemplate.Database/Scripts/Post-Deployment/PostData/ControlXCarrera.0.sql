@@ -20,6 +20,16 @@ USING (
 	, ('phCategoria', @IdCarrera, 'Categoria', 1, 'Se requiere una categoria', 0, null, null)
 	, ('phAcepto',  @IdCarrera, 'Acepto', 1, 'Se requiere aceptar los terminos', 0, null, null)
 	-- , ('phClub', @IdCarrera, 'Club', 0, '', 0, null, null) 
+	-- , ('phGeneric01', @IdCarrera, 'Generic01', 0, '', 0, null, null)
+	-- , ('phGeneric02', @IdCarrera, 'Generic02', 0, '', 0, null, null)
+	-- , ('phGeneric03', @IdCarrera, 'Generic03', 0, '', 0, null, null)
+	-- , ('phGeneric04', @IdCarrera, 'Generic04', 0, '', 0, null, null)
+	-- , ('phGeneric05', @IdCarrera, 'Generic05', 0, '', 0, null, null)
+	-- , ('phGeneric06', @IdCarrera, 'Generic06', 0, '', 0, null, null)
+	-- , ('phGeneric07', @IdCarrera, 'Generic07', 0, '', 0, null, null)
+	-- , ('phGeneric08', @IdCarrera, 'Generic08', 0, '', 0, null, null)
+	-- , ('phGeneric09', @IdCarrera, 'Generic09', 0, '', 0, null, null)
+	-- , ('phGeneric10', @IdCarrera, 'Generic10', 0, '', 0, null, null)
 
 	) AS S (IdControlASP, IdCarrera, Etiqueta, Requerido, EtiquetaRequerido, RegularExpression, RegularErrorMessage, ValidationExpression)
 	INNER JOIN [Control] C ON C.IdControlASP = S.IdControlASP

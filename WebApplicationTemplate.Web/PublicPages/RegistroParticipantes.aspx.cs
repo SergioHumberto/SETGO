@@ -640,6 +640,17 @@ namespace WebApplicationTemplate.Web.Pages
 				carreraBLL.UpdateSiguienteFolio(carreraOBJ);
 			}
 
+            // Fill 10 generic fields
+            objParticipante.Generic01 = !string.IsNullOrEmpty(txtGeneric01.Text.Trim()) ? txtGeneric01.Text.Trim() : null;
+            objParticipante.Generic02 = !string.IsNullOrEmpty(txtGeneric02.Text.Trim()) ? txtGeneric02.Text.Trim() : null;
+            objParticipante.Generic03 = !string.IsNullOrEmpty(txtGeneric03.Text.Trim()) ? txtGeneric03.Text.Trim() : null;
+            objParticipante.Generic04 = !string.IsNullOrEmpty(txtGeneric04.Text.Trim()) ? txtGeneric04.Text.Trim() : null;
+            objParticipante.Generic05 = !string.IsNullOrEmpty(txtGeneric05.Text.Trim()) ? txtGeneric05.Text.Trim() : null;
+            objParticipante.Generic06 = !string.IsNullOrEmpty(txtGeneric06.Text.Trim()) ? txtGeneric06.Text.Trim() : null;
+            objParticipante.Generic07 = !string.IsNullOrEmpty(txtGeneric07.Text.Trim()) ? txtGeneric07.Text.Trim() : null;
+            objParticipante.Generic08 = !string.IsNullOrEmpty(txtGeneric08.Text.Trim()) ? txtGeneric08.Text.Trim() : null;
+            objParticipante.Generic09 = !string.IsNullOrEmpty(txtGeneric09.Text.Trim()) ? txtGeneric09.Text.Trim() : null;
+            objParticipante.Generic10 = !string.IsNullOrEmpty(txtGeneric10.Text.Trim()) ? txtGeneric10.Text.Trim() : null;
 
             return objParticipante;
         }

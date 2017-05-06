@@ -31,5 +31,15 @@ namespace WebApplicationTemplate.Objects
         public int IdTipoEquipo { get; set; }
 
 		public int Folio { get; set; }
-	}
+        public string Generic01 { get; set; }
+        public string Generic02 { get; set; }
+        public string Generic03 { get; set; }
+        public string Generic04 { get; set; }
+        public string Generic05 { get; set; }
+        public string Generic06 { get; set; }
+        public string Generic07 { get; set; }
+        public string Generic08 { get; set; }
+        public string Generic09 { get; set; }
+        public string Generic10 { get; set; }
+    }
 }

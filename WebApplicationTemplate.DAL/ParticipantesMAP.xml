@@ -25,6 +25,16 @@
       , Socio
       , Club
 			, Folio
+            , Generic01
+            , Generic02
+            , Generic03
+            , Generic04
+            , Generic05
+            , Generic06
+            , Generic07
+            , Generic08
+            , Generic09
+            , Generic10
       )
       VALUES
       (
@@ -43,6 +53,16 @@
       , #Socio#
       , #Club#
 			, #Folio#
+            , #Generic01#
+            , #Generic02#
+            , #Generic03#
+            , #Generic04#
+            , #Generic05#
+            , #Generic06#
+            , #Generic07#
+            , #Generic08#
+            , #Generic09#
+            , #Generic10#
       )
 
       <selectKey type="post" resultClass="int" property="IdParticipante">
