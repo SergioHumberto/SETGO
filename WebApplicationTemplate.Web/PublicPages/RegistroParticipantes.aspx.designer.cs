@@ -229,6 +229,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::WebApplicationTemplate.Web.Controls.UserControls.DatePickerControl datePickerEdad;
         
         /// <summary>
+        /// Control phSocio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phSocio;
+        
+        /// <summary>
         /// Control lblSocio.
         /// </summary>
         /// <remarks>
@@ -247,6 +256,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtSocio;
         
         /// <summary>
+        /// Control phInvitado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phInvitado;
+        
+        /// <summary>
         /// Control lblInvitado.
         /// </summary>
         /// <remarks>
@@ -263,6 +281,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInvitado;
+        
+        /// <summary>
+        /// Control phNoAccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phNoAccion;
         
         /// <summary>
         /// Control lblNoAccion.
@@ -1046,6 +1073,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCategoria;
+        
+        /// <summary>
+        /// Control phPoliticas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phPoliticas;
         
         /// <summary>
         /// Control lblPoliticas.

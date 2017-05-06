@@ -120,6 +120,7 @@
     </div>
     </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phSocio" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -128,7 +129,9 @@
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phInvitado" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -137,7 +140,9 @@
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phNoAccion" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -149,6 +154,7 @@
             </div>
         </div>
     </div>
+    </asp:PlaceHolder>
 
     <asp:PlaceHolder ID="phClub" Visible="false" runat="server">
     <div style="width:60%" class="row">
@@ -162,6 +168,8 @@
     </div>
     </asp:PlaceHolder>
     
+    <br />
+
     <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
     <div style="width:60%" class="row">
         <div class="col-md-6">
@@ -417,12 +425,14 @@
     
     <br />
 
+    <asp:PlaceHolder ID="phPoliticas" runat="server">
     <div class="row">
         <div class="col-md-12">
             <asp:Label ID="lblPoliticas" runat="server">
             </asp:Label>
         </div>
     </div>
+    </asp:PlaceHolder>
 
     <asp:PlaceHolder ID="phAcepto" Visible="false" runat="server">
     <div style="width:60%" class="row">
