@@ -86,8 +86,37 @@ namespace WebApplicationTemplate.Web.Pages
             ReportViewer2.LocalReport.DataSources.Add(rds);
             ReportViewer2.LocalReport.ReportPath = HttpContext.Current.Server.MapPath("~/Reports/ReporteRegistrados.rdlc");
             ReportViewer2.LocalReport.ReportEmbeddedResource = HttpContext.Current.Server.MapPath("~/Reports/ReporteRegistrados.rdlc");
-            ReportViewer2.LocalReport.SetParameters(new ReportParameter("NombreCarrera", ddlCarrera.SelectedItem.Text));
+            ReportViewer2.LocalReport.SetParameters(GetListReportParameter());
             ReportViewer2.LocalReport.Refresh();
+        }
+
+        private List<ReportParameter> GetListReportParameter()
+        {
+            List<ReportParameter> lstReportParameter = new List<ReportParameter>();
+            lstReportParameter.Add(new ReportParameter("NombreCarrera", ddlCarrera.SelectedItem.Text));
+
+            string strPrefixGeneric = "Generic";
+            ControlXCarreraBLL objControlXCarrera = new ControlXCarreraBLL(Tools.HttpSecurity.CurrentSession);
+
+            int IdCarrera;
+            int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
+
+            for (int i = 1; i <= 10; i++)
+            {
+                string nameControl = "ph" + strPrefixGeneric + i.ToString("00");
+
+                IList<ControlXCarreraOBJ> lstControls = objControlXCarrera.SelectControlXCarrera(new ControlXCarreraOBJ() { IdControlASP = nameControl, IdCarrera = IdCarrera });
+                if (lstControls.Count > 0)
+                {
+                    lstReportParameter.Add(new ReportParameter("Generic" + i.ToString("00"), lstControls[0].Etiqueta));
+                }
+                else
+                {
+                    lstReportParameter.Add(new ReportParameter("Generic" + i.ToString("00"), "Generic" + i.ToString("00")));
+                }
+            }
+
+            return lstReportParameter;
         }
     }
 }

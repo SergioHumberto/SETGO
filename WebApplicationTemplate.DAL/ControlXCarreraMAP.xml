@@ -41,6 +41,7 @@
               INNER JOIN Control C ON C.IdControl = CxC.IdControl
               WHERE (#IdCarrera# <= 0 OR CxC.IdCarrera = #IdCarrera#)
               AND (#IdControl# <= 0 OR CXC.IdControl = #IdControl#)
+              AND (#IdControlASP# IS NULL OR C.IdControlASP = #IdControlASP#)
       
               ]]>
 

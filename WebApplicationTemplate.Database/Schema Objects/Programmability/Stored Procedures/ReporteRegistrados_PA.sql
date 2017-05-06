@@ -20,6 +20,17 @@ BEGIN
 	, R.Nombre AS [Rama]
 	, P.TransactionNumber
 	, P.StatusPaypal
+	, P.Folio
+	, P.Generic01
+	, P.Generic02
+	, P.Generic03
+	, P.Generic04
+	, P.Generic05
+	, P.Generic06
+	, P.Generic07
+	, P.Generic08
+	, P.Generic09
+	, P.Generic10
 	FROM Participante P
 	INNER JOIN ParticipanteXCarrera PxC ON PxC.IdParticipante = P.IdParticipante
 	INNER JOIN Categoria C ON C.IdCategoria = PxC.IdCategoria
