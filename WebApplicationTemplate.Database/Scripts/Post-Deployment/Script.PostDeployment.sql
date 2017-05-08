@@ -10,4 +10,4 @@ Plantilla de script posterior a la implementación
 --------------------------------------------------------------------------------------
 */
 :r .\PostData\Control.0.sql
-:r .\PostData\ControlXCarrera.0.sql
+--:r .\PostData\ControlXCarrera.0.sql ####  NO SE DEBE EJECUTAR EN PRODUCTIVO ####
