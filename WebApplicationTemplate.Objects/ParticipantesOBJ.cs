@@ -19,7 +19,6 @@ namespace WebApplicationTemplate.Objects
         public string Email { get; set; }
         public string TelefonoEmergencia { get; set; }
         public int? IdEquipo { get; set; }
-        public bool Pagado { get; set; }
         public string Socio { get; set; }
         public string TransactionNumber { get; set; }
         public string StatusPaypal { get; set; }

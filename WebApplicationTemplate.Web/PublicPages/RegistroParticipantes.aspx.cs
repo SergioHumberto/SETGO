@@ -827,7 +827,7 @@ namespace WebApplicationTemplate.Web.Pages
                     ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(IdParticipante);
                     if (objParticipante != null)
                     {
-                        objParticipante.Pagado = true;
+                        //objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14 
                         objParticipanteBLL.UpdateParticipante(objParticipante);
                     }
                 }
@@ -843,7 +843,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                     foreach (ParticipantesOBJ objParticipante in lstParticipantes)
                     {
-                        objParticipante.Pagado = true;
+                        //objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14
                         objParticipanteBLL.UpdateParticipante(objParticipante);
                     }
                 }

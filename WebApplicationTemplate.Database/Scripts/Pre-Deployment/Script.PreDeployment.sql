@@ -15,3 +15,4 @@
 :r .\User.sql
 :r .\Carrera.sql
 :r .\DeleteControlsWithOutUse.sql
+:r .\Participante.1.sql

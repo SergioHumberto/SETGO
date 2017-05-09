@@ -20,8 +20,7 @@
       , Telefono
       , Email
       , TelefonoEmergencia
-      , IdEquipo
-      , Pagado
+      , IdEquipo      
       , Socio
       , Club
 			, Folio
@@ -48,8 +47,7 @@
       , #Telefono#
       , #Email#
       , #TelefonoEmergencia#
-      , #IdEquipo#
-      , #Pagado#
+      , #IdEquipo#      
       , #Socio#
       , #Club#
 			, #Folio#
@@ -76,8 +74,7 @@
 
       <update id="UpdateParticipante" parameterClass="ParticipantesOBJ"  >
           UPDATE Participante 
-          SET Pagado = #Pagado#
-          , TransactionNumber = #TransactionNumber#
+          SET TransactionNumber = #TransactionNumber#
           , StatusPaypal = #StatusPaypal#
           WHERE IdParticipante = #IdParticipante#
       </update>

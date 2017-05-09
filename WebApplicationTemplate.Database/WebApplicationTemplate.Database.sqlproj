@@ -255,6 +255,7 @@
     <None Include="Scripts\Pre-Deployment\TipoEquipo_IdCategoríaFK.sql" />
     <None Include="Scripts\Pre-Deployment\Participante.0.sql" />
     <None Include="Scripts\Pre-Deployment\BorrarTablasDeRelacion.sql" />
+    <None Include="Scripts\Pre-Deployment\Participante.1.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
