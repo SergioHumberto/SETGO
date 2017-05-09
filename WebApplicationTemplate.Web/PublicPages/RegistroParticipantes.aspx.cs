@@ -198,6 +198,7 @@ namespace WebApplicationTemplate.Web.Pages
                                     {
                                         revGenericControl.Enabled = itemControlXCarrera.RegularExpression;
                                         revGenericControl.ErrorMessage = itemControlXCarrera.RegularErrorMessage;
+                                        revGenericControl.ValidationExpression = itemControlXCarrera.ValidationExpression ?? "";
                                     }
 
                                     Control controlDatePickerEdad = itemControl.FindControl("datePickerEdad");
