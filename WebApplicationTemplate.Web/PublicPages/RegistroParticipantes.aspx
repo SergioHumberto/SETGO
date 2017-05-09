@@ -122,26 +122,33 @@
 
     <asp:PlaceHolder ID="phFechaNacimiento" Visible="false" runat="server">
         <label id="lblFechaNacimiento" runat="server" />
+
         <div style="width:60%" class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label id="lblDia" runat="server">Dia</label>
-                    <asp:DropDownList ID="ddlDia" CssClass="form-control" runat="server" />
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label id="lblMes" runat="server">Mes</label>
-                    <asp:DropDownList ID="ddlMes" CssClass="form-control" runat="server" />
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label id="lblAnio" runat="server">Año</label>
-                    <asp:DropDownList ID="ddlAnio" CssClass="form-control" runat="server" />
-                </div>
+            <div class="col-md-6">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="form-group" style="right:10px">
+                                <label id="lblDia" runat="server">Dia</label>
+                                <asp:DropDownList ID="ddlDia" CssClass="form-control" runat="server" />
+                            </div>
+                        </td>
+                        <td style="width:50px"/>
+                        <td>
+                            <div class="form-group">
+                                <label id="lblMes" runat="server">Mes</label>
+                                <asp:DropDownList ID="ddlMes" CssClass="form-control" runat="server" />
+                            </div>
+                        </td>
+                        <td style="width:50px"/>
+                        <td>
+                            <div class="form-group">
+                                <label id="lblAnio" runat="server">Año</label>
+                                <asp:DropDownList ID="ddlAnio" CssClass="form-control" runat="server" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </asp:PlaceHolder>
