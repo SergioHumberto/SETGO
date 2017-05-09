@@ -27,6 +27,11 @@
            .AlertaRequerido {
                color:red
            }
+
+           .LetraEtiqueta {
+               font-size:14px;
+           }
+
        </style> 
 
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -128,22 +133,22 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="form-group" style="right:10px">
-                                <label id="lblDia" runat="server">Dia</label>
+                            <div class="form-group">
+                                <label id="lblDia" class="LetraEtiqueta" runat="server">Dia</label>
                                 <asp:DropDownList ID="ddlDia" CssClass="form-control" runat="server" />
                             </div>
                         </td>
                         <td style="width:50px"/>
                         <td>
                             <div class="form-group">
-                                <label id="lblMes" runat="server">Mes</label>
+                                <label id="lblMes" class="LetraEtiqueta" runat="server">Mes</label>
                                 <asp:DropDownList ID="ddlMes" CssClass="form-control" runat="server" />
                             </div>
                         </td>
                         <td style="width:50px"/>
                         <td>
                             <div class="form-group">
-                                <label id="lblAnio" runat="server">Año</label>
+                                <label id="lblAnio" class="LetraEtiqueta" runat="server">Año</label>
                                 <asp:DropDownList ID="ddlAnio" CssClass="form-control" runat="server" />
                             </div>
                         </td>
