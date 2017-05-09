@@ -8,7 +8,7 @@
     //    }       
 </script>
 
-    <iframe width="600" height="1600" style="width:100%;border:none;height:1600px !important" allowtransparency="true" runat="server" frameborder="0" scrolling="no" src="../PublicPages/RegistroParticipantes.aspx?IdCarrera=1">
+    <iframe width="600" style="width:100%;border:none;height:2500px !important" allowtransparency="true" runat="server" frameborder="0" scrolling="no" src="../PublicPages/RegistroParticipantes.aspx?IdCarrera=1">
 
     </iframe>
 
