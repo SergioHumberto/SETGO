@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CarreraOBJ.cs" />
     <Compile Include="CategoriaOBJ.cs" />
+    <Compile Include="ConfiguracionResultadosOBJ.cs" />
     <Compile Include="ControlXCarreraOBJ.cs" />
     <Compile Include="EquipoOBJ.cs" />
     <Compile Include="PaypalConfigOBJ.cs" />

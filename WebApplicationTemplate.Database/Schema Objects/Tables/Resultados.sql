@@ -1,19 +1,22 @@
 ﻿CREATE TABLE [dbo].[Resultados]
 (
-	[IdResultados] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[IdParticipante] INT NULL FOREIGN KEY REFERENCES [Participante](IdParticipante),
-	[Nombres] VARCHAR(100) NOT NULL,
-	[ApellidoPaterno] VARCHAR(100) NOT NULL,
-	[ApellidoMaterno] VARCHAR(100) NOT NULL,
-	[Genero] VARCHAR(1) NULL,
-	[Tiempo] VARCHAR(100) NULL,
-	[PosicionGeneral] INT NULL,
-	[PosicionCategoria] INT NULL,
-	[PosicionRama] INT NULL,
-	[Velocidad] VARCHAR(100) NULL,
-	[Folio] INT NULL,
-	[Dorsal] INT NULL,
-	[Chip] INT NULL,
-	[Grupo] VARCHAR(100) NULL
-
+	[IdResultado]	INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[IdCarrera]		INT NOT NULL FOREIGN KEY REFERENCES [Carrera](IdCarrera),
+	[Numero]		INT NULL,
+	[Paterno]		VARCHAR(50) NULL,
+	[Materno]		VARCHAR(50) NULL,
+	[Nombres]		VARCHAR(50) NULL,
+	[Folio]			INT NULL,
+	[Sexo]			VARCHAR(10) NULL,
+	[Categoria]		VARCHAR(10) NULL,
+	[Procedencia]	VARCHAR(50) NULL,
+	[Equipo]		VARCHAR(50) NULL,
+	[Telefono]		VARCHAR(20) NULL,
+	[T_Chip]		VARCHAR(10) NULL,
+	[T_Oficial]		VARCHAR(10) NULL,
+	[Lug_Cat]		INT NULL,
+	[Lug_Rama]		INT NULL,
+	[Vel]			VARCHAR(10) NULL,
+	[Lug_Gral]		INT NULL,
+	[Rama]			VARCHAR(20) NULL
 )

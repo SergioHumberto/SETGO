@@ -106,6 +106,7 @@
     <Content Include="Pages\AdmonCatEquipos.aspx" />
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
+    <Content Include="Pages\CargarResultados.aspx" />
     <Content Include="PublicPages\PayPalRestAPI.aspx" />
     <Content Include="PublicPages\PayPal.aspx" />
     <Content Include="PublicPages\PaymentProcess.aspx" />
@@ -268,6 +269,13 @@
     <Compile Include="Pages\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CargarResultados.aspx.cs">
+      <DependentUpon>CargarResultados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CargarResultados.aspx.designer.cs">
+      <DependentUpon>CargarResultados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PublicPages\PayPalRestAPI.aspx.cs">
       <DependentUpon>PayPalRestAPI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -374,6 +382,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Estilos\" />
+    <Folder Include="Pages\TempFiles\" />
     <Folder Include="Resources\Scripts\" />
   </ItemGroup>
   <ItemGroup>

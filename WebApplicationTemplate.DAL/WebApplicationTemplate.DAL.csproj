@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="CarreraDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
+    <Compile Include="ConfiguracionResultadosMAP.cs" />
     <Compile Include="ControlXCarreraDAL.cs" />
     <Compile Include="DAL.cs" />
     <Compile Include="DataAccessException.cs" />
@@ -57,7 +58,7 @@
     <Compile Include="ParticipanteXCarreraDAL.cs" />
     <Compile Include="PaypalConfigDAL.cs" />
     <Compile Include="RamaDAL.cs" />
-    <Compile Include="ResultadosMAP.cs" />
+    <Compile Include="ResultadosDAL.cs" />
     <Compile Include="RutaDAL.cs" />
     <Compile Include="Security\ElementDAL.cs" />
     <Compile Include="Security\InterfaceDAL.cs" />
@@ -151,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SMTPConfigMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConfiguracionResultadosMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

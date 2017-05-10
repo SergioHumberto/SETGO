@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+	<alias>
+		<typeAlias alias="ConfiguracionResultadosOBJ" type="WebApplicationTemplate.Objects.ConfiguracionResultadosOBJ" />
+	</alias>
+
+	<statements>
+
+		<insert id="InsertarConfiguracionResultado" parameterClass="ConfiguracionResultadosOBJ">
+
+			INSERT INTO ConfiguracionResultados(IdCarrera,NombreCampo,Visible)
+			VALUES(#IdCarrera#,#NombreCampo#,#Visible#)
+
+			<selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
+				SELECT @@IDENTITY
+			</selectKey>
+
+		</insert>
+
+		<select id="VerificarConfiguracionDeCarrera" resultClass="int" parameterClass="int" >
+			IF EXISTS(
+			SELECT * FROM ConfiguracionResultados WHERE IdCarrera = #value#
+			)
+			BEGIN
+				SELECT 1
+			END
+			ELSE BEGIN
+				SELECT 0
+			END
+		</select>
+
+		<update id="ActualizarConfiguracion" parameterClass="ConfiguracionResultadosOBJ" >
+			UPDATE ConfiguracionResultados
+			SET Visible = #Visible#
+			WHERE IdCarrera = #IdCarrera# AND NombreCampo = #NombreCampo#
+		</update>
+		
+	</statements>
+
+</sqlMap>

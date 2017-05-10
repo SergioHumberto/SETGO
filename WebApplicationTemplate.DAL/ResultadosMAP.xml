@@ -4,5 +4,76 @@
   <alias>
     <typeAlias alias="ResultadosOBJ" type="WebApplicationTemplate.Objects.ResultadosOBJ" />
   </alias>
+	
+	<statements>
+
+    <insert id="InsertarResultado" parameterClass="ResultadosOBJ">
+
+      INSERT INTO Resultados
+      (
+			IdCarrera
+			,Numero
+			,Paterno
+			,Materno
+			,Nombres
+			,Folio
+			,Sexo
+			,Categoria
+			,Procedencia
+			,Equipo
+			,Telefono
+			,T_Chip
+			,T_Oficial
+			,Lug_Cat
+			,Lug_Rama
+			,Vel
+			,Lug_Gral
+			,Rama
+      )
+      VALUES
+      (
+			#IdCarrera#
+			,#Numero#
+			,#Paterno#
+			,#Materno#
+			,#Nombres#
+			,#Folio#
+			,#Sexo#
+			,#Categoria#
+			,#Procedencia#
+			,#Equipo#
+			,#Telefono#
+			,#T_Chip#
+			,#T_Oficial#
+			,#Lug_Cat#
+			,#Lug_Rama#
+			,#Vel#
+			,#Lug_Gral#
+			,#Rama#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdResultado">
+        SELECT @@IDENTITY
+      </selectKey>
+
+    </insert>
+		
+		<select id="VerificarResultadoDeCarrera" resultClass="int" parameterClass="int" >
+      IF EXISTS(
+				SELECT * FROM Resultados WHERE IdCarrera = #value#
+			)
+			BEGIN 
+				SELECT 1
+			END
+			ELSE BEGIN
+				SELECT 0
+			END
+    </select>
+
+		<delete id="EliminarResultadosDeCarrera" parameterClass="int">
+			DELETE FROM Resultados WHERE IdCarrera = #value#
+		</delete>
+	
+  </statements>
 
 </sqlMap>

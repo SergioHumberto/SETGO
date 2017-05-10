@@ -243,6 +243,7 @@
     <Build Include="Schema Objects\Tables\ControlXCarrera.sql" />
     <Build Include="Schema Objects\Tables\SMTPConfig.sql" />
     <None Include="Scripts\Pre-Deployment\DeleteControlsWithOutUse.sql" />
+    <Build Include="Schema Objects\Tables\ConfiguracionResultados.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

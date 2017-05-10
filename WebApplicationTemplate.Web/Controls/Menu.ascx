@@ -38,6 +38,7 @@
                 </ul>
             </li>
             <li><a href="<%= Urls.ReporteRegistrados() %>">Reporte Registrados</a></li>
+            <li><a href="<%= Urls.CargarResultados() %>">Cargar Resultados</a></li>
             <li><a href="<%= Urls.SignOut() %>">Salir</a></li>
         </ul>
     </div>
