@@ -91,5 +91,9 @@ namespace WebApplicationTemplate.Web.Tools
 		{
 			return Abs("~/Pages/CargarResultados.aspx");
 		}
+        public static String BuscaCarrera()
+        {
+            return Abs("~/Pages/BuscaCarrera.aspx");
+        }
     }
 }

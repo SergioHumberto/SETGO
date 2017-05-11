@@ -31,7 +31,9 @@ namespace WebApplicationTemplate.DAL
 		{
 			DAL.Update("UpdateSiguienteFolio", carreraOBJ);
 		}
-
-
-	}
+        public static void UpdateActivo(CarreraOBJ carreraOBJ)
+        {
+            DAL.Update("UpdateActivo", carreraOBJ);
+        }
+    }
 }

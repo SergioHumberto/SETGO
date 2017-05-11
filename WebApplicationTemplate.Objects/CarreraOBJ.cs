@@ -10,6 +10,8 @@ namespace WebApplicationTemplate.Objects
         public CarreraOBJ()
         {
             Activo = true;
+            FechaIniForQuery = new DateTime(1753, 1, 1);
+            FechaFinForQuery = new DateTime(1753, 1, 1);
         }
         public int IdCarrera { get; set; }
         public string Nombre { get; set; }
@@ -28,9 +30,10 @@ namespace WebApplicationTemplate.Objects
         public bool Activo { get; set; }
         public string CC { get; set; }
         public string BCC { get; set; }
-        public string URLRegistro { get; set; }
-
-		public int FolioInicial { get; set; }
-		public int SiguienteFolio { get; set; }
-	}
+        public string URLRegistro { get; set; }    
+        public int FolioInicial { get; set; }
+        public int SiguienteFolio { get; set; }
+        public DateTime FechaIniForQuery { get; set; }
+        public DateTime FechaFinForQuery { get; set; }
+    }
 }

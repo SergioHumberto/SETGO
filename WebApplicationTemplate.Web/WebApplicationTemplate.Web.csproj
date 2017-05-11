@@ -47,6 +47,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\Libraries\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportViewer.Common.VS2010.10.0.40219.1\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
       <Private>True</Private>
@@ -104,9 +107,11 @@
     <Content Include="Masters\PublicPage.Master" />
     <Content Include="Masters\PrivatePage.Master" />
     <Content Include="Pages\AdmonCatEquipos.aspx" />
+    <Content Include="Pages\BuscaCarrera.aspx" />
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\CargarResultados.aspx" />
+    <Content Include="Pages\ModificaCarrera.aspx" />
     <Content Include="PublicPages\PayPalRestAPI.aspx" />
     <Content Include="PublicPages\PayPal.aspx" />
     <Content Include="PublicPages\PaymentProcess.aspx" />
@@ -255,6 +260,13 @@
     <Compile Include="Pages\AdmonCatEquipos.aspx.designer.cs">
       <DependentUpon>AdmonCatEquipos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BuscaCarrera.aspx.cs">
+      <DependentUpon>BuscaCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BuscaCarrera.aspx.designer.cs">
+      <DependentUpon>BuscaCarrera.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Demo.aspx.cs">
       <DependentUpon>Demo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -275,6 +287,13 @@
     </Compile>
     <Compile Include="Pages\CargarResultados.aspx.designer.cs">
       <DependentUpon>CargarResultados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ModificaCarrera.aspx.cs">
+      <DependentUpon>ModificaCarrera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ModificaCarrera.aspx.designer.cs">
+      <DependentUpon>ModificaCarrera.aspx</DependentUpon>
     </Compile>
     <Compile Include="PublicPages\PayPalRestAPI.aspx.cs">
       <DependentUpon>PayPalRestAPI.aspx</DependentUpon>

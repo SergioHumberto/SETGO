@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
-  
+
   <alias>
     <typeAlias alias="CarreraOBJ" type="WebApplicationTemplate.Objects.CarreraOBJ" />
   </alias>
-  
+
   <statements>
 
     <insert id="InsertarCarrera" parameterClass="CarreraOBJ">
@@ -51,38 +51,44 @@
     </insert>
 
     <select id="SelectCarrera" resultClass="CarreraOBJ" parameterClass="CarreraOBJ" >
-      
+
       <![CDATA[
       
       SELECT 
       * 
       FROM Carrera C
       WHERE (#IdCarrera# <= 0 OR C.IdCarrera = #IdCarrera#)
-      AND (#Nombre# IS NULL OR C.Nombre = #Nombre#)
-      AND C.Activo = #Activo#
-      
-      ]]>
+      AND (#Nombre# IS NULL OR C.Nombre like #Nombre#)
+      AND C.Activo = #Activo#      
+      AND (#FechaIniForQuery# = '17530101' OR (C.Fecha >= #FechaIniForQuery# and (#FechaFinForQuery# = '17530101' OR C.Fecha <= #FechaFinForQuery#)))
+      ]]>    
       
     </select>
 
     <select id="SelectCarreraObject" parameterClass="int" resultClass="CarreraOBJ" >
-      
-      SELECT 
-        C.* 
-      FROM 
-        Carrera C 
-      WHERE 
-        C.IdCarrera = #value#
-        <!--AND C.Activo = #Activo#-->
-      
+
+      SELECT
+      C.*
+      FROM
+      Carrera C
+      WHERE
+      C.IdCarrera = #value#
+      <!--AND C.Activo = #Activo#-->
+
     </select>
 
-		<update id="UpdateSiguienteFolio" parameterClass="CarreraOBJ" >
-			UPDATE Carrera
-			SET SiguienteFolio = #SiguienteFolio#
-			WHERE IdCarrera = #IdCarrera#
-		</update>
-    
+    <update id="UpdateSiguienteFolio" parameterClass="CarreraOBJ" >
+      UPDATE Carrera
+      SET SiguienteFolio = #SiguienteFolio#
+      WHERE IdCarrera = #IdCarrera#
+    </update>
+
+    <update id="UpdateActivo" parameterClass="CarreraOBJ" >
+      UPDATE Carrera
+      SET Activo = #Activo#
+      WHERE IdCarrera = #IdCarrera#
+    </update>
+
   </statements>
-  
+
 </sqlMap>

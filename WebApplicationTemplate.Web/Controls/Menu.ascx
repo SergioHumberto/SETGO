@@ -25,6 +25,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="<%= Urls.AdmonCatEquipos() %>">Equipos</a></li>                    
+                    <li><a href="<%= Urls.BuscaCarrera() %>">Carreras</a></li>
                     <%--<li class="divider"></li>--%>                    
                 </ul>
             </li>
