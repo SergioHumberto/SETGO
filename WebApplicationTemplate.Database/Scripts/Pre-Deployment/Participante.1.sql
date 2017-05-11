@@ -1,20 +1,24 @@
-﻿IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'Pagado' AND TABLE_NAME = 'Participante'  AND IS_NULLABLE = 'NO')
+﻿PRINT 'Participante.1.sql...'
+	
+IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'Pagado' AND TABLE_NAME = 'Participante'  AND IS_NULLABLE = 'NO')
 BEGIN	
-	ALTER TABLE [Participante]
-	ALTER COLUMN [Pagado] bit NULL; 
+	ALTER TABLE Participante
+	ALTER COLUMN Pagado BIT NULL
 END
 GO
-
 IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'Pagado' AND TABLE_NAME = 'Participante'  AND IS_NULLABLE = 'YES')
 BEGIN	
-	UPDATE [Participante]
-	SET [Pagado] = null; 
+	EXEC(
+	'UPDATE Participante
+	SET Pagado = null'
+	)
 END
 GO
-
 IF exists (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME = 'Pagado' AND TABLE_NAME = 'Participante'  AND IS_NULLABLE = 'YES')
 BEGIN	
-	ALTER TABLE [Participante]
-	DROP COLUMN [Pagado];
+EXEC(
+	'ALTER TABLE Participante
+	DROP COLUMN Pagado'
+	)
 END
 GO

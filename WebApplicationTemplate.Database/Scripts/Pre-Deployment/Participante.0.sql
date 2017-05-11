@@ -1,4 +1,4 @@
-﻿
+﻿PRINT 'Participante.0.sql...'
 IF NOT EXISTS
 (
 	SELECT *

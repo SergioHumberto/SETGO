@@ -1,4 +1,5 @@
-﻿/****************************************************************************
+﻿PRINT 'BorrarTablasDeRelacion.sql...'
+/****************************************************************************
 BORRA ELEMENTOS
 *****************************************************************************/
 IF exists (select * from dbo.sysobjects where id = object_id('[dbo].[FK__Categoria__IdCar__48CFD27E]') and OBJECTPROPERTY(id, 'IsForeignKey') = 1)

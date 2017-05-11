@@ -1,3 +1,5 @@
+PRINT 'DeleteControlsWithOutUse.sql...';
+
 WITH [DATA] AS ( 
 	SELECT CxC.* FROM (VALUES ('lblEtiquetaNombre')
 	, ('txtNombres')
