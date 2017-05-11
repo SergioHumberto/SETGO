@@ -25,5 +25,10 @@ namespace WebApplicationTemplate.DAL
 			Mapper.Instance().Delete("EliminarResultadosDeCarrera", IdCarrera);
 		}
 
+		public static IList<ResultadosOBJ> SeleccionarResultadosByIdCarrera(int idCarrera)
+		{
+			return Mapper.Instance().QueryForList<ResultadosOBJ>("SeleccionarResultadosByIdCarrera", idCarrera);
+		}
+
 	}
 }

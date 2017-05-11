@@ -21,6 +21,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 			if (!IsPostBack)
 			{
 				lblError.Text = string.Empty;
+				lblErrorCarrera.Text = string.Empty;
 
 				LoadCarreras();
 
@@ -44,6 +45,21 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				int idCarrera = 0;
+				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
+				{
+					if (idCarrera < 0)
+					{
+						ddlCarrera.Focus();
+						lblErrorCarrera.Text = "Debe seleccionar una carrera.";
+						return;
+					}
+					else
+					{
+						lblErrorCarrera.Text = string.Empty;
+					}
+				}
+
 				if (FileUpload1.HasFile)
 				{
 					string FileName = Path.GetFileName(FileUpload1.PostedFile.FileName);
@@ -198,6 +214,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 			Import_To_Grid(FilePath, Extension, "Yes");
 			GridView1.PageIndex = e.NewPageIndex;
 			GridView1.DataBind();
+			GridView1.Visible = true;
 		}
 
 		protected void btnSubmit_Click(object sender, EventArgs e)
@@ -254,6 +271,77 @@ namespace WebApplicationTemplate.Web.PublicPages
 					crOBJ.Visible = item.Selected;
 
 					crBLL.ActualizarConfiguracion(crOBJ);
+				}
+			}
+		}
+
+		protected void btnConsultarResultados_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				ResultadosBLL resultadosBLL = new ResultadosBLL();
+
+				GridView1.Columns.Clear();
+
+				int idCarrera = 0;
+				if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
+				{
+					if (idCarrera > 0)
+					{
+						if (resultadosBLL.VerificarResultadoDeCarrera(idCarrera))
+						{
+							GridView1.Visible = true;
+							GridView1.DataSource = resultadosBLL.SeleccionarResultadosByIdCarrera(idCarrera);
+							GridView1.DataBind();
+
+							chklstCampos.Visible = true;
+							lblConfiguracion.Visible = true;
+							btnSubmit.Visible = true;
+							lblErrorCarrera.Text = string.Empty;
+
+							CargarConfiguracionResultados();
+						}
+						else
+						{
+							lblErrorCarrera.Text = "No se han cargado resultados para esta carrera.";
+						}
+					}
+					else
+					{
+						GridView1.Visible = false;
+
+						chklstCampos.Visible = false;
+						lblConfiguracion.Visible = false;
+						btnSubmit.Visible = false;
+
+						lblErrorCarrera.Text = "Debe seleccionar una carrera.";
+						ddlCarrera.Focus();
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				lblError.Text = ex.Message;
+			}
+		}
+
+		private void CargarConfiguracionResultados()
+		{
+			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+
+			int idCarrera = 0;
+			if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
+			{
+				if (crBLL.VerificarConfiguracionDeCarrera(idCarrera))
+				{
+					IList<ConfiguracionResultadosOBJ> lstCrOBJ;
+
+					lstCrOBJ = crBLL.SeleccionarConfiguracionByIdCarrera(idCarrera);
+					
+					for(int i=0; i<chklstCampos.Items.Count; i++)
+					{
+						chklstCampos.Items[i].Selected = lstCrOBJ[i].Visible;
+					}
 				}
 			}
 		}

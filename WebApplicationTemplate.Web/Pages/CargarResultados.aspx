@@ -21,28 +21,35 @@
         <asp:DropDownList CssClass="form-control" ID="ddlCarrera" AutoPostBack="true" runat="server" AppendDataBoundItems="true">
             <asp:ListItem Value="-1">-- Seleccione una Carrera --</asp:ListItem>
         </asp:DropDownList>
+        <br />
+        <asp:Label ID="lblErrorCarrera" runat="server" Text="" ForeColor="Red"></asp:Label>
     </div>
 
     <br />
 
      <div class="input-group" style="width:60%">
-        <asp:FileUpload ID="FileUpload1" CssClass="btn btn-defaul" runat="server" />
+        <asp:FileUpload ID="FileUpload1" CssClass="btn btn-defaul btn-file" runat="server" />
     </div>
 
     <br />
 
     <div class="input-group" style="width:60%">
         <asp:Button ID="btnUpload" CssClass="btn btn-default" runat="server" Text="Cargar Resultados"
-                    OnClick="btnUpload_Click" />
+                OnClick="btnUpload_Click" />
+        &nbsp &nbsp
+        <asp:Button ID="btnConsultarResultados" CssClass="btn btn-default" runat="server" Text="Consultar Resultados"
+                OnClick="btnConsultarResultados_Click"/>
     </div>
 
     <br />
 
-    <div class="input-group" style="width:60%">
-        <asp:GridView ID="GridView1" runat="server"
-                OnPageIndexChanging = "PageIndexChanging" AllowPaging = "true"
-                CssClass="table table-bordered bs-table">
-        </asp:GridView>
+    <div style="overflow-x:auto;width:100%">
+       <div class="input-group" style="width:60%" >
+            <asp:GridView ID="GridView1" runat="server"
+                    OnPageIndexChanging = "PageIndexChanging" AllowPaging = "true"
+                    CssClass="table table-bordered bs-table">
+            </asp:GridView>
+        </div>
     </div>
 
     <br />
@@ -78,7 +85,7 @@
     <br />
 
     <div class="input-group" style="width:60%">
-        <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     </div>
 
 </asp:Content>

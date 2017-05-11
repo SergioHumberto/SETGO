@@ -35,6 +35,10 @@
 			SET Visible = #Visible#
 			WHERE IdCarrera = #IdCarrera# AND NombreCampo = #NombreCampo#
 		</update>
+
+		<select id="SeleccionarConfiguracionByIdCarrera" resultClass="ConfiguracionResultadosOBJ" parameterClass="int">
+			SELECT * FROM ConfiguracionResultados WHERE IdCarrera = #value#
+		</select>
 		
 	</statements>
 

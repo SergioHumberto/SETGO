@@ -31,5 +31,10 @@ namespace WebApplicationTemplate.BLL
 		{
 			ResultadosDAL.EliminarResultadosDeCarrera(IdCarrera);
 		}
+
+		public IList<ResultadosOBJ> SeleccionarResultadosByIdCarrera(int idCarrera)
+		{
+			return ResultadosDAL.SeleccionarResultadosByIdCarrera(idCarrera);
+		}
 	}
 }

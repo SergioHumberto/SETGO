@@ -24,5 +24,10 @@ namespace WebApplicationTemplate.DAL
 		{
 			Mapper.Instance().Update("ActualizarConfiguracion", crOBJ);
 		}
+
+		public static IList<ConfiguracionResultadosOBJ> SeleccionarConfiguracionByIdCarrera(int idCarrera)
+		{
+			return Mapper.Instance().QueryForList<ConfiguracionResultadosOBJ>("SeleccionarConfiguracionByIdCarrera",idCarrera);
+		}
 	}
 }

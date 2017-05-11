@@ -73,6 +73,10 @@
 		<delete id="EliminarResultadosDeCarrera" parameterClass="int">
 			DELETE FROM Resultados WHERE IdCarrera = #value#
 		</delete>
+
+		<select id="SeleccionarResultadosByIdCarrera" resultClass="ResultadosOBJ" parameterClass="int" >
+			SELECT * FROM Resultados WHERE IdCarrera = #value#
+		</select>
 	
   </statements>
 
