@@ -25,6 +25,9 @@
       , CC
       , BCC
       , URLRegistro
+      , PayPalEmail
+      , DescripcionPoliticas
+      , FolioInicial
       )
       VALUES
       (
@@ -42,6 +45,9 @@
       , #CC#
       , #BCC#
       , #URLRegistro#
+      , #PayPalEmail#,
+      , #DescripcionPoliticas#
+      , #FolioInicial#
       )
 
       <selectKey type="post" resultClass="int" property="IdCarrera">
@@ -86,6 +92,21 @@
     <update id="UpdateActivo" parameterClass="CarreraOBJ" >
       UPDATE Carrera
       SET Activo = #Activo#
+      WHERE IdCarrera = #IdCarrera#
+    </update>
+
+    <update id="UpdateCarrera" parameterClass="CarreraOBJ" >
+      UPDATE Carrera
+      SET
+      Nombre = #Nombre#,
+      Fecha = #Fecha#,
+      ContenidoHtml = #ContenidoHtml#,
+      PayPalEmail = #PayPalEmail#,
+      DescripcionPoliticas= #DescripcionPoliticas#,
+      CC = #CC#,
+      BCC = #BCC#,
+      URLRegistro = #URLRegistro#,
+      FolioInicial = #FolioInicial#
       WHERE IdCarrera = #IdCarrera#
     </update>
 

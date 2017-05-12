@@ -35,5 +35,9 @@ namespace WebApplicationTemplate.DAL
         {
             DAL.Update("UpdateActivo", carreraOBJ);
         }
+        public static void UpdateCarrera(CarreraOBJ carreraOBJ)
+        {
+            DAL.Update("UpdateCarrera", carreraOBJ);
+        }
     }
 }

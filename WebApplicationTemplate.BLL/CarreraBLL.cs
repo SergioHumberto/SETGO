@@ -35,7 +35,10 @@ namespace WebApplicationTemplate.BLL
         {
             CarreraDAL.UpdateActivo(carreraOBJ);
         }
-
+        public void UpdateCarrera(CarreraOBJ carreraOBJ)
+        {
+            CarreraDAL.UpdateCarrera(carreraOBJ);
+        }
 
     }
 }
