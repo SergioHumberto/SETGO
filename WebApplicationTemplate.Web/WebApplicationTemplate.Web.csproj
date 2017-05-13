@@ -368,6 +368,7 @@
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\CargarResultados.aspx" />
     <Content Include="Pages\ConfiguraCarrera.aspx" />
+    <Content Include="PublicPages\GenerarCertificados.aspx" />
     <Content Include="PublicPages\PayPalRestAPI.aspx" />
     <Content Include="PublicPages\PayPal.aspx" />
     <Content Include="PublicPages\PaymentProcess.aspx" />
@@ -375,6 +376,8 @@
     <Content Include="Pages\ReporteRegistrados.aspx" />
     <Content Include="Pages\SignOut.aspx" />
     <Content Include="Pages\TestIFrame.aspx" />
+    <Content Include="Reports\Images\imgCertificado1.jpg" />
+    <Content Include="Reports\Images\imgCertificado2.jpg" />
     <Content Include="Resources\Images\Calendar.png" />
     <Content Include="Resources\Images\footer-background.gif" />
     <Content Include="Resources\Images\header-background.gif" />
@@ -426,6 +429,28 @@
     </Content>
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Properties\PublishProfiles\SETGO-SMARTASP.pubxml" />
+    <Content Include="Reports\XSD\ReporteCertificado_1DS.xsc">
+      <DependentUpon>ReporteCertificado_1DS.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\XSD\ReporteCertificado_1DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteCertificado_1DS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\XSD\ReporteCertificado_1DS.xss">
+      <DependentUpon>ReporteCertificado_1DS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\XSD\ReporteCertificado_2DS.xsc">
+      <DependentUpon>ReporteCertificado_2DS.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\XSD\ReporteCertificado_2DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReporteCertificado_2DS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\XSD\ReporteCertificado_2DS.xss">
+      <DependentUpon>ReporteCertificado_2DS.xsd</DependentUpon>
+    </Content>
     <None Include="Reports\XSD\ReporteRegistradosDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -551,6 +576,13 @@
     <Compile Include="Pages\ConfiguraCarrera.aspx.designer.cs">
       <DependentUpon>ConfiguraCarrera.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PublicPages\GenerarCertificados.aspx.cs">
+      <DependentUpon>GenerarCertificados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublicPages\GenerarCertificados.aspx.designer.cs">
+      <DependentUpon>GenerarCertificados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PublicPages\PayPalRestAPI.aspx.cs">
       <DependentUpon>PayPalRestAPI.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -606,6 +638,18 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Classes\ReporteCertificado_1.cs" />
+    <Compile Include="Reports\Classes\ReporteCertificado_2.cs" />
+    <Compile Include="Reports\XSD\ReporteCertificado_1DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteCertificado_1DS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XSD\ReporteCertificado_2DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteCertificado_2DS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\XSD\ReporteRegistradosDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -629,6 +673,7 @@
     </Compile>
     <Compile Include="Tools\DataSetHelper.cs" />
     <Compile Include="Tools\HttpTool.cs" />
+    <Compile Include="Tools\ReportControl.cs" />
     <Compile Include="Tools\Urls.cs" />
     <Compile Include="Tools\WebException.cs" />
     <Compile Include="Tools\WebServiceBase.cs">
@@ -686,6 +731,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Reports\ReporteRegistrados.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\ReporteCertificado_1.rdlc" />
+    <EmbeddedResource Include="Reports\ReporteCertificado_2.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
