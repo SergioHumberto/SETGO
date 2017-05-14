@@ -40,5 +40,8 @@ namespace WebApplicationTemplate.Objects
         public string Generic08 { get; set; }
         public string Generic09 { get; set; }
         public string Generic10 { get; set; }
-    }
+
+		public DateTime FechaRegistro { get; set; }
+		public DateTime? FechaPago { get; set; }
+	}
 }

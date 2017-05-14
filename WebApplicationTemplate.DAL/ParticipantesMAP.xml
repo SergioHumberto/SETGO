@@ -34,6 +34,8 @@
             , Generic08
             , Generic09
             , Generic10
+			, FechaRegistro
+			, FechaPago
       )
       VALUES
       (
@@ -61,6 +63,8 @@
             , #Generic08#
             , #Generic09#
             , #Generic10#
+			, #FechaRegistro#
+			, #FechaPago#
       )
 
       <selectKey type="post" resultClass="int" property="IdParticipante">
@@ -76,6 +80,7 @@
           UPDATE Participante 
           SET TransactionNumber = #TransactionNumber#
           , StatusPaypal = #StatusPaypal#
+					, FechaPago = #FechaPago#
           WHERE IdParticipante = #IdParticipante#
       </update>
 

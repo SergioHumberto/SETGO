@@ -27,5 +27,7 @@
 	[Generic07] VARCHAR(255) NULL,
 	[Generic08] VARCHAR(255) NULL,
 	[Generic09] VARCHAR(255) NULL,
-	[Generic10] VARCHAR(255) NULL
+	[Generic10] VARCHAR(255) NULL,
+	[FechaRegistro] DATETIME NOT NULL,
+	[FechaPago] DATETIME NULL
 )

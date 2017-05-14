@@ -662,6 +662,8 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipante.Generic09 = !string.IsNullOrEmpty(txtGeneric09.Text.Trim()) ? txtGeneric09.Text.Trim() : null;
             objParticipante.Generic10 = !string.IsNullOrEmpty(txtGeneric10.Text.Trim()) ? txtGeneric10.Text.Trim() : null;
 
+			objParticipante.FechaRegistro = DateTime.Now;
+
             return objParticipante;
         }
 

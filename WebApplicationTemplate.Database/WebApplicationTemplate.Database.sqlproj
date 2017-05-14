@@ -251,6 +251,7 @@
     <None Include="Scripts\Pre-Deployment\User.sql" />
     <None Include="Scripts\Pre-Deployment\Carrera.sql" />
     <Build Include="Schema Objects\Programmability\Stored Procedures\ReporteCertificado1_PA.sql" />
+    <None Include="Scripts\Pre-Deployment\Participante.2.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />

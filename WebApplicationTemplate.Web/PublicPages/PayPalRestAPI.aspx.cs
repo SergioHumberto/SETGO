@@ -125,7 +125,10 @@ namespace WebApplicationTemplate.Web.Pages
                     objParticipante.StatusPaypal = strStatus;
                     objParticipante.TransactionNumber = strToken;
 
-                    objParticipanteBLL.UpdateParticipante(objParticipante);
+					//Actualiza en la tabla de participante, la fecha de pago de paypal
+					objParticipante.FechaPago = DateTime.Now;
+
+					objParticipanteBLL.UpdateParticipante(objParticipante);
                 }
 
                 //Cadena para enviar el correo.
