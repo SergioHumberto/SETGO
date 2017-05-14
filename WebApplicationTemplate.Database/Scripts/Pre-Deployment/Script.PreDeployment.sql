@@ -16,4 +16,4 @@
 :r .\Carrera.sql
 :r .\DeleteControlsWithOutUse.sql
 :r .\Participante.1.sql
-:r \Participante.2.sql
+:r .\Participante.2.sql
