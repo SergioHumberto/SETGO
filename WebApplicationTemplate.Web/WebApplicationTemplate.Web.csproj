@@ -640,6 +640,7 @@
     </Compile>
     <Compile Include="Reports\Classes\ReporteCertificado_1.cs" />
     <Compile Include="Reports\Classes\ReporteCertificado_2.cs" />
+    <Compile Include="Reports\Classes\ReporteRegistrados.cs" />
     <Compile Include="Reports\XSD\ReporteCertificado_1DS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
