@@ -454,11 +454,17 @@ tr.TableRowAlternate
 .MessageError
 {
 	color: #ff0000;
-	//font-weight: bold;
+	/*font-weight: bold;*/
 }
 
-.MessageWarning
+.MessageWarningxx
 {
 	color: #FF6600;
 	font-weight: bold;
+}
+
+.FontSmallGrid 
+{
+    font-family:Arial;
+    font-size:8pt;
 }

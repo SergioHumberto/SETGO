@@ -31,5 +31,13 @@ namespace WebApplicationTemplate.BLL
         {
             return CategoriaDAL.SelectCategoriaByIdParticipante(IdParticipante);
         }
+        public void UpdateCategoria(CategoriaOBJ param)
+        {
+            CategoriaDAL.UpdateCategoria(param);
+        }
+        public void DeleteCategoria(CategoriaOBJ param)
+        {
+            CategoriaDAL.DeleteCategoria(param);
+        }
     }
 }

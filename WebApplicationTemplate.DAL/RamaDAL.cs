@@ -20,5 +20,18 @@ namespace WebApplicationTemplate.DAL
 		{
 			return Mapper.Instance().QueryForObject<RamaOBJ>("SelectRamaByIdParticipante", IdParticipante);
 		}
-	}
+        public static int InsertarRama(RamaOBJ param)
+        {
+            DAL.Insert("InsertarRama", param);
+            return param.IdRama;
+        }
+        public static void UpdateRama(RamaOBJ param)
+        {
+            DAL.Update("UpdateRama", param);
+        }
+        public static void DeleteRama(RamaOBJ param)
+        {
+            DAL.Delete("DeleteRama", param);
+        }
+    }
 }

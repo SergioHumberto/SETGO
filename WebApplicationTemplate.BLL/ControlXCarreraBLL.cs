@@ -27,5 +27,14 @@ namespace WebApplicationTemplate.BLL
         {
             return ControlXCarreraDAL.SelectControlXCarrera(param);
         }
+        public void UpdateControlXCarrera(ControlXCarreraOBJ controlXCarrera)
+        {
+            ControlXCarreraDAL.UpdateControlXCarrera(controlXCarrera);
+        }
+        public void DeleteControlXCarrera(ControlXCarreraOBJ controlXCarrera)
+        {
+            ControlXCarreraDAL.DeleteControlXCarrera(controlXCarrera);
+        }
+
     }
 }

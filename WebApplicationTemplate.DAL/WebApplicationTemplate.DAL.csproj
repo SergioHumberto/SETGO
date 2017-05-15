@@ -50,6 +50,7 @@
     <Compile Include="CarreraDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="ConfiguracionResultadosMAP.cs" />
+    <Compile Include="ControlDAL.cs" />
     <Compile Include="ControlXCarreraDAL.cs" />
     <Compile Include="DAL.cs" />
     <Compile Include="DataAccessException.cs" />
@@ -157,6 +158,9 @@
     <EmbeddedResource Include="ConfiguracionResultadosMAP.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ControlMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

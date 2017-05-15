@@ -16,14 +16,34 @@ namespace WebApplicationTemplate.Web
             SMTPConfigBLL SMTPConfigBLL = new SMTPConfigBLL();
             SMTPConfigOBJ SMTPConfigOBJ = SMTPConfigBLL.SelectSMTPConfig();
 
-            if ( SMTPConfigOBJ != null)
+            if (SMTPConfigOBJ != null)
             {
                 MailMessage mail = new MailMessage();
 
                 mail.From = new MailAddress(SMTPConfigOBJ.User);
                 if (correo != null && correo != string.Empty) mail.To.Add(correo);
-                if (CC != null && CC != string.Empty) mail.CC.Add(CC);
-                if(BCC != null && BCC != string.Empty) mail.Bcc.Add(BCC);
+                if (CC != null && CC != string.Empty)
+                {
+                    CC = CC.Replace(" ","");
+                    string[] ccs = CC.Split(',');
+
+                    foreach(string cc in ccs)
+                    {
+                        mail.CC.Add(cc);
+                    }                    
+                }
+                
+                if (BCC != null && BCC != string.Empty)
+                {
+                    BCC = BCC.Replace(" ", "");
+                    string[] bccs = BCC.Split(',');
+
+                    foreach (string bcc in bccs)
+                    {
+                        mail.Bcc.Add(bcc);
+                    }
+                }
+                
                 mail.Subject = @"Confirmación de Registro [#" + folio + "]";
                 mail.IsBodyHtml = true;
 
@@ -35,7 +55,7 @@ namespace WebApplicationTemplate.Web
                 SmtpServer.EnableSsl = false;
 
                 SmtpServer.Send(mail);
-            }           
+            }
         }
     }
 }

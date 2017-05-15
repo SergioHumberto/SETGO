@@ -12,7 +12,7 @@ namespace WebApplicationTemplate.DAL
     {
         public static int InsertControlXCarrera(ControlXCarreraOBJ param)
         {
-            DAL.Insert("InsertControlXCarrera", param);
+            DAL.Insert("InsertarControlXCarrera", param);
             return param.IdControlXCarrera;
         }
 
@@ -27,5 +27,14 @@ namespace WebApplicationTemplate.DAL
             IList<ControlXCarreraOBJ> lstControlXCarrera = DAL.QueryForList<ControlXCarreraOBJ>("SelectControlXCarrera", controlXCarrera);
             return lstControlXCarrera;
         }
+        public static void UpdateControlXCarrera(ControlXCarreraOBJ controlXCarrera)
+        {
+            DAL.Update("UpdateControlXCarrera", controlXCarrera);
+        }
+        public static void DeleteControlXCarrera(ControlXCarreraOBJ controlXCarrera)
+        {
+            DAL.Delete("DeleteControlXCarrera", controlXCarrera);
+        }
+        
     }
 }

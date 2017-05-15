@@ -32,5 +32,13 @@ namespace WebApplicationTemplate.DAL
             CategoriaOBJ objCategoria = Mapper.Instance().QueryForObject<CategoriaOBJ>("SelectCategoriaByIdParticipante", IdParticipante);
             return objCategoria;
         }
+        public static void UpdateCategoria(CategoriaOBJ param)
+        {
+            DAL.Update("UpdateCategoria", param);
+        }
+        public static void DeleteCategoria(CategoriaOBJ param)
+        {
+            DAL.Delete("DeleteCategoria", param);
+        }
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="CategoriaXCarreraBLL.cs" />
     <Compile Include="CategoriaXRutaBLL.cs" />
     <Compile Include="ConfiguracionResultadosBLL.cs" />
+    <Compile Include="ControlBLL.cs" />
     <Compile Include="ControlXCarreraBLL.cs" />
     <Compile Include="EquipoBLL.cs" />
     <Compile Include="ParticipantesBLL.cs" />

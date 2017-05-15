@@ -2,9 +2,10 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="aspx" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="true" EnableScriptLocalization="true"></asp:ScriptManager>
-    <div class="form-horizontal">
+    <div class="form-horizontal" style="max-width: none !important; width: 880px;">
         <div class="form-group">
             <h2 class="col-md-12">Configura Carrera</h2>
         </div>
@@ -14,6 +15,7 @@
                 Generales
             </div>
             <div class="panel-body">
+                <div class="col-md-12 alert alert-success" runat="server" id="lblSuccessGenerales" visible="false"></div>
                 <div class="form-group">
                     <label class="col-md-1 col-md-offset-10 col-xs-12" for="lblEstatus">Estatus:</label>
                     <asp:Label CssClass="col-md-1 col-xs-12" runat="server" ID="lblEstatus"></asp:Label>
@@ -82,7 +84,8 @@
                     <div class="col-md-10">
                         <asp:TextBox CssClass="form-control" runat="server" ID="txtURLRegistro"></asp:TextBox>
                         <asp:RegularExpressionValidator ID="rexURLRegistro" runat="server" SetFocusOnError="true" ErrorMessage="La URL de registro es inválida"
-                            ControlToValidate="txtURLRegistro" Display="Dynamic" CssClass="MessageError" ValidationExpression="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-:]+[a-zA-Z0-9]\.[^\s]{4,}|www\.[a-zA-Z0-9][a-zA-Z0-9-:]+[a-zA-Z0-9]\.[^\s]{4,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{4,}|www\.[a-zA-Z0-9]\.[^\s]{4,})" />
+                            ControlToValidate="txtURLRegistro" Display="Dynamic" CssClass="MessageError"
+                            ValidationExpression="^(http|https)\://[a-zA-Z0-9\-\.]+(\.[a-zA-Z]{2,3}|:[0-9]{2,})/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*$" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -103,7 +106,82 @@
                 Campos
             </div>
             <div class="panel-body">
-                <%--AGREGAR CAMPOS AQUI--%>
+                <asp:UpdatePanel runat="server" ID="updpnlCampos">
+                    <ContentTemplate>
+                        <div class="col-md-12 alert alert-danger" runat="server" id="lblErrorMessagesCampos" visible="false"></div>
+                        <asp:GridView runat="server" ID="grdCampos" AutoGenerateColumns="false" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" OnRowDataBound="grdCampos_RowDataBound" OnDataBinding="grdCampos_DataBinding" OnRowEditing="grdCampos_RowEditing" OnRowCancelingEdit="grdCampos_RowCancelingEdit" OnRowUpdating="grdCampos_RowUpdating" OnRowDeleting="grdCampos_RowDeleting">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Campo" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:HiddenField runat="server" ID="hdnIdControlXCarrera" Value='<%#Bind("IdControlXCarrera") %>' />
+                                        <asp:HiddenField runat="server" ID="hdnIdControl" Value='<%#Bind("IdControl") %>' />
+                                        <asp:Label runat="server" ID="lblControl" Text='<%#Bind("IdControlASP")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:HiddenField runat="server" ID="hdnIdControlXCarrera" Value='<%#Bind("IdControlXCarrera") %>' />
+                                        <asp:HiddenField runat="server" ID="hdnIdControl" Value='<%#Bind("IdControl") %>' />
+                                        <asp:DropDownList ID="ddlControl" runat="server" CssClass="form-control input-sm"></asp:DropDownList>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Etiqueta" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblEtiqueta" Text='<%#Bind("Etiqueta") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox runat="server" ID="txtEtiqueta" Text='<%#Bind("Etiqueta") %>' CssClass="form-control input-sm" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Req." ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkRequerido" Enabled="false" Checked='<%#Bind("Requerido") %>' />
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkRequerido" Checked='<%#Bind("Requerido") %>' />
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Error Requerido" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblErrorRequerido" Text='<%#Bind("EtiquetaRequerido") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox runat="server" ID="txtErrorRequerido" Text='<%#Bind("EtiquetaRequerido") %>' CssClass="form-control input-sm" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Validar" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkValidar" Enabled="false" Checked='<%#Bind("RegularExpression") %>' />
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkValidar" Checked='<%#Bind("RegularExpression") %>' />
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Expresion Reg." ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblExpReg" Text='<%#Bind("ValidationExpression") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox runat="server" ID="txtExpReg" Text='<%#Bind("ValidationExpression") %>' CssClass="form-control input-sm" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Error Exp.Reg." ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblErrorExpReg" Text='<%#Bind("RegularErrorMessage") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox runat="server" ID="txtErrorExpReg" Text='<%#Bind("RegularErrorMessage") %>' CssClass="form-control input-sm" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:CommandField ShowEditButton="true" ButtonType="Image" EditImageUrl="~/Resources/Images/icon-edit.png" CancelImageUrl="~/Resources/Images/icon-cancel.png" UpdateImageUrl="~/Resources/Images/icon-apply.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                                <asp:CommandField ShowDeleteButton="true" ButtonType="Image" DeleteImageUrl="~/Resources/Images/icon-delete.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                            </Columns>
+                        </asp:GridView>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <asp:Button runat="server" ID="btnAddNewRow" CssClass="btn btn-default" Text="Agregar nuevo" OnClick="btnAddNewRow_Click" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
         <div class="panel panel-default">
@@ -111,7 +189,43 @@
                 Ramas
             </div>
             <div class="panel-body">
-                <%--AGREGAR Ramas AQUI--%>
+                <asp:UpdatePanel runat="server" ID="updRamas">
+                    <ContentTemplate>
+                        <div class="col-md-12 alert alert-danger" runat="server" id="lblErrorRamas" visible="false"></div>
+                        <div class="text-right">
+                            <asp:LinkButton CssClass="" runat="server" ID="lnkShowInactiveRamas" OnClick="lnkShowInactiveRamas_Click"></asp:LinkButton>
+                        </div>
+                        <asp:GridView runat="server" ID="grdRamas" AutoGenerateColumns="false" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" OnRowEditing="grdRamas_RowEditing" OnRowCancelingEdit="grdRamas_RowCancelingEdit" OnRowUpdating="grdRamas_RowUpdating" OnRowDeleting="grdRamas_RowDeleting">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Nombre" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:HiddenField runat="server" ID="hdnIdRama" Value='<%#Bind("IdRama") %>' />
+                                        <asp:Label runat="server" ID="lblNombre" Text='<%#Bind("Nombre")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:HiddenField runat="server" ID="hdnIdRama" Value='<%#Bind("IdRama") %>' />
+                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control input-sm" Text='<%#Bind("Nombre")%>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Activo" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Enabled="false" Checked='<%#Bind("Activo") %>' />
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Checked='<%#Bind("Activo") %>' />
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:CommandField ShowEditButton="true" ButtonType="Image" EditImageUrl="~/Resources/Images/icon-edit.png" CancelImageUrl="~/Resources/Images/icon-cancel.png" UpdateImageUrl="~/Resources/Images/icon-apply.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                                <asp:CommandField ShowDeleteButton="true" ButtonType="Image" DeleteImageUrl="~/Resources/Images/icon-delete.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                            </Columns>
+                        </asp:GridView>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <asp:Button runat="server" ID="btnAgregarRama" CssClass="btn btn-default" Text="Agregar nueva Rama" OnClick="btnAgregarRama_Click" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
         <div class="panel panel-default">
@@ -119,7 +233,59 @@
                 Categorías
             </div>
             <div class="panel-body">
-                <%--AGREGAR Categorías AQUI--%>
+                <div class="panel-body">
+                    <asp:UpdatePanel runat="server" ID="updCategoria">
+                        <ContentTemplate>
+                            <div class="col-md-12 alert alert-danger" runat="server" id="lblErrorCategoria" visible="false"></div>
+                            <div class="text-right">
+                                <asp:LinkButton CssClass="" runat="server" ID="lnkShowInactiveCategoria" OnClick="lnkShowInactiveCategoria_Click"></asp:LinkButton>
+                            </div>
+                            <asp:GridView runat="server" ID="grdCategorias" AutoGenerateColumns="false" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" OnRowEditing="grdCategorias_RowEditing" OnRowCancelingEdit="grdCategorias_RowCancelingEdit" OnRowUpdating="grdCategorias_RowUpdating" OnRowDeleting="grdCategorias_RowDeleting">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Nombre" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                        <ItemTemplate>
+                                            <asp:HiddenField runat="server" ID="hdnIdCategoria" Value='<%#Bind("IdCategoria") %>' />
+                                            <asp:Label runat="server" ID="lblNombre" Text='<%#Bind("Nombre")%>'></asp:Label>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:HiddenField runat="server" ID="hdnIdCategoria" Value='<%#Bind("IdCategoria") %>' />
+                                            <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control input-sm" Text='<%#Bind("Nombre")%>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Precio" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                        <ItemTemplate>
+                                            <div class="input-group">
+                                                <span>$&nbsp;</span>
+                                                <asp:Label ID="lblPrecio" runat="server" Text='<%#Bind("Precio") %>'></asp:Label>
+                                            </div>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <asp:TextBox ID="txtPrecio" runat="server" Text='<%#Bind("Precio") %>' class="form-control"></asp:TextBox>
+                                            </div>
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Activo" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                        <ItemTemplate>
+                                            <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Enabled="false" Checked='<%#Bind("Activo") %>' />
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Checked='<%#Bind("Activo") %>' />
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:CommandField ShowEditButton="true" ButtonType="Image" EditImageUrl="~/Resources/Images/icon-edit.png" CancelImageUrl="~/Resources/Images/icon-cancel.png" UpdateImageUrl="~/Resources/Images/icon-apply.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                                    <asp:CommandField ShowDeleteButton="true" ButtonType="Image" DeleteImageUrl="~/Resources/Images/icon-delete.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                                </Columns>
+                            </asp:GridView>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <asp:Button runat="server" ID="btnAgregarCategoria" CssClass="btn btn-default" Text="Agregar nueva Categoria" OnClick="btnAgregarCategoria_Click" />
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
             </div>
         </div>
         <div class="panel panel-default">

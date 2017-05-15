@@ -21,5 +21,17 @@ namespace WebApplicationTemplate.BLL
 		{
 			return RamaDAL.SelectRamaByIdParticipante(idParticipante);
 		}
-	}
+        public int InsertarRama(RamaOBJ param)
+        {
+            return RamaDAL.InsertarRama(param);
+        }
+        public void UpdateRama(RamaOBJ param)
+        {
+            RamaDAL.UpdateRama(param);
+        }
+        public void DeleteRama(RamaOBJ param)
+        {
+            RamaDAL.DeleteRama(param);
+        }
+    }
 }

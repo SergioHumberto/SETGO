@@ -5,20 +5,7 @@
     <typeAlias alias="CategoriaOBJ" type="WebApplicationTemplate.Objects.CategoriaOBJ" />
   </alias>
 
-  <statements>
-
-    <insert id="InsertarCategoria" parameterClass="CategoriaOBJ">
-
-      INSERT INTO Categoria
-      ()
-      VALUES
-      ()
-
-      <selectKey type="post" resultClass="int" property="IdCategoria">
-        SELECT @@IDENTITY
-      </selectKey>
-
-    </insert>
+  <statements>    
 
     <select id="SelectCategoria" parameterClass="CategoriaOBJ" resultClass="CategoriaOBJ">
       <![CDATA[
@@ -48,6 +35,44 @@
       INNER JOIN Categoria C ON PXC.IdCategoria = C.IdCategoria
       WHERE PXC.IdParticipante = #value#
     </select>
+
+    <insert id="InsertarCategoria" parameterClass="CategoriaOBJ">
+
+      INSERT INTO Categoria
+      (
+      IdCarrera
+      , Nombre
+      , Precio
+      , Activo
+      )
+      VALUES
+      (
+      #IdCarrera#
+      , #Nombre#
+      , #Precio#
+      , #Activo#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdCategoria">
+        SELECT @@IDENTITY
+      </selectKey>
+
+    </insert>
+
+    <update id="UpdateCategoria" parameterClass="CategoriaOBJ" >
+      UPDATE Categoria
+      SET
+      IdCarrera = #IdCarrera#
+      , Nombre = #Nombre#
+      , Precio = #Precio#
+      , Activo = #Activo#
+      WHERE IdCategoria = #IdCategoria#
+    </update>
+
+    <delete id="DeleteCategoria" parameterClass="CategoriaOBJ">
+      DELETE FROM Categoria
+      WHERE IdCategoria = #IdCategoria#
+    </delete>
 
   </statements>
 

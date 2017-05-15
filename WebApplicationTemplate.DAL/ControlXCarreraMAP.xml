@@ -1,38 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
 
-    <alias>
-        <typeAlias alias="ControlXCarreraOBJ" type="WebApplicationTemplate.Objects.ControlXCarreraOBJ" />
-    </alias>
+  <alias>
+    <typeAlias alias="ControlXCarreraOBJ" type="WebApplicationTemplate.Objects.ControlXCarreraOBJ" />
+  </alias>
 
-    <statements>
+  <statements>
 
-        <insert id="InsertarControlXCarrera" parameterClass="ControlXCarreraOBJ">
+    <insert id="InsertarControlXCarrera" parameterClass="ControlXCarreraOBJ">
 
-            INSERT INTO ControlXCarrera
-            (
-            IdControl
-            , IdCarrera
-            , Etiqueta
-            , Requerido
-            )
-            VALUES
-            (
-            #IdControl#
-            , #IdCarrera#
-            , #Etiqueta#
-            , #Requerido#
-            )
+      INSERT INTO ControlXCarrera
+      (
+      IdControl
+      , IdCarrera
+      , Etiqueta
+      , Requerido
+      , EtiquetaRequerido
+      , RegularExpression
+      , RegularErrorMessage
+      , ValidationExpression
+      )
+      VALUES
+      (
+      #IdControl#
+      , #IdCarrera#
+      , #Etiqueta#
+      , #Requerido#
+      , #EtiquetaRequerido#
+      , #RegularExpression#
+      , #RegularErrorMessage#
+      , #ValidationExpression#
+      )
 
-            <selectKey type="post" resultClass="int" property="IdControlXCarrera">
-                SELECT @@IDENTITY
-            </selectKey>
+      <selectKey type="post" resultClass="int" property="IdControlXCarrera">
+        SELECT @@IDENTITY
+      </selectKey>
 
-        </insert>
+    </insert>
 
-        <select id="SelectControlXCarrera" resultClass="ControlXCarreraOBJ" parameterClass="ControlXCarreraOBJ" >
+    <update id="UpdateControlXCarrera" parameterClass="ControlXCarreraOBJ" >
+      UPDATE ControlXCarrera
+      SET
+      IdControl = #IdControl#
+      , IdCarrera = #IdCarrera#
+      , Etiqueta = #Etiqueta#
+      , Requerido = #Requerido#
+      , EtiquetaRequerido = #EtiquetaRequerido#
+      , RegularExpression = #RegularExpression#
+      , RegularErrorMessage = #RegularErrorMessage#
+      , ValidationExpression = #ValidationExpression#
+      WHERE IdControlXCarrera = #IdControlXCarrera#
+    </update>
 
-            <![CDATA[
+    <select id="SelectControlXCarrera" resultClass="ControlXCarreraOBJ" parameterClass="ControlXCarreraOBJ" >
+
+      <![CDATA[
       
               SELECT 
               CxC.* 
@@ -45,14 +67,17 @@
       
               ]]>
 
-        </select>
+    </select>
 
-        <select id="SelectControlXCarreraObject" parameterClass="int" resultClass="ControlXCarreraOBJ" >
+    <select id="SelectControlXCarreraObject" parameterClass="int" resultClass="ControlXCarreraOBJ" >
+      SELECT CxC.* FROM ControlXCarrera CxC WHERE CxC.IdControlXCarrera = #value#
+    </select>
 
-            SELECT CxC.* FROM ControlXCarrera CxC WHERE CxC.IdControlXCarrera = #value#
+    <delete id="DeleteControlXCarrera" parameterClass="ControlXCarreraOBJ">
+      DELETE FROM ControlXCarrera
+      WHERE IdControlXCarrera = #IdControlXCarrera#
+    </delete>
 
-        </select>
-
-    </statements>
+  </statements>
 
 </sqlMap>

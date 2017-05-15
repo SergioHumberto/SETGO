@@ -25,7 +25,41 @@
 		  INNER JOIN Rama R ON PXC.IdRama = R.IdRama
 		  WHERE PXC.IdParticipante = #value#
 	  </select>
-	  
+
+    <insert id="InsertarRama" parameterClass="RamaOBJ">
+
+      INSERT INTO Rama
+      (
+      IdCarrera
+      , Nombre
+      , Activo
+      )
+      VALUES
+      (
+      #IdCarrera#
+      , #Nombre#
+      , #Activo#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdRama">
+        SELECT @@IDENTITY
+      </selectKey>
+    </insert>
+
+    <update id="UpdateRama" parameterClass="RamaOBJ" >
+      UPDATE Rama
+      SET
+      IdCarrera = #IdCarrera#
+      , Nombre = #Nombre#
+      , Activo = #Activo#
+      WHERE IdRama = #IdRama#
+    </update>
+
+    <delete id="DeleteRama" parameterClass="RamaOBJ">
+      DELETE FROM Rama
+      WHERE IdRama = #IdRama#
+    </delete>
+
   </statements>
 
 </sqlMap>
