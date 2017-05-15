@@ -43,5 +43,7 @@ namespace WebApplicationTemplate.Objects
 
 		public DateTime FechaRegistro { get; set; }
 		public DateTime? FechaPago { get; set; }
+
+		public string FolioOffline { get; set; }
 	}
 }

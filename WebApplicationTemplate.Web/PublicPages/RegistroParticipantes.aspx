@@ -273,6 +273,20 @@
     </div>
     </asp:PlaceHolder>
 
+    <asp:PlaceHolder ID="phFolioOffline" Visible="false" runat="server">
+    <div style="width:60%" class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label id="lblFolioOffline" runat="server">Folio</label>
+                <asp:TextBox ID="txtFolioOffline" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="reqFolioOffline" ControlToValidate="txtFolioOffline" SetFocusOnError="true" 
+                    CssClass="AlertaRequerido" ErrorMessage="Se requiere folio" runat="server" Display="Dynamic" ></asp:RequiredFieldValidator>
+            </div>
+        </div>
+    </div>
+    </asp:PlaceHolder>
+
     </asp:PlaceHolder>
 
     <asp:PlaceHolder ID="phGeneric01" Visible="false" runat="server">

@@ -29,5 +29,6 @@
 	[Generic09] VARCHAR(255) NULL,
 	[Generic10] VARCHAR(255) NULL,
 	[FechaRegistro] DATETIME NOT NULL,
-	[FechaPago] DATETIME NULL
+	[FechaPago] DATETIME NULL,
+	[FolioOffline] VARCHAR(255) NULL
 )

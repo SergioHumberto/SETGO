@@ -98,7 +98,7 @@ namespace WebApplicationTemplate.Web.Pages
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+			{
             if (!IsPostBack)
             {
                 EliminaVariablesDeSession();
@@ -112,7 +112,9 @@ namespace WebApplicationTemplate.Web.Pages
                     cusError.IsValid = false;
                     btnEnviar.Visible = false;
                 }
-            }
+
+				PagoOffline();
+			}
         }
 
         public static Control[] FlattenHierachy(Control root)
@@ -701,6 +703,11 @@ namespace WebApplicationTemplate.Web.Pages
 
 			objParticipante.FechaRegistro = DateTime.Now;
 
+			if (string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
+			{
+				objParticipante.FolioOffline = txtFolioOffline.Text;
+			}
+
             return objParticipante;
         }
 
@@ -1029,6 +1036,13 @@ namespace WebApplicationTemplate.Web.Pages
 
             ddlAnio.Items.AddRange(lstItemsAnios.ToArray());
         }
+		/// <summary>
+		/// Revisa el modo de pago (Paypal o Offline), y oculta o muestra el txtFolioOffline.
+		/// </summary>
+		private void PagoOffline()
+		{
+			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+			CarreraOBJ carreraOBJ = new CarreraOBJ();
 
         protected void rptClasificacion_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -1063,5 +1077,20 @@ namespace WebApplicationTemplate.Web.Pages
                 }
             }
         }
+			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+
+			if(carreraOBJ != null)
+			{
+				if (!string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
+				{
+					phFolioOffline.Visible = false;
+				}
+				else
+				{
+					phFolioOffline.Visible = true;
+				}
+			}
+		}
+
     }
 }

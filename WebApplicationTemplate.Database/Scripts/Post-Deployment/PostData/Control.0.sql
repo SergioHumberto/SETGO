@@ -61,6 +61,7 @@ USING (
 	 , ('phGeneric09')
 	 , ('phGeneric10')
 	,('phFechaNacimiento')
+	,('phFolioOffline')
 	) AS S (NameControl)  
 ON T.IdControlASP = S.NameControl 
 
