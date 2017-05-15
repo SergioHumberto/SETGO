@@ -22,13 +22,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// Control lblError.
+        /// Control updGenerales.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblError;
+        protected global::System.Web.UI.UpdatePanel updGenerales;
         
         /// <summary>
         /// Control lblSuccessGenerales.
@@ -40,6 +40,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSuccessGenerales;
         
         /// <summary>
+        /// Control lblError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblError;
+        
+        /// <summary>
         /// Control lblEstatus.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,24 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEstatus;
+        
+        /// <summary>
+        /// Control txtURL.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtURL;
+        
+        /// <summary>
+        /// Control lnkVistaPrevia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkVistaPrevia;
         
         /// <summary>
         /// Control txtNombreCarrera.

@@ -22,12 +22,21 @@ namespace WebApplicationTemplate.Web.Pages
                 {
                     int idCarrera = -1;
                     if (Request.QueryString["IdCarrera"] != null)
+                    {
                         int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                        txtURL.Text = Urls.RegistroParticipantes() + "?IdCarrera=" + idCarrera;
+                        lnkVistaPrevia.NavigateUrl = txtURL.Text;
 
-                    BindDataToGenerales(idCarrera);
-                    BindDataToCampos(getDataControlXCarrera(idCarrera));
-                    BindDataToRamas(getDataRamas(idCarrera));
-                    BindDataToCategorias(getDataCategorias(idCarrera));
+                        BindDataToGenerales(idCarrera);
+                        BindDataToCampos(getDataControlXCarrera(idCarrera));
+                        BindDataToRamas(getDataRamas(idCarrera));
+                        BindDataToCategorias(getDataCategorias(idCarrera));
+                    }
+                    else
+                    {
+                        txtURL.Text = "No disponible";
+                        lnkVistaPrevia.NavigateUrl = "#";
+                    }
 
                     lnkShowInactiveRamas.Text = getTextlnkShowInactiveRama();
                     lnkShowInactiveCategoria.Text = getTextlnkShowInactiveCategoria();
@@ -102,9 +111,9 @@ namespace WebApplicationTemplate.Web.Pages
                 int idCarrera = -1;
                 if (Request.QueryString["IdCarrera"] != null)
                 {
-
                     int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
                 }
+
                 // Crea y llena objeto Carrera
                 CarreraOBJ carreraObj = new CarreraOBJ();
 
@@ -134,8 +143,17 @@ namespace WebApplicationTemplate.Web.Pages
                     // Inicializa BLL y Guarda
                     UserSession session = HttpSecurity.CurrentSession;
                     CarreraBLL carreraBLL = new CarreraBLL(session);
-
-                    carreraBLL.UpdateCarrera(carreraObj);
+                    if (carreraObj.IdCarrera == -1)
+                    {
+                        carreraObj.SiguienteFolio = carreraObj.FolioInicial;
+                        carreraObj.Activo = true;
+                        int id = carreraBLL.InsertarCarrera(carreraObj);
+                        Response.Redirect(Urls.ConfiguraCarrera() + "?IdCarrera=" + id.ToString());
+                    }
+                    else
+                    {
+                        carreraBLL.UpdateCarrera(carreraObj);
+                    }
                 }
                 lblSuccessGenerales.InnerText = "Se ha guardado satisfactoriamente";
                 lblSuccessGenerales.Visible = true;
@@ -423,8 +441,16 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                ViewState.Add("NuevoCampo", true);
-                grdCampos.SetEditRow(grdCampos.Rows.Count);
+                if (Request.QueryString["IdCarrera"] != null)
+                {
+                    ViewState.Add("NuevoCampo", true);
+                    grdCampos.SetEditRow(grdCampos.Rows.Count);
+                }
+                else
+                {
+                    lblErrorMessagesCampos.InnerText = "Primero debes capturar y guardar los datos generales de la carrera";
+                    lblErrorMessagesCampos.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -447,7 +473,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             grdRamas.DataSource = listRamas;
             grdRamas.DataBind();
-        }                
+        }
 
         protected void grdRamas_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -502,7 +528,7 @@ namespace WebApplicationTemplate.Web.Pages
                 errores += (errores == string.Empty) ? "" : ", ";
                 errores += "El Nombre no debe estar vacio";
             }
-            
+
             /*
             * Si existen mensajes de error los hace visibles
             */
@@ -538,7 +564,7 @@ namespace WebApplicationTemplate.Web.Pages
                 rama.IdCarrera = idCarrera;
                 rama.IdRama = idRama;
                 rama.Nombre = nombre;
-                rama.Activo = activo;          
+                rama.Activo = activo;
 
 
                 if (!validaRama(rama)) return;
@@ -600,8 +626,16 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                ViewState.Add("NuevaRama", true);
-                grdRamas.SetEditRow(grdRamas.Rows.Count);
+                if (Request.QueryString["IdCarrera"] != null)
+                {
+                    ViewState.Add("NuevaRama", true);
+                    grdRamas.SetEditRow(grdRamas.Rows.Count);
+                }
+                else
+                {
+                    lblErrorRamas.InnerText = "Primero debes capturar y guardar los datos generales de la carrera";
+                    lblErrorRamas.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -634,7 +668,7 @@ namespace WebApplicationTemplate.Web.Pages
             BindDataToRamas(getDataRamas(idCarrera));
         }
         #endregion
-        #region Categorias        
+        #region Categorias           
         protected string getTextlnkShowInactiveCategoria()
         {
             return (ViewState["ShowInactiveCategorias"] != null && (bool)ViewState["ShowInactiveCategorias"]) ? "Mostrar Activos" : "Mostrar Inactivos";
@@ -833,8 +867,16 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                ViewState.Add("NuevaCategoria", true);
-                grdCategorias.SetEditRow(grdCategorias.Rows.Count);
+                if (Request.QueryString["IdCarrera"] != null)
+                {
+                    ViewState.Add("NuevaCategoria", true);
+                    grdCategorias.SetEditRow(grdCategorias.Rows.Count);
+                }
+                else
+                {
+                    lblErrorCategoria.InnerText = "Primero debes capturar y guardar los datos generales de la carrera";
+                    lblErrorCategoria.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -842,6 +884,6 @@ namespace WebApplicationTemplate.Web.Pages
                 lblErrorCategoria.Visible = true;
             }
         }
-        #endregion
+        #endregion        
     }
 }

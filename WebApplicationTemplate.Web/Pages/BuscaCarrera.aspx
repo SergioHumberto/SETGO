@@ -63,6 +63,9 @@
                     </Columns>
                 </asp:GridView>
             </div>
+            <div class="col-md-offset-5">
+                <asp:Button runat="server" ID="btnNuevaCarrera" CssClass="btn btn-default" Text="Nueva Carrera" OnClick="btnNuevaCarrera_Click" />
+            </div>
         </div>
     </div>
 </asp:Content>

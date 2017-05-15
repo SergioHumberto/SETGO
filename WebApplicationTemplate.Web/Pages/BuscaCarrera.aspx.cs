@@ -159,5 +159,10 @@ namespace WebApplicationTemplate.Web.Pages
             ViewState.Remove("ShowInactive");
             BindDataToCarrerasGridView(getDataCarreras());
         }
+
+        protected void btnNuevaCarrera_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Urls.ConfiguraCarrera());
+        }
     }
 }

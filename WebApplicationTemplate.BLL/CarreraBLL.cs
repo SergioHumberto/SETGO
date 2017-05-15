@@ -12,9 +12,9 @@ namespace WebApplicationTemplate.BLL
     {
         public CarreraBLL(UserSession session) : base(session) { /* do nothing */ }
 
-        public void InsertarCarrera(CarreraOBJ carreraOBJ)
+        public int InsertarCarrera(CarreraOBJ carreraOBJ)
         {
-			CarreraDAL.InsertarCarrera(carreraOBJ);
+			return CarreraDAL.InsertarCarrera(carreraOBJ);
         }
 
         public IList<CarreraOBJ> SelectCarrera(CarreraOBJ p_CarreraOBJ)

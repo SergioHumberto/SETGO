@@ -13,13 +13,6 @@
       (
       Nombre
       , Fecha
-      , Hora
-      , Precio
-      , CategoriaEvento
-      , PaginaWeb
-      , PalabrasClave
-      , URLMapa
-      , Ubicacion
       , ContenidoHtml
       , Activo
       , CC
@@ -28,26 +21,21 @@
       , PayPalEmail
       , DescripcionPoliticas
       , FolioInicial
+      , SiguienteFolio
       )
       VALUES
       (
       #Nombre#
       , #Fecha#
-      , #Hora#
-      , #Precio#
-      , #CategoriaEvento#
-      , #PaginaWeb#
-      , #PalabrasClave#
-      , #URLMapa#
-      , #Ubicacion#
       , #ContenidoHtml#
       , #Activo#
       , #CC#
       , #BCC#
       , #URLRegistro#
-      , #PayPalEmail#,
+      , #PayPalEmail#
       , #DescripcionPoliticas#
       , #FolioInicial#
+      , #SiguienteFolio#
       )
 
       <selectKey type="post" resultClass="int" property="IdCarrera">

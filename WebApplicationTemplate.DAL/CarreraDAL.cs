@@ -10,9 +10,10 @@ namespace WebApplicationTemplate.DAL
 {
     public static class CarreraDAL
     {
-        public static void InsertarCarrera(CarreraOBJ carreraOBJ)
+        public static int InsertarCarrera(CarreraOBJ carreraOBJ)
         {
             Mapper.Instance().Insert("InsertarCarrera", carreraOBJ);
+            return carreraOBJ.IdCarrera;
         }
 
         public static IList<CarreraOBJ> SelectCarrera(CarreraOBJ p_CarreraOBJ)
