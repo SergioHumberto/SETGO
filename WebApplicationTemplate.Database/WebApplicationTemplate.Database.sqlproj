@@ -244,6 +244,9 @@
     <Build Include="Schema Objects\Tables\SMTPConfig.sql" />
     <None Include="Scripts\Pre-Deployment\DeleteControlsWithOutUse.sql" />
     <Build Include="Schema Objects\Tables\ConfiguracionResultados.sql" />
+    <Build Include="Schema Objects\Tables\Clasificacion.sql" />
+    <Build Include="Schema Objects\Tables\ValoresClasificacion.sql" />
+    <Build Include="Schema Objects\Tables\ClasificacionXParticipante.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

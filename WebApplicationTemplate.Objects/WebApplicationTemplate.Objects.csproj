@@ -41,10 +41,13 @@
   <ItemGroup>
     <Compile Include="CarreraOBJ.cs" />
     <Compile Include="CategoriaOBJ.cs" />
+    <Compile Include="ClasificacionOBJ.cs" />
+    <Compile Include="ClasificacionXParticipanteOBJ.cs" />
     <Compile Include="ConfiguracionResultadosOBJ.cs" />
     <Compile Include="ControlOBJ.cs" />
     <Compile Include="ControlXCarreraOBJ.cs" />
     <Compile Include="EquipoOBJ.cs" />
+    <Compile Include="EtiquetaOBJ.cs" />
     <Compile Include="PaypalConfigOBJ.cs" />
     <Compile Include="SessionPayPal.cs" />
     <Compile Include="ParticipantesOBJ.cs" />
@@ -71,6 +74,7 @@
     <Compile Include="Security\ProfileUser.cs" />
     <Compile Include="SMTPConfigOBJ.cs" />
     <Compile Include="TipoEquipoOBJ.cs" />
+    <Compile Include="ValorClasificacionOBJ.cs" />
     <Compile Include="WebService\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>

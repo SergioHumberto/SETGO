@@ -459,6 +459,23 @@
     </asp:UpdatePanel>
     </asp:PlaceHolder>
     
+    <asp:PlaceHolder ID="phClasificacion" runat="server">
+        
+    <asp:Repeater ID="rptClasificacion"  OnItemDataBound="rptClasificacion_ItemDataBound" runat="server">
+        <ItemTemplate>
+            <div style="width:60%" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label id="lblNombreClasificacion" runat="server"/>
+                        <asp:RadioButtonList ID="rblClasificacionItem" CssClass="LetraEtiqueta" runat="server" />
+                    </div>
+                </div>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+        
+    </asp:PlaceHolder>
+
     <br />
 
     <asp:PlaceHolder ID="phPoliticas" runat="server">

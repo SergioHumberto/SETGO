@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="CarreraDAL.cs" />
     <Compile Include="CategoriaDAL.cs" />
+    <Compile Include="ClasificacionDAL.cs" />
+    <Compile Include="ClasificacionXParticipanteDAL.cs" />
     <Compile Include="ConfiguracionResultadosMAP.cs" />
     <Compile Include="ControlDAL.cs" />
     <Compile Include="ControlXCarreraDAL.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Security\UserDAL.cs" />
     <Compile Include="SMTPConfigDAL.cs" />
     <Compile Include="TipoEquipoDAL.cs" />
+    <Compile Include="ValorClasificacionDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApplicationTemplate.Objects\WebApplicationTemplate.Objects.csproj">
@@ -161,6 +164,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ControlMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClasificacionMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ValorClasificacionMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClasificacionXParticipanteMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

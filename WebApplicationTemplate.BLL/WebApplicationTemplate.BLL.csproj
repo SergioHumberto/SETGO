@@ -46,6 +46,8 @@
     <Compile Include="CategoriaBLL.cs" />
     <Compile Include="CategoriaXCarreraBLL.cs" />
     <Compile Include="CategoriaXRutaBLL.cs" />
+    <Compile Include="ClasificacionBLL.cs" />
+    <Compile Include="ClasificacionXParticipanteBLL.cs" />
     <Compile Include="ConfiguracionResultadosBLL.cs" />
     <Compile Include="ControlBLL.cs" />
     <Compile Include="ControlXCarreraBLL.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Security\ProfileBLL.cs" />
     <Compile Include="Security\UserBLL.cs" />
     <Compile Include="Validations.cs" />
+    <Compile Include="ValorClasificacionBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApplicationTemplate.DAL\WebApplicationTemplate.DAL.csproj">

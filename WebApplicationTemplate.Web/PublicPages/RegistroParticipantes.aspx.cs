@@ -245,8 +245,20 @@ namespace WebApplicationTemplate.Web.Pages
 
                 LoadValoresFechas();
 
+                LoadClasificaciones();
+
                 lblPoliticas.Text = objCarrera.DescripcionPoliticas;
             }
+        }
+
+        private void LoadClasificaciones()
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+            ClasificacionBLL objClasificacionBLL = new ClasificacionBLL(session);
+            IList<ClasificacionOBJ> lstClasificaciones = objClasificacionBLL.SelectClasificacion(new ClasificacionOBJ() { });
+
+            rptClasificacion.DataSource = lstClasificaciones;
+            rptClasificacion.DataBind();
         }
 
         private void LoadTipoEquipoDdl()
@@ -520,9 +532,11 @@ namespace WebApplicationTemplate.Web.Pages
                 ParticipantesOBJ objParticipante = FillParticipanteOBJ();
                 ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
 
-                objParticipanteBLL.InsertParticipante(objParticipante);
+                int IdParticipante = objParticipanteBLL.InsertParticipante(objParticipante);
 
-                InsertaParticipanteXCarrera(objParticipante.IdParticipante, IdCarreraProperty);
+                InsertaParticipanteXCarrera(IdParticipante, IdCarreraProperty);
+                InsertarClasificacionXParticipante(IdParticipante);
+
                 DAL.DAL.CommitTransaction();
 
                 IdParticipanteVSProperty = objParticipante.IdParticipante;
@@ -531,6 +545,29 @@ namespace WebApplicationTemplate.Web.Pages
             {                
                 DAL.DAL.RollbackTransaction();
                 throw new Exception("Hubo un error al guardar participante, detalle del error: " + ex.Message);
+            }
+        }
+
+        private void InsertarClasificacionXParticipante(int IdParticipante)
+        {
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            ClasificacionXParticipanteBLL objClasificacionXParticipanteBLL = new ClasificacionXParticipanteBLL(session);
+
+            foreach (RepeaterItem item in rptClasificacion.Controls)
+            {
+                RadioButtonList rblClasificacionItem = item.FindControl("rblClasificacionItem") as RadioButtonList;
+                if (rblClasificacionItem != null)
+                {
+                    int IdValorClasificacion;
+                    if (int.TryParse(rblClasificacionItem.SelectedValue, out IdValorClasificacion))
+                    {
+                        ClasificacionXParticipanteOBJ objClasificacionXParticipante = new ClasificacionXParticipanteOBJ();
+                        objClasificacionXParticipante.IdParticipante = IdParticipante;
+                        objClasificacionXParticipante.IdValorClasificacion = IdValorClasificacion;
+
+                        objClasificacionXParticipanteBLL.InsertClasificacionXParticipante(objClasificacionXParticipante);
+                    }
+                }
             }
         }
 
@@ -993,5 +1030,38 @@ namespace WebApplicationTemplate.Web.Pages
             ddlAnio.Items.AddRange(lstItemsAnios.ToArray());
         }
 
+        protected void rptClasificacion_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                ClasificacionOBJ objClasificacion = e.Item.DataItem as ClasificacionOBJ;
+
+                if (objClasificacion != null)
+                {
+                    HtmlGenericControl lblNombreClasificacion = e.Item.FindControl("lblNombreClasificacion") as HtmlGenericControl;
+                    if (lblNombreClasificacion != null)
+                    {
+                        lblNombreClasificacion.InnerText = objClasificacion.Nombre;
+                    }
+
+                    RadioButtonList rblClasificacionItem = e.Item.FindControl("rblClasificacionItem") as RadioButtonList;
+                    if (rblClasificacionItem != null)
+                    {
+                        UserSession session = Tools.HttpSecurity.CurrentSession;
+                        ValorClasificacionBLL objClasificacionBLL = new ValorClasificacionBLL(session);
+                        IList<ValorClasificacionOBJ> lstValorClasificacion = objClasificacionBLL.SelectValorClasificacion(new ValorClasificacionOBJ() { IdClasificacion = objClasificacion.IdClasificacion });
+                        rblClasificacionItem.DataSource = lstValorClasificacion;
+                        rblClasificacionItem.DataTextField = "Etiqueta";
+                        rblClasificacionItem.DataValueField = "IdValorClasificacion";
+                        if (lstValorClasificacion.Count > 0) // Para seleccionar el primer elemento
+                        {
+                            rblClasificacionItem.SelectedIndex = 0;
+                        }
+
+                        rblClasificacionItem.DataBind();
+                    }
+                }
+            }
+        }
     }
 }

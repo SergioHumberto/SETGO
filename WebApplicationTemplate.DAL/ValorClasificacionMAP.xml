@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+    <alias>
+        <typeAlias alias="ValorClasificacionOBJ" type="WebApplicationTemplate.Objects.ValorClasificacionOBJ" />
+    </alias>
+
+    <statements>
+        <select id="SelectValorClasificacion" parameterClass="ValorClasificacionOBJ" resultClass="ValorClasificacionOBJ">
+            <![CDATA[
+            
+            SELECT 
+            VC.* 
+            FROM ValorClasificacion VC
+            WHERE (#IdClasificacion# <= 0 OR VC.IdClasificacion = #IdClasificacion#)
+            AND (#IdValorClasificacion# <= 0 OR VC.IdValorClasificacion = #IdValorClasificacion#)
+            
+            ]]>
+        </select>
+    </statements>
+</sqlMap>

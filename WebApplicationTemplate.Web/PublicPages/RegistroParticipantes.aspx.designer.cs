@@ -1129,6 +1129,24 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCategoria;
         
         /// <summary>
+        /// Control phClasificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phClasificacion;
+        
+        /// <summary>
+        /// Control rptClasificacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptClasificacion;
+        
+        /// <summary>
         /// Control phPoliticas.
         /// </summary>
         /// <remarks>

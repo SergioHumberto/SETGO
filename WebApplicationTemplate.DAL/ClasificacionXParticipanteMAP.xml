@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
+
+    <alias>
+        <typeAlias alias="ClasificacionXParticipanteOBJ" type="WebApplicationTemplate.Objects.ClasificacionXParticipanteOBJ" />
+    </alias>
+
+    <statements>
+        <select id="SelectClasificacionXParticipante" parameterClass="ClasificacionXParticipanteOBJ" resultClass="ClasificacionXParticipanteOBJ">
+            <![CDATA[
+            
+            SELECT 
+            CxP.* 
+            FROM ClasificacionXParticipante CxP
+            WHERE (#IdValorClasificacion# OR CxP.IdValorClasificacion = #IdValorClasificacion#)
+            
+            ]]>
+        </select>
+
+        <insert id="InsertClasificacionXParticipante" parameterClass="ClasificacionXParticipanteOBJ">
+            INSERT INTO ClasificacionXParticipante (IdValorClasificacion, IdParticipante)
+            VALUES(#IdValorClasificacion#, #IdParticipante#)
+
+            <selectKey type="post" resultClass="int" property="IdClasificacionXParticipante">
+                SELECT @@IDENTITY
+            </selectKey>
+        </insert>
+        
+    </statements>
+</sqlMap>
