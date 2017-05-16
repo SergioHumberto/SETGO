@@ -45,6 +45,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				lblError.Text = string.Empty;
 				int idCarrera = 0;
 				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
 				{
@@ -221,6 +222,8 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				lblError.Text = string.Empty;
+
 				int idCarrera = 0;
 				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
 				{
@@ -281,6 +284,8 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				lblError.Text = string.Empty;
+
 				ResultadosBLL resultadosBLL = new ResultadosBLL();
 
 				GridView1.Columns.Clear();
@@ -340,7 +345,26 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 					crOBJ = crBLL.SeleccionarConfiguracionByIdCarrera(idCarrera);
 					
-					
+					if(crOBJ != null)
+					{
+						chklstCampos.Items[0].Selected = crOBJ.Numero;
+						chklstCampos.Items[1].Selected = crOBJ.Paterno;
+						chklstCampos.Items[2].Selected = crOBJ.Materno;
+						chklstCampos.Items[3].Selected = crOBJ.Nombres;
+						chklstCampos.Items[4].Selected = crOBJ.Folio;
+						chklstCampos.Items[5].Selected = crOBJ.Sexo;
+						chklstCampos.Items[6].Selected = crOBJ.Categoria;
+						chklstCampos.Items[7].Selected = crOBJ.Procedencia;
+						chklstCampos.Items[8].Selected = crOBJ.Equipo;
+						chklstCampos.Items[9].Selected = crOBJ.Telefono;
+						chklstCampos.Items[10].Selected = crOBJ.T_Chip;
+						chklstCampos.Items[11].Selected = crOBJ.T_Oficial;
+						chklstCampos.Items[12].Selected = crOBJ.Lug_Cat;
+						chklstCampos.Items[13].Selected = crOBJ.Lug_Rama;
+						chklstCampos.Items[14].Selected = crOBJ.Vel;
+						chklstCampos.Items[15].Selected = crOBJ.Lug_Gral;
+						chklstCampos.Items[16].Selected = crOBJ.Rama;
+					}
 				}
 			}
 		}
