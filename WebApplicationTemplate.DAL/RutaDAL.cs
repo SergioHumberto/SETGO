@@ -28,4 +28,11 @@ namespace WebApplicationTemplate.DAL
             DAL.Delete("DeleteRuta", param);
         }
     }
+
+		public static IList<RutaOBJ> SeleccionarRutasByIdCategoria(int idCategoria)
+		{
+			return Mapper.Instance().QueryForList<RutaOBJ>("SeleccionarRutasByIdCategoria", idCategoria);
+		}
+
+	}
 }

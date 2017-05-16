@@ -51,6 +51,11 @@
       WHERE IdRuta = #IdRuta#
     </delete>
 
+		<select id="SeleccionarRutasByIdCategoria" parameterClass="int" resultClass="RutaOBJ">
+			SELECT * FROM Ruta
+			WHERE IdCategoria = #value#
+		</select>
+
   </statements>
 
 </sqlMap>
