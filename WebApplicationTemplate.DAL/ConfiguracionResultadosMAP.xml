@@ -9,8 +9,46 @@
 
 		<insert id="InsertarConfiguracionResultado" parameterClass="ConfiguracionResultadosOBJ">
 
-			INSERT INTO ConfiguracionResultados(IdCarrera,NombreCampo,Visible)
-			VALUES(#IdCarrera#,#NombreCampo#,#Visible#)
+			INSERT INTO ConfiguracionResultados(
+				IdCarrera
+				,Numero
+				,Paterno
+				,Materno
+				,Nombres
+				,Folio
+				,Sexo
+				,Categoria
+				,Procedencia
+				,Equipo
+				,Telefono
+				,T_Chip
+				,T_Oficial
+				,Lug_Cat
+				,Lug_Rama
+				,Vel
+				,Lug_Gral
+				,Rama
+			)
+			VALUES(
+				#IdCarrera#
+				,#Numero#
+				,#Paterno#
+				,#Materno#
+				,#Nombres#
+				,#Folio#
+				,#Sexo#
+				,#Categoria#
+				,#Procedencia#
+				,#Equipo#
+				,#Telefono#
+				,#T_Chip#
+				,#T_Oficial#
+				,#Lug_Cat#
+				,#Lug_Rama#
+				,#Vel#
+				,#Lug_Gral#
+				,#Rama#
+			)
 
 			<selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
 				SELECT @@IDENTITY
@@ -32,8 +70,25 @@
 
 		<update id="ActualizarConfiguracion" parameterClass="ConfiguracionResultadosOBJ" >
 			UPDATE ConfiguracionResultados
-			SET Visible = #Visible#
-			WHERE IdCarrera = #IdCarrera# AND NombreCampo = #NombreCampo#
+			SET 
+				Numero = #Numero#
+				,Paterno = #Paterno#
+				,Materno = #Materno#
+				,Nombres = #Nombres#
+				,Folio = #Folio#
+				,Sexo = #Sexo#
+				,Categoria = #Categoria#
+				,Procedencia = #Procedencia#
+				,Equipo = #Equipo#
+				,Telefono = #Telefono#
+				,T_Chip = #T_Chip#
+				,T_Oficial = #T_Oficial#
+				,Lug_Cat = #Lug_Cat#
+				,Lug_Rama = #Lug_Rama#
+				,Vel = #Vel#
+				,Lug_Gral = #Lug_Gral#
+				,Rama = #Rama#
+			WHERE IdCarrera = #IdCarrera#
 		</update>
 
 		<select id="SeleccionarConfiguracionByIdCarrera" resultClass="ConfiguracionResultadosOBJ" parameterClass="int">

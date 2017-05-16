@@ -245,33 +245,35 @@ namespace WebApplicationTemplate.Web.PublicPages
 		private void GuardarConfiguracion(int idCarrera)
 		{
 			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+			ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+
+			crOBJ.IdCarrera = idCarrera;
+			crOBJ.Numero = chklstCampos.Items[0].Selected;
+			crOBJ.Paterno = chklstCampos.Items[1].Selected;
+			crOBJ.Materno = chklstCampos.Items[2].Selected;
+			crOBJ.Nombres = chklstCampos.Items[3].Selected;
+			crOBJ.Folio = chklstCampos.Items[4].Selected;
+			crOBJ.Sexo = chklstCampos.Items[5].Selected;
+			crOBJ.Categoria = chklstCampos.Items[6].Selected;
+			crOBJ.Procedencia = chklstCampos.Items[7].Selected;
+			crOBJ.Equipo = chklstCampos.Items[8].Selected;
+			crOBJ.Telefono = chklstCampos.Items[9].Selected;
+			crOBJ.T_Chip = chklstCampos.Items[10].Selected;
+			crOBJ.T_Oficial = chklstCampos.Items[11].Selected;
+			crOBJ.Lug_Cat = chklstCampos.Items[12].Selected;
+			crOBJ.Lug_Rama = chklstCampos.Items[13].Selected;
+			crOBJ.Vel = chklstCampos.Items[14].Selected;
+			crOBJ.Lug_Gral = chklstCampos.Items[15].Selected;
+			crOBJ.Rama = chklstCampos.Items[16].Selected;
 
 			//Insertar
 			if (!crBLL.VerificarConfiguracionDeCarrera(idCarrera))
 			{
-				foreach (ListItem item in chklstCampos.Items)
-				{
-					ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
-
-					crOBJ.IdCarrera = idCarrera;
-					crOBJ.NombreCampo = item.Value.ToString();
-					crOBJ.Visible = item.Selected;
-
-					crBLL.InsertarConfiguracionResultado(crOBJ);
-				}
+				crBLL.InsertarConfiguracionResultado(crOBJ);
 			}
 			else//Update
 			{
-				foreach (ListItem item in chklstCampos.Items)
-				{
-					ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
-
-					crOBJ.IdCarrera = idCarrera;
-					crOBJ.NombreCampo = item.Value.ToString();
-					crOBJ.Visible = item.Selected;
-
-					crBLL.ActualizarConfiguracion(crOBJ);
-				}
+				crBLL.ActualizarConfiguracion(crOBJ);
 			}
 		}
 
@@ -334,14 +336,11 @@ namespace WebApplicationTemplate.Web.PublicPages
 			{
 				if (crBLL.VerificarConfiguracionDeCarrera(idCarrera))
 				{
-					IList<ConfiguracionResultadosOBJ> lstCrOBJ;
+					ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
 
-					lstCrOBJ = crBLL.SeleccionarConfiguracionByIdCarrera(idCarrera);
+					crOBJ = crBLL.SeleccionarConfiguracionByIdCarrera(idCarrera);
 					
-					for(int i=0; i<chklstCampos.Items.Count; i++)
-					{
-						chklstCampos.Items[i].Selected = lstCrOBJ[i].Visible;
-					}
+					
 				}
 			}
 		}

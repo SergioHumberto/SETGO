@@ -369,6 +369,7 @@
     <Content Include="Pages\CargarResultados.aspx" />
     <Content Include="Pages\ConfiguraCarrera.aspx" />
     <Content Include="PublicPages\GenerarCertificados.aspx" />
+    <Content Include="PublicPages\ConsultaResultados.aspx" />
     <Content Include="PublicPages\PayPalRestAPI.aspx" />
     <Content Include="PublicPages\PayPal.aspx" />
     <Content Include="PublicPages\PaymentProcess.aspx" />
@@ -582,6 +583,13 @@
     </Compile>
     <Compile Include="PublicPages\GenerarCertificados.aspx.designer.cs">
       <DependentUpon>GenerarCertificados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PublicPages\ConsultaResultados.aspx.cs">
+      <DependentUpon>ConsultaResultados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PublicPages\ConsultaResultados.aspx.designer.cs">
+      <DependentUpon>ConsultaResultados.aspx</DependentUpon>
     </Compile>
     <Compile Include="PublicPages\PayPalRestAPI.aspx.cs">
       <DependentUpon>PayPalRestAPI.aspx</DependentUpon>

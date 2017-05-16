@@ -472,6 +472,22 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     </asp:PlaceHolder>
+
+    <asp:PlaceHolder ID="phRuta" Visible="true" runat="server">
+    <asp:UpdatePanel ID="upRuta" UpdateMode="Always" runat="server">
+        <ContentTemplate>
+            <div style="width:60%" class="row">
+                <div class="col-md-6">
+                    <label id="lblRuta" runat="server">Ruta:</label>
+                    <asp:RadioButtonList ID="rblRuta" AutoPostBack="true" runat="server">
+                    </asp:RadioButtonList>
+                    <asp:RequiredFieldValidator ID="reqRuta" ControlToValidate="rblRuta" SetFocusOnError="true" 
+                            CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere una Ruta" runat="server"></asp:RequiredFieldValidator>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    </asp:PlaceHolder>
     
     <asp:PlaceHolder ID="phClasificacion" runat="server">
         

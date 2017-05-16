@@ -74,6 +74,9 @@
                     <asp:ListItem Text="T_Chip" Value="T_Chip" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="T_Oficial" Value="T_Oficial" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="Lug_Cat" Value="Lug_Cat" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="Lug_Rama" Value="Lug_Rama" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="Vel" Value="Vel" Selected="True"></asp:ListItem>
+                    <asp:ListItem Text="Lug_Gral" Value="Lug_Gral" Selected="True"></asp:ListItem>
                     <asp:ListItem Text="Rama" Value="Rama" Selected="True"></asp:ListItem>
                 </asp:CheckBoxList>
                 <br /><br />

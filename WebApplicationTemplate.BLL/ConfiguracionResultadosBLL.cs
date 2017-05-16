@@ -32,7 +32,7 @@ namespace WebApplicationTemplate.BLL
 			ConfiguracionResultadosMAP.ActualizarConfiguracion(crOBJ);
 		}
 
-		public IList<ConfiguracionResultadosOBJ> SeleccionarConfiguracionByIdCarrera(int idCarrera)
+		public ConfiguracionResultadosOBJ SeleccionarConfiguracionByIdCarrera(int idCarrera)
 		{
 			return ConfiguracionResultadosMAP.SeleccionarConfiguracionByIdCarrera(idCarrera);
 		}

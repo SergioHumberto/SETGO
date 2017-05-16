@@ -140,7 +140,9 @@
     <EmbeddedResource Include="RamaMAP.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ResultadosMAP.xml" />
+    <EmbeddedResource Include="ResultadosMAP.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RutaMAP.xml" />
