@@ -15,5 +15,6 @@ namespace WebApplicationTemplate.Objects
         public string Nombre { get; set; }
         public Decimal DistanciaKM { get; set; }
         public bool Activo { get; set; }
+        public int IdCategoria { get; set; }
     }
 }

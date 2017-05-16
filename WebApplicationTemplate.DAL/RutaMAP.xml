@@ -33,6 +33,7 @@
       <selectKey type="post" resultClass="int" property="IdRuta">
         SELECT @@IDENTITY
       </selectKey>
+      
     </insert>
 
     <update id="UpdateRuta" parameterClass="RutaOBJ" >
