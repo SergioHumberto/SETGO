@@ -29,6 +29,6 @@
     <%--<rsweb:ReportViewer ID="ReportViewer1" Width="80%" runat="server">
 
     </rsweb:ReportViewer>--%>
-    <rsweb:ReportViewer ID="ReportViewer2" Visible="true" runat="server" Width="80%"></rsweb:ReportViewer>
+    <rsweb:ReportViewer ID="ReportViewer2" Visible="false" runat="server" Width="80%"></rsweb:ReportViewer>
 
 </asp:Content>
