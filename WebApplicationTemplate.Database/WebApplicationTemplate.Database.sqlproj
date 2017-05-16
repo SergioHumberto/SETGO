@@ -247,6 +247,7 @@
     <Build Include="Schema Objects\Tables\Clasificacion.sql" />
     <Build Include="Schema Objects\Tables\ValoresClasificacion.sql" />
     <Build Include="Schema Objects\Tables\ClasificacionXParticipante.sql" />
+    <Build Include="Schema Objects\Programmability\Functions\GetClasificacionesXParticipante.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

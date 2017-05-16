@@ -329,6 +329,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             private global::System.Data.DataColumn columnGeneric10;
             
+            private global::System.Data.DataColumn columnClasificaciones;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DataTable1DataTable() {
@@ -564,6 +566,14 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ClasificacionesColumn {
+                get {
+                    return this.columnClasificaciones;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -624,7 +634,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                         string Generic07, 
                         string Generic08, 
                         string Generic09, 
-                        string Generic10) {
+                        string Generic10, 
+                        string Clasificaciones) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Nombre,
@@ -651,7 +662,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                         Generic07,
                         Generic08,
                         Generic09,
-                        Generic10};
+                        Generic10,
+                        Clasificaciones};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -699,6 +711,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 this.columnGeneric08 = base.Columns["Generic08"];
                 this.columnGeneric09 = base.Columns["Generic09"];
                 this.columnGeneric10 = base.Columns["Generic10"];
+                this.columnClasificaciones = base.Columns["Clasificaciones"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -754,6 +767,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 base.Columns.Add(this.columnGeneric09);
                 this.columnGeneric10 = new global::System.Data.DataColumn("Generic10", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGeneric10);
+                this.columnClasificaciones = new global::System.Data.DataColumn("Clasificaciones", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnClasificaciones);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1296,6 +1311,22 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Clasificaciones {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.ClasificacionesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Clasificaciones\' de la tabla \'DataTable1\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.ClasificacionesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNombreNull() {
                 return this.IsNull(this.tableDataTable1.NombreColumn);
             }
@@ -1592,6 +1623,18 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetGeneric10Null() {
                 this[this.tableDataTable1.Generic10Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsClasificacionesNull() {
+                return this.IsNull(this.tableDataTable1.ClasificacionesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetClasificacionesNull() {
+                this[this.tableDataTable1.ClasificacionesColumn] = global::System.Convert.DBNull;
             }
         }
         
