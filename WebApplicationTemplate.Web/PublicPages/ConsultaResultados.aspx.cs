@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using WebApplicationTemplate.DAL;
 using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
 
@@ -41,6 +42,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				lblError.Text = string.Empty;
 				ResultadosBLL resultadosBLL = new ResultadosBLL();
 
 				grdConsultarResultados.Columns.Clear();
@@ -78,6 +80,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				lblError.Text = string.Empty;
 				grdConsultarResultados.PageIndex = e.NewPageIndex;
 				grdConsultarResultados.DataBind();
 				grdConsultarResultados.Visible = true;
@@ -94,8 +97,10 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				lblError.Text = string.Empty;
+
 				SqlConnection cn = new SqlConnection(
-					@"data source=(local)\SQLEXPRESS;initial catalog=SETGO;user id=sa;password=Pa$$w0rd;");
+					DAL.DAL.ConnectionString);
 
 				string query = GetConsulta(idCarrera);
 
