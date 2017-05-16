@@ -1036,13 +1036,6 @@ namespace WebApplicationTemplate.Web.Pages
 
             ddlAnio.Items.AddRange(lstItemsAnios.ToArray());
         }
-		/// <summary>
-		/// Revisa el modo de pago (Paypal o Offline), y oculta o muestra el txtFolioOffline.
-		/// </summary>
-		private void PagoOffline()
-		{
-			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-			CarreraOBJ carreraOBJ = new CarreraOBJ();
 
         protected void rptClasificacion_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -1077,6 +1070,14 @@ namespace WebApplicationTemplate.Web.Pages
                 }
             }
         }
+
+		/// <summary>
+		/// Revisa el modo de pago (Paypal o Offline), y oculta o muestra el txtFolioOffline.
+		/// </summary>
+		private void PagoOffline()
+		{
+			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+			CarreraOBJ carreraOBJ = new CarreraOBJ();
 			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
 
 			if(carreraOBJ != null)
