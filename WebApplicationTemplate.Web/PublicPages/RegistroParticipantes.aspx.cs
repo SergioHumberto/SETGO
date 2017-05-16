@@ -114,6 +114,8 @@ namespace WebApplicationTemplate.Web.Pages
                 }
 
 				PagoOffline();
+
+				lblRuta.Visible = false;
 			}
         }
 
@@ -423,6 +425,15 @@ namespace WebApplicationTemplate.Web.Pages
 					{
 						PaypalDelegateForm(Amount);
 					}
+					else
+					{
+						LimpiarCampos();
+
+						lblModalTitle.Text = "¡Registro con éxito!";
+						lblModalBody.Text = "¡Gracias por registrarte!";
+						ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+						upModal.Update();
+					}
                 }
                 catch (Exception ex)
                 {
@@ -474,7 +485,12 @@ namespace WebApplicationTemplate.Web.Pages
             rblCategoria.ClearSelection();
             rblRamas.ClearSelection();
             chkAcepto.Checked = false;
-        }
+			txtFolioOffline.Text = string.Empty;
+			rblRuta.Items.Clear();
+			ddlDia.ClearSelection();
+			ddlMes.ClearSelection();
+			ddlAnio.ClearSelection();
+		}
 
         private void InsertarEquipo()
         {
@@ -593,8 +609,11 @@ namespace WebApplicationTemplate.Web.Pages
                 objParticipanteXCarreraOBJ.IdCategoria = IdCategoria;
             }
 
-            int? IdRuta = null;            
-            objParticipanteXCarreraOBJ.IdRuta = IdRuta;
+            int IdRuta;
+			if (int.TryParse(rblRuta.SelectedValue, out IdRuta))
+			{
+				objParticipanteXCarreraOBJ.IdRuta = IdRuta;
+			}
 
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
 
@@ -975,7 +994,9 @@ namespace WebApplicationTemplate.Web.Pages
                 if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
                 {
                     lblTotal.InnerText = "" + GetPrecioXCategoria(IdCategoria);
-                }
+
+					CargarRutasByIdCategoria(IdCategoria);
+				}
             }
             else
             {
@@ -1090,6 +1111,29 @@ namespace WebApplicationTemplate.Web.Pages
 				{
 					phFolioOffline.Visible = true;
 				}
+			}
+		}
+
+		private void CargarRutasByIdCategoria(int idCategoria)
+		{
+			RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
+			IList<RutaOBJ> lstRutas;
+
+			lstRutas = rutaBLL.SeleccionarRutasByIdCategoria(idCategoria);
+
+			lblRuta.Visible = false;
+
+			if(lstRutas != null && lstRutas.Count > 0)
+			{
+				lblRuta.Visible = true;
+				rblRuta.DataSource = lstRutas;
+				rblRuta.DataTextField = "Nombre";
+				rblRuta.DataValueField = "IdRuta";
+				rblRuta.DataBind();
+			}
+			else
+			{
+				phRuta.Visible = false;
 			}
 		}
 

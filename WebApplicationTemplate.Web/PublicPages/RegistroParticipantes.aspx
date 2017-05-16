@@ -473,7 +473,7 @@
     </asp:UpdatePanel>
     </asp:PlaceHolder>
 
-    <asp:PlaceHolder ID="phRuta" Visible="true" runat="server">
+    <asp:PlaceHolder ID="phRuta" Visible="false" runat="server">
     <asp:UpdatePanel ID="upRuta" UpdateMode="Always" runat="server">
         <ContentTemplate>
             <div style="width:60%" class="row">
@@ -551,6 +551,27 @@
     <br />
 
     <asp:Label ID="lblMessage" runat="server"></asp:Label>
+
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <asp:UpdatePanel ID="upModal" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"><asp:Label ID="lblModalTitle" runat="server" Text=""></asp:Label></h4>
+                        </div>
+                        <div class="modal-body">
+                            <asp:Label ID="lblModalBody" runat="server" Text=""></asp:Label>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </div>
 
     <script type="text/javascript">
 
