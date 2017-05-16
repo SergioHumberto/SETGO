@@ -16,5 +16,17 @@ namespace WebApplicationTemplate.BLL
         {
             return RutaDAL.SelectRutaByIdParticipante(IdParticipante);
         }
+        public void InsertarRuta(RutaOBJ param)
+        {
+            RutaDAL.InsertarRuta(param);
+        }
+        public void UpdateRuta(RutaOBJ param)
+        {
+            RutaDAL.UpdateRuta(param);
+        }
+        public void DeleteRuta(RutaOBJ param)
+        {
+            RutaDAL.DeleteRuta(param);
+        }
     }
 }

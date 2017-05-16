@@ -13,6 +13,43 @@
       WHERE PXC.IdParticipante = #value#
     </select>
 
+    <insert id="InsertarRuta" parameterClass="RutaOBJ">
+
+      INSERT INTO Ruta
+      (
+      Nombre
+      , DistanciaKM
+      , Activo
+      , IdCategoria
+      )
+      VALUES
+      (
+      #Nombre#
+      , #DistanciaKM#
+      , #Activo#
+      , #IdCategoria#
+      )
+
+      <selectKey type="post" resultClass="int" property="IdRuta">
+        SELECT @@IDENTITY
+      </selectKey>
+    </insert>
+
+    <update id="UpdateRuta" parameterClass="RutaOBJ" >
+      UPDATE Ruta
+      SET
+      Nombre  = #Nombre#
+      , DistanciaKM = #DistanciaKM#
+      , Activo = #Activo#
+      , IdCategoria = #IdCategoria#
+      WHERE IdRuta = #IdRuta#
+    </update>
+
+    <delete id="DeleteRuta" parameterClass="RutaOBJ">
+      DELETE FROM Ruta
+      WHERE IdRuta = #IdRuta#
+    </delete>
+
   </statements>
 
 </sqlMap>

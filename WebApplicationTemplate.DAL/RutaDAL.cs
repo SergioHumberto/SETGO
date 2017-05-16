@@ -15,5 +15,17 @@ namespace WebApplicationTemplate.DAL
             RutaOBJ objRuta = Mapper.Instance().QueryForObject<RutaOBJ>("SelectRutaByIdParticipante", IdParticipante);
             return objRuta;
         }
+        public static void InsertarRuta(RutaOBJ param)
+        {
+            Mapper.Instance().Insert("InsertarRuta", param);
+        }
+        public static void UpdateRuta(RutaOBJ param)
+        {
+            DAL.Update("UpdateRuta", param);
+        }
+        public static void DeleteRuta(RutaOBJ param)
+        {
+            DAL.Delete("DeleteRuta", param);
+        }
     }
 }
