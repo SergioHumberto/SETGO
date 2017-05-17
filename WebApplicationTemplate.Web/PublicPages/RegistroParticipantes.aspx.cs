@@ -249,17 +249,20 @@ namespace WebApplicationTemplate.Web.Pages
 
                 LoadValoresFechas();
 
-                LoadClasificaciones();
+                LoadClasificaciones(IdCarrera);
 
                 lblPoliticas.Text = objCarrera.DescripcionPoliticas;
             }
         }
 
-        private void LoadClasificaciones()
+        private void LoadClasificaciones(int idCarrera)
         {
             UserSession session = HttpSecurity.CurrentSession;
             ClasificacionBLL objClasificacionBLL = new ClasificacionBLL(session);
-            IList<ClasificacionOBJ> lstClasificaciones = objClasificacionBLL.SelectClasificacion(new ClasificacionOBJ() { });
+            ClasificacionOBJ clasificacion = new ClasificacionOBJ();
+            clasificacion.IdCarrera = idCarrera;
+
+            IList<ClasificacionOBJ> lstClasificaciones = objClasificacionBLL.SelectClasificacion(clasificacion);
 
             rptClasificacion.DataSource = lstClasificaciones;
             rptClasificacion.DataBind();
