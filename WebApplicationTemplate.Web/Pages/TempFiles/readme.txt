@@ -1,0 +1,1 @@
+Si no se coloca un archivo la carpeta no existiría en el sitio que publiquemos

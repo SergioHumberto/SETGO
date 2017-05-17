@@ -368,6 +368,7 @@
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\CargarResultados.aspx" />
     <Content Include="Pages\ConfiguraCarrera.aspx" />
+    <Content Include="Pages\TempFiles\readme.txt" />
     <Content Include="PublicPages\GenerarCertificados.aspx" />
     <Content Include="PublicPages\ConsultaResultados.aspx" />
     <Content Include="PublicPages\PayPalRestAPI.aspx" />
@@ -712,7 +713,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Estilos\" />
-    <Folder Include="Pages\TempFiles\" />
     <Folder Include="Resources\Scripts\" />
   </ItemGroup>
   <ItemGroup>
