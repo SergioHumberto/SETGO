@@ -15,5 +15,17 @@ namespace WebApplicationTemplate.DAL
             IList<ClasificacionOBJ> lstClasificacion = DAL.QueryForList<ClasificacionOBJ>("SelectClasificacion", finder);
             return lstClasificacion;
         }
+        public static void InsertarClasificacion(ClasificacionOBJ param)
+        {
+            Mapper.Instance().Insert("InsertarClasificacion", param);
+        }
+        public static void UpdateClasificacion(ClasificacionOBJ param)
+        {
+            DAL.Update("UpdateClasificacion", param);
+        }
+        public static void DeleteClasificacion(ClasificacionOBJ param)
+        {
+            DAL.Delete("DeleteClasificacion", param);
+        }
     }
 }

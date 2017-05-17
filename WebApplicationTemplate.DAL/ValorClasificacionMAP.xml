@@ -17,5 +17,37 @@
             
             ]]>
         </select>
+
+      <insert id="InsertarValorClasificacion" parameterClass="ValorClasificacionOBJ">
+
+        INSERT INTO ValorClasificacion
+        (
+        IdClasificacion
+        , Etiqueta
+        )
+        VALUES
+        (
+        #IdClasificacion#
+        , #Etiqueta#   
+        )
+
+        <selectKey type="post" resultClass="int" property="IdValorClasificacion">
+          SELECT @@IDENTITY
+        </selectKey>
+
+      </insert>
+
+      <update id="UpdateValorClasificacion" parameterClass="ValorClasificacionOBJ" >
+        UPDATE ValorClasificacion
+        SET
+        IdClasificacion  = #IdClasificacion#
+        , Etiqueta = #Etiqueta#
+        WHERE IdValorClasificacion = #IdValorClasificacion#
+      </update>
+
+      <delete id="DeleteValorClasificacion" parameterClass="ValorClasificacionOBJ">
+        DELETE FROM ValorClasificacion
+        WHERE IdValorClasificacion = #IdValorClasificacion#
+      </delete>
     </statements>
 </sqlMap>

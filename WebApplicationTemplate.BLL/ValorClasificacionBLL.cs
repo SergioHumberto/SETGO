@@ -15,5 +15,17 @@ namespace WebApplicationTemplate.BLL
         {
             return ValorClasificacionDAL.SelectValorClasificacion(finder);
         }
+        public void InsertarValorClasificacion(ValorClasificacionOBJ param)
+        {
+            ValorClasificacionDAL.InsertarValorClasificacion(param);
+        }
+        public void UpdateValorClasificacion(ValorClasificacionOBJ param)
+        {
+            ValorClasificacionDAL.UpdateValorClasificacion(param);
+        }
+        public void DeleteValorClasificacion(ValorClasificacionOBJ param)
+        {
+            ValorClasificacionDAL.DeleteValorClasificacion(param);
+        }
     }
 }

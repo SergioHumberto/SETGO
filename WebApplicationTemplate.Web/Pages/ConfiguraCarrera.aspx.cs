@@ -20,10 +20,9 @@ namespace WebApplicationTemplate.Web.Pages
                 LimpiaMensajes();
                 if (!Page.IsPostBack)
                 {
-                    int idCarrera = -1;
-                    if (Request.QueryString["IdCarrera"] != null)
+                    int idCarrera = getIdCarrera();
+                    if (idCarrera != -1)
                     {
-                        int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
                         txtURL.Text = Urls.RegistroParticipantes() + "?IdCarrera=" + idCarrera;
                         lnkVistaPrevia.NavigateUrl = txtURL.Text;
 
@@ -32,6 +31,7 @@ namespace WebApplicationTemplate.Web.Pages
                         BindDataToRamas(getDataRamas(idCarrera));
                         BindDataToCategorias(getDataCategorias(idCarrera));
                         BindDataToRutas(getDataRutas(idCarrera));
+                        BindDataToClasificacion(getDataClasificaciones(idCarrera));
                     }
                     else
                     {
@@ -49,6 +49,14 @@ namespace WebApplicationTemplate.Web.Pages
                 lblError.InnerText = ex.Message;
                 lblError.Visible = true;
             }
+        }
+
+        protected int getIdCarrera()
+        {
+            int idCarrera = -1;
+            if (Request.QueryString["IdCarrera"] != null)
+                int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+            return idCarrera;
         }
         protected void LimpiaMensajes()
         {
@@ -69,6 +77,9 @@ namespace WebApplicationTemplate.Web.Pages
 
             lblErrorRutas.InnerText = string.Empty;
             lblErrorRutas.Visible = false;
+
+            lblErrorClasificaciones.InnerText = string.Empty;
+            lblErrorClasificaciones.Visible = false;
         }
         #region DatosGenerales
         protected void BindDataToGenerales(int idCarrera)
@@ -113,11 +124,7 @@ namespace WebApplicationTemplate.Web.Pages
             try
             {
                 // Obtiene ID CARRERA
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                {
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
-                }
+                int idCarrera = getIdCarrera();
 
                 // Crea y llena objeto Carrera
                 CarreraOBJ carreraObj = new CarreraOBJ();
@@ -246,9 +253,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
                 grdCampos.EditIndex = e.NewEditIndex;
                 if (ViewState["NuevoCampo"] != null && (bool)ViewState["NuevoCampo"])
                 {
@@ -271,9 +276,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 grdCampos.EditIndex = -1;
                 ViewState.Remove("NuevoCampo");
@@ -371,9 +374,7 @@ namespace WebApplicationTemplate.Web.Pages
                 string ExpReg = (e.NewValues["ValidationExpression"] != null) ? e.NewValues["ValidationExpression"].ToString() : string.Empty;
                 string ErrorExpReg = (e.NewValues["RegularErrorMessage"] != null) ? e.NewValues["RegularErrorMessage"].ToString() : string.Empty;
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 ControlXCarreraOBJ controlXcarrera = new ControlXCarreraOBJ();
                 controlXcarrera.IdCarrera = idCarrera;
@@ -427,9 +428,7 @@ namespace WebApplicationTemplate.Web.Pages
                 ControlXCarreraOBJ controlXcarrera = new ControlXCarreraOBJ();
                 controlXcarrera.IdControlXCarrera = IdControlXCarrera;
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 controlXCarreraBll.DeleteControlXCarrera(controlXcarrera);
                 BindDataToCampos(getDataControlXCarrera(idCarrera));
@@ -446,7 +445,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                if (Request.QueryString["IdCarrera"] != null)
+                if (getIdCarrera() != -1)
                 {
                     ViewState.Add("NuevoCampo", true);
                     grdCampos.SetEditRow(grdCampos.Rows.Count);
@@ -485,9 +484,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
                 grdRamas.EditIndex = e.NewEditIndex;
                 if (ViewState["NuevaRama"] != null && (bool)ViewState["NuevaRama"])
                 {
@@ -510,9 +507,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 grdRamas.EditIndex = -1;
                 ViewState.Remove("NuevaRama");
@@ -561,9 +556,7 @@ namespace WebApplicationTemplate.Web.Pages
                 bool activo;
                 bool.TryParse(e.NewValues["Activo"].ToString(), out activo);
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 RamaOBJ rama = new RamaOBJ();
                 rama.IdCarrera = idCarrera;
@@ -612,9 +605,7 @@ namespace WebApplicationTemplate.Web.Pages
                 RamaOBJ rama = new RamaOBJ();
                 rama.IdRama = idRama;
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 ramaBLL.DeleteRama(rama);
                 BindDataToRamas(getDataRamas(idCarrera));
@@ -631,7 +622,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                if (Request.QueryString["IdCarrera"] != null)
+                if (getIdCarrera() != -1)
                 {
                     ViewState.Add("NuevaRama", true);
                     grdRamas.SetEditRow(grdRamas.Rows.Count);
@@ -664,9 +655,7 @@ namespace WebApplicationTemplate.Web.Pages
                 ViewState.Add("ShowInactiveRamas", !(bool)ViewState["ShowInactiveRamas"]);
             }
 
-            int idCarrera = -1;
-            if (Request.QueryString["IdCarrera"] != null)
-                int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+            int idCarrera = getIdCarrera();
 
 
             lnkShowInactiveRamas.Text = getTextlnkShowInactiveRama();
@@ -703,9 +692,7 @@ namespace WebApplicationTemplate.Web.Pages
                 ViewState.Add("ShowInactiveCategorias", !(bool)ViewState["ShowInactiveCategorias"]);
             }
 
-            int idCarrera = -1;
-            if (Request.QueryString["IdCarrera"] != null)
-                int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+            int idCarrera = getIdCarrera();
 
 
             lnkShowInactiveCategoria.Text = getTextlnkShowInactiveCategoria();
@@ -717,9 +704,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 grdCategorias.EditIndex = e.NewEditIndex;
                 if (ViewState["NuevaCategoria"] != null && (bool)ViewState["NuevaCategoria"])
@@ -743,9 +728,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 grdCategorias.EditIndex = -1;
                 ViewState.Remove("NuevaCategoria");
@@ -801,9 +784,7 @@ namespace WebApplicationTemplate.Web.Pages
                 bool activo;
                 bool.TryParse(e.NewValues["Activo"].ToString(), out activo);
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 CategoriaOBJ categoria = new CategoriaOBJ();
                 categoria.IdCarrera = idCarrera;
@@ -853,9 +834,7 @@ namespace WebApplicationTemplate.Web.Pages
                 CategoriaOBJ categoria = new CategoriaOBJ();
                 categoria.IdCategoria = idCategoria;
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 categoriaBLL.DeleteCategoria(categoria);
                 BindDataToCategorias(getDataCategorias(idCarrera));
@@ -872,7 +851,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                if (Request.QueryString["IdCarrera"] != null)
+                if (getIdCarrera() != -1)
                 {
                     ViewState.Add("NuevaCategoria", true);
                     grdCategorias.SetEditRow(grdCategorias.Rows.Count);
@@ -949,9 +928,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 obtieneListaCategorias(idCarrera);
             }
@@ -976,9 +953,7 @@ namespace WebApplicationTemplate.Web.Pages
                 ViewState.Add("ShowInactiveRutas", !(bool)ViewState["ShowInactiveRutas"]);
             }
 
-            int idCarrera = -1;
-            if (Request.QueryString["IdCarrera"] != null)
-                int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+            int idCarrera = getIdCarrera();
 
             lnkShowInactiveRutas.Text = getTextlnkShowInactiveRutas();
             BindDataToRutas(getDataRutas(idCarrera));
@@ -989,9 +964,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 grdRutas.EditIndex = e.NewEditIndex;
                 if (ViewState["NuevaRuta"] != null && (bool)ViewState["NuevaRuta"])
@@ -1015,9 +988,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 grdRutas.EditIndex = -1;
                 ViewState.Remove("NuevaRuta");
@@ -1050,7 +1021,7 @@ namespace WebApplicationTemplate.Web.Pages
                 errores += (errores == string.Empty) ? "" : ", ";
                 errores += "La distancia debe ser mayor o igual a cero";
             }
-            
+
             /*
             * Si existen mensajes de error los hace visibles
             */
@@ -1083,18 +1054,16 @@ namespace WebApplicationTemplate.Web.Pages
                 decimal distancia;
                 decimal.TryParse(e.NewValues["DistanciaKM"].ToString(), out distancia);
                 bool activo;
-                bool.TryParse(e.NewValues["Activo"].ToString(), out activo);                
+                bool.TryParse(e.NewValues["Activo"].ToString(), out activo);
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 RutaOBJ ruta = new RutaOBJ();
                 ruta.IdCategoria = IdCategoria;
                 ruta.IdRuta = IdRuta;
                 ruta.Nombre = nombre;
                 ruta.DistanciaKM = distancia;
-                ruta.Activo = activo;                
+                ruta.Activo = activo;
 
                 if (!validaRuta(ruta)) return;
 
@@ -1136,9 +1105,7 @@ namespace WebApplicationTemplate.Web.Pages
                 RutaOBJ ruta = new RutaOBJ();
                 ruta.IdRuta = idRuta;
 
-                int idCarrera = -1;
-                if (Request.QueryString["IdCarrera"] != null)
-                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+                int idCarrera = getIdCarrera();
 
                 rutaBLL.DeleteRuta(ruta);
                 BindDataToRutas(getDataRutas(idCarrera));
@@ -1155,7 +1122,7 @@ namespace WebApplicationTemplate.Web.Pages
             LimpiaMensajes();
             try
             {
-                if (Request.QueryString["IdCarrera"] != null)
+                if (getIdCarrera() != -1)
                 {
                     ViewState.Add("NuevaRuta", true);
                     grdRutas.SetEditRow(grdRutas.Rows.Count);
@@ -1172,6 +1139,169 @@ namespace WebApplicationTemplate.Web.Pages
                 lblErrorRutas.Visible = true;
             }
         }
-        #endregion        
+        #endregion
+        #region Clasificaciones Genéricas
+        protected IList<ClasificacionOBJ> getDataClasificaciones(int idCarrera)
+        {
+            ClasificacionBLL clasificacionBLL = new ClasificacionBLL(HttpSecurity.CurrentSession);
+
+            ClasificacionOBJ ruta = new ClasificacionOBJ();
+            ruta.IdCarrera = idCarrera;
+
+            return clasificacionBLL.SelectClasificacion(ruta);
+        }
+        protected IList<ValorClasificacionOBJ> getDataValores(int idClasificacion)
+        {
+            ValorClasificacionBLL clasificacionBLL = new ValorClasificacionBLL(HttpSecurity.CurrentSession);
+
+            ValorClasificacionOBJ valor = new ValorClasificacionOBJ();
+            valor.IdClasificacion = idClasificacion;
+
+            return clasificacionBLL.SelectValorClasificacion(valor);
+        }
+        protected void BindDataToClasificacion(IList<ClasificacionOBJ> lstClasificacion)
+        {
+            lstBxClasificaciones.DataSource = lstClasificacion;
+            lstBxClasificaciones.DataTextField = "Nombre";
+            lstBxClasificaciones.DataValueField = "IdClasificacion";
+            lstBxClasificaciones.DataBind();
+        }
+        protected void BindDataToValorClasificacion(IList<ValorClasificacionOBJ> lstValClas)
+        {
+            lstBxValores.DataSource = lstValClas;
+            lstBxValores.DataTextField = "Etiqueta";
+            lstBxValores.DataValueField = "IdValorClasificacion";
+            lstBxValores.DataBind();
+        }
+
+        protected void lstBxClasificaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int idClasificacion;
+                int.TryParse(lstBxClasificaciones.SelectedItem.Value, out idClasificacion);
+                BindDataToValorClasificacion(getDataValores(idClasificacion));
+            }
+            catch (Exception ex)
+            {
+                lblErrorClasificaciones.InnerText = ex.Message;
+                lblErrorClasificaciones.Visible = true;
+            }
+        }
+        protected void btnAddClasificacion_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                if (txtClasificacion.Text == string.Empty)
+                {
+                    throw new Exception("Debes ingresar el nombre de la clasificacion");
+                }
+
+                ClasificacionOBJ clasificacion = new ClasificacionOBJ();
+                clasificacion.IdCarrera = getIdCarrera();
+                clasificacion.Nombre = txtClasificacion.Text;
+
+                ClasificacionBLL clasificacionBLL = new ClasificacionBLL(HttpSecurity.CurrentSession);
+                clasificacionBLL.InsertarClasificacion(clasificacion);
+
+                txtClasificacion.Text = string.Empty;
+                BindDataToClasificacion(getDataClasificaciones(getIdCarrera()));
+            }
+            catch (Exception ex)
+            {
+                lblErrorClasificaciones.InnerText = ex.Message;
+                lblErrorClasificaciones.Visible = true;
+            }
+        }
+
+        protected void btnDeleteClasificacion_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                if (lstBxClasificaciones.SelectedIndex == -1)
+                {
+                    throw new Exception("Debes seleccionar una clasificacion");
+                }
+
+                ClasificacionOBJ clasificacion = new ClasificacionOBJ();
+                int idClasificacion;
+                int.TryParse(lstBxClasificaciones.SelectedValue, out idClasificacion);
+                clasificacion.IdClasificacion = idClasificacion;
+
+                ClasificacionBLL clasificacionBLL = new ClasificacionBLL(HttpSecurity.CurrentSession);
+                clasificacionBLL.DeleteClasificacion(clasificacion);
+
+                BindDataToClasificacion(getDataClasificaciones(getIdCarrera()));
+            }
+            catch (Exception ex)
+            { 
+                if (ex.Message.Contains("FK_ValorClasificacion_Clasificacion_IdClasificacion"))
+                {
+                    lblErrorClasificaciones.InnerText = "Primero se deben borrar todos los valores de la clasificacion seleccionada";
+                }
+                else
+                    lblErrorClasificaciones.InnerText = ex.Message;
+                lblErrorClasificaciones.Visible = true;
+            }
+        }
+
+        protected void btnAddValor_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                if (txtValor.Text == string.Empty)
+                {
+                    throw new Exception("Debes ingresar la etiqueta valor");
+                }
+
+                ValorClasificacionOBJ valor = new ValorClasificacionOBJ();
+                int idClasificacion;
+                int.TryParse(lstBxClasificaciones.SelectedValue, out idClasificacion);
+                valor.IdClasificacion = idClasificacion;
+                valor.Etiqueta = txtValor.Text;
+
+                ValorClasificacionBLL valorBLL = new ValorClasificacionBLL(HttpSecurity.CurrentSession);
+                valorBLL.InsertarValorClasificacion(valor);
+
+                txtValor.Text = string.Empty;
+                BindDataToValorClasificacion(getDataValores(idClasificacion));
+            }
+            catch (Exception ex)
+            {
+                lblErrorClasificaciones.InnerText = ex.Message;
+                lblErrorClasificaciones.Visible = true;
+            }
+        }
+
+        protected void btnDeleteValor_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                if (lstBxValores.SelectedIndex == -1)
+                {
+                    throw new Exception("Debes seleccionar un valor");
+                }
+
+                ValorClasificacionOBJ valor = new ValorClasificacionOBJ();
+                int idValor;
+                int.TryParse(lstBxValores.SelectedValue, out idValor);
+                valor.IdValorClasificacion = idValor;
+
+                int idClasificacion;
+                int.TryParse(lstBxClasificaciones.SelectedValue, out idClasificacion);
+
+                ValorClasificacionBLL valorBLL = new ValorClasificacionBLL(HttpSecurity.CurrentSession);
+                valorBLL.DeleteValorClasificacion(valor);
+
+                BindDataToValorClasificacion(getDataValores(idClasificacion));
+            }
+            catch (Exception ex)
+            { 
+                lblErrorClasificaciones.InnerText = ex.Message;
+                lblErrorClasificaciones.Visible = true;
+            }
+        }
+        #endregion
+
     }
 }

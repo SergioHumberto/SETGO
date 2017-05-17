@@ -15,5 +15,17 @@ namespace WebApplicationTemplate.BLL
         {
             return ClasificacionDAL.SelectClasificacion(finder);
         }
+        public void InsertarClasificacion(ClasificacionOBJ param)
+        {
+            ClasificacionDAL.InsertarClasificacion(param);
+        }
+        public void UpdateClasificacion(ClasificacionOBJ param)
+        {
+            ClasificacionDAL.UpdateClasificacion(param);
+        }
+        public void DeleteClasificacion(ClasificacionOBJ param)
+        {
+            ClasificacionDAL.DeleteClasificacion(param);
+        }
     }
 }

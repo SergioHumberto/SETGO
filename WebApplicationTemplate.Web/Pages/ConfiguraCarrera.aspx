@@ -382,10 +382,47 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
-                Niveles
+                Clasificaciones Genéricas
             </div>
             <div class="panel-body">
-                <%--AGREGAR Niveles AQUI--%>
+                <asp:UpdatePanel runat="server" ID="updClasificaciones">
+                    <ContentTemplate>
+                        <div class="col-md-12 alert alert-danger" runat="server" id="lblErrorClasificaciones" visible="false"></div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label class="control-label" for="txtClasificacion">Clasificaciones</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label" for="txtValor">Valores</label>
+                            </div>
+                            <div class="col-md-4">
+                                <asp:TextBox runat="server" ID="txtClasificacion" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group btn-group-sm">
+                                    <asp:ImageButton runat="server" ID="btnAddClasificacion" CssClass="btn btn-default" ImageUrl="~/Resources/Images/icon-add.png" OnClick="btnAddClasificacion_Click" />
+                                    <asp:ImageButton runat="server" ID="btnDeleteClasificacion" CssClass="btn btn-default" ImageUrl="~/Resources/Images/icon-delete.png" OnClick="btnDeleteClasificacion_Click" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <asp:TextBox runat="server" ID="txtValor" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group btn-group-sm">
+                                    <asp:ImageButton runat="server" ID="btnAddValor" CssClass="btn btn-default" ImageUrl="~/Resources/Images/icon-add.png" OnClick="btnAddValor_Click" />
+                                    <asp:ImageButton runat="server" ID="btnDeleteValor" CssClass="btn btn-default" ImageUrl="~/Resources/Images/icon-delete.png" OnClick="btnDeleteValor_Click" />
+                                </div>
+                            </div>
+                            <div class="clearfix">&nbsp;</div>
+                            <div class="col-md-6">
+                                <asp:ListBox runat="server" ID="lstBxClasificaciones" CssClass="form-control" Rows="10" AutoPostBack="true" SelectionMode="Single" OnSelectedIndexChanged="lstBxClasificaciones_SelectedIndexChanged"></asp:ListBox>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:ListBox runat="server" ID="lstBxValores" CssClass="form-control" Rows="10"></asp:ListBox>
+                            </div>
+                        </div>
+                    </ContentTemplate>                                     
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>

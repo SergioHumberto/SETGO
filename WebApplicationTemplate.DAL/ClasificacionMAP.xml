@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="" xmlns="http://ibatis.apache.org/mapping">
 
-    <alias>
-        <typeAlias alias="ClasificacionOBJ" type="WebApplicationTemplate.Objects.ClasificacionOBJ" />
-    </alias>
+  <alias>
+    <typeAlias alias="ClasificacionOBJ" type="WebApplicationTemplate.Objects.ClasificacionOBJ" />
+  </alias>
 
-    <statements>
+  <statements>
 
-        <select id="SelectClasificacion" parameterClass="ClasificacionOBJ" resultClass="ClasificacionOBJ" >
-            <![CDATA[
+    <select id="SelectClasificacion" parameterClass="ClasificacionOBJ" resultClass="ClasificacionOBJ" >
+      <![CDATA[
             
             SELECT 
             C.* 
@@ -17,7 +17,39 @@
             AND (#IdClasificacion# <= 0 OR C.IdClasificacion = #IdClasificacion#)
             
             ]]>
-        </select>
-        
-    </statements>
+    </select>
+
+    <insert id="InsertarClasificacion" parameterClass="ClasificacionOBJ">
+
+      INSERT INTO Clasificacion
+      (
+      Nombre
+      , IdCarrera
+      )
+      VALUES
+      (
+      #Nombre#
+      , #IdCarrera#     
+      )
+
+      <selectKey type="post" resultClass="int" property="IdClasificacion">
+        SELECT @@IDENTITY
+      </selectKey>
+
+    </insert>
+
+    <update id="UpdateClasificacion" parameterClass="ClasificacionOBJ" >
+      UPDATE Clasificacion
+      SET
+      Nombre  = #Nombre#
+      , IdCarrera = #IdCarrera#
+      WHERE IdClasificacion = #IdClasificacion#
+    </update>
+
+    <delete id="DeleteClasificacion" parameterClass="ClasificacionOBJ">
+      DELETE FROM Clasificacion
+      WHERE IdClasificacion = #IdClasificacion#
+    </delete>
+
+  </statements>
 </sqlMap>
