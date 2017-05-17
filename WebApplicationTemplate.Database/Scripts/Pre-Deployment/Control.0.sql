@@ -11,3 +11,13 @@ BEGIN
 END
 
 GO
+
+IF NOT EXISTS(
+	SELECT * FROM [Control]
+	WHERE IdControlASP = 'phRuta'
+)
+BEGIN
+	INSERT INTO [Control] VALUES('phRuta')
+END
+
+GO
