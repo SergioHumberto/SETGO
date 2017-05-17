@@ -207,15 +207,11 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 		protected void PageIndexChanging(object sender, GridViewPageEventArgs e)
 		{
-			string FolderPath = ConfigurationManager.AppSettings["FolderPath"];
-			string FileName = GridView1.Caption;
-			string Extension = Path.GetExtension(FileName);
-			string FilePath = Server.MapPath(FolderPath + FileName);
-
-			Import_To_Grid(FilePath, Extension, "Yes");
 			GridView1.PageIndex = e.NewPageIndex;
 			GridView1.DataBind();
 			GridView1.Visible = true;
+
+			btnConsultarResultados_Click(null, e);
 		}
 
 		protected void btnSubmit_Click(object sender, EventArgs e)

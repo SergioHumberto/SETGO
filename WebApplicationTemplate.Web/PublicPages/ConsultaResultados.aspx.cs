@@ -25,6 +25,8 @@ namespace WebApplicationTemplate.Web.PublicPages
 				LoadCarreras();
 
 				lblError.Text = string.Empty;
+
+				tbRegistros.Visible = false;
 			}
 		}
 
@@ -55,6 +57,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 						if (resultadosBLL.VerificarResultadoDeCarrera(idCarrera))
 						{
 							CargarResultados(idCarrera);
+							tbRegistros.Visible = true;
 						}
 						else
 						{
@@ -203,6 +206,26 @@ namespace WebApplicationTemplate.Web.PublicPages
 			query += " FROM RESULTADOS WHERE IdCarrera=" + idCarrera;
 
 			return query;
+		}
+
+		protected void ddlNumRegistros_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				lblError.Text = string.Empty;
+
+				int num = 0;
+				if(int.TryParse(ddlNumRegistros.SelectedValue, out num))
+				{
+					grdConsultarResultados.PageSize = num;
+
+					btnConsultarResultados_Click(null, e);
+				}
+			}
+			catch (Exception ex)
+			{
+				lblError.Text = ex.Message;
+			}
 		}
 	}
 }

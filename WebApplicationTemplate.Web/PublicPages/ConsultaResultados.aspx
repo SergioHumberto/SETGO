@@ -42,16 +42,47 @@
 
         <br />
 
+        <div class="input-group" style="width:60%">
+            <asp:Table ID="tbRegistros" runat="server">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="lblMostrar" runat="server" Text="Mostrar"></asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:DropDownList ID="ddlNumRegistros" AutoPostBack="true" runat="server" AppendDataBoundItems="true" 
+                            CssClass="dropdown" OnSelectedIndexChanged="ddlNumRegistros_SelectedIndexChanged">
+                            <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                            <asp:ListItem Text="25" Value="25"></asp:ListItem>
+                            <asp:ListItem Text="50" Value="50"></asp:ListItem>
+                            <asp:ListItem Text="100" Value="100"></asp:ListItem>
+                        </asp:DropDownList>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Label ID="lblRegistros" runat="server" Text="Registros"></asp:Label>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </div>
+
+        <br />
+        
         <div style="overflow-x:auto;width:100%">
            <div class="input-group" style="width:60%" >
                <asp:GridView ID="grdConsultarResultados" runat="server"
                     OnPageIndexChanging="PageIndexChanging" 
                     AllowPaging = "true"
-                    CssClass="table table-bordered bs-table">
+                    CssClass="table table-bordered bs-table"
+                   PageSize="10"
+                   PagerSettings-Mode="NextPrevious"
+                   PagerSettings-PreviousPageText="Anterior"
+                   PagerSettings-NextPageText="Siguiente"
+                   PagerStyle-HorizontalAlign="Right"
+                   HeaderStyle-BackColor="#d9edf7"
+                   >
                 </asp:GridView>
            </div>
         </div>
-
+            
         <br />
 
         <div class="input-group" style="width:60%">

@@ -40,8 +40,12 @@
     <div style="overflow-x:auto;width:100%">
        <div class="input-group" style="width:60%" >
             <asp:GridView ID="GridView1" runat="server"
-                    OnPageIndexChanging = "PageIndexChanging" AllowPaging = "true"
-                    CssClass="table table-bordered bs-table">
+                OnPageIndexChanging = "PageIndexChanging" AllowPaging = "true"
+                CssClass="table table-bordered bs-table"
+                PagerSettings-Mode="NextPrevious"
+                PagerSettings-PreviousPageText="Anterior"
+                PagerSettings-NextPageText="Siguiente"
+                >
             </asp:GridView>
         </div>
     </div>

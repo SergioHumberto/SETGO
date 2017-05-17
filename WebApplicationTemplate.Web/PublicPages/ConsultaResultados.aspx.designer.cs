@@ -58,6 +58,42 @@ namespace WebApplicationTemplate.Web.PublicPages {
         protected global::System.Web.UI.WebControls.Button btnConsultarResultados;
         
         /// <summary>
+        /// Control tbRegistros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tbRegistros;
+        
+        /// <summary>
+        /// Control lblMostrar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMostrar;
+        
+        /// <summary>
+        /// Control ddlNumRegistros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlNumRegistros;
+        
+        /// <summary>
+        /// Control lblRegistros.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRegistros;
+        
+        /// <summary>
         /// Control grdConsultarResultados.
         /// </summary>
         /// <remarks>
