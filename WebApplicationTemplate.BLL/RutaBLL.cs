@@ -29,10 +29,14 @@ namespace WebApplicationTemplate.BLL
             RutaDAL.DeleteRuta(param);
         }
 
-		public IList<RutaOBJ> SeleccionarRutasByIdCategoria(int idCategoria)
+		public IList<RutaOBJ> SeleccionarRutasByIdCategoria(RutaOBJ param)
 		{
-			return RutaDAL.SeleccionarRutasByIdCategoria(idCategoria);
+			return RutaDAL.SeleccionarRutasByIdCategoria(param);
 		}
 
-	}
+        public IList<RutaOBJ> SeleccionarRutasByIdCarrera(RutaOBJ param)
+        {
+            return RutaDAL.SeleccionarRutasByIdCarrera(param);
+        }
+    }
 }

@@ -6,7 +6,7 @@
   </alias>
 
   <statements>
-
+   
     <select id="SelectRutaByIdParticipante" parameterClass="int" resultClass="RutaOBJ">
       SELECT R.* FROM ParticipanteXCarrera PXC
       INNER JOIN Ruta R ON PXC.IdRuta = R.IdRuta
@@ -51,10 +51,20 @@
       WHERE IdRuta = #IdRuta#
     </delete>
 
-		<select id="SeleccionarRutasByIdCategoria" parameterClass="int" resultClass="RutaOBJ">
-			SELECT * FROM Ruta
-			WHERE IdCategoria = #value#
-		</select>
+		<select id="SeleccionarRutasByIdCategoria" parameterClass="RutaOBJ" resultClass="RutaOBJ">
+      SELECT * FROM Ruta
+      WHERE IdCategoria = #IdCategoria#
+      AND Activo = #Activo#
+    </select>
+
+    <select id="SeleccionarRutasByIdCarrera" parameterClass="RutaOBJ" resultClass="RutaOBJ">
+      SELECT r.*, ct.Nombre as NombreCategoria
+      FROM Ruta r
+      INNER JOIN Categoria ct ON r.IdCategoria = ct.IdCategoria
+      INNER JOIN Carrera cr ON ct.IdCarrera = cr.IdCarrera
+      WHERE cr.IdCarrera = #IdCarrera#
+      AND r.Activo = #Activo#
+    </select>
 
   </statements>
 

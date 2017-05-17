@@ -23,7 +23,7 @@
     <div class="form-horizontal" style="max-width: none !important; width: 880px;">
         <div class="form-group">
             <h2 class="col-md-12">Configura Carrera</h2>
-        </div>        
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 Generales
@@ -41,7 +41,7 @@
                             <label class="col-md-2 control-label" for="txtURL">URL</label>
                             <div class="col-md-10">
                                 <asp:TextBox CssClass="form-control" runat="server" ID="txtURL" TextMode="Url" ReadOnly="true"></asp:TextBox>
-                                <div class="text-right">                                    
+                                <div class="text-right">
                                     <a class="btn btn-link" id="btnCopy">Copiar URL</a>
                                     <span>|</span>
                                     <asp:HyperLink runat="server" Target="_blank" ID="lnkVistaPrevia" CssClass="btn btn-link" Text="Vista Previa"></asp:HyperLink>
@@ -323,7 +323,61 @@
                 Rutas
             </div>
             <div class="panel-body">
-                <%--AGREGAR Rutas AQUI--%>
+                <asp:UpdatePanel runat="server" ID="updRutas">
+                    <ContentTemplate>
+                        <div class="col-md-12 alert alert-danger" runat="server" id="lblErrorRutas" visible="false"></div>
+                        <div class="text-right">
+                            <asp:LinkButton runat="server" ID="lnkShowInactiveRutas" OnClick="lnkShowInactiveRutas_Click"></asp:LinkButton>
+                        </div>
+                        <asp:GridView runat="server" ID="grdRutas" AutoGenerateColumns="false" CssClass="table table-bordered" ShowHeaderWhenEmpty="true" OnRowDataBound="grdRutas_RowDataBound" OnDataBinding="grdRutas_DataBinding" OnRowEditing="grdRutas_RowEditing" OnRowCancelingEdit="grdRutas_RowCancelingEdit" OnRowUpdating="grdRutas_RowUpdating" OnRowDeleting="grdRutas_RowDeleting">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Categoria" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:HiddenField runat="server" ID="hdnIdRuta" Value='<%#Bind("IdRuta") %>' />
+                                        <asp:HiddenField runat="server" ID="hdnIdCategoria" Value='<%#Bind("IdCategoria") %>' />
+                                        <asp:Label runat="server" ID="lblCategoria" Text='<%#Bind("NombreCategoria")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:HiddenField runat="server" ID="hdnIdRuta" Value='<%#Bind("IdRuta") %>' />
+                                        <asp:HiddenField runat="server" ID="hdnIdCategoria" Value='<%#Bind("IdCategoria") %>' />
+                                        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-control input-sm"></asp:DropDownList>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Nombre" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblNombre" Text='<%#Bind("Nombre")%>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control input-sm" Text='<%#Bind("Nombre")%>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Distancia Km" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblDistanciaKM" runat="server" Text='<%#Bind("DistanciaKM") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtDistanciaKM" runat="server" Text='<%#Bind("DistanciaKM") %>' class="form-control"></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Activo" ControlStyle-Font-Size="8pt" HeaderStyle-Font-Size="9pt" ItemStyle-Font-Size="8pt">
+                                    <ItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Enabled="false" Checked='<%#Bind("Activo") %>' />
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Checked='<%#Bind("Activo") %>' />
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:CommandField ShowEditButton="true" ButtonType="Image" EditImageUrl="~/Resources/Images/icon-edit.png" CancelImageUrl="~/Resources/Images/icon-cancel.png" UpdateImageUrl="~/Resources/Images/icon-apply.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                                <asp:CommandField ShowDeleteButton="true" ButtonType="Image" DeleteImageUrl="~/Resources/Images/icon-delete.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
+                            </Columns>
+                        </asp:GridView>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <asp:Button runat="server" ID="btnAregarRuta" CssClass="btn btn-default" Text="Agregar nueva Ruta" OnClick="btnAregarRuta_Click" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
         <div class="panel panel-default">

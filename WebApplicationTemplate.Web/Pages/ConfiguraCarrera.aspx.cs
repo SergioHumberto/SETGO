@@ -31,6 +31,7 @@ namespace WebApplicationTemplate.Web.Pages
                         BindDataToCampos(getDataControlXCarrera(idCarrera));
                         BindDataToRamas(getDataRamas(idCarrera));
                         BindDataToCategorias(getDataCategorias(idCarrera));
+                        BindDataToRutas(getDataRutas(idCarrera));
                     }
                     else
                     {
@@ -40,6 +41,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                     lnkShowInactiveRamas.Text = getTextlnkShowInactiveRama();
                     lnkShowInactiveCategoria.Text = getTextlnkShowInactiveCategoria();
+                    lnkShowInactiveRutas.Text = getTextlnkShowInactiveRutas();
                 }
             }
             catch (Exception ex)
@@ -64,6 +66,9 @@ namespace WebApplicationTemplate.Web.Pages
 
             lblErrorCategoria.InnerText = string.Empty;
             lblErrorCategoria.Visible = false;
+
+            lblErrorRutas.InnerText = string.Empty;
+            lblErrorRutas.Visible = false;
         }
         #region DatosGenerales
         protected void BindDataToGenerales(int idCarrera)
@@ -882,6 +887,289 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 lblErrorCategoria.InnerText = ex.Message;
                 lblErrorCategoria.Visible = true;
+            }
+        }
+        #endregion
+        #region Rutas
+        protected IList<RutaOBJ> getDataRutas(int idCarrera)
+        {
+            RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
+
+            RutaOBJ ruta = new RutaOBJ();
+            ruta.IdCarrera = idCarrera;
+            ruta.Activo = (ViewState["ShowInactiveRutas"] != null && (bool)ViewState["ShowInactiveRutas"]) ? false : true;
+
+            return rutaBLL.SeleccionarRutasByIdCarrera(ruta);
+        }
+        protected void BindDataToRutas(IList<RutaOBJ> listRutas)
+        {
+            grdRutas.DataSource = listRutas;
+            grdRutas.DataBind();
+        }
+        protected void obtieneListaCategorias(int idCarrera)
+        {
+            IList<CategoriaOBJ> lstCategorias = getDataCategorias(idCarrera);
+            ViewState.Remove("lstCategorias");
+            ViewState.Add("lstCategorias", lstCategorias);
+        }
+
+        protected void grdRutas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    DropDownList ddlCategoria = (e.Row.FindControl("ddlCategoria") as DropDownList);
+                    if (ddlCategoria != null)
+                    {
+                        IList<CategoriaOBJ> lstCategorias = (IList<CategoriaOBJ>)ViewState["lstCategorias"];
+                        if (lstCategorias.Count > 0)
+                        {
+                            ddlCategoria.DataSource = lstCategorias;
+                            ddlCategoria.DataTextField = "Nombre";
+                            ddlCategoria.DataValueField = "IdCategoria";
+                            ddlCategoria.DataBind();
+                        }
+                        ddlCategoria.Items.Insert(0, new ListItem("< Seleccionar >"));
+                        string idControl = (e.Row.FindControl("hdnIdCategoria") as HiddenField).Value;
+                        ListItem selectedItem = ddlCategoria.Items.FindByValue(idControl);
+                        if (selectedItem != null)
+                            selectedItem.Selected = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
+            }
+        }
+
+        protected void grdRutas_DataBinding(object sender, EventArgs e)
+        {
+            try
+            {
+                int idCarrera = -1;
+                if (Request.QueryString["IdCarrera"] != null)
+                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+
+                obtieneListaCategorias(idCarrera);
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
+            }
+        }
+        protected string getTextlnkShowInactiveRutas()
+        {
+            return (ViewState["ShowInactiveRutas"] != null && (bool)ViewState["ShowInactiveRutas"]) ? "Mostrar Activos" : "Mostrar Inactivos";
+        }
+        protected void lnkShowInactiveRutas_Click(object sender, EventArgs e)
+        {
+            if (ViewState["ShowInactiveRutas"] == null)
+            {
+                ViewState.Add("ShowInactiveRutas", true);
+            }
+            else
+            {
+                ViewState.Add("ShowInactiveRutas", !(bool)ViewState["ShowInactiveRutas"]);
+            }
+
+            int idCarrera = -1;
+            if (Request.QueryString["IdCarrera"] != null)
+                int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+
+            lnkShowInactiveRutas.Text = getTextlnkShowInactiveRutas();
+            BindDataToRutas(getDataRutas(idCarrera));
+        }
+
+        protected void grdRutas_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                int idCarrera = -1;
+                if (Request.QueryString["IdCarrera"] != null)
+                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+
+                grdRutas.EditIndex = e.NewEditIndex;
+                if (ViewState["NuevaRuta"] != null && (bool)ViewState["NuevaRuta"])
+                {
+                    IList<RutaOBJ> lstRutas = getDataRutas(idCarrera);
+                    lstRutas.Add(new RutaOBJ());
+                    BindDataToRutas(lstRutas);
+                }
+                else
+                    BindDataToRutas(getDataRutas(idCarrera));
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
+            }
+        }
+
+        protected void grdRutas_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                int idCarrera = -1;
+                if (Request.QueryString["IdCarrera"] != null)
+                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+
+                grdRutas.EditIndex = -1;
+                ViewState.Remove("NuevaRuta");
+                BindDataToRutas(getDataRutas(idCarrera));
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
+            }
+        }
+
+        protected bool validaRuta(RutaOBJ param)
+        {
+            string errores = string.Empty;
+            if (param.IdCategoria <= 0)
+            {
+                errores += (errores == string.Empty) ? "" : ", ";
+                errores += "Es necesario seleccionar una categoria";
+            }
+
+            if (param.Nombre == string.Empty)
+            {
+                errores += (errores == string.Empty) ? "" : ", ";
+                errores += "El Nombre no debe estar vacio";
+            }
+
+            if (param.DistanciaKM < 0)
+            {
+                errores += (errores == string.Empty) ? "" : ", ";
+                errores += "La distancia debe ser mayor o igual a cero";
+            }
+            
+            /*
+            * Si existen mensajes de error los hace visibles
+            */
+            if (errores != string.Empty)
+            {
+                lblErrorMessagesCampos.InnerText = errores;
+                lblErrorMessagesCampos.Visible = true;
+                return false;
+            }
+            else
+                return true;
+        }
+
+        protected void grdRutas_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                GridViewRow grdRow = (GridViewRow)grdRutas.Rows[e.RowIndex];
+                //obtener los nuevos valores   
+                HiddenField hdnIdRuta = grdRow.FindControl("hdnIdRuta") as HiddenField;
+                int IdRuta;
+                int.TryParse(hdnIdRuta.Value, out IdRuta);
+
+                DropDownList ddlCategoria = grdRow.FindControl("ddlCategoria") as DropDownList;
+                int IdCategoria;
+                int.TryParse(ddlCategoria.SelectedItem.Value, out IdCategoria);
+
+                string nombre = (e.NewValues["Nombre"] != null) ? e.NewValues["Nombre"].ToString() : string.Empty;
+                decimal distancia;
+                decimal.TryParse(e.NewValues["DistanciaKM"].ToString(), out distancia);
+                bool activo;
+                bool.TryParse(e.NewValues["Activo"].ToString(), out activo);                
+
+                int idCarrera = -1;
+                if (Request.QueryString["IdCarrera"] != null)
+                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+
+                RutaOBJ ruta = new RutaOBJ();
+                ruta.IdCategoria = IdCategoria;
+                ruta.IdRuta = IdRuta;
+                ruta.Nombre = nombre;
+                ruta.DistanciaKM = distancia;
+                ruta.Activo = activo;                
+
+                if (!validaRuta(ruta)) return;
+
+                UserSession session = HttpSecurity.CurrentSession;
+                RutaBLL rutaBLL = new RutaBLL(session);
+
+                if (ViewState["NuevaRuta"] != null && (bool)ViewState["NuevaRuta"])
+                {
+                    rutaBLL.InsertarRuta(ruta);
+                    ViewState.Remove("NuevaRuta");
+                }
+                else
+                    rutaBLL.UpdateRuta(ruta);
+
+                grdRutas.EditIndex = -1;
+
+                BindDataToRutas(getDataRutas(idCarrera));
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
+            }
+        }
+
+        protected void grdRutas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                UserSession session = HttpSecurity.CurrentSession;
+                RutaBLL rutaBLL = new RutaBLL(session);
+
+                GridViewRow row = grdRutas.Rows[e.RowIndex];
+                HiddenField hdnIdRuta = row.FindControl("hdnIdRuta") as HiddenField;
+                int idRuta;
+                int.TryParse(hdnIdRuta.Value, out idRuta);
+
+                RutaOBJ ruta = new RutaOBJ();
+                ruta.IdRuta = idRuta;
+
+                int idCarrera = -1;
+                if (Request.QueryString["IdCarrera"] != null)
+                    int.TryParse(Request.QueryString["IdCarrera"], out idCarrera);
+
+                rutaBLL.DeleteRuta(ruta);
+                BindDataToRutas(getDataRutas(idCarrera));
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
+            }
+        }
+
+        protected void btnAregarRuta_Click(object sender, EventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                if (Request.QueryString["IdCarrera"] != null)
+                {
+                    ViewState.Add("NuevaRuta", true);
+                    grdRutas.SetEditRow(grdRutas.Rows.Count);
+                }
+                else
+                {
+                    lblErrorRutas.InnerText = "Primero debes capturar y guardar los datos generales de la carrera";
+                    lblErrorRutas.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblErrorRutas.InnerText = ex.Message;
+                lblErrorRutas.Visible = true;
             }
         }
         #endregion        

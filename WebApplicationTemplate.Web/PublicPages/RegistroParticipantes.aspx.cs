@@ -1119,7 +1119,10 @@ namespace WebApplicationTemplate.Web.Pages
 			RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
 			IList<RutaOBJ> lstRutas;
 
-			lstRutas = rutaBLL.SeleccionarRutasByIdCategoria(idCategoria);
+            RutaOBJ ruta = new RutaOBJ();
+            ruta.IdCategoria = idCategoria;
+
+			lstRutas = rutaBLL.SeleccionarRutasByIdCategoria(ruta);
 
 			lblRuta.Visible = false;
 
