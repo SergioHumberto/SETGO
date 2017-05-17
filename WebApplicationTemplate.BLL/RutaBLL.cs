@@ -28,7 +28,6 @@ namespace WebApplicationTemplate.BLL
         {
             RutaDAL.DeleteRuta(param);
         }
-    }
 
 		public IList<RutaOBJ> SeleccionarRutasByIdCategoria(int idCategoria)
 		{
