@@ -39,7 +39,15 @@
                 </ul>
             </li>
             <li><a href="<%= Urls.ReporteRegistrados() %>">Reporte Registrados</a></li>
-            <li><a href="<%= Urls.CargarResultados() %>">Cargar Resultados</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resultados<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="<%= Urls.CargarResultados() %>">Cargar</a></li>   
+                    <li><a href="<%= Urls.ConsultaResultadosIFrame()%>">Consulta</a></li>                                 
+                    <%--<li class="divider"></li>--%>                    
+                </ul>
+            </li>            
             <li><a href="<%= Urls.SignOut() %>">Salir</a></li>
         </ul>
     </div>

@@ -367,6 +367,7 @@
     <Content Include="Masters\PrivatePage.Master" />
     <Content Include="Pages\AdmonCatEquipos.aspx" />
     <Content Include="Pages\BuscaCarrera.aspx" />
+    <Content Include="Pages\ConsultaResultadosIFrame.aspx" />
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\CargarResultados.aspx" />
@@ -552,6 +553,13 @@
     </Compile>
     <Compile Include="Pages\BuscaCarrera.aspx.designer.cs">
       <DependentUpon>BuscaCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ConsultaResultadosIFrame.aspx.cs">
+      <DependentUpon>ConsultaResultadosIFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ConsultaResultadosIFrame.aspx.designer.cs">
+      <DependentUpon>ConsultaResultadosIFrame.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Demo.aspx.cs">
       <DependentUpon>Demo.aspx</DependentUpon>

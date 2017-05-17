@@ -99,5 +99,14 @@ namespace WebApplicationTemplate.Web.Tools
         {
             return Abs("~/Pages/ConfiguraCarrera.aspx");
         }
+        public static String ConsultaResultados()
+        {
+            return Abs("~/PublicPages/ConsultaResultados.aspx");
+        }
+
+        public static String ConsultaResultadosIFrame()
+        {
+            return Abs("~/Pages/ConsultaResultadosIFrame.aspx");
+        }
     }
 }
