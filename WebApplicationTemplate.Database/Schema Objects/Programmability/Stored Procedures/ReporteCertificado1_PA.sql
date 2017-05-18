@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[ReporteCertificado1_PA]
 (
 	@IdCarrera INT
+	, @IdResultado INT = NULL
 )
 AS
 BEGIN
@@ -13,4 +14,5 @@ BEGIN
 	, R.Lug_Rama AS [PosicionSexo]
 	FROM Resultados R
 	WHERE R.IdCarrera = @IdCarrera
+		AND (@IdResultado IS NULL OR R.IdResultado = @IdResultado)
 END 

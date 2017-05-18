@@ -12,6 +12,7 @@ namespace WebApplicationTemplate.Web.Reports.Classes
     public class ReporteCertificado_1 : Tools.ReportControl
     {
         public int IdCarrera { get; set; }
+        public int IdResultado { get; set; }
 
         public override string ReportPath()
         {
@@ -20,8 +21,9 @@ namespace WebApplicationTemplate.Web.Reports.Classes
 
         public override DataTable GenerateDataSource()
         {
-            SqlParameter[] arrParams = new SqlParameter[1];
+            SqlParameter[] arrParams = new SqlParameter[2];
             arrParams[0] = new SqlParameter("IdCarrera", IdCarrera);
+            arrParams[1] = new SqlParameter("IdResultado", IdResultado);
 
             DataTable dt = Tools.DataSetHelper.ExecuteStoredProcedure("ReporteCertificado1_PA", arrParams);
             dt.TableName = "DataSet1";

@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConsultaResultados.aspx.cs" Inherits="WebApplicationTemplate.Web.PublicPages.ConsultaResultados1" %>
 
+<%@ Register TagPrefix="obout" Namespace="Obout.Grid" Assembly="obout_Grid_NET" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,66 +26,48 @@
 
         <br />
 
-        <div class="input-group" style="width:60%">
-            <label>Carrera</label>
-            <asp:DropDownList CssClass="form-control" ID="ddlCarrera" AutoPostBack="true" runat="server" AppendDataBoundItems="true">
-                <asp:ListItem Value="-1">-- Seleccione una Carrera --</asp:ListItem>
-            </asp:DropDownList>
-            <br />
-            <asp:Label ID="lblErrorCarrera" runat="server" Text="" ForeColor="Red"></asp:Label>
-        </div>
+        <asp:Label ID="lblErrorCarrera" ForeColor="Red" runat="server"></asp:Label>
 
-        <br />
+        <obout:Grid id="grdConsultarResultados" runat="server"  AutoGenerateColumns="false" CallbackMode="true" Serialize="true" 
+			 FolderStyle="styles/premiere_blue" AllowColumnResizing="true" EnableRecordHover="true"
+			AllowAddingRecords="true" Language="es" AllowDataAccessOnServer="true" AllowFiltering="true" ShowLoadingMessage="true">
+            <Columns>
+                <obout:Column DataField="Nombres" Wrap="true" HeaderText="Nombres" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="Paterno" Wrap="true" HeaderText="Paterno" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="Materno" HeaderText="Materno" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="Sexo" HeaderText="Sexo" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="T_Chip" HeaderText="Tiempo chip" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="Lug_Rama" HeaderText="Lugar rama" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="Vel" HeaderText="Vel" Align="left" runat="server" Width="100"/>
+                <obout:Column DataField="Lug_Gral" Align="left" Wrap="true" Width="120" HeaderStyle-Wrap="true" HeaderText="Lugar general" runat="server"/>
+                <obout:Column>
+                    <TemplateSettings TemplateId="templateCertificado" HeaderTemplateId="templateHeaderCertificado" />
+                </obout:Column>
 
-        <div class="input-group" style="width:60%">
-            <asp:Button ID="btnConsultarResultados" CssClass="btn btn-default" runat="server" Text="Consultar Resultados"
-                    OnClick="btnConsultarResultados_Click"/>
-        </div>
-
-        <br />
-
-        <div class="input-group" style="width:60%">
-            <asp:Table ID="tbRegistros" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="lblMostrar" runat="server" Text="Mostrar"></asp:Label>
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="ddlNumRegistros" AutoPostBack="true" runat="server" AppendDataBoundItems="true" 
-                            CssClass="dropdown" OnSelectedIndexChanged="ddlNumRegistros_SelectedIndexChanged">
-                            <asp:ListItem Text="10" Value="10"></asp:ListItem>
-                            <asp:ListItem Text="25" Value="25"></asp:ListItem>
-                            <asp:ListItem Text="50" Value="50"></asp:ListItem>
-                            <asp:ListItem Text="100" Value="100"></asp:ListItem>
-                        </asp:DropDownList>
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:Label ID="lblRegistros" runat="server" Text="Registros"></asp:Label>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </div>
-
-        <br />
-        
-        <div style="overflow-x:auto;width:100%">
-           <div class="input-group" style="width:60%" >
-               <asp:GridView ID="grdConsultarResultados" runat="server"
-                    OnPageIndexChanging="PageIndexChanging" 
-                    AllowPaging = "true"
-                    CssClass="table table-bordered bs-table"
-                   PageSize="10"
-                   PagerSettings-Mode="NextPrevious"
-                   PagerSettings-PreviousPageText="Anterior"
-                   PagerSettings-NextPageText="Siguiente"
-                   PagerStyle-HorizontalAlign="Right"
-                   HeaderStyle-BackColor="#d9edf7"
-                   >
-                </asp:GridView>
-           </div>
-        </div>
-            
-        <br />
+                <%-- otros campos --%>
+                <%--<obout:Column DataField="Categoria" HeaderText="Categoria" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="Numero" HeaderText="Numero" Wrap="true" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="Folio" HeaderText="Folio" Width="90" runat="server"/>--%>
+                <%--<obout:Column DataField="Procedencia" HeaderText="Procedencia" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="Equipo" HeaderText="Equipo" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="Telefono" HeaderText="Telefono" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="T_Oficial" HeaderText="T_Oficial" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="Lug_Cat" HeaderText="Lug_Cat" Width="100" runat="server"/>--%>
+                <%--<obout:Column DataField="Rama" HeaderText="Rama" Width="100" runat="server"/>--%>
+            </Columns>
+            <Templates>
+                <obout:GridTemplate runat="server" ID="templateHeaderCertificado">
+                    <Template>
+                        Certificado
+                    </Template>
+                </obout:GridTemplate>
+                <obout:GridTemplate runat="server" ID="templateCertificado">
+                    <Template>
+                        <asp:LinkButton runat="server" ID="lnkBtnImprimirCertificado" OnClick="lnkBtnImprimirCertificado_Click" Text="Imprime"></asp:LinkButton>
+                    </Template>
+                </obout:GridTemplate>
+            </Templates>
+		</obout:Grid>		
 
         <div class="input-group" style="width:60%">
             <asp:Label ID="lblError" Text="" runat="server"></asp:Label>

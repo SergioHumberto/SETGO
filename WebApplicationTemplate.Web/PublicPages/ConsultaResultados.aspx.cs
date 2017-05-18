@@ -18,81 +18,54 @@ namespace WebApplicationTemplate.Web.PublicPages
 {
 	public partial class ConsultaResultados1 : System.Web.UI.Page
 	{
-		protected void Page_Load(object sender, EventArgs e)
+        private int IdCarreraProperty
+        {
+            get {
+
+                if (Request.QueryString["IdCarrera"] != null)
+                {
+                    int IdCarrera;
+                    if (int.TryParse(Request.QueryString["IdCarrera"], out IdCarrera))
+                    {
+                        if (IdCarrera > 0)
+                        {
+                            return IdCarrera;
+                        }
+                    }
+                }
+
+                return -1;
+            }
+        }
+
+
+        protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
 			{
-				LoadCarreras();
+                // LoadCarreras();
+                ResultadosBLL resultadosBLL = new ResultadosBLL();
 
-				lblError.Text = string.Empty;
+                if (IdCarreraProperty > 0)
+                {
+                    if (resultadosBLL.VerificarResultadoDeCarrera(IdCarreraProperty))
+                    {
+                        CargarResultados(IdCarreraProperty);
+                        // tbRegistros.Visible = true;
+                    }
+                    else
+                    {
+                        lblErrorCarrera.Text = "No se han cargado resultados para esta carrera.";
+                    }
+                }
+                else
+                {
+                    grdConsultarResultados.Visible = false;
 
-				tbRegistros.Visible = false;
-			}
-		}
+                    lblErrorCarrera.Text = "Debe seleccionar una carrera.";
+                }
 
-		private void LoadCarreras()
-		{
-			CarreraBLL objCarreraBLL = new CarreraBLL(Tools.HttpSecurity.CurrentSession);
-			IList<CarreraOBJ> lstCarreras = objCarreraBLL.SelectCarrera(new CarreraOBJ() { }); // Todas las carreras
-			ddlCarrera.DataSource = lstCarreras;
-			ddlCarrera.DataTextField = "Nombre";
-			ddlCarrera.DataValueField = "IdCarrera";
-			ddlCarrera.DataBind();
-		}
-
-		protected void btnConsultarResultados_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				lblError.Text = string.Empty;
-				ResultadosBLL resultadosBLL = new ResultadosBLL();
-
-				grdConsultarResultados.Columns.Clear();
-
-				int idCarrera = 0;
-				if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
-				{
-					if (idCarrera > 0)
-					{
-						if (resultadosBLL.VerificarResultadoDeCarrera(idCarrera))
-						{
-							CargarResultados(idCarrera);
-							tbRegistros.Visible = true;
-						}
-						else
-						{
-							lblErrorCarrera.Text = "No se han cargado resultados para esta carrera.";
-						}
-					}
-					else
-					{
-						grdConsultarResultados.Visible = false;
-
-						lblErrorCarrera.Text = "Debe seleccionar una carrera.";
-						ddlCarrera.Focus();
-					}
-				}
-			}
-			catch(Exception ex)
-			{
-				lblError.Text = ex.Message;
-			}
-		}
-
-		protected void PageIndexChanging(object sender, GridViewPageEventArgs e)
-		{
-			try
-			{
-				lblError.Text = string.Empty;
-				grdConsultarResultados.PageIndex = e.NewPageIndex;
-				grdConsultarResultados.DataBind();
-				grdConsultarResultados.Visible = true;
-
-				btnConsultarResultados_Click(null, e);
-			}
-			catch(Exception ex)
-			{
-				lblError.Text = ex.Message;
+                lblError.Text = string.Empty;
 			}
 		}
 
@@ -130,7 +103,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 			string query = string.Empty;
 
-			query = "SELECT ";
+			query = "SELECT IdResultado, ";
 
 			if(crOBJ.Numero)
 			{
@@ -208,24 +181,34 @@ namespace WebApplicationTemplate.Web.PublicPages
 			return query;
 		}
 
-		protected void ddlNumRegistros_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			try
-			{
-				lblError.Text = string.Empty;
+        protected void lnkBtnImprimirCertificado_Click(object sender, EventArgs e)
+        {
+            LinkButton lnkBtn = sender as LinkButton;
+            Obout.Grid.TemplateContainer templateContainer = lnkBtn.NamingContainer as Obout.Grid.TemplateContainer;
 
-				int num = 0;
-				if(int.TryParse(ddlNumRegistros.SelectedValue, out num))
-				{
-					grdConsultarResultados.PageSize = num;
+            if (templateContainer != null)
+            {
+                Obout.Grid.GridTemplate gridTemplate = templateContainer.NamingContainer as Obout.Grid.GridTemplate;
 
-					btnConsultarResultados_Click(null, e);
-				}
-			}
-			catch (Exception ex)
-			{
-				lblError.Text = ex.Message;
-			}
-		}
-	}
+                if (gridTemplate != null)
+                {
+                    Obout.Grid.GridRow gridRow = gridTemplate.NamingContainer as Obout.Grid.GridRow;
+
+                    if (gridRow != null)
+                    {
+                        DataRowView drv = gridRow.DataItem as DataRowView;
+                        if (drv != null)
+                        {
+                            int IdResultado = int.Parse(drv["IdResultado"].ToString());
+                            Reports.Classes.ReporteCertificado_1 reportCertificado = new Reports.Classes.ReporteCertificado_1();
+
+                            reportCertificado.IdCarrera = IdCarreraProperty;
+                            reportCertificado.IdResultado = IdResultado;
+                            reportCertificado.GenerateReport();
+                        }
+                    }
+                }
+            }            
+        }
+    }
 }
