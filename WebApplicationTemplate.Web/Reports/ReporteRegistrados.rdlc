@@ -83,6 +83,12 @@
             <TablixColumn>
               <Width>3.25438cm</Width>
             </TablixColumn>
+            <TablixColumn>
+              <Width>2.87042cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.08208cm</Width>
+            </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
@@ -855,6 +861,66 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox12</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox21">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Ruta</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox16">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Codigo Pago</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox16</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1655,12 +1721,74 @@
                     </Textbox>
                   </CellContents>
                 </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Ruta">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Ruta.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Ruta</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="CodigoPago">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!CodigoPago.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>CodigoPago</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
               </TablixCells>
             </TablixRow>
           </TablixRows>
         </TablixBody>
         <TablixColumnHierarchy>
           <TablixMembers>
+            <TablixMember />
+            <TablixMember />
             <TablixMember />
             <TablixMember />
             <TablixMember />
@@ -1702,7 +1830,7 @@
         <DataSetName>RegistradosXCarrera</DataSetName>
         <Top>4.89162cm</Top>
         <Height>1.2cm</Height>
-        <Width>76.45328cm</Width>
+        <Width>82.40578cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1807,7 +1935,7 @@
     <Height>3.22119in</Height>
     <Style />
   </Body>
-  <Width>30.22471in</Width>
+  <Width>32.49554in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
@@ -1939,10 +2067,18 @@
           <DataField>Clasificaciones</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Ruta">
+          <DataField>Ruta</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CodigoPago">
+          <DataField>CodigoPago</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ReporteRegistradosDS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Lenovo\Desktop\ProyectoPepe\trunk\WebApplicationTemplate.Web\Reports\XSD\ReporteRegistradosDS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Lenovo\Desktop\Proyectos\ProyectoPepe\trunk\WebApplicationTemplate.Web\Reports\XSD\ReporteRegistradosDS.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
