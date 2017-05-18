@@ -331,6 +331,10 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             private global::System.Data.DataColumn columnClasificaciones;
             
+            private global::System.Data.DataColumn columnRuta;
+            
+            private global::System.Data.DataColumn columnCodigoPago;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DataTable1DataTable() {
@@ -574,6 +578,22 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RutaColumn {
+                get {
+                    return this.columnRuta;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CodigoPagoColumn {
+                get {
+                    return this.columnCodigoPago;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -635,7 +655,9 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                         string Generic08, 
                         string Generic09, 
                         string Generic10, 
-                        string Clasificaciones) {
+                        string Clasificaciones, 
+                        string Ruta, 
+                        string CodigoPago) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Nombre,
@@ -663,7 +685,9 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                         Generic08,
                         Generic09,
                         Generic10,
-                        Clasificaciones};
+                        Clasificaciones,
+                        Ruta,
+                        CodigoPago};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -712,6 +736,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 this.columnGeneric09 = base.Columns["Generic09"];
                 this.columnGeneric10 = base.Columns["Generic10"];
                 this.columnClasificaciones = base.Columns["Clasificaciones"];
+                this.columnRuta = base.Columns["Ruta"];
+                this.columnCodigoPago = base.Columns["CodigoPago"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -769,6 +795,10 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 base.Columns.Add(this.columnGeneric10);
                 this.columnClasificaciones = new global::System.Data.DataColumn("Clasificaciones", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnClasificaciones);
+                this.columnRuta = new global::System.Data.DataColumn("Ruta", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRuta);
+                this.columnCodigoPago = new global::System.Data.DataColumn("CodigoPago", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCodigoPago);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1327,6 +1357,38 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Ruta {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.RutaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Ruta\' de la tabla \'DataTable1\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.RutaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string CodigoPago {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.CodigoPagoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'CodigoPago\' de la tabla \'DataTable1\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.CodigoPagoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNombreNull() {
                 return this.IsNull(this.tableDataTable1.NombreColumn);
             }
@@ -1635,6 +1697,30 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetClasificacionesNull() {
                 this[this.tableDataTable1.ClasificacionesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRutaNull() {
+                return this.IsNull(this.tableDataTable1.RutaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRutaNull() {
+                this[this.tableDataTable1.RutaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCodigoPagoNull() {
+                return this.IsNull(this.tableDataTable1.CodigoPagoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCodigoPagoNull() {
+                this[this.tableDataTable1.CodigoPagoColumn] = global::System.Convert.DBNull;
             }
         }
         
