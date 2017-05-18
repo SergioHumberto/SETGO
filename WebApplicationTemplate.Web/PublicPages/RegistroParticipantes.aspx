@@ -272,20 +272,6 @@
                 </div>
             </asp:PlaceHolder>
 
-            <asp:PlaceHolder ID="phFolioOffline" Visible="false" runat="server">
-                <div style="width: 60%" class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label id="lblFolioOffline" runat="server">Folio</label>
-                            <asp:TextBox ID="txtFolioOffline" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
-
-                            <asp:RequiredFieldValidator ID="reqFolioOffline" ControlToValidate="txtFolioOffline" SetFocusOnError="true"
-                                CssClass="AlertaRequerido" ErrorMessage="Se requiere folio" runat="server" Display="Dynamic"></asp:RequiredFieldValidator>
-                        </div>
-                    </div>
-                </div>
-            </asp:PlaceHolder>
-
         </asp:PlaceHolder>
 
         <asp:PlaceHolder ID="phGeneric01" Visible="false" runat="server">
@@ -532,6 +518,26 @@
                 </div>
             </asp:PlaceHolder>
 
+            <br />
+
+            <asp:UpdatePanel runat="server" ID="upFormaPago" UpdateMode="Always">
+                <ContentTemplate>
+                    <asp:PlaceHolder ID="phFolioOffline" Visible="false" runat="server">
+                        <div style="width: 80%" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label id="lblFolioOffline" runat="server">Código de Pago</label>
+                                    <asp:TextBox ID="txtFolioOffline" Enabled="true" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
+
+                                    <asp:RequiredFieldValidator ID="reqFolioOffline" ControlToValidate="txtFolioOffline" SetFocusOnError="true"
+                                        CssClass="AlertaRequerido" ErrorMessage="Se requiere folio" runat="server" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:PlaceHolder>
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
             <asp:UpdatePanel runat="server" ID="upTotal" UpdateMode="Always">
                 <ContentTemplate>

@@ -248,6 +248,7 @@
     <Build Include="Schema Objects\Tables\ValoresClasificacion.sql" />
     <Build Include="Schema Objects\Tables\ClasificacionXParticipante.sql" />
     <Build Include="Schema Objects\Programmability\Functions\GetClasificacionesXParticipante.sql" />
+    <None Include="Scripts\Post-Deployment\ControlXCarrera.1.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />
