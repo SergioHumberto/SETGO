@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ConsultaResultados.aspx.cs" Inherits="WebApplicationTemplate.Web.PublicPages.ConsultaResultados1" %>
 
-<%@ Register TagPrefix="obout" Namespace="Obout.Grid" Assembly="obout_Grid_NET" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,59 +14,91 @@
     
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-
+        
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" />
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
-        <h3>Consulta de resultados</h3>
+        <style type="text/css">
+            .Titulo {
+                background-color: #d9edf7;
+                font-weight: 700;
+                vertical-align: middle;
+            }
+
+            .Titulo:hover {
+                background-color: #31B0E6;
+            }
+
+        </style>
+
+     <script>
+  
+     $(document).ready(function () {
+         $('#tbl').dataTable({
+             "sScrollY": "90%",
+             //'sPaginationType': 'full_numbers',
+             //'iDisplayLength': 5,
+             "bPaginate": true,
+             "bProcessing": true,
+             "bServerSide": false
+         });
+     });
+ </script>
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
         <br />
 
         <asp:Label ID="lblErrorCarrera" ForeColor="Red" runat="server"></asp:Label>
 
-        <obout:Grid id="grdConsultarResultados" runat="server"  AutoGenerateColumns="false" CallbackMode="true" Serialize="true" 
-			 FolderStyle="styles/premiere_blue" AllowColumnResizing="true" EnableRecordHover="true"
-			AllowAddingRecords="true" Language="es" AllowDataAccessOnServer="true" AllowFiltering="true" ShowLoadingMessage="true">
-            <Columns>
-                <obout:Column DataField="Nombres" Wrap="true" HeaderText="Nombres" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="Paterno" Wrap="true" HeaderText="Paterno" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="Materno" HeaderText="Materno" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="Sexo" HeaderText="Sexo" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="T_Chip" HeaderText="Tiempo chip" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="Lug_Rama" HeaderText="Lugar rama" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="Vel" HeaderText="Vel" Align="left" runat="server" Width="100"/>
-                <obout:Column DataField="Lug_Gral" Align="left" Wrap="true" Width="120" HeaderStyle-Wrap="true" HeaderText="Lugar general" runat="server"/>
-                <obout:Column>
-                    <TemplateSettings TemplateId="templateCertificado" HeaderTemplateId="templateHeaderCertificado" />
-                </obout:Column>
+        <div class="input-group">
+        <div style="width:1150px;" >
+        
+            <asp:Repeater ID="repeater" runat="server">
+            <HeaderTemplate>
+                <table id="tbl" cellpadding="1" cellspacing="0" 
+                    border="0" class="display">
+                  <thead>
+                    <tr>
+                        <th class="Titulo">Nombres</th>
+                        <th class="Titulo">Paterno</th>
+                        <th class="Titulo">Materno</th>
+                        <th class="Titulo">Sexo</th>
+                        <th class="Titulo">Tiempo chip</th>
+                        <th class="Titulo">Lugar rama</th>
+                        <th class="Titulo">Vel</th>
+                        <th class="Titulo">Lugar general</th>
+                        <th class="Titulo">Imprime</th>
+                    </tr>
+                  </thead>
+                <tbody>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td><%# Eval("Nombres") %></td>
+                    <td><%# Eval("Paterno") %></td>
+                    <td><%# Eval("Materno") %></td>
+                    <td><%# Eval("Sexo") %></td>
+                    <td><%# Eval("T_Chip") %></td>
+                    <td><%# Eval("Lug_Rama") %></td>
+                    <td><%# Eval("Vel") %></td>
+                    <td><%# Eval("Lug_Gral") %></td>
+                    <td><a href="<%= URLRedirectImprimirCertificado %><%# Eval("IdResultado") %>"> Imprime </a></td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                    </tbody>
+                </table>
+            </FooterTemplate>
+        </asp:Repeater>
+    </div>
+            </div>
 
-                <%-- otros campos --%>
-                <%--<obout:Column DataField="Categoria" HeaderText="Categoria" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="Numero" HeaderText="Numero" Wrap="true" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="Folio" HeaderText="Folio" Width="90" runat="server"/>--%>
-                <%--<obout:Column DataField="Procedencia" HeaderText="Procedencia" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="Equipo" HeaderText="Equipo" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="Telefono" HeaderText="Telefono" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="T_Oficial" HeaderText="T_Oficial" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="Lug_Cat" HeaderText="Lug_Cat" Width="100" runat="server"/>--%>
-                <%--<obout:Column DataField="Rama" HeaderText="Rama" Width="100" runat="server"/>--%>
-            </Columns>
-            <Templates>
-                <obout:GridTemplate runat="server" ID="templateHeaderCertificado">
-                    <Template>
-                        Certificado
-                    </Template>
-                </obout:GridTemplate>
-                <obout:GridTemplate runat="server" ID="templateCertificado">
-                    <Template>
-                        <asp:LinkButton runat="server" ID="lnkBtnImprimirCertificado" OnClick="lnkBtnImprimirCertificado_Click" Text="Imprime"></asp:LinkButton>
-                    </Template>
-                </obout:GridTemplate>
-            </Templates>
-		</obout:Grid>		
-
+        <br />
+        
         <div class="input-group" style="width:60%">
             <asp:Label ID="lblError" Text="" runat="server"></asp:Label>
         </div>

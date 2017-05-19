@@ -74,14 +74,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="obout_Grid_NET, Version=5.0.7.0, Culture=neutral, PublicKeyToken=5ddc49d3b53e3f98, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\obout_Grid_NET.dll</HintPath>
-    </Reference>
-    <Reference Include="obout_Interface, Version=4.0.10.0, Culture=neutral, PublicKeyToken=d5dff6913a9d6649, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\obout_Interface.dll</HintPath>
-    </Reference>
     <Reference Include="PayPal, Version=1.8.0.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\PayPal.dll</HintPath>

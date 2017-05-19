@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using WebApplicationTemplate.DAL;
 using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
+using System.Web.Services;
 
 namespace WebApplicationTemplate.Web.PublicPages
 {
@@ -38,36 +39,84 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
 
+        public int IdResultadoProperty
+        {
+            get
+            {
+                int IdResultado;
+                if (Request.QueryString["IdResultado"] != null)
+                {
+                    if (int.TryParse(Request.QueryString["IdResultado"], out IdResultado))
+                    {
+                        return IdResultado;
+                    }
+                }
+
+                return -1;
+            }
+        }
+
+        public string URLRedirectImprimirCertificado
+        {
+            get
+            {
+                string url = "~/PublicPages/ConsultaResultados.aspx?IdCarrera={0}&IdResultado=";
+                url = string.Format(url, IdCarreraProperty);
+
+                return Tools.Urls.Abs(url);
+            }
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
 			{
-                // LoadCarreras();
-                ResultadosBLL resultadosBLL = new ResultadosBLL();
-
-                if (IdCarreraProperty > 0)
+                if (IdResultadoProperty > 0)
                 {
-                    if (resultadosBLL.VerificarResultadoDeCarrera(IdCarreraProperty))
-                    {
-                        CargarResultados(IdCarreraProperty);
-                        // tbRegistros.Visible = true;
-                    }
-                    else
-                    {
-                        lblErrorCarrera.Text = "No se han cargado resultados para esta carrera.";
-                    }
+                    GeneraCertificado(IdResultadoProperty);
                 }
                 else
                 {
-                    grdConsultarResultados.Visible = false;
-
-                    lblErrorCarrera.Text = "Debe seleccionar una carrera.";
+                    LoadCarrera();
                 }
-
-                lblError.Text = string.Empty;
 			}
 		}
+
+        private void GeneraCertificado(int IdResultado)
+        {
+            Reports.Classes.ReporteCertificado_1 reportCertificado = new Reports.Classes.ReporteCertificado_1();
+
+            reportCertificado.IdCarrera = IdCarreraProperty;
+            reportCertificado.IdResultado = IdResultado;
+            reportCertificado.GenerateReport();
+        }
+
+        private void LoadCarrera()
+        {
+            ResultadosBLL resultadosBLL = new ResultadosBLL();
+
+            if (IdCarreraProperty > 0)
+            {
+                if (resultadosBLL.VerificarResultadoDeCarrera(IdCarreraProperty))
+                {
+                    CargarResultados(IdCarreraProperty);
+                    // tbRegistros.Visible = true;
+                }
+                else
+                {
+                    lblErrorCarrera.Text = "No se han cargado resultados para esta carrera.";
+                }
+            }
+            else
+            {
+                repeater.Visible = false;
+
+                lblErrorCarrera.Text = "Debe seleccionar una carrera.";
+            }
+
+            lblError.Text = string.Empty;
+        }
 
 		private void CargarResultados(int idCarrera)
 		{
@@ -84,9 +133,11 @@ namespace WebApplicationTemplate.Web.PublicPages
 				SqlDataAdapter da = new SqlDataAdapter(cmd);
 				DataTable dt = new DataTable();
 				da.Fill(dt);
-				grdConsultarResultados.DataSource = dt;
-				grdConsultarResultados.DataBind();
-				cn.Close();
+
+                repeater.DataSource = dt;
+                repeater.DataBind();
+
+                cn.Close();
 			}
 			catch (Exception ex)
 			{
@@ -180,35 +231,5 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 			return query;
 		}
-
-        protected void lnkBtnImprimirCertificado_Click(object sender, EventArgs e)
-        {
-            LinkButton lnkBtn = sender as LinkButton;
-            Obout.Grid.TemplateContainer templateContainer = lnkBtn.NamingContainer as Obout.Grid.TemplateContainer;
-
-            if (templateContainer != null)
-            {
-                Obout.Grid.GridTemplate gridTemplate = templateContainer.NamingContainer as Obout.Grid.GridTemplate;
-
-                if (gridTemplate != null)
-                {
-                    Obout.Grid.GridRow gridRow = gridTemplate.NamingContainer as Obout.Grid.GridRow;
-
-                    if (gridRow != null)
-                    {
-                        DataRowView drv = gridRow.DataItem as DataRowView;
-                        if (drv != null)
-                        {
-                            int IdResultado = int.Parse(drv["IdResultado"].ToString());
-                            Reports.Classes.ReporteCertificado_1 reportCertificado = new Reports.Classes.ReporteCertificado_1();
-
-                            reportCertificado.IdCarrera = IdCarreraProperty;
-                            reportCertificado.IdResultado = IdResultado;
-                            reportCertificado.GenerateReport();
-                        }
-                    }
-                }
-            }            
-        }
     }
 }

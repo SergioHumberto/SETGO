@@ -44,5 +44,9 @@ namespace WebApplicationTemplate.Web.Reports.Classes
             return "Certificado1";
         }
 
+        public override EnumDisposition Disposition()
+        {
+            return EnumDisposition.inline;
+        }
     }
 }

@@ -40,31 +40,13 @@ namespace WebApplicationTemplate.Web.PublicPages {
         protected global::System.Web.UI.WebControls.Label lblErrorCarrera;
         
         /// <summary>
-        /// Control grdConsultarResultados.
+        /// Control repeater.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::Obout.Grid.Grid grdConsultarResultados;
-        
-        /// <summary>
-        /// Control templateHeaderCertificado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Obout.Grid.GridTemplate templateHeaderCertificado;
-        
-        /// <summary>
-        /// Control templateCertificado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::Obout.Grid.GridTemplate templateCertificado;
+        protected global::System.Web.UI.WebControls.Repeater repeater;
         
         /// <summary>
         /// Control lblError.
