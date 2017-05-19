@@ -18,4 +18,3 @@
 :r .\Participante.1.sql
 :r .\Participante.2.sql
 :r .\Control.0.sql
-:r .\ControlXCarrera.0.sql

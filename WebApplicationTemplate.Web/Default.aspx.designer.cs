@@ -13,15 +13,6 @@ namespace WebApplicationTemplate.Web {
     public partial class Default {
         
         /// <summary>
-        /// Control lblPassword.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPassword;
-        
-        /// <summary>
         /// Control txtUsername.
         /// </summary>
         /// <remarks>
@@ -29,15 +20,6 @@ namespace WebApplicationTemplate.Web {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUsername;
-        
-        /// <summary>
-        /// Control lblUsername.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsername;
         
         /// <summary>
         /// Control txtPassword.
@@ -49,15 +31,6 @@ namespace WebApplicationTemplate.Web {
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
-        /// Control btnSignIn.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSignIn;
-        
-        /// <summary>
         /// Control lblError.
         /// </summary>
         /// <remarks>
@@ -65,5 +38,14 @@ namespace WebApplicationTemplate.Web {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
+        /// Control btnSignIn.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSignIn;
     }
 }
