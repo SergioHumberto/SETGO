@@ -43,15 +43,15 @@
     <br />
 
      <div class="input-group" style="width:60%">
-        <asp:FileUpload ID="FileUpload1" CssClass="btn btn-defaul btn-file" runat="server" />
+        <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="false" />
+         
+         <asp:Button ID="btnUpload" runat="server" Text="Cargar Resultados"
+                OnClick="btnUpload_Click" Style="display: none" />
     </div>
 
     <br />
 
     <div class="input-group" style="width:60%">
-        <asp:Button ID="btnUpload" CssClass="btn btn-default" runat="server" Text="Cargar Resultados"
-                OnClick="btnUpload_Click" />
-        &nbsp &nbsp
         <asp:Button ID="btnConsultarResultados" CssClass="btn btn-default" runat="server" Text="Consultar Resultados"
                 OnClick="btnConsultarResultados_Click"/>
     </div>
@@ -109,5 +109,13 @@
     <div class="input-group" style="width:60%">
         <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     </div>
+
+    <script type="text/javascript">
+        function UploadFile(fileUpload) {
+            if (fileUpload.value != '') {
+                document.getElementById("<%=btnUpload.ClientID %>").click();
+            }
+        }
+    </script>
 
 </asp:Content>

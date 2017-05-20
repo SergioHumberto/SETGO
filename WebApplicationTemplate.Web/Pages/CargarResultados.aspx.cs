@@ -56,6 +56,8 @@ namespace WebApplicationTemplate.Web.PublicPages
 				chklstCampos.Visible = false;
 				lblConfiguracion.Visible = false;
 				btnSubmit.Visible = false;
+
+				FileUpload1.Attributes["onchange"] = "UploadFile(this)";
 			}
 		}
 
@@ -468,6 +470,10 @@ namespace WebApplicationTemplate.Web.PublicPages
 			{
 				lblError.Text = ex.Message;
 			}
+		}
+
+		protected void Upload(object sender, EventArgs e)
+		{
 		}
 	}
 }
