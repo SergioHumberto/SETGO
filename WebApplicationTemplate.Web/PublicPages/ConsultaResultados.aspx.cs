@@ -98,7 +98,15 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             if (IdCarreraProperty > 0)
             {
-                if (resultadosBLL.VerificarResultadoDeCarrera(IdCarreraProperty))
+				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+				ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
+				crFinder.IdCarrera = IdCarreraProperty;
+				crFinder.IdCategoria = null;        //ASIGNAR LA CATEGORIA
+
+				crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
+
+                if (resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
                 {
                     CargarResultados(IdCarreraProperty);
                     // tbRegistros.Visible = true;
@@ -149,8 +157,12 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
 			ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+			ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 
-			crOBJ = crBLL.SeleccionarConfiguracionByIdCarrera(idCarrera);
+			crFinder.IdCarrera = idCarrera;
+			crFinder.IdCategoria = null;		//ASIGNAR EL ID DE LA CATEGORIA
+
+			crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 
 			string query = string.Empty;
 

@@ -7,10 +7,11 @@
 
 	<statements>
 
-		<insert id="InsertarConfiguracionResultado" parameterClass="ConfiguracionResultadosOBJ">
+		<insert id="InsertarConfiguracionResultado" resultClass="int" parameterClass="ConfiguracionResultadosOBJ">
 
 			INSERT INTO ConfiguracionResultados(
 				IdCarrera
+				,IdCategoria
 				,Numero
 				,Paterno
 				,Materno
@@ -31,6 +32,7 @@
 			)
 			VALUES(
 				#IdCarrera#
+				,#IdCategoria#
 				,#Numero#
 				,#Paterno#
 				,#Materno#
@@ -56,9 +58,11 @@
 
 		</insert>
 
-		<select id="VerificarConfiguracionDeCarrera" resultClass="int" parameterClass="int" >
+		<select id="VerificarConfiguracionDeCarrera" resultClass="int" parameterClass="ConfiguracionResultadosOBJ" >
 			IF EXISTS(
-			SELECT * FROM ConfiguracionResultados WHERE IdCarrera = #value#
+				SELECT * FROM ConfiguracionResultados 
+				WHERE IdCarrera = #IdCarrera#
+				AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
 			)
 			BEGIN
 				SELECT 1
@@ -89,11 +93,20 @@
 				,Lug_Gral = #Lug_Gral#
 				,Rama = #Rama#
 			WHERE IdCarrera = #IdCarrera#
+			AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
 		</update>
 
-		<select id="SeleccionarConfiguracionByIdCarrera" resultClass="ConfiguracionResultadosOBJ" parameterClass="int">
-			SELECT * FROM ConfiguracionResultados WHERE IdCarrera = #value#
+		<select id="SeleccionarConfiguracionByIdCarreraIdCategoria" resultClass="ConfiguracionResultadosOBJ" parameterClass="ConfiguracionResultadosOBJ">
+			SELECT * FROM ConfiguracionResultados 
+			WHERE IdCarrera = #IdCarrera#
+			AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
 		</select>
+
+		<delete id="EliminarConfiguracionByIdCarreraIdCategoria" parameterClass="ConfiguracionResultadosOBJ">
+			DELETE FROM ConfiguracionResultados
+			WHERE IdCarrera = #IdCarrera#
+			AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
+		</delete>
 		
 	</statements>
 

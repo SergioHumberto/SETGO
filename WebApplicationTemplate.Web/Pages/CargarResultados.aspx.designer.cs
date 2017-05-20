@@ -22,6 +22,24 @@ namespace WebApplicationTemplate.Web.PublicPages {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
+        /// Control upCarrera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upCarrera;
+        
+        /// <summary>
+        /// Control lblCarrera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCarrera;
+        
+        /// <summary>
         /// Control ddlCarrera.
         /// </summary>
         /// <remarks>
@@ -38,6 +56,42 @@ namespace WebApplicationTemplate.Web.PublicPages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorCarrera;
+        
+        /// <summary>
+        /// Control upCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upCategoria;
+        
+        /// <summary>
+        /// Control lblCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCategoria;
+        
+        /// <summary>
+        /// Control ddlCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
+        
+        /// <summary>
+        /// Control lblErrorCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorCategoria;
         
         /// <summary>
         /// Control FileUpload1.

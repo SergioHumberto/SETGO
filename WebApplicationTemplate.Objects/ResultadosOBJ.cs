@@ -8,7 +8,8 @@ namespace WebApplicationTemplate.Objects
     public class ResultadosOBJ
     {
         public int IdResultado { get; set; }
-        public int IdCarrera { get; set; }
+        public int? IdParticipante { get; set; }
+		public int IdConfiguracionResultados { get; set; }
 		public int? Numero { get; set; }
 		public string Paterno { get; set; }
 		public string Materno { get; set; }

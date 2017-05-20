@@ -15,9 +15,9 @@ namespace WebApplicationTemplate.BLL
 			ConfiguracionResultadosMAP.InsertarConfiguracionResultado(crOBJ);
 		}
 
-		public bool VerificarConfiguracionDeCarrera(int idCarrera)
+		public bool VerificarConfiguracionDeCarrera(ConfiguracionResultadosOBJ crOBJ)
 		{
-			if(ConfiguracionResultadosMAP.VerificarConfiguracionDeCarrera(idCarrera) == 1)
+			if(ConfiguracionResultadosMAP.VerificarConfiguracionDeCarrera(crOBJ) == 1)
 			{
 				return true;
 			}
@@ -32,9 +32,14 @@ namespace WebApplicationTemplate.BLL
 			ConfiguracionResultadosMAP.ActualizarConfiguracion(crOBJ);
 		}
 
-		public ConfiguracionResultadosOBJ SeleccionarConfiguracionByIdCarrera(int idCarrera)
+		public ConfiguracionResultadosOBJ SeleccionarConfiguracionByIdCarreraIdCategoria(ConfiguracionResultadosOBJ crOBJ)
 		{
-			return ConfiguracionResultadosMAP.SeleccionarConfiguracionByIdCarrera(idCarrera);
+			return ConfiguracionResultadosMAP.SeleccionarConfiguracionByIdCarreraIdCategoria(crOBJ);
+		}
+
+		public void EliminarConfiguracionByIdCarreraIdCategoria(ConfiguracionResultadosOBJ crOBJ)
+		{
+			ConfiguracionResultadosMAP.EliminarConfiguracionByIdCarreraIdCategoria(crOBJ);
 		}
 	}
 }

@@ -11,12 +11,33 @@
     <br />
 
     <div class="input-group" style="width:60%">
-        <label>Carrera</label>
-        <asp:DropDownList CssClass="form-control" ID="ddlCarrera" AutoPostBack="true" runat="server" AppendDataBoundItems="true">
-            <asp:ListItem Value="-1">-- Seleccione una Carrera --</asp:ListItem>
-        </asp:DropDownList>
-        <br />
-        <asp:Label ID="lblErrorCarrera" runat="server" Text="" ForeColor="Red"></asp:Label>
+        <asp:UpdatePanel ID="upCarrera" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <asp:Label ID="lblCarrera" runat="server" Text="Carrera" ></asp:Label>
+                <asp:DropDownList CssClass="form-control" ID="ddlCarrera" AutoPostBack="true" runat="server" AppendDataBoundItems="true"
+                    OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged">
+                    <asp:ListItem Value="-1">-- Seleccione una Carrera --</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                <asp:Label ID="lblErrorCarrera" runat="server" Text="" ForeColor="Red"></asp:Label>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+
+    <br />
+
+    <div class="input-group" style="width:60%">
+        <asp:UpdatePanel ID="upCategoria" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <asp:Label ID="lblCategoria" runat="server" Text="Categoría" Visible="false"></asp:Label>
+                <asp:DropDownList CssClass="form-control" ID="ddlCategoria" AutoPostBack="true" runat="server" AppendDataBoundItems="true"
+                    Visible="false">
+                    <asp:ListItem Value="-1">-- Seleccione una Categoría --</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+                <asp:Label ID="lblErrorCategoria" runat="server" Text="" ForeColor="Red"></asp:Label>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 
     <br />

@@ -15,19 +15,19 @@ namespace WebApplicationTemplate.DAL
 			Mapper.Instance().Insert("InsertarResultado", resultadosOBJ);
 		}
 
-		public static int VerificarResultadoDeCarrera(int IdCarrera)
+		public static int VerificarResultadoDeCarrera(int idConfiguracionResultados)
 		{
-			return Mapper.Instance().QueryForObject<int>("VerificarResultadoDeCarrera", IdCarrera);
+			return Mapper.Instance().QueryForObject<int>("VerificarResultadoDeCarrera", idConfiguracionResultados);
 		}
 
-		public static void EliminarResultadosDeCarrera(int IdCarrera)
+		public static void EliminarResultadosByIdConfiguracionResultados(int IdConfiguracionResultados)
 		{
-			Mapper.Instance().Delete("EliminarResultadosDeCarrera", IdCarrera);
+			Mapper.Instance().Delete("EliminarResultadosByIdConfiguracionResultados", IdConfiguracionResultados);
 		}
 
-		public static IList<ResultadosOBJ> SeleccionarResultadosByIdCarrera(int idCarrera)
+		public static IList<ResultadosOBJ> SeleccionarResultadosByConfiguracionResultados(int idConfiguracionResultados)
 		{
-			return Mapper.Instance().QueryForList<ResultadosOBJ>("SeleccionarResultadosByIdCarrera", idCarrera);
+			return Mapper.Instance().QueryForList<ResultadosOBJ>("SeleccionarResultadosByConfiguracionResultados", idConfiguracionResultados);
 		}
 
 	}

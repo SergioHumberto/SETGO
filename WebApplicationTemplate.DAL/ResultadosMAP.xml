@@ -11,7 +11,8 @@
 
       INSERT INTO Resultados
       (
-			IdCarrera
+			IdParticipante
+			,IdConfiguracionResultados
 			,Numero
 			,Paterno
 			,Materno
@@ -32,7 +33,8 @@
       )
       VALUES
       (
-			#IdCarrera#
+			#IdParticipante#
+			,#IdConfiguracionResultados#
 			,#Numero#
 			,#Paterno#
 			,#Materno#
@@ -60,7 +62,9 @@
 		
 		<select id="VerificarResultadoDeCarrera" resultClass="int" parameterClass="int" >
       IF EXISTS(
-				SELECT * FROM Resultados WHERE IdCarrera = #value#
+				SELECT * FROM Resultados R
+				LEFT JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
+				WHERE CR.IdConfiguracionResultados = #value#
 			)
 			BEGIN 
 				SELECT 1
@@ -70,12 +74,14 @@
 			END
     </select>
 
-		<delete id="EliminarResultadosDeCarrera" parameterClass="int">
-			DELETE FROM Resultados WHERE IdCarrera = #value#
+		<delete id="EliminarResultadosByIdConfiguracionResultados" parameterClass="int">
+			DELETE FROM Resultados WHERE IdConfiguracionResultados = #value#
 		</delete>
 
-		<select id="SeleccionarResultadosByIdCarrera" resultClass="ResultadosOBJ" parameterClass="int" >
-			SELECT * FROM Resultados WHERE IdCarrera = #value#
+		<select id="SeleccionarResultadosByConfiguracionResultados" resultClass="ResultadosOBJ" parameterClass="int" >
+			SELECT R.* FROM Resultados R
+			LEFT JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
+			WHERE CR.IdConfiguracionResultados = #value#
 		</select>
 	
   </statements>

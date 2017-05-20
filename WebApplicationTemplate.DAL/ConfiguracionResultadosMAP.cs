@@ -15,9 +15,9 @@ namespace WebApplicationTemplate.DAL
 			Mapper.Instance().Insert("InsertarConfiguracionResultado", crOBJ);
 		}
 
-		public static int VerificarConfiguracionDeCarrera(int idCarrera)
+		public static int VerificarConfiguracionDeCarrera(ConfiguracionResultadosOBJ crOBJ)
 		{
-			return Mapper.Instance().QueryForObject<int>("VerificarConfiguracionDeCarrera", idCarrera);
+			return Mapper.Instance().QueryForObject<int>("VerificarConfiguracionDeCarrera", crOBJ);
 		}
 
 		public static void ActualizarConfiguracion(ConfiguracionResultadosOBJ crOBJ)
@@ -25,9 +25,14 @@ namespace WebApplicationTemplate.DAL
 			Mapper.Instance().Update("ActualizarConfiguracion", crOBJ);
 		}
 
-		public static ConfiguracionResultadosOBJ SeleccionarConfiguracionByIdCarrera(int idCarrera)
+		public static ConfiguracionResultadosOBJ SeleccionarConfiguracionByIdCarreraIdCategoria(ConfiguracionResultadosOBJ crOBJ)
 		{
-			return Mapper.Instance().QueryForObject<ConfiguracionResultadosOBJ>("SeleccionarConfiguracionByIdCarrera",idCarrera);
+			return Mapper.Instance().QueryForObject<ConfiguracionResultadosOBJ>("SeleccionarConfiguracionByIdCarreraIdCategoria", crOBJ);
+		}
+
+		public static void EliminarConfiguracionByIdCarreraIdCategoria(ConfiguracionResultadosOBJ crOBJ)
+		{
+			Mapper.Instance().Delete("EliminarConfiguracionByIdCarreraIdCategoria", crOBJ);
 		}
 	}
 }

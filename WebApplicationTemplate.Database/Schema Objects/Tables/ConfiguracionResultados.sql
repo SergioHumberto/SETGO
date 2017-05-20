@@ -2,7 +2,7 @@
 (
 	[IdConfiguracionResultados] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	[IdCarrera]		INT NOT NULL CONSTRAINT [FK_Carrera_ConfiguracionResultados] FOREIGN KEY REFERENCES [Carrera](IdCarrera),
-	[IdCategoria]	INT NOT NULL CONSTRAINT [FK_Categoria_ConfiguracionResultados] FOREIGN KEY REFERENCES [Categoria](IdCategoria),
+	[IdCategoria]	INT NULL CONSTRAINT [FK_Categoria_ConfiguracionResultados] FOREIGN KEY REFERENCES [Categoria](IdCategoria),
 	[Numero]		BIT NOT NULL,
 	[Paterno]		BIT NOT NULL,
 	[Materno]		BIT NOT NULL,

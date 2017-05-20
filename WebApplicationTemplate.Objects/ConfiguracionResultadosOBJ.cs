@@ -9,6 +9,7 @@ namespace WebApplicationTemplate.Objects
 	{
 		public int IdConfiguracionResultados { get; set; }
 		public int IdCarrera { get; set; }
+		public int? IdCategoria { get; set; }
 		public bool Numero { get; set; }
 		public bool Paterno { get; set; }
 		public bool Materno { get; set; }

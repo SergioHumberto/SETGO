@@ -16,6 +16,34 @@ namespace WebApplicationTemplate.Web.PublicPages
 {
 	public partial class ConsultaResultados : System.Web.UI.Page
 	{
+		private int IDCARRERA
+		{
+			get
+			{
+				int idCarrera = 0;
+				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
+				{
+					return idCarrera;
+				}
+				return -1;
+			}
+		}
+		private int? IDCATEGORIA
+		{
+			get
+			{
+				int idCategoria = 0;
+				if (int.TryParse(ddlCategoria.SelectedValue, out idCategoria))
+				{
+					if(idCategoria > 0)
+					{
+						return idCategoria;
+					}
+				}
+				return null;
+			}
+		}
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
@@ -119,7 +147,10 @@ namespace WebApplicationTemplate.Web.PublicPages
 			try
 			{
 				ResultadosBLL resultadosBLL = new ResultadosBLL();
-				
+				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+				ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
+
 				int idCarrera = 0;
 				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
 				{
@@ -133,75 +164,99 @@ namespace WebApplicationTemplate.Web.PublicPages
 					throw new Exception("Error al seleccionar la carrera");
 				}
 
+				int idCategoria = 0;
+				if(int.TryParse(ddlCategoria.SelectedValue, out idCategoria))
+				{
+					if(idCategoria > 0)
+					{
+						crFinder.IdCategoria = idCategoria;
+					}
+				}
+
+				crFinder.IdCarrera = idCarrera;
+
 				//Si los resultados ya se habían cargado, los elimina para volver a insertarlos.
-				if (resultadosBLL.VerificarResultadoDeCarrera(idCarrera))
+				if(crBLL.VerificarConfiguracionDeCarrera(crFinder))
 				{
-					resultadosBLL.EliminarResultadosDeCarrera(idCarrera);
+					crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
+
+					resultadosBLL.EliminarResultadosByIdConfiguracionResultados(crOBJ.IdConfiguracionResultados);
+					crBLL.EliminarConfiguracionByIdCarreraIdCategoria(crOBJ);
 				}
 
-				foreach (DataRow row in dt.Rows)
-				{
-					ResultadosOBJ resultadosOBJ = new ResultadosOBJ();
-
-					resultadosOBJ.IdCarrera = idCarrera;
-
-					int numero = 0;
-					if(int.TryParse(row["Numero"].ToString(), out numero))
-					{
-						resultadosOBJ.Numero = numero;
-					}
-
-					resultadosOBJ.Paterno = row["Paterno"].ToString();
-					resultadosOBJ.Materno = row["Materno"].ToString();
-					resultadosOBJ.Nombres = row["Nombres"].ToString();
-
-					int folio = 0;
-					if(int.TryParse(row["Folio"].ToString(), out folio))
-					{
-						resultadosOBJ.Folio = folio;
-					}
-
-					resultadosOBJ.Sexo = row["Sexo"].ToString();
-					resultadosOBJ.Categoria = row["Categoria"].ToString();
-					resultadosOBJ.Procedencia = row["Proceden"].ToString();
-					resultadosOBJ.Equipo = row["Equipo"].ToString();
-					resultadosOBJ.Telefono = row["Telefono"].ToString();
-					resultadosOBJ.T_Chip = row["T_Chip"].ToString();
-					resultadosOBJ.T_Oficial = row["T_Oficial"].ToString();
-
-					int lug_cat = 0;
-					if (int.TryParse(row["Lug_Cat"].ToString(), out lug_cat))
-					{
-						resultadosOBJ.Lug_Cat = lug_cat;
-					}
-
-					int lug_rama = 0;
-					if (int.TryParse(row["Lug_Rama"].ToString(), out lug_rama))
-					{
-						resultadosOBJ.Lug_Rama = lug_rama;
-					}
-
-					resultadosOBJ.Vel = row["Vel"].ToString();
-
-					int lug_gral = 0;
-					if (int.TryParse(row["Lug_Gral"].ToString(), out lug_gral))
-					{
-						resultadosOBJ.Lug_Gral = lug_gral;
-					}
-
-					resultadosOBJ.Rama = row["Rama"].ToString();
-					
-					resultadosBLL.InsertarCarrera(resultadosOBJ);
-				}
 				chklstCampos.Visible = true;
 				lblConfiguracion.Visible = true;
 				btnSubmit.Visible = true;
 
-				GuardarConfiguracion(idCarrera);
+				crBLL.InsertarConfiguracionResultado(GetConfiguracionResultados());
+
+				crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
+
+				GuardarCarrera(crOBJ.IdConfiguracionResultados, dt);
 			}
 			catch(Exception ex)
 			{
 				throw new Exception(ex.Message);
+			}
+		}
+
+		private void GuardarCarrera(int idConfiguracionResultados, DataTable dt)
+		{
+			ResultadosBLL resultadosBLL = new ResultadosBLL();
+
+			foreach (DataRow row in dt.Rows)
+			{
+				ResultadosOBJ resultadosOBJ = new ResultadosOBJ();
+
+				resultadosOBJ.IdConfiguracionResultados = idConfiguracionResultados;
+
+				int numero = 0;
+				if (int.TryParse(row["Numero"].ToString(), out numero))
+				{
+					resultadosOBJ.Numero = numero;
+				}
+
+				resultadosOBJ.Paterno = row["Paterno"].ToString();
+				resultadosOBJ.Materno = row["Materno"].ToString();
+				resultadosOBJ.Nombres = row["Nombres"].ToString();
+
+				int folio = 0;
+				if (int.TryParse(row["Folio"].ToString(), out folio))
+				{
+					resultadosOBJ.Folio = folio;
+				}
+
+				resultadosOBJ.Sexo = row["Sexo"].ToString();
+				resultadosOBJ.Categoria = row["Categoria"].ToString();
+				resultadosOBJ.Procedencia = row["Proceden"].ToString();
+				resultadosOBJ.Equipo = row["Equipo"].ToString();
+				resultadosOBJ.Telefono = row["Telefono"].ToString();
+				resultadosOBJ.T_Chip = row["T_Chip"].ToString();
+				resultadosOBJ.T_Oficial = row["T_Oficial"].ToString();
+
+				int lug_cat = 0;
+				if (int.TryParse(row["Lug_Cat"].ToString(), out lug_cat))
+				{
+					resultadosOBJ.Lug_Cat = lug_cat;
+				}
+
+				int lug_rama = 0;
+				if (int.TryParse(row["Lug_Rama"].ToString(), out lug_rama))
+				{
+					resultadosOBJ.Lug_Rama = lug_rama;
+				}
+
+				resultadosOBJ.Vel = row["Vel"].ToString();
+
+				int lug_gral = 0;
+				if (int.TryParse(row["Lug_Gral"].ToString(), out lug_gral))
+				{
+					resultadosOBJ.Lug_Gral = lug_gral;
+				}
+
+				resultadosOBJ.Rama = row["Rama"].ToString();
+
+				resultadosBLL.InsertarCarrera(resultadosOBJ);
 			}
 		}
 
@@ -218,22 +273,14 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+
 				lblError.Text = string.Empty;
 
-				int idCarrera = 0;
-				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
-				{
-					if (idCarrera < 0)
-					{
-						throw new Exception("Seleccione una Carrera");
-					}
-				}
-				else
-				{
-					throw new Exception("Error al seleccionar la carrera");
-				}
+				crOBJ = GetConfiguracionResultados();
 
-				GuardarConfiguracion(idCarrera);
+				crBLL.ActualizarConfiguracion(crOBJ);
 			}
 			catch (Exception ex)
 			{
@@ -241,12 +288,12 @@ namespace WebApplicationTemplate.Web.PublicPages
 			}
 		}
 
-		private void GuardarConfiguracion(int idCarrera)
+		private ConfiguracionResultadosOBJ GetConfiguracionResultados()
 		{
-			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
 			ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
 
-			crOBJ.IdCarrera = idCarrera;
+			crOBJ.IdCarrera = IDCARRERA;
+			crOBJ.IdCategoria = IDCATEGORIA;
 			crOBJ.Numero = chklstCampos.Items[0].Selected;
 			crOBJ.Paterno = chklstCampos.Items[1].Selected;
 			crOBJ.Materno = chklstCampos.Items[2].Selected;
@@ -265,15 +312,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 			crOBJ.Lug_Gral = chklstCampos.Items[15].Selected;
 			crOBJ.Rama = chklstCampos.Items[16].Selected;
 
-			//Insertar
-			if (!crBLL.VerificarConfiguracionDeCarrera(idCarrera))
-			{
-				crBLL.InsertarConfiguracionResultado(crOBJ);
-			}
-			else//Update
-			{
-				crBLL.ActualizarConfiguracion(crOBJ);
-			}
+			return crOBJ;
 		}
 
 		protected void btnConsultarResultados_Click(object sender, EventArgs e)
@@ -283,6 +322,9 @@ namespace WebApplicationTemplate.Web.PublicPages
 				lblError.Text = string.Empty;
 
 				ResultadosBLL resultadosBLL = new ResultadosBLL();
+				ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
+				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
 
 				GridView1.Columns.Clear();
 
@@ -291,18 +333,30 @@ namespace WebApplicationTemplate.Web.PublicPages
 				{
 					if (idCarrera > 0)
 					{
-						if (resultadosBLL.VerificarResultadoDeCarrera(idCarrera))
+						crFinder.IdCarrera = idCarrera;
+						crFinder.IdCategoria = IDCATEGORIA;
+
+						crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
+
+						if(crOBJ != null)
 						{
-							GridView1.Visible = true;
-							GridView1.DataSource = resultadosBLL.SeleccionarResultadosByIdCarrera(idCarrera);
-							GridView1.DataBind();
+							if (resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
+							{
+								GridView1.Visible = true;
+								GridView1.DataSource = resultadosBLL.SeleccionarResultadosByConfiguracionResultados(crOBJ.IdConfiguracionResultados);
+								GridView1.DataBind();
 
-							chklstCampos.Visible = true;
-							lblConfiguracion.Visible = true;
-							btnSubmit.Visible = true;
-							lblErrorCarrera.Text = string.Empty;
+								chklstCampos.Visible = true;
+								lblConfiguracion.Visible = true;
+								btnSubmit.Visible = true;
+								lblErrorCarrera.Text = string.Empty;
 
-							CargarConfiguracionResultados();
+								CargarConfiguracionResultados();
+							}
+							else
+							{
+								lblErrorCarrera.Text = "No se han cargado resultados para esta carrera.";
+							}
 						}
 						else
 						{
@@ -331,15 +385,18 @@ namespace WebApplicationTemplate.Web.PublicPages
 		private void CargarConfiguracionResultados()
 		{
 			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
-
+			ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 			int idCarrera = 0;
 			if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
 			{
-				if (crBLL.VerificarConfiguracionDeCarrera(idCarrera))
+				crFinder.IdCarrera = idCarrera;
+				crFinder.IdCategoria = IDCATEGORIA;
+
+				if (crBLL.VerificarConfiguracionDeCarrera(crFinder))
 				{
 					ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
 
-					crOBJ = crBLL.SeleccionarConfiguracionByIdCarrera(idCarrera);
+					crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 					
 					if(crOBJ != null)
 					{
@@ -362,6 +419,54 @@ namespace WebApplicationTemplate.Web.PublicPages
 						chklstCampos.Items[16].Selected = crOBJ.Rama;
 					}
 				}
+			}
+		}
+
+		protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			try
+			{
+				lblError.Text = string.Empty;
+
+				CategoriaBLL catBLL = new CategoriaBLL(Tools.HttpSecurity.CurrentSession);
+				CategoriaOBJ catOBJ = new CategoriaOBJ();
+				IList<CategoriaOBJ> lstCat;
+
+				int idCarrera = 0;
+				if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
+				{
+					if (idCarrera > 0)
+					{
+						ddlCategoria.Items.Clear();
+						lblCategoria.Visible = true;
+						ddlCategoria.Visible = true;
+
+						catOBJ.IdCarrera = idCarrera;
+
+						lstCat = catBLL.SelectCategoria(catOBJ);
+
+						ListItem item = new ListItem();
+
+						item.Value = "-1";
+						item.Text = "-- Seleccione una Categoría --";
+
+						ddlCategoria.Items.Add(item);
+
+						ddlCategoria.DataSource = lstCat;
+						ddlCategoria.DataTextField = "Nombre";
+						ddlCategoria.DataValueField = "IdCategoria";
+						ddlCategoria.DataBind();
+					}
+					else
+					{
+						lblCategoria.Visible = false;
+						ddlCategoria.Visible = false;
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				lblError.Text = ex.Message;
 			}
 		}
 	}

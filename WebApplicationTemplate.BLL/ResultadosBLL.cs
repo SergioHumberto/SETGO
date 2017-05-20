@@ -15,9 +15,9 @@ namespace WebApplicationTemplate.BLL
 			ResultadosDAL.InsertarResultado(resultadosOBJ);
 		}
 
-		public bool VerificarResultadoDeCarrera(int IdCarrera)
+		public bool VerificarResultadoDeCarrera(int idConfiguracionResultados)
 		{
-			if(ResultadosDAL.VerificarResultadoDeCarrera(IdCarrera) == 0)
+			if(ResultadosDAL.VerificarResultadoDeCarrera(idConfiguracionResultados) == 0)
 			{
 				return false;
 			}
@@ -27,14 +27,14 @@ namespace WebApplicationTemplate.BLL
 			}
 		}
 
-		public void EliminarResultadosDeCarrera(int IdCarrera)
+		public void EliminarResultadosByIdConfiguracionResultados(int IdConfiguracionResultados)
 		{
-			ResultadosDAL.EliminarResultadosDeCarrera(IdCarrera);
+			ResultadosDAL.EliminarResultadosByIdConfiguracionResultados(IdConfiguracionResultados);
 		}
 
-		public IList<ResultadosOBJ> SeleccionarResultadosByIdCarrera(int idCarrera)
+		public IList<ResultadosOBJ> SeleccionarResultadosByConfiguracionResultados(int idConfiguracionResultados)
 		{
-			return ResultadosDAL.SeleccionarResultadosByIdCarrera(idCarrera);
+			return ResultadosDAL.SeleccionarResultadosByConfiguracionResultados(idConfiguracionResultados);
 		}
 	}
 }
