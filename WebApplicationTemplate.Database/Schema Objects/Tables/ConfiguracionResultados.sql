@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[ConfiguracionResultados]
 (
 	[IdConfiguracionResultados] INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[IdCarrera]		INT NOT NULL,
+	[IdCarrera]		INT NOT NULL CONSTRAINT [FK_Carrera_ConfiguracionResultados] FOREIGN KEY REFERENCES [Carrera](IdCarrera),
+	[IdCategoria]	INT NOT NULL CONSTRAINT [FK_Categoria_ConfiguracionResultados] FOREIGN KEY REFERENCES [Categoria](IdCategoria),
 	[Numero]		BIT NOT NULL,
 	[Paterno]		BIT NOT NULL,
 	[Materno]		BIT NOT NULL,

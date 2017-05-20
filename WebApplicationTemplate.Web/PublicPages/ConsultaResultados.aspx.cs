@@ -227,7 +227,9 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 			query = query.Remove(query.Length - 1, 1);//Elimina la coma de al final de la cadena.
 
-			query += " FROM RESULTADOS WHERE IdCarrera=" + idCarrera;
+			query += @" FROM RESULTADOS R 
+				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
+				WHERE CR.IdCarrera=" + idCarrera;
 
 			return query;
 		}

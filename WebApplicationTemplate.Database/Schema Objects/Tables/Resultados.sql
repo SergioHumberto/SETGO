@@ -1,7 +1,8 @@
 ﻿CREATE TABLE [dbo].[Resultados]
 (
 	[IdResultado]	INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[IdCarrera]		INT NOT NULL FOREIGN KEY REFERENCES [Carrera](IdCarrera),
+	[IdParticipante] INT NULL CONSTRAINT [FK_Participante_Resultados] FOREIGN KEY REFERENCES [Participante](IdParticipante),
+	[IdConfiguracionResultados] INT NOT NULL CONSTRAINT [FK_ConfiguracionResultados_Resultados] FOREIGN KEY REFERENCES [ConfiguracionResultados](IdConfiguracionResultados),
 	[Numero]		INT NULL,
 	[Paterno]		VARCHAR(50) NULL,
 	[Materno]		VARCHAR(50) NULL,

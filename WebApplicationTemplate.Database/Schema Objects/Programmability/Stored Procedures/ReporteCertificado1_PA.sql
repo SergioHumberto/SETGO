@@ -13,6 +13,7 @@ BEGIN
 	, R.Lug_Cat AS [PosicionPorCategoria]
 	, R.Lug_Rama AS [PosicionSexo]
 	FROM Resultados R
-	WHERE R.IdCarrera = @IdCarrera
+	INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
+	WHERE CR.IdCarrera = @IdCarrera
 		AND (@IdResultado IS NULL OR R.IdResultado = @IdResultado)
 END 
