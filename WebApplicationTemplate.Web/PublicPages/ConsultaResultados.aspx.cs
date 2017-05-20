@@ -39,6 +39,26 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
 
+        public int IdCategoriaProperty
+        {
+            get
+            {
+                if (Request.QueryString["IdCategoria"] != null)
+                {
+                    int IdCategoria;
+                    if (int.TryParse(Request.QueryString["IdCategoria"], out IdCategoria))
+                    {
+                        if (IdCategoria > 0)
+                        {
+                            return IdCategoria;
+                        }
+                    }
+                }
+
+                return -1;
+            }
+        }
+
         public int IdResultadoProperty
         {
             get
@@ -96,6 +116,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             ResultadosBLL resultadosBLL = new ResultadosBLL();
 
+            lblErrorCarrera.Text = string.Empty;
             if (IdCarreraProperty > 0)
             {
 				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
@@ -108,8 +129,15 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                 if (resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
                 {
-                    CargarResultados(IdCarreraProperty);
-                    // tbRegistros.Visible = true;
+                    if (IdCategoriaProperty <= 0)
+                    {
+                        CargarResultados(IdCarreraProperty, null);
+                        LoadCategoriasXCarrera(IdCarreraProperty);
+                    }
+                    else
+                    {
+                        CargarResultados(IdCarreraProperty, IdCategoriaProperty);
+                    }
                 }
                 else
                 {
@@ -118,42 +146,72 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
             else
             {
-                repeater.Visible = false;
-
+                // repeater.Visible = false;
                 lblErrorCarrera.Text = "Debe seleccionar una carrera.";
+                LoadDdlCarrera();
             }
-
-            lblError.Text = string.Empty;
         }
 
-		private void CargarResultados(int idCarrera)
+        private void LoadDdlCarrera()
+        {
+            phCarrera.Visible = true;
+
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            CarreraBLL objCarreraBLL = new CarreraBLL(session);
+            IList<CarreraOBJ> lstCarrera = objCarreraBLL.SelectCarrera(new CarreraOBJ() { }); // Todos los resultados
+
+            ddlCarrera.DataSource = lstCarrera;
+            ddlCarrera.DataTextField = "Nombre";
+            ddlCarrera.DataValueField = "IdCarrera";
+            ddlCarrera.DataBind();
+
+            ddlCarrera.Items.Insert(0, new ListItem() { Text = "--------", Value = "-1" });
+        }
+
+		private void CargarResultados(int idCarrera, int? IdCategoria)
 		{
 			try
 			{
-				lblError.Text = string.Empty;
+                lblErrorCarrera.Text = string.Empty;
+				string query = GetConsulta(idCarrera, IdCategoria);
 
-				SqlConnection cn = new SqlConnection(
-					DAL.DAL.ConnectionString);
-
-				string query = GetConsulta(idCarrera);
-
-				SqlCommand cmd = new SqlCommand(query, cn);
-				SqlDataAdapter da = new SqlDataAdapter(cmd);
-				DataTable dt = new DataTable();
-				da.Fill(dt);
-
-                repeater.DataSource = dt;
-                repeater.DataBind();
-
-                cn.Close();
+                if (!string.IsNullOrEmpty(query))
+                {
+                    DataTable dt = GetDataTable(query);
+                    repeater.DataSource = dt;
+                    repeater.DataBind();                    
+                }
 			}
 			catch (Exception ex)
 			{
-				lblError.Text = ex.Message;
+                lblErrorCarrera.Text = ex.Message;
 			}
 		}
 
-		private string GetConsulta(int idCarrera)
+        // Este metodo se moverá a una clase que ejecute consultas con SqlClient.
+        private DataTable GetDataTable(string strQuery)
+        {
+            DataTable dt = new DataTable();
+
+            using (SqlConnection cn = new SqlConnection(DAL.DAL.ConnectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(strQuery, cn))
+                {
+                    // connection timeout default its 30 seconds.
+                    // to fix
+                    // cmd.CommandTimeout = cn.ConnectionTimeout;
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+		private string GetConsulta(int idCarrera, int? IdCategoria)
 		{
 			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
 			ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
@@ -164,77 +222,82 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 			crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 
+            if (crOBJ == null)
+            {
+                return null;
+            }
+
 			string query = string.Empty;
 
-			query = "SELECT IdResultado, ";
+			query = "SELECT R.IdResultado, ";
 
 			if(crOBJ.Numero)
 			{
-				query += "Numero,";
+				query += "R.Numero,";
 			}
 			if (crOBJ.Paterno)
 			{
-				query += "Paterno,";
+				query += "R.Paterno,";
 			}
 			if (crOBJ.Materno)
 			{
-				query += "Materno,";
+				query += "R.Materno,";
 			}
 			if (crOBJ.Nombres)
 			{
-				query += "Nombres,";
+				query += "R.Nombres,";
 			}
 			if (crOBJ.Folio)
 			{
-				query += "Folio,";
+				query += "R.Folio,";
 			}
 			if (crOBJ.Sexo)
 			{
-				query += "Sexo,";
+				query += "R.Sexo,";
 			}
 			if (crOBJ.Categoria)
 			{
-				query += "Categoria,";
+				query += "R.Categoria,";
 			}
 			if (crOBJ.Procedencia)
 			{
-				query += "Procedencia,";
+				query += "R.Procedencia,";
 			}
 			if (crOBJ.Equipo)
 			{
-				query += "Equipo,";
+				query += "R.Equipo,";
 			}
 			if (crOBJ.Telefono)
 			{
-				query += "Telefono,";
+				query += "R.Telefono,";
 			}
 			if (crOBJ.T_Chip)
 			{
-				query += "T_Chip,";
+				query += "R.T_Chip,";
 			}
 			if (crOBJ.T_Oficial)
 			{
-				query += "T_Oficial,";
+				query += "R.T_Oficial,";
 			}
 			if (crOBJ.Lug_Cat)
 			{
-				query += "Lug_Cat,";
+				query += "R.Lug_Cat,";
 			}
 			if (crOBJ.Lug_Rama)
 			{
-				query += "Lug_Rama,";
+				query += "R.Lug_Rama,";
 			}
 			if (crOBJ.Vel)
 			{
-				query += "Vel,";
+				query += "R.Vel,";
 			}
 			if (crOBJ.Lug_Gral)
 			{
-				query += "Lug_Gral,";
+				query += "R.Lug_Gral,";
 			}
 			if (crOBJ.Rama)
 			{
-				query += "Rama,";
+				query += "R.Rama,";
 			}
 
 			query = query.Remove(query.Length - 1, 1);//Elimina la coma de al final de la cadena.
@@ -243,7 +306,92 @@ namespace WebApplicationTemplate.Web.PublicPages
 				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 				WHERE CR.IdCarrera=" + idCarrera;
 
+            if (IdCategoria.HasValue)
+            {
+                query += " AND CR.IdCategoria=" + IdCategoria.Value;
+            }
+
 			return query;
 		}
+
+        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CleanRepeater();
+
+            if (ddlCarrera.SelectedValue != "-1")
+            {
+                lblErrorCarrera.Text = "";
+
+                int IdCarrera;
+                if (int.TryParse(ddlCarrera.SelectedValue, out IdCarrera))
+                {
+                    if (IdCarrera > 0)
+                    {
+                        LoadCategoriasXCarrera(IdCarrera);
+                        CargarResultados(IdCarrera, null);
+                    }
+                }
+            }
+
+            if (ddlCategoria.Items.Count > 0)
+            {
+                ddlCategoria.SelectedIndex = 0;
+            }
+        }
+
+        private void LoadCategoriasXCarrera(int IdCarrera)
+        {
+            phCategoria.Visible = true;
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            CategoriaBLL objCategoriaBLL = new CategoriaBLL(session);
+            IList<CategoriaOBJ> lstCategorias = objCategoriaBLL.SelectCategoria(new CategoriaOBJ() { IdCarrera = IdCarrera });
+
+            ddlCategoria.DataSource = lstCategorias;
+            ddlCategoria.DataTextField = "Nombre";
+            ddlCategoria.DataValueField = "IdCategoria";
+            ddlCategoria.DataBind();
+
+            ddlCategoria.Items.Insert(0, new ListItem() { Text="------", Value = "-1" });
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int IdCarrera;
+            CleanRepeater();
+
+            if (!int.TryParse(ddlCarrera.SelectedValue, out IdCarrera) || IdCarrera <= 0)
+            {
+                IdCarrera = IdCarreraProperty;
+            }
+
+            if (IdCarrera > 0)
+            {
+                // repeater.Visible = true;
+
+                int IdCategoria;
+                if (int.TryParse(ddlCategoria.SelectedValue, out IdCategoria))
+                {
+                    if (IdCategoria > 0)
+                    {
+                        CargarResultados(IdCategoria, IdCategoria);
+                    }
+                    else
+                    {
+                        CargarResultados(IdCarrera, null);
+                    }
+
+                    if (repeater.Items.Count == 0)
+                    {
+                        lblErrorCarrera.Text = "No existen resultados para la carrera con la categoria seleccionada";
+                    }
+                }
+            }
+        }
+
+        private void CleanRepeater()
+        {
+            repeater.DataSource = null;
+            repeater.DataBind();
+        }
     }
 }
