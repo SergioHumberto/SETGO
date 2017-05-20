@@ -1433,7 +1433,9 @@
     <WCFMetadataStorage Include="Service References\MLWSUserValidations\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Reports\ReporteRegistrados.rdlc" />
+    <Content Include="Reports\ReporteRegistrados.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\ReporteCertificado_1.rdlc" />
