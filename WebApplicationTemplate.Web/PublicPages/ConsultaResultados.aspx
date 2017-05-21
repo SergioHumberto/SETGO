@@ -131,7 +131,7 @@
                                     <td><%# Eval("Lug_Rama") %></td>
                                     <td><%# Eval("Vel") %></td>
                                     <td><%# Eval("Lug_Gral") %></td>
-                                    <td><a href="<%= URLRedirectImprimirCertificado %><%# Eval("IdResultado") %>">Imprime </a></td>
+                                    <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %><%# Eval("IdResultado") %>">Imprime </a></td>
                                 </tr>
                             </ItemTemplate>
                             <FooterTemplate>
