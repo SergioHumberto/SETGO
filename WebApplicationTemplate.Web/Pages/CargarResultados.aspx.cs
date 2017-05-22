@@ -8,7 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using WebApplicationTemplate.Web.Tools;
 using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
 
@@ -47,8 +47,8 @@ namespace WebApplicationTemplate.Web.PublicPages
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			if (!IsPostBack)
-			{
-				lblError.Text = string.Empty;
+			{                
+                lblError.Text = string.Empty;
 				lblErrorCarrera.Text = string.Empty;
 
 				LoadCarreras();
@@ -61,7 +61,16 @@ namespace WebApplicationTemplate.Web.PublicPages
 			}
 		}
 
-		private void LoadCarreras()
+        protected void cargaURL()
+        {
+            string parametros = (IDCARRERA != -1) ? "?IdCarrera=" + IDCARRERA : string.Empty;
+            parametros += (IDCARRERA != -1 && IDCATEGORIA != null) ? "&IdCategoria=" + IDCATEGORIA : string.Empty;
+            txtURL.Text = (parametros != string.Empty) ? Urls.ConsultaResultados() + parametros : "";
+            lnkVistaPrevia.NavigateUrl = txtURL.Text;
+
+        }
+
+        private void LoadCarreras()
 		{
 			CarreraBLL objCarreraBLL = new CarreraBLL(Tools.HttpSecurity.CurrentSession);
 			IList<CarreraOBJ> lstCarreras = objCarreraBLL.SelectCarrera(new CarreraOBJ() { }); // Todas las carreras
@@ -465,6 +474,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 						ddlCategoria.Visible = false;
 					}
 				}
+                cargaURL();
 			}
 			catch(Exception ex)
 			{
@@ -475,5 +485,19 @@ namespace WebApplicationTemplate.Web.PublicPages
 		protected void Upload(object sender, EventArgs e)
 		{
 		}
-	}
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lblError.Text = string.Empty;
+               
+                cargaURL();
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
+    }
 }
