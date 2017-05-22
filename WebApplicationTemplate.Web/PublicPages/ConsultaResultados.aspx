@@ -101,7 +101,7 @@
                 <br />
 
                 <div class="input-group">
-                    <div style="width: 1150px;">
+                    <div class="col-md-12">
                         <asp:Repeater ID="repeater" runat="server">
                             <HeaderTemplate>
                                 <table id="tbl" cellpadding="1" cellspacing="0"
