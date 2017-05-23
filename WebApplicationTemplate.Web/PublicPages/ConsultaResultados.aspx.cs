@@ -123,11 +123,11 @@ namespace WebApplicationTemplate.Web.PublicPages
 				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
 				ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 				crFinder.IdCarrera = IdCarreraProperty;
-				crFinder.IdCategoria = null;        //ASIGNAR LA CATEGORIA
+				crFinder.IdCategoria = IdCategoriaProperty;
 
 				crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 
-                if (resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
+                if (crOBJ != null &&  resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
                 {
                     if (IdCategoriaProperty <= 0)
                     {
@@ -218,7 +218,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 			ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 
 			crFinder.IdCarrera = idCarrera;
-			crFinder.IdCategoria = null;		//ASIGNAR EL ID DE LA CATEGORIA
+			crFinder.IdCategoria = IdCategoriaProperty;
 
 			crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 
