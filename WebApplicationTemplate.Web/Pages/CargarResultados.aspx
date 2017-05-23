@@ -88,51 +88,59 @@
     </div>
     <br />
 
-    <div style="overflow-x: auto; width: 100%">
-        <div class="input-group" style="width: 60%">
-            <asp:GridView ID="GridView1" runat="server"
-                OnPageIndexChanging="PageIndexChanging" AllowPaging="true"
-                CssClass="table table-bordered bs-table"
-                PagerSettings-Mode="NextPrevious"
-                PagerSettings-PreviousPageText="Anterior"
-                PagerSettings-NextPageText="Siguiente">
-            </asp:GridView>
-        </div>
-    </div>
+    <asp:UpdatePanel ID="upGrdResultados" runat="server" UpdateMode="Always">
+        <ContentTemplate>
+            <div style="overflow-x: auto; width: 100%">
+                <div class="input-group" style="width: 60%">
+                    <asp:GridView ID="grdResultados" runat="server"
+                        OnPageIndexChanging="PageIndexChanging" AllowPaging="true"
+                        CssClass="table table-bordered bs-table"
+                        PagerSettings-Mode="NextPrevious"
+                        PagerSettings-PreviousPageText="Anterior"
+                        PagerSettings-NextPageText="Siguiente">
+                    </asp:GridView>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <br />
 
-    <div class="input-group" style="width: 60%">
-        <fieldset class="form-group">
-            <h3>
-                <asp:Label runat="server" ID="lblConfiguracion" Text="Marque los campos que desea que se muestren en Resultados."></asp:Label>
-            </h3>
-            <div class="checkbox checkbox-primary">
-                <asp:CheckBoxList ID="chklstCampos" runat="server" CssClass="styled">
-                    <asp:ListItem Text="Número" Value="Numero" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Paterno" Value="Paterno" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Materno" Value="Materno" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Nombres" Value="Nombres" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Folio" Value="Folio" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Sexo" Value="Sexo" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Categoría" Value="Categoria" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Procedencia" Value="Procedencia" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Equipo" Value="Equipo" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Telefono" Value="Telefono" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="T_Chip" Value="T_Chip" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="T_Oficial" Value="T_Oficial" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Lug_Cat" Value="Lug_Cat" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Lug_Rama" Value="Lug_Rama" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Vel" Value="Vel" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Lug_Gral" Value="Lug_Gral" Selected="True"></asp:ListItem>
-                    <asp:ListItem Text="Rama" Value="Rama" Selected="True"></asp:ListItem>
-                </asp:CheckBoxList>
-                <br />
-                <br />
-                <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-default" Text="Guardar" OnClick="btnSubmit_Click" />
+    <asp:UpdatePanel ID="updLstConfigCarrera" runat="server" UpdateMode="Always">
+        <ContentTemplate>
+            <div class="input-group" style="width: 60%">
+                <fieldset class="form-group">
+                    <h3>
+                        <asp:Label runat="server" ID="lblConfiguracion" Text="Marque los campos que desea que se muestren en Resultados."></asp:Label>
+                    </h3>
+                    <div class="checkbox checkbox-primary">
+                        <asp:CheckBoxList ID="chklstCampos" runat="server" CssClass="styled">
+                            <asp:ListItem Text="Número" Value="Numero" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Paterno" Value="Paterno" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Materno" Value="Materno" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Nombres" Value="Nombres" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Folio" Value="Folio" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Sexo" Value="Sexo" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Categoría" Value="Categoria" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Procedencia" Value="Procedencia" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Equipo" Value="Equipo" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Telefono" Value="Telefono" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="T_Chip" Value="T_Chip" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="T_Oficial" Value="T_Oficial" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Lug_Cat" Value="Lug_Cat" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Lug_Rama" Value="Lug_Rama" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Vel" Value="Vel" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Lug_Gral" Value="Lug_Gral" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Rama" Value="Rama" Selected="True"></asp:ListItem>
+                        </asp:CheckBoxList>
+                        <br />
+                        <br />
+                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-default" Text="Guardar" OnClick="btnSubmit_Click" />
+                    </div>
+                </fieldset>
             </div>
-        </fieldset>
-    </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <br />
 

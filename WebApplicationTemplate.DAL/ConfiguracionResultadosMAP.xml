@@ -99,7 +99,11 @@
 		<select id="SeleccionarConfiguracionByIdCarreraIdCategoria" resultClass="ConfiguracionResultadosOBJ" parameterClass="ConfiguracionResultadosOBJ">
 			SELECT * FROM ConfiguracionResultados 
 			WHERE IdCarrera = #IdCarrera#
-			AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
+			AND (
+				(ISNULL(#IdCategoria#, 0) = 0 AND IdCategoria is null) 
+				OR 
+				(ISNULL(#IdCategoria#, 0) != 1 AND IdCategoria = #IdCategoria#)
+			)
 		</select>
 
 		<delete id="EliminarConfiguracionByIdCarreraIdCategoria" parameterClass="ConfiguracionResultadosOBJ">

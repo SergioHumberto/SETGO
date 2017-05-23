@@ -151,9 +151,9 @@ namespace WebApplicationTemplate.Web.PublicPages
 			connExcel.Close();
 
 			//Bind Data to GridView
-			GridView1.Caption = Path.GetFileName(FilePath);
-			GridView1.DataSource = dt;
-			GridView1.DataBind();
+			grdResultados.Caption = Path.GetFileName(FilePath);
+			grdResultados.DataSource = dt;
+			grdResultados.DataBind();
 
 			try
 			{
@@ -273,9 +273,9 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 		protected void PageIndexChanging(object sender, GridViewPageEventArgs e)
 		{
-			GridView1.PageIndex = e.NewPageIndex;
-			GridView1.DataBind();
-			GridView1.Visible = true;
+			grdResultados.PageIndex = e.NewPageIndex;
+			grdResultados.DataBind();
+			grdResultados.Visible = true;
 
 			btnConsultarResultados_Click(null, e);
 		}
@@ -337,7 +337,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
 				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
 
-				GridView1.Columns.Clear();
+				grdResultados.Columns.Clear();
 
 				int idCarrera = 0;
 				if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
@@ -353,9 +353,9 @@ namespace WebApplicationTemplate.Web.PublicPages
 						{
 							if (resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
 							{
-								GridView1.Visible = true;
-								GridView1.DataSource = resultadosBLL.SeleccionarResultadosByConfiguracionResultados(crOBJ.IdConfiguracionResultados);
-								GridView1.DataBind();
+								grdResultados.Visible = true;
+								grdResultados.DataSource = resultadosBLL.SeleccionarResultadosByConfiguracionResultados(crOBJ.IdConfiguracionResultados);
+								grdResultados.DataBind();
 
 								chklstCampos.Visible = true;
 								lblConfiguracion.Visible = true;
@@ -376,7 +376,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 					}
 					else
 					{
-						GridView1.Visible = false;
+						grdResultados.Visible = false;
 
 						chklstCampos.Visible = false;
 						lblConfiguracion.Visible = false;
@@ -397,6 +397,11 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
 			ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
+
+			lblConfiguracion.Visible = true;
+			btnSubmit.Visible = true;
+			chklstCampos.Visible = true;
+
 			int idCarrera = 0;
 			if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
 			{
@@ -437,6 +442,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 		{
 			try
 			{
+				LimpiarGrid();
 				lblError.Text = string.Empty;
 
 				CategoriaBLL catBLL = new CategoriaBLL(Tools.HttpSecurity.CurrentSession);
@@ -490,7 +496,8 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             try
             {
-                lblError.Text = string.Empty;
+				LimpiarGrid();
+				lblError.Text = string.Empty;
                
                 cargaURL();
             }
@@ -499,5 +506,15 @@ namespace WebApplicationTemplate.Web.PublicPages
                 lblError.Text = ex.Message;
             }
         }
-    }
+
+		private void LimpiarGrid()
+		{
+			lblConfiguracion.Visible = false;
+			btnSubmit.Visible = false;
+			chklstCampos.Visible = false;
+
+			grdResultados.DataSource = null;
+			grdResultados.DataBind();
+		}
+	}
 }
