@@ -306,10 +306,14 @@ namespace WebApplicationTemplate.Web.PublicPages
 				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 				WHERE CR.IdCarrera=" + idCarrera;
 
-            if (IdCategoria.HasValue)
+            if (IdCategoria == null)
             {
-                query += " AND CR.IdCategoria=" + IdCategoria.Value;
+                query += " AND CR.IdCategoria IS NULL";
             }
+			else
+			{
+				query += " AND CR.IdCategoria = " + IdCategoria;
+			}
 
 			return query;
 		}
@@ -373,7 +377,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                 {
                     if (IdCategoria > 0)
                     {
-                        CargarResultados(IdCategoria, IdCategoria);
+                        CargarResultados(IdCarrera, IdCategoria);
                     }
                     else
                     {
