@@ -46,5 +46,10 @@ namespace WebApplicationTemplate.DAL.Security
 			DAL.Insert("InsertUser", objUser);
         }
 
-    }
+		public static int ExisteUsername(User user)
+		{
+			return Mapper.Instance().QueryForObject<int>("ExisteUsername", user);
+		}
+
+	}
 }

@@ -17,7 +17,10 @@ namespace WebApplicationTemplate.Objects.Security
 
         //public Nullable<Guid> MacrolynkGUID { get; set; }
 		public string Password { get; set; }
-        
-        // TODO complete user data
+
+		public string Nombre { get; set; }
+		public string ApellidoPaterno { get; set; }
+		public string ApellidoMaterno { get; set; }
+		public string Email { get; set; }
 	}
 }

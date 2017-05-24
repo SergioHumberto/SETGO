@@ -66,5 +66,17 @@ namespace WebApplicationTemplate.BLL.Security
             UserDAL.InsertUser(user);
         }
 
+		public bool ExisteUsername(User user)
+		{
+			if (UserDAL.ExisteUsername(user) == 1)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 	}
 }

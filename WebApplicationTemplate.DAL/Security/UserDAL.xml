@@ -7,24 +7,30 @@
 	<statements>
 
     <insert id="InsertUser">
-		INSERT INTO [User]
-		(
-		Username
-		,Password
-		,IsSuperUser
-		<!--,MacrolynkGUID-->
-		)
-		VALUES
-		(
-		#username#
-		,#password#
-		,#isSuperUser#
-		<!--,#macrolynkGUID#-->
-		)
+			INSERT INTO [User]
+			(
+			Username
+			,Nombre
+			,ApellidoPaterno
+			,ApellidoMaterno
+			,Email
+			,Password
+			,IsSuperUser
+			)
+			VALUES
+			(
+			#Username#
+			,#Nombre#
+			,#ApellidoPaterno#
+			,#ApellidoMaterno#
+			,#Email#
+			,#Password#
+			,#IsSuperUser#
+			)
 
-		<selectKey type="post" resultClass="int" property="IdUser">
-			SELECT @@IDENTITY
-		</selectKey>
+			<selectKey type="post" resultClass="int" property="IdUser">
+				SELECT @@IDENTITY
+			</selectKey>
     </insert>
     
 	<select id="SelectUserByUsername" resultClass="User">
@@ -48,5 +54,19 @@
       SET SessionToken = #sessionToken#
       WHERE IdUser = #idUser#
     </update>
+
+		<select id="ExisteUsername" parameterClass="User" resultClass="int">
+			IF EXISTS(
+				SELECT * FROM [User]
+				WHERE Username = #Username#
+			)
+			BEGIN
+				SELECT 1
+			END
+			ELSE BEGIN
+				SELECT 0
+			END
+		</select>
+		
 	</statements>
 </sqlMap>

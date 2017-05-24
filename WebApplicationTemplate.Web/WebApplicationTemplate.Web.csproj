@@ -363,12 +363,17 @@
     <Content Include="Masters\PublicPage.Master" />
     <Content Include="Masters\PrivatePage.Master" />
     <Content Include="Pages\AdmonCatEquipos.aspx" />
+    <Content Include="Pages\assets\bootstrap.min.js" />
+    <Content Include="Pages\assets\jquery-1.11.2.min.js" />
+    <Content Include="Pages\assets\jquery.validate.min.js" />
     <Content Include="Pages\BuscaCarrera.aspx" />
     <Content Include="Pages\ConsultaResultadosIFrame.aspx" />
     <Content Include="Pages\Demo.aspx" />
     <Content Include="Pages\Home.aspx" />
     <Content Include="Pages\CargarResultados.aspx" />
     <Content Include="Pages\ConfiguraCarrera.aspx" />
+    <Content Include="Pages\RegistrarAdministrador.aspx" />
+    <Content Include="Pages\RegistrarAdministradorIFrame.aspx" />
     <Content Include="Pages\TempFiles\readme.txt" />
     <Content Include="PublicPages\GenerarCertificados.aspx" />
     <Content Include="PublicPages\ConsultaResultados.aspx" />
@@ -1264,6 +1269,20 @@
     </Compile>
     <Compile Include="Pages\ConfiguraCarrera.aspx.designer.cs">
       <DependentUpon>ConfiguraCarrera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrarAdministrador.aspx.cs">
+      <DependentUpon>RegistrarAdministrador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\RegistrarAdministrador.aspx.designer.cs">
+      <DependentUpon>RegistrarAdministrador.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrarAdministradorIFrame.aspx.cs">
+      <DependentUpon>RegistrarAdministradorIFrame.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\RegistrarAdministradorIFrame.aspx.designer.cs">
+      <DependentUpon>RegistrarAdministradorIFrame.aspx</DependentUpon>
     </Compile>
     <Compile Include="PublicPages\GenerarCertificados.aspx.cs">
       <DependentUpon>GenerarCertificados.aspx</DependentUpon>

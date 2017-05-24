@@ -21,3 +21,4 @@
 :r .\ControlXCarrera.0.sql
 :r .\Resultados.0.sql
 :r .\ConfiguracionResultados.0.sql
+:r .\User.1.sql
