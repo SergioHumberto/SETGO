@@ -113,10 +113,5 @@ namespace WebApplicationTemplate.Web.Tools
 		{
 			return Abs("~/Pages/RegistrarAdministrador.aspx");
 		}
-
-		public static String RegistrarAdministradorIFrame()
-		{
-			return Abs("~/Pages/RegistrarAdministradorIFrame.aspx");
-		}
 	}
 }

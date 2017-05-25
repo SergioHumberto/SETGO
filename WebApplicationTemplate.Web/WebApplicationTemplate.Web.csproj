@@ -373,8 +373,8 @@
     <Content Include="Pages\CargarResultados.aspx" />
     <Content Include="Pages\ConfiguraCarrera.aspx" />
     <Content Include="Pages\RegistrarAdministrador.aspx" />
-    <Content Include="Pages\RegistrarAdministradorIFrame.aspx" />
     <Content Include="Pages\TempFiles\readme.txt" />
+    <Content Include="Pages\Usuarios.aspx" />
     <Content Include="PublicPages\GenerarCertificados.aspx" />
     <Content Include="PublicPages\ConsultaResultados.aspx" />
     <Content Include="PublicPages\localization\bg.xml" />
@@ -1277,12 +1277,12 @@
     <Compile Include="Pages\RegistrarAdministrador.aspx.designer.cs">
       <DependentUpon>RegistrarAdministrador.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RegistrarAdministradorIFrame.aspx.cs">
-      <DependentUpon>RegistrarAdministradorIFrame.aspx</DependentUpon>
+    <Compile Include="Pages\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\RegistrarAdministradorIFrame.aspx.designer.cs">
-      <DependentUpon>RegistrarAdministradorIFrame.aspx</DependentUpon>
+    <Compile Include="Pages\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="PublicPages\GenerarCertificados.aspx.cs">
       <DependentUpon>GenerarCertificados.aspx</DependentUpon>

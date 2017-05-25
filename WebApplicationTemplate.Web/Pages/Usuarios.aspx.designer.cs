@@ -10,6 +10,6 @@
 namespace WebApplicationTemplate.Web.Pages {
     
     
-    public partial class RegistrarAdministradorIFrame {
+    public partial class Usuarios {
     }
 }
