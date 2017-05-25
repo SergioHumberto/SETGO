@@ -17,7 +17,6 @@
                         <input name="username" id="username" type="text" class="form-control" placeholder="Nombre de usuario"/>
                         </div>
                         <span class="help-block" id="error"></span>
-                        <label id="lblError" class="help-block"></label>
                     </div>
 
                     <div class="form-group">
@@ -87,10 +86,6 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="assets/jquery.validate.min.js"></script>
-
     <script type="text/javascript">
         $('document').ready(function () {
             // name validation
@@ -107,7 +102,7 @@
                 return this.optional(element) || eregex.test(value);
             });
             
-            $("#register-form").validate({
+            $("#frm").validate({
 
                 rules:
                 {
@@ -169,7 +164,7 @@
                     },
                     email: {
                         required: "Por favor ingrese su dirección de correo electrónico.",
-                        validemail: "Enter Valid Email Address"
+                        validemail: "Ingrese una dirección de correo valida."
                     },
                     password: {
                         required: "Por favor introdusca su contraseña.",
