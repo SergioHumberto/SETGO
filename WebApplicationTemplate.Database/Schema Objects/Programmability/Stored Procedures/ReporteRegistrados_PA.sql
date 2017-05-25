@@ -33,7 +33,7 @@ BEGIN
 	, P.Generic10
 	, dbo.GetClasificacionesXParticipante(P.IdParticipante) AS [Clasificaciones]
 	, RU.Nombre as [Ruta]
-	, P.FolioOffline as [Codigo de Pago]
+	, P.FolioOffline as [CodigoPago]
 	FROM Participante P
 	INNER JOIN ParticipanteXCarrera PxC ON PxC.IdParticipante = P.IdParticipante
 	INNER JOIN Categoria C ON C.IdCategoria = PxC.IdCategoria

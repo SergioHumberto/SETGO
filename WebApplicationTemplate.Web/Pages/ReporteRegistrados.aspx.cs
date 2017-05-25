@@ -8,7 +8,6 @@ using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
 using System.Data.SqlClient;
 using System.Data;
-using Microsoft.Reporting.WebForms;
 using System.IO;
 
 namespace WebApplicationTemplate.Web.Pages
@@ -20,6 +19,12 @@ namespace WebApplicationTemplate.Web.Pages
             if (!IsPostBack)
             {
                 LoadCarreras();
+
+                int IdCarrera;
+                if (int.TryParse(ddlCarrera.SelectedValue, out IdCarrera))
+                {
+                    GenerateReportOnScreen(IdCarrera);
+                }
             }
         }
 
@@ -42,6 +47,31 @@ namespace WebApplicationTemplate.Web.Pages
                 reporteRegistrados.IdCarrera = IdCarrera;
                 reporteRegistrados.NombreCarrera = ddlCarrera.SelectedItem.Text;
                 reporteRegistrados.GenerateReport();
+            }
+        }
+
+        private void GenerateReportOnScreen(int IdCarrera)
+        {
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            CarreraBLL objCarreraBLL = new CarreraBLL(session);
+            CarreraOBJ objCarrera = objCarreraBLL.SelectCarreraObject(IdCarrera);
+
+            if (objCarrera != null)
+            {
+                Reports.Classes.ReporteRegistrados reporteRegistrados = new Reports.Classes.ReporteRegistrados();
+                reporteRegistrados.IdCarrera = objCarrera.IdCarrera;
+                reporteRegistrados.NombreCarrera = objCarrera.Nombre;
+                repeater.DataSource = reporteRegistrados.GenerateDataSource();
+                repeater.DataBind();
+            }
+        }
+
+        protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int IdCarrera;
+            if (int.TryParse(ddlCarrera.SelectedValue, out IdCarrera))
+            {
+                GenerateReportOnScreen(IdCarrera);
             }
         }
     }
