@@ -172,6 +172,7 @@
                     },
                     cpassword: {
                         required: "Por favor confirme su contraseña.",
+                        minlength: "La contraseña debe tener al menos 8 caracteres.",
                         equalTo: "La contraseña no coincide."
                     }
                 },
