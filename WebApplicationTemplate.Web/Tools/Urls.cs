@@ -109,9 +109,9 @@ namespace WebApplicationTemplate.Web.Tools
             return Abs("~/Pages/ConsultaResultadosIFrame.aspx");
         }
 
-		public static String RegistrarAdministrador()
+		public static String Usuarios()
 		{
-			return Abs("~/Pages/RegistrarAdministrador.aspx");
+			return Abs("~/Pages/Usuarios.aspx");
 		}
 	}
 }

@@ -26,6 +26,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="<%= Urls.AdmonCatEquipos() %>">Equipos</a></li>                    
                     <li><a href="<%= Urls.BuscaCarrera() %>">Carreras</a></li>
+                    <li><a href="<%= Urls.Usuarios() %>">Usuarios</a></li>
                     <%--<li class="divider"></li>--%>                    
                 </ul>
             </li>
@@ -47,15 +48,7 @@
                     <li><a href="<%= Urls.ConsultaResultadosIFrame()%>">Consulta</a></li>                                 
                     <%--<li class="divider"></li>--%>                    
                 </ul>
-            </li>   
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registro<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="<%= Urls.RegistrarAdministrador() %>">Registro Administrador</a></li>
-                    <%--<li class="divider"></li>--%>                    
-                </ul>
-            </li>           
+            </li>             
             <li><a href="<%= Urls.SignOut() %>">Salir</a></li>
         </ul>
     </div>
