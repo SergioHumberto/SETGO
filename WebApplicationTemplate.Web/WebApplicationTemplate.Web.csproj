@@ -1104,7 +1104,6 @@
     <Content Include="PublicPages\resources\FileBrowser\Documents\MyProjects.zip" />
     <Content Include="PublicPages\resources\FileBrowser\Documents\stock.doc" />
     <Content Include="PublicPages\resources\FileBrowser\Shapes\Favorites.tmp" />
-    <Content Include="PublicPages\styles\black_glass\Thumbs.db" />
     <Content Include="PublicPages\styles\grand_gray\interface\OboutTextBox\images\Thumbs.db" />
     <None Include="Reports\XSD\ReporteCertificado_1DS.xsd">
       <SubType>Designer</SubType>
@@ -1266,6 +1265,7 @@
     </Compile>
     <Compile Include="Pages\Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
