@@ -103,7 +103,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
         private void GeneraCertificado(int IdResultado)
         {
-            Reports.Classes.ReporteCertificado_1 reportCertificado = new Reports.Classes.ReporteCertificado_1();
+            Reports.Classes.ReporteCertificado_3 reportCertificado = new Reports.Classes.ReporteCertificado_3();
 
             reportCertificado.IdCarrera = IdCarreraProperty;
             reportCertificado.IdResultado = IdResultado;
