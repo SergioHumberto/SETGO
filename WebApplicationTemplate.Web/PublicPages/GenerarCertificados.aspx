@@ -32,6 +32,8 @@
 
         <asp:Button runat="server" CssClass="btn btn-default" ID="btnGenerarCertificado2" Text="Generar certificado 2" OnClick="btnGenerarCertificado2_Click" />
 
+        <asp:Button runat="server" CssClass="btn btn-default" ID="btnGenerarCertificado3" Text="Generar certificado 3" OnClick="btnGenerarCertificado3_Click" />
+
     </div>
     </form>
 </body>

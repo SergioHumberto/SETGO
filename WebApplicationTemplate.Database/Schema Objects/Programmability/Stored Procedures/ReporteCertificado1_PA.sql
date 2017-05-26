@@ -15,5 +15,5 @@ BEGIN
 	FROM Resultados R
 	INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 	WHERE CR.IdCarrera = @IdCarrera
-		AND (@IdResultado IS NULL OR R.IdResultado = @IdResultado)
+		AND (@IdResultado <= 0 OR R.IdResultado = @IdResultado)
 END 

@@ -52,5 +52,15 @@ namespace WebApplicationTemplate.Web.PublicPages
             reporte.IdCarrera = IdCarrera;
             reporte.GenerateReport();
         }
+
+        protected void btnGenerarCertificado3_Click(object sender, EventArgs e)
+        {
+            Reports.Classes.ReporteCertificado_3 reporte = new Reports.Classes.ReporteCertificado_3();
+            int IdCarrera;
+            int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
+
+            reporte.IdCarrera = IdCarrera;
+            reporte.GenerateReport();
+        }
     }
 }
