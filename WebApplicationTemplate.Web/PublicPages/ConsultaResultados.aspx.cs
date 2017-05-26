@@ -80,9 +80,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             get
             {
-                string url = "~/PublicPages/ConsultaResultados.aspx?IdCarrera={0}&IdResultado=";
-                url = string.Format(url, IdCarreraProperty);
-
+                string url = "~/PublicPages/ConsultaResultados.aspx";
                 return Tools.Urls.Abs(url);
             }
         }
@@ -237,7 +235,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 			string query = string.Empty;
 
-			query = "SELECT R.IdResultado, ";
+			query = "SELECT R.IdResultado, CR.IdCarrera,";
 
 			if(crOBJ.Numero)
 			{
