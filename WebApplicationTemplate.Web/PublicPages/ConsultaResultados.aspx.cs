@@ -438,28 +438,46 @@ namespace WebApplicationTemplate.Web.PublicPages
             {
                 if (objCR != null)
                 {
+                    e.Item.FindControl("thNumero").Visible = objCR.Numero;
                     e.Item.FindControl("thNombres").Visible = objCR.Nombres;
                     e.Item.FindControl("thPaterno").Visible = objCR.Paterno;
                     e.Item.FindControl("thMaterno").Visible = objCR.Materno;
+                    e.Item.FindControl("thFolio").Visible = objCR.Folio;
                     e.Item.FindControl("thSexo").Visible = objCR.Sexo;
+                    e.Item.FindControl("thCategoria").Visible = objCR.Categoria;
+                    e.Item.FindControl("thProcedencia").Visible = objCR.Procedencia;
+                    e.Item.FindControl("thEquipo").Visible = objCR.Equipo;
+                    e.Item.FindControl("thTelefono").Visible = objCR.Telefono;
                     e.Item.FindControl("thTiempoChip").Visible = objCR.T_Chip;
+                    e.Item.FindControl("thTiempoOficial").Visible = objCR.T_Oficial;
+                    e.Item.FindControl("thLugarCategoria").Visible = objCR.Lug_Cat;
                     e.Item.FindControl("thLugarRama").Visible = objCR.Lug_Rama;
                     e.Item.FindControl("thVel").Visible = objCR.Vel;
                     e.Item.FindControl("thLugarGeneral").Visible = objCR.Lug_Gral;
+                    e.Item.FindControl("thRama").Visible = objCR.Rama;
                 }
             }
             else if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 if (objCR != null)
                 {
+                    e.Item.FindControl("tdNumero").Visible = objCR.Numero;
                     e.Item.FindControl("tdNombres").Visible = objCR.Nombres;
                     e.Item.FindControl("tdPaterno").Visible = objCR.Paterno;
                     e.Item.FindControl("tdMaterno").Visible = objCR.Materno;
+                    e.Item.FindControl("tdFolio").Visible = objCR.Folio;
                     e.Item.FindControl("tdSexo").Visible = objCR.Sexo;
+                    e.Item.FindControl("tdCategoria").Visible = objCR.Categoria;
+                    e.Item.FindControl("tdProcedencia").Visible = objCR.Procedencia;
+                    e.Item.FindControl("tdEquipo").Visible = objCR.Equipo;
+                    e.Item.FindControl("tdTelefono").Visible = objCR.Telefono;
                     e.Item.FindControl("tdTiempoChip").Visible = objCR.T_Chip;
+                    e.Item.FindControl("tdTiempoOficial").Visible = objCR.T_Oficial;
+                    e.Item.FindControl("tdLugarCategoria").Visible = objCR.Lug_Cat;
                     e.Item.FindControl("tdLugarRama").Visible = objCR.Lug_Rama;
                     e.Item.FindControl("tdVel").Visible = objCR.Vel;
                     e.Item.FindControl("tdLugarGeneral").Visible = objCR.Lug_Gral;
+                    e.Item.FindControl("tdRama").Visible = objCR.Rama;
                 }
             }
         }
