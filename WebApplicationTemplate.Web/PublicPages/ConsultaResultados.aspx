@@ -102,20 +102,20 @@
 
                 <div class="input-group">
                     <div class="col-md-12">
-                        <asp:Repeater ID="repeater" runat="server">
+                        <asp:Repeater ID="repeater" OnItemDataBound="repeater_ItemDataBound" runat="server">
                             <HeaderTemplate>
                                 <table id="tbl" cellpadding="1" cellspacing="0"
                                     border="0" class="display">
                                     <thead>
                                         <tr>
-                                            <th class="Titulo">Nombres</th>
-                                            <th class="Titulo">Paterno</th>
-                                            <th class="Titulo">Materno</th>
-                                            <th class="Titulo">Sexo</th>
-                                            <th class="Titulo">Tiempo chip</th>
-                                            <th class="Titulo">Lugar rama</th>
-                                            <th class="Titulo">Vel</th>
-                                            <th class="Titulo">Lugar general</th>
+                                            <th id="thNombres" runat="server" class="Titulo">Nombres</th>
+                                            <th id="thPaterno" class="Titulo" runat="server">Paterno</th>
+                                            <th id="thMaterno" class="Titulo" runat="server">Materno</th>
+                                            <th id="thSexo" class="Titulo" runat="server">Sexo</th>
+                                            <th id="thTiempoChip" class="Titulo" runat="server">Tiempo chip</th>
+                                            <th id="thLugarRama" class="Titulo" runat="server">Lugar rama</th>
+                                            <th id="thVel" class="Titulo" runat="server">Vel</th>
+                                            <th id="thLugarGeneral" class="Titulo" runat="server">Lugar general</th>
                                             <th class="Titulo">Imprime</th>
                                         </tr>
                                     </thead>
@@ -123,14 +123,14 @@
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <tr>
-                                    <td><%# Eval("Nombres") %></td>
-                                    <td><%# Eval("Paterno") %></td>
-                                    <td><%# Eval("Materno") %></td>
-                                    <td><%# Eval("Sexo") %></td>
-                                    <td><%# Eval("T_Chip") %></td>
-                                    <td><%# Eval("Lug_Rama") %></td>
-                                    <td><%# Eval("Vel") %></td>
-                                    <td><%# Eval("Lug_Gral") %></td>
+                                    <td id="tdNombres" runat="server"><%# Eval("Nombres") %></td>
+                                    <td id="tdPaterno" runat="server"><%# Eval("Paterno") %></td>
+                                    <td id="tdMaterno" runat="server"><%# Eval("Materno") %></td>
+                                    <td id="tdSexo" runat="server"><%# Eval("Sexo") %></td>
+                                    <td id="tdTiempoChip" runat="server"><%# Eval("T_Chip") %></td>
+                                    <td id="tdLugarRama" runat="server"><%# Eval("Lug_Rama") %></td>
+                                    <td id="tdVel" runat="server"><%# Eval("Vel") %></td>
+                                    <td id="tdLugarGeneral" runat="server"><%# Eval("Lug_Gral") %></td>
                                     <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %>?IdCarrera=<%# Eval("IdCarrera") %>&IdResultado=<%# Eval("IdResultado") %>">Imprime </a></td>
                                 </tr>
                             </ItemTemplate>

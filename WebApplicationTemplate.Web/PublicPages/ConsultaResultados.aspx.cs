@@ -23,15 +23,23 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             get {
 
+                int IdCarrera;
                 if (Request.QueryString["IdCarrera"] != null)
                 {
-                    int IdCarrera;
                     if (int.TryParse(Request.QueryString["IdCarrera"], out IdCarrera))
                     {
                         if (IdCarrera > 0)
                         {
                             return IdCarrera;
                         }
+                    }
+                }
+
+                if (int.TryParse(ddlCarrera.SelectedValue, out IdCarrera))
+                {
+                    if (IdCarrera > 0)
+                    {
+                        return IdCarrera;
                     }
                 }
 
@@ -43,15 +51,24 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             get
             {
+                int IdCategoria;
+
                 if (Request.QueryString["IdCategoria"] != null)
                 {
-                    int IdCategoria;
                     if (int.TryParse(Request.QueryString["IdCategoria"], out IdCategoria))
                     {
                         if (IdCategoria > 0)
                         {
                             return IdCategoria;
                         }
+                    }
+                }
+
+                if(int.TryParse(ddlCategoria.SelectedValue, out IdCategoria))
+                {
+                    if (IdCategoria > 0)
+                    {
+                        return IdCategoria;
                     }
                 }
 
@@ -237,74 +254,74 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 			query = "SELECT R.IdResultado, CR.IdCarrera,";
 
-			if(crOBJ.Numero)
-			{
+			//if(crOBJ.Numero)
+			//{
 				query += "R.Numero,";
-			}
-			if (crOBJ.Paterno)
-			{
+			// }
+			//if (crOBJ.Paterno)
+			//{
 				query += "R.Paterno,";
-			}
-			if (crOBJ.Materno)
-			{
+			// }
+			//if (crOBJ.Materno)
+			//{
 				query += "R.Materno,";
-			}
-			if (crOBJ.Nombres)
-			{
+			// }
+			//if (crOBJ.Nombres)
+			//{
 				query += "R.Nombres,";
-			}
-			if (crOBJ.Folio)
-			{
+			//}
+			//if (crOBJ.Folio)
+			//{
 				query += "R.Folio,";
-			}
-			if (crOBJ.Sexo)
-			{
+			// }
+			//if (crOBJ.Sexo)
+			//{
 				query += "R.Sexo,";
-			}
-			if (crOBJ.Categoria)
-			{
+			//}
+			//if (crOBJ.Categoria)
+			//{
 				query += "R.Categoria,";
-			}
-			if (crOBJ.Procedencia)
-			{
+			//}
+			//if (crOBJ.Procedencia)
+			//{
 				query += "R.Procedencia,";
-			}
-			if (crOBJ.Equipo)
-			{
+			//}
+			//if (crOBJ.Equipo)
+			//{
 				query += "R.Equipo,";
-			}
-			if (crOBJ.Telefono)
-			{
+			//}
+			//if (crOBJ.Telefono)
+			//{
 				query += "R.Telefono,";
-			}
-			if (crOBJ.T_Chip)
-			{
+			//}
+			//if (crOBJ.T_Chip)
+			//{
 				query += "R.T_Chip,";
-			}
-			if (crOBJ.T_Oficial)
-			{
+			//}
+			//if (crOBJ.T_Oficial)
+			//{
 				query += "R.T_Oficial,";
-			}
-			if (crOBJ.Lug_Cat)
-			{
+			//}
+			//if (crOBJ.Lug_Cat)
+			//{
 				query += "R.Lug_Cat,";
-			}
-			if (crOBJ.Lug_Rama)
-			{
+			//}
+			//if (crOBJ.Lug_Rama)
+			//{
 				query += "R.Lug_Rama,";
-			}
-			if (crOBJ.Vel)
-			{
+			//}
+			//if (crOBJ.Vel)
+			//{
 				query += "R.Vel,";
-			}
-			if (crOBJ.Lug_Gral)
-			{
+			//}
+			//if (crOBJ.Lug_Gral)
+			//{
 				query += "R.Lug_Gral,";
-			}
-			if (crOBJ.Rama)
-			{
+			//}
+			//if (crOBJ.Rama)
+			//{
 				query += "R.Rama,";
-			}
+			// }
 
 			query = query.Remove(query.Length - 1, 1);//Elimina la coma de al final de la cadena.
 
@@ -402,6 +419,49 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             repeater.DataSource = null;
             repeater.DataBind();
+        }
+
+        protected void repeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            ConfiguracionResultadosBLL objConfiguracionResultadosBLL = new ConfiguracionResultadosBLL();
+            ConfiguracionResultadosOBJ finder = new ConfiguracionResultadosOBJ();
+            finder.IdCarrera = IdCarreraProperty;
+
+            if (IdCategoriaProperty > 0)
+            {
+                finder.IdCategoria = IdCategoriaProperty;
+            }
+
+            ConfiguracionResultadosOBJ objCR = objConfiguracionResultadosBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(finder);
+
+            if (e.Item.ItemType == ListItemType.Header)
+            {
+                if (objCR != null)
+                {
+                    e.Item.FindControl("thNombres").Visible = objCR.Nombres;
+                    e.Item.FindControl("thPaterno").Visible = objCR.Paterno;
+                    e.Item.FindControl("thMaterno").Visible = objCR.Materno;
+                    e.Item.FindControl("thSexo").Visible = objCR.Sexo;
+                    e.Item.FindControl("thTiempoChip").Visible = objCR.T_Chip;
+                    e.Item.FindControl("thLugarRama").Visible = objCR.Lug_Rama;
+                    e.Item.FindControl("thVel").Visible = objCR.Vel;
+                    e.Item.FindControl("thLugarGeneral").Visible = objCR.Lug_Gral;
+                }
+            }
+            else if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                if (objCR != null)
+                {
+                    e.Item.FindControl("tdNombres").Visible = objCR.Nombres;
+                    e.Item.FindControl("tdPaterno").Visible = objCR.Paterno;
+                    e.Item.FindControl("tdMaterno").Visible = objCR.Materno;
+                    e.Item.FindControl("tdSexo").Visible = objCR.Sexo;
+                    e.Item.FindControl("tdTiempoChip").Visible = objCR.T_Chip;
+                    e.Item.FindControl("tdLugarRama").Visible = objCR.Lug_Rama;
+                    e.Item.FindControl("tdVel").Visible = objCR.Vel;
+                    e.Item.FindControl("tdLugarGeneral").Visible = objCR.Lug_Gral;
+                }
+            }
         }
     }
 }
