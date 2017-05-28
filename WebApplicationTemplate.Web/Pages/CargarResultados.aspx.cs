@@ -314,25 +314,25 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             crOBJ.IdCarrera = IDCARRERA;
             crOBJ.IdCategoria = IDCATEGORIA;
-            crOBJ.Numero = chklstCampos.Items[0].Selected;
-            crOBJ.Paterno = chklstCampos.Items[1].Selected;
-            crOBJ.Materno = chklstCampos.Items[2].Selected;
-            crOBJ.Nombres = chklstCampos.Items[3].Selected;
-            crOBJ.Folio = chklstCampos.Items[4].Selected;
-            crOBJ.Sexo = chklstCampos.Items[5].Selected;
-            crOBJ.Categoria = chklstCampos.Items[6].Selected;
-            crOBJ.Procedencia = chklstCampos.Items[7].Selected;
-            crOBJ.Equipo = chklstCampos.Items[8].Selected;
-            crOBJ.Telefono = chklstCampos.Items[9].Selected;
-            crOBJ.T_Chip = chklstCampos.Items[10].Selected;
-            crOBJ.T_Oficial = chklstCampos.Items[11].Selected;
-            crOBJ.Lug_Cat = chklstCampos.Items[12].Selected;
-            crOBJ.Lug_Rama = chklstCampos.Items[13].Selected;
-            crOBJ.Vel = chklstCampos.Items[14].Selected;
-            crOBJ.Lug_Gral = chklstCampos.Items[15].Selected;
-            crOBJ.Rama = chklstCampos.Items[16].Selected;
-            crOBJ.Edad = chklstCampos.Items[17].Selected;
-            crOBJ.T_Intermedio = chklstCampos.Items[18].Selected;            
+            crOBJ.Numero = chklstCampos.Items.FindByText("Número").Selected;
+            crOBJ.Paterno = chklstCampos.Items.FindByText("Paterno").Selected;
+            crOBJ.Materno = chklstCampos.Items.FindByText("Materno").Selected;
+            crOBJ.Nombres = chklstCampos.Items.FindByText("Nombres").Selected;
+            crOBJ.Folio = chklstCampos.Items.FindByText("Folio").Selected;
+            crOBJ.Sexo = chklstCampos.Items.FindByText("Sexo").Selected;
+            crOBJ.Categoria = chklstCampos.Items.FindByText("Categoría").Selected;
+            crOBJ.Procedencia = chklstCampos.Items.FindByText("Procedencia").Selected;
+            crOBJ.Equipo = chklstCampos.Items.FindByText("Equipo").Selected;
+            crOBJ.Telefono = chklstCampos.Items.FindByText("Telefono").Selected;
+            crOBJ.T_Chip = chklstCampos.Items.FindByText("T_Chip").Selected;
+            crOBJ.T_Oficial = chklstCampos.Items.FindByText("T_Oficial").Selected;
+            crOBJ.Lug_Cat = chklstCampos.Items.FindByText("Lug_Cat").Selected;
+            crOBJ.Lug_Rama = chklstCampos.Items.FindByText("Lug_Rama").Selected;
+            crOBJ.Vel = chklstCampos.Items.FindByText("Vel").Selected;
+            crOBJ.Lug_Gral = chklstCampos.Items.FindByText("Lug_Gral").Selected;
+            crOBJ.Rama = chklstCampos.Items.FindByText("Rama").Selected;
+            crOBJ.Edad = chklstCampos.Items.FindByText("Edad").Selected;
+            crOBJ.T_Intermedio = chklstCampos.Items.FindByText("T_Intermedio").Selected;            
 
             return crOBJ;
         }
@@ -427,25 +427,26 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                     if (crOBJ != null)
                     {
-                        chklstCampos.Items[0].Selected = crOBJ.Numero;
-                        chklstCampos.Items[1].Selected = crOBJ.Paterno;
-                        chklstCampos.Items[2].Selected = crOBJ.Materno;
-                        chklstCampos.Items[3].Selected = crOBJ.Nombres;
-                        chklstCampos.Items[4].Selected = crOBJ.Folio;
-                        chklstCampos.Items[5].Selected = crOBJ.Sexo;
-                        chklstCampos.Items[6].Selected = crOBJ.Categoria;
-                        chklstCampos.Items[7].Selected = crOBJ.Procedencia;
-                        chklstCampos.Items[8].Selected = crOBJ.Equipo;
-                        chklstCampos.Items[9].Selected = crOBJ.Telefono;
-                        chklstCampos.Items[10].Selected = crOBJ.T_Chip;
-                        chklstCampos.Items[11].Selected = crOBJ.T_Oficial;
-                        chklstCampos.Items[12].Selected = crOBJ.Lug_Cat;
-                        chklstCampos.Items[13].Selected = crOBJ.Lug_Rama;
-                        chklstCampos.Items[14].Selected = crOBJ.Vel;
-                        chklstCampos.Items[15].Selected = crOBJ.Lug_Gral;
-                        chklstCampos.Items[16].Selected = crOBJ.Rama;
-                        chklstCampos.Items[17].Selected = crOBJ.Edad;
-                        chklstCampos.Items[18].Selected = crOBJ.T_Intermedio;
+                        chklstCampos.Items.FindByText("Número").Selected = crOBJ.Numero;
+                        chklstCampos.Items.FindByText("Paterno").Selected = crOBJ.Paterno;
+                        chklstCampos.Items.FindByText("Materno").Selected = crOBJ.Materno;
+                        chklstCampos.Items.FindByText("Nombres").Selected = crOBJ.Nombres;
+                        chklstCampos.Items.FindByText("Folio").Selected = crOBJ.Folio;
+                        chklstCampos.Items.FindByText("Sexo").Selected = crOBJ.Sexo;
+                        chklstCampos.Items.FindByText("Categoría").Selected = crOBJ.Categoria;
+                        chklstCampos.Items.FindByText("Procedencia").Selected = crOBJ.Procedencia;
+                        chklstCampos.Items.FindByText("Equipo").Selected = crOBJ.Equipo;
+                        chklstCampos.Items.FindByText("Telefono").Selected = crOBJ.Telefono;
+                        chklstCampos.Items.FindByText("T_Chip").Selected = crOBJ.T_Chip;
+                        chklstCampos.Items.FindByText("T_Oficial").Selected = crOBJ.T_Oficial;
+                        chklstCampos.Items.FindByText("Lug_Cat").Selected = crOBJ.Lug_Cat;
+                        chklstCampos.Items.FindByText("Lug_Rama").Selected = crOBJ.Lug_Rama;
+                        chklstCampos.Items.FindByText("Vel").Selected = crOBJ.Vel;
+                        chklstCampos.Items.FindByText("Lug_Gral").Selected = crOBJ.Lug_Gral;
+                        chklstCampos.Items.FindByText("Rama").Selected = crOBJ.Rama;
+                        chklstCampos.Items.FindByText("Edad").Selected = crOBJ.Edad;
+                        chklstCampos.Items.FindByText("T_Intermedio").Selected = crOBJ.T_Intermedio;
+                        
                     }
                 }
             }

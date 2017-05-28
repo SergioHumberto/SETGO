@@ -120,11 +120,13 @@
                             <asp:ListItem Text="Materno" Value="Materno" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Nombres" Value="Nombres" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Folio" Value="Folio" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Edad" Value="Edad" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Sexo" Value="Sexo" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Categoría" Value="Categoria" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Procedencia" Value="Procedencia" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Equipo" Value="Equipo" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Telefono" Value="Telefono" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="T_Intermedio" Value="T_Intermedio" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="T_Chip" Value="T_Chip" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="T_Oficial" Value="T_Oficial" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Lug_Cat" Value="Lug_Cat" Selected="True"></asp:ListItem>
@@ -132,8 +134,6 @@
                             <asp:ListItem Text="Vel" Value="Vel" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Lug_Gral" Value="Lug_Gral" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Rama" Value="Rama" Selected="True"></asp:ListItem>
-                            <asp:ListItem Text="Edad" Value="Edad" Selected="True"></asp:ListItem>
-                            <asp:ListItem Text="T_Intermedio" Value="T_Intermedio" Selected="True"></asp:ListItem>
                         </asp:CheckBoxList>
                         <br />
                         <br />
