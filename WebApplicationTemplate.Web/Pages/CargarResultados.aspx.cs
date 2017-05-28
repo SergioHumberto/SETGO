@@ -314,26 +314,14 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             crOBJ.IdCarrera = IDCARRERA;
             crOBJ.IdCategoria = IDCATEGORIA;
-            crOBJ.Numero = chklstCampos.Items.FindByText("Número").Selected;
-            crOBJ.Paterno = chklstCampos.Items.FindByText("Paterno").Selected;
-            crOBJ.Materno = chklstCampos.Items.FindByText("Materno").Selected;
-            crOBJ.Nombres = chklstCampos.Items.FindByText("Nombres").Selected;
-            crOBJ.Folio = chklstCampos.Items.FindByText("Folio").Selected;
-            crOBJ.Sexo = chklstCampos.Items.FindByText("Sexo").Selected;
-            crOBJ.Categoria = chklstCampos.Items.FindByText("Categoría").Selected;
-            crOBJ.Procedencia = chklstCampos.Items.FindByText("Procedencia").Selected;
-            crOBJ.Equipo = chklstCampos.Items.FindByText("Equipo").Selected;
-            crOBJ.Telefono = chklstCampos.Items.FindByText("Telefono").Selected;
-            crOBJ.T_Chip = chklstCampos.Items.FindByText("T_Chip").Selected;
-            crOBJ.T_Oficial = chklstCampos.Items.FindByText("T_Oficial").Selected;
-            crOBJ.Lug_Cat = chklstCampos.Items.FindByText("Lug_Cat").Selected;
-            crOBJ.Lug_Rama = chklstCampos.Items.FindByText("Lug_Rama").Selected;
-            crOBJ.Vel = chklstCampos.Items.FindByText("Vel").Selected;
-            crOBJ.Lug_Gral = chklstCampos.Items.FindByText("Lug_Gral").Selected;
-            crOBJ.Rama = chklstCampos.Items.FindByText("Rama").Selected;
-            crOBJ.Edad = chklstCampos.Items.FindByText("Edad").Selected;
-            crOBJ.T_Intermedio = chklstCampos.Items.FindByText("T_Intermedio").Selected;            
+            System.Reflection.PropertyInfo[] props = crOBJ.GetType().GetProperties();
 
+            foreach (System.Reflection.PropertyInfo prop in props)
+            {
+                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                    prop.SetValue(crOBJ, chklstCampos.Items.FindByText(prop.Name).Selected);
+            }
+            
             return crOBJ;
         }
 
@@ -404,8 +392,22 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
 
+        protected void cargaItemsChkBoxListConfiguracionResultados()
+        {
+            ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+            System.Reflection.PropertyInfo[] props = crOBJ.GetType().GetProperties();
+            chklstCampos.Items.Clear();
+
+            foreach (System.Reflection.PropertyInfo prop in props)
+            {
+                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                    chklstCampos.Items.Add(new ListItem(prop.Name, "true"));
+            }
+        }
         private void CargarConfiguracionResultados()
         {
+            cargaItemsChkBoxListConfiguracionResultados();
+
             ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
             ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 
@@ -427,26 +429,13 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                     if (crOBJ != null)
                     {
-                        chklstCampos.Items.FindByText("Número").Selected = crOBJ.Numero;
-                        chklstCampos.Items.FindByText("Paterno").Selected = crOBJ.Paterno;
-                        chklstCampos.Items.FindByText("Materno").Selected = crOBJ.Materno;
-                        chklstCampos.Items.FindByText("Nombres").Selected = crOBJ.Nombres;
-                        chklstCampos.Items.FindByText("Folio").Selected = crOBJ.Folio;
-                        chklstCampos.Items.FindByText("Sexo").Selected = crOBJ.Sexo;
-                        chklstCampos.Items.FindByText("Categoría").Selected = crOBJ.Categoria;
-                        chklstCampos.Items.FindByText("Procedencia").Selected = crOBJ.Procedencia;
-                        chklstCampos.Items.FindByText("Equipo").Selected = crOBJ.Equipo;
-                        chklstCampos.Items.FindByText("Telefono").Selected = crOBJ.Telefono;
-                        chklstCampos.Items.FindByText("T_Chip").Selected = crOBJ.T_Chip;
-                        chklstCampos.Items.FindByText("T_Oficial").Selected = crOBJ.T_Oficial;
-                        chklstCampos.Items.FindByText("Lug_Cat").Selected = crOBJ.Lug_Cat;
-                        chklstCampos.Items.FindByText("Lug_Rama").Selected = crOBJ.Lug_Rama;
-                        chklstCampos.Items.FindByText("Vel").Selected = crOBJ.Vel;
-                        chklstCampos.Items.FindByText("Lug_Gral").Selected = crOBJ.Lug_Gral;
-                        chklstCampos.Items.FindByText("Rama").Selected = crOBJ.Rama;
-                        chklstCampos.Items.FindByText("Edad").Selected = crOBJ.Edad;
-                        chklstCampos.Items.FindByText("T_Intermedio").Selected = crOBJ.T_Intermedio;
-                        
+                        System.Reflection.PropertyInfo[] props = crOBJ.GetType().GetProperties();
+
+                        foreach (System.Reflection.PropertyInfo prop in props)
+                        {
+                            if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                                chklstCampos.Items.FindByText(prop.Name).Selected = (bool)prop.GetValue(crOBJ);
+                        }
                     }
                 }
             }

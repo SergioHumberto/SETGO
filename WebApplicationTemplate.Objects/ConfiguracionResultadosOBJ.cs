@@ -15,19 +15,19 @@ namespace WebApplicationTemplate.Objects
 		public bool Materno { get; set; }
 		public bool Nombres { get; set; }
 		public bool Folio { get; set; }
-		public bool Sexo { get; set; }
+        public bool Edad { get; set; }
+        public bool Sexo { get; set; }
 		public bool Categoria { get; set; }
 		public bool Procedencia { get; set; }
 		public bool Equipo { get; set; }
 		public bool Telefono { get; set; }
-		public bool T_Chip { get; set; }
+        public bool T_Intermedio { get; set; }
+        public bool T_Chip { get; set; }
 		public bool T_Oficial { get; set; }
 		public bool Lug_Cat { get; set; }
 		public bool Lug_Rama { get; set; }
 		public bool Vel { get; set; }
 		public bool Lug_Gral { get; set; }
-		public bool Rama { get; set; }
-        public bool Edad { get; set; }
-        public bool T_Intermedio { get; set; }
+		public bool Rama { get; set; }                
 	}
 }
