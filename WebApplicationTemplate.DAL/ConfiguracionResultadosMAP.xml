@@ -9,50 +9,54 @@
 
 		<insert id="InsertarConfiguracionResultado" resultClass="int" parameterClass="ConfiguracionResultadosOBJ">
 
-			INSERT INTO ConfiguracionResultados(
-				IdCarrera
-				,IdCategoria
-				,Numero
-				,Paterno
-				,Materno
-				,Nombres
-				,Folio
-				,Sexo
-				,Categoria
-				,Procedencia
-				,Equipo
-				,Telefono
-				,T_Chip
-				,T_Oficial
-				,Lug_Cat
-				,Lug_Rama
-				,Vel
-				,Lug_Gral
-				,Rama
-			)
-			VALUES(
-				#IdCarrera#
-				,#IdCategoria#
-				,#Numero#
-				,#Paterno#
-				,#Materno#
-				,#Nombres#
-				,#Folio#
-				,#Sexo#
-				,#Categoria#
-				,#Procedencia#
-				,#Equipo#
-				,#Telefono#
-				,#T_Chip#
-				,#T_Oficial#
-				,#Lug_Cat#
-				,#Lug_Rama#
-				,#Vel#
-				,#Lug_Gral#
-				,#Rama#
-			)
+      INSERT INTO ConfiguracionResultados(
+      IdCarrera
+      ,IdCategoria
+      ,Numero
+      ,Paterno
+      ,Materno
+      ,Nombres
+      ,Folio
+      ,Sexo
+      ,Categoria
+      ,Procedencia
+      ,Equipo
+      ,Telefono
+      ,T_Chip
+      ,T_Oficial
+      ,Lug_Cat
+      ,Lug_Rama
+      ,Vel
+      ,Lug_Gral
+      ,Rama
+      ,Edad
+      ,T_Intermedio
+      )
+      VALUES(
+      #IdCarrera#
+      ,#IdCategoria#
+      ,#Numero#
+      ,#Paterno#
+      ,#Materno#
+      ,#Nombres#
+      ,#Folio#
+      ,#Sexo#
+      ,#Categoria#
+      ,#Procedencia#
+      ,#Equipo#
+      ,#Telefono#
+      ,#T_Chip#
+      ,#T_Oficial#
+      ,#Lug_Cat#
+      ,#Lug_Rama#
+      ,#Vel#
+      ,#Lug_Gral#
+      ,#Rama#
+      ,#Edad#
+      ,#T_Intermedio#
+      )
 
-			<selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
+      <selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
 				SELECT @@IDENTITY
 			</selectKey>
 
@@ -73,28 +77,30 @@
 		</select>
 
 		<update id="ActualizarConfiguracion" parameterClass="ConfiguracionResultadosOBJ" >
-			UPDATE ConfiguracionResultados
-			SET 
-				Numero = #Numero#
-				,Paterno = #Paterno#
-				,Materno = #Materno#
-				,Nombres = #Nombres#
-				,Folio = #Folio#
-				,Sexo = #Sexo#
-				,Categoria = #Categoria#
-				,Procedencia = #Procedencia#
-				,Equipo = #Equipo#
-				,Telefono = #Telefono#
-				,T_Chip = #T_Chip#
-				,T_Oficial = #T_Oficial#
-				,Lug_Cat = #Lug_Cat#
-				,Lug_Rama = #Lug_Rama#
-				,Vel = #Vel#
-				,Lug_Gral = #Lug_Gral#
-				,Rama = #Rama#
-			WHERE IdCarrera = #IdCarrera#
-			AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
-		</update>
+      UPDATE ConfiguracionResultados
+      SET
+      Numero = #Numero#
+      ,Paterno = #Paterno#
+      ,Materno = #Materno#
+      ,Nombres = #Nombres#
+      ,Folio = #Folio#
+      ,Sexo = #Sexo#
+      ,Categoria = #Categoria#
+      ,Procedencia = #Procedencia#
+      ,Equipo = #Equipo#
+      ,Telefono = #Telefono#
+      ,T_Chip = #T_Chip#
+      ,T_Oficial = #T_Oficial#
+      ,Lug_Cat = #Lug_Cat#
+      ,Lug_Rama = #Lug_Rama#
+      ,Vel = #Vel#
+      ,Lug_Gral = #Lug_Gral#
+      ,Rama = #Rama#
+      ,Edad = #Edad#
+      ,T_Intermedio = #T_Intermedio#
+      WHERE IdCarrera = #IdCarrera#
+      AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
+    </update>
 
 		<select id="SeleccionarConfiguracionByIdCarreraIdCategoria" resultClass="ConfiguracionResultadosOBJ" parameterClass="ConfiguracionResultadosOBJ">
 			SELECT * FROM ConfiguracionResultados 
@@ -102,7 +108,7 @@
 			AND (
 				(ISNULL(#IdCategoria#, 0) = 0 AND IdCategoria is null) 
 				OR 
-				(ISNULL(#IdCategoria#, 0) != 1 AND IdCategoria = #IdCategoria#)
+				(ISNULL(#IdCategoria#, 0) = 1 AND IdCategoria = #IdCategoria#)
 			)
 		</select>
 

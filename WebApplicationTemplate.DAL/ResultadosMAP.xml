@@ -11,47 +11,51 @@
 
       INSERT INTO Resultados
       (
-			IdParticipante
-			,IdConfiguracionResultados
-			,Numero
-			,Paterno
-			,Materno
-			,Nombres
-			,Folio
-			,Sexo
-			,Categoria
-			,Procedencia
-			,Equipo
-			,Telefono
-			,T_Chip
-			,T_Oficial
-			,Lug_Cat
-			,Lug_Rama
-			,Vel
-			,Lug_Gral
-			,Rama
+      IdParticipante
+      ,IdConfiguracionResultados
+      ,Numero
+      ,Paterno
+      ,Materno
+      ,Nombres
+      ,Folio
+      ,Sexo
+      ,Categoria
+      ,Procedencia
+      ,Equipo
+      ,Telefono
+      ,T_Chip
+      ,T_Oficial
+      ,Lug_Cat
+      ,Lug_Rama
+      ,Vel
+      ,Lug_Gral
+      ,Rama
+      ,Edad
+      ,T_Intermedio
       )
       VALUES
       (
-			#IdParticipante#
-			,#IdConfiguracionResultados#
-			,#Numero#
-			,#Paterno#
-			,#Materno#
-			,#Nombres#
-			,#Folio#
-			,#Sexo#
-			,#Categoria#
-			,#Procedencia#
-			,#Equipo#
-			,#Telefono#
-			,#T_Chip#
-			,#T_Oficial#
-			,#Lug_Cat#
-			,#Lug_Rama#
-			,#Vel#
-			,#Lug_Gral#
-			,#Rama#
+      #IdParticipante#
+      ,#IdConfiguracionResultados#
+      ,#Numero#
+      ,#Paterno#
+      ,#Materno#
+      ,#Nombres#
+      ,#Folio#
+      ,#Sexo#
+      ,#Categoria#
+      ,#Procedencia#
+      ,#Equipo#
+      ,#Telefono#
+      ,#T_Chip#
+      ,#T_Oficial#
+      ,#Lug_Cat#
+      ,#Lug_Rama#
+      ,#Vel#
+      ,#Lug_Gral#
+      ,#Rama#
+      ,#Edad#
+      ,#T_Intermedio#
       )
 
       <selectKey type="post" resultClass="int" property="IdResultado">

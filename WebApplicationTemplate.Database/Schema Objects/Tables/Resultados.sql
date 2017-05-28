@@ -19,5 +19,7 @@
 	[Lug_Rama]		INT NULL,
 	[Vel]			VARCHAR(10) NULL,
 	[Lug_Gral]		INT NULL,
-	[Rama]			VARCHAR(20) NULL
+	[Rama]			VARCHAR(20) NULL, 
+    [Edad] INT NULL, 
+    [T_Intermedio] VARCHAR(10) NULL
 )

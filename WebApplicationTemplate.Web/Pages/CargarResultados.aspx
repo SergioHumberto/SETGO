@@ -132,6 +132,8 @@
                             <asp:ListItem Text="Vel" Value="Vel" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Lug_Gral" Value="Lug_Gral" Selected="True"></asp:ListItem>
                             <asp:ListItem Text="Rama" Value="Rama" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="Edad" Value="Edad" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="T_Intermedio" Value="T_Intermedio" Selected="True"></asp:ListItem>
                         </asp:CheckBoxList>
                         <br />
                         <br />

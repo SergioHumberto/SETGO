@@ -113,11 +113,13 @@
                                             <th id="thPaterno" class="Titulo" runat="server">Paterno</th>
                                             <th id="thMaterno" class="Titulo" runat="server">Materno</th>
                                             <th id="thFolio" class="Titulo" runat="server">Folio</th>
+                                            <th id="thEdad" class="Titulo" runat="server">Edad</th>
                                             <th id="thSexo" class="Titulo" runat="server">Sexo</th>
                                             <th id="thCategoria" class="Titulo" runat="server">Categoria</th>
                                             <th id="thProcedencia" class="Titulo" runat="server">Procedencia</th>
                                             <th id="thEquipo" class="Titulo" runat="server">Equipo</th>
                                             <th id="thTelefono" class="Titulo" runat="server">Telefono</th>
+                                            <th id="thTiempoIntermedio" class="Titulo" runat="server">Tiempo Intermedio</th>
                                             <th id="thTiempoChip" class="Titulo" runat="server">Tiempo chip</th>
                                             <th id="thTiempoOficial" class="Titulo" runat="server">Tiempo oficial</th>
                                             <th id="thLugarCategoria" class="Titulo" runat="server">Lugar categoria</th>
@@ -137,11 +139,13 @@
                                     <td id="tdPaterno" runat="server"><%# Eval("Paterno") %></td>
                                     <td id="tdMaterno" runat="server"><%# Eval("Materno") %></td>
                                     <td id="tdFolio" runat="server"><%# Eval("Folio") %></td>
+                                    <td id="tdEdad" runat="server"><%# Eval("Edad") %></td>
                                     <td id="tdSexo" runat="server"><%# Eval("Sexo") %></td>
                                     <td id="tdCategoria" runat="server"><%# Eval("Categoria") %></td>
                                     <td id="tdProcedencia" runat="server"><%# Eval("Procedencia") %></td>
                                     <td id="tdEquipo" runat="server"><%# Eval("Equipo") %></td>
                                     <td id="tdTelefono" runat="server"><%# Eval("Telefono") %></td>
+                                    <td id="tdTiempoIntermedio" runat="server"><%# Eval("T_Intermedio") %></td>
                                     <td id="tdTiempoChip" runat="server"><%# Eval("T_Chip") %></td>
                                     <td id="tdTiempoOficial" runat="server"><%# Eval("T_Oficial") %></td>
                                     <td id="tdLugarCategoria" runat="server"><%# Eval("Lug_Cat") %></td>

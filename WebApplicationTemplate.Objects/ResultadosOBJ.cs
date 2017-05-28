@@ -27,5 +27,7 @@ namespace WebApplicationTemplate.Objects
 		public string Vel { get; set; }
 		public int? Lug_Gral { get; set; }
 		public string Rama { get; set; }
+        public int Edad { get; set; }
+        public string T_Intermedio { get; set; }
 	}
 }

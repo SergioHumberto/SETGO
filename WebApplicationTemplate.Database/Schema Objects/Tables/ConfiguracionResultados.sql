@@ -19,5 +19,7 @@
 	[Lug_Rama]		BIT NOT NULL,
 	[Vel]			BIT NOT NULL,
 	[Lug_Gral]		BIT NOT NULL,
-	[Rama]			BIT NOT NULL
+	[Rama]			BIT NOT NULL, 
+    [Edad] BIT NOT NULL DEFAULT 1, 
+    [T_Intermedio] BIT NOT NULL DEFAULT 1
 )

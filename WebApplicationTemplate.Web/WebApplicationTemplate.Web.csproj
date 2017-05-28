@@ -800,11 +800,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\ReporteCertificado_1.rdlc" />
-    <EmbeddedResource Include="Reports\ReporteCertificado_2.rdlc" />
-    <EmbeddedResource Include="Reports\ReporteCertificado_3.rdlc">
+    <Content Include="Reports\ReporteCertificado_1.rdlc" />
+    <Content Include="Reports\ReporteCertificado_2.rdlc" />
+    <Content Include="Reports\ReporteCertificado_3.rdlc">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

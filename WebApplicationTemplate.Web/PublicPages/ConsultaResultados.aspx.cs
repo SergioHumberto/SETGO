@@ -17,11 +17,12 @@ using System.Web.Services;
 
 namespace WebApplicationTemplate.Web.PublicPages
 {
-	public partial class ConsultaResultados1 : System.Web.UI.Page
-	{
+    public partial class ConsultaResultados1 : System.Web.UI.Page
+    {
         private int IdCarreraProperty
         {
-            get {
+            get
+            {
 
                 int IdCarrera;
                 if (Request.QueryString["IdCarrera"] != null)
@@ -64,7 +65,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                     }
                 }
 
-                if(int.TryParse(ddlCategoria.SelectedValue, out IdCategoria))
+                if (int.TryParse(ddlCategoria.SelectedValue, out IdCategoria))
                 {
                     if (IdCategoria > 0)
                     {
@@ -104,9 +105,9 @@ namespace WebApplicationTemplate.Web.PublicPages
 
 
         protected void Page_Load(object sender, EventArgs e)
-		{
-			if (!IsPostBack)
-			{
+        {
+            if (!IsPostBack)
+            {
                 if (IdResultadoProperty > 0)
                 {
                     GeneraCertificado(IdResultadoProperty);
@@ -115,8 +116,8 @@ namespace WebApplicationTemplate.Web.PublicPages
                 {
                     LoadCarrera();
                 }
-			}
-		}
+            }
+        }
 
         private void GeneraCertificado(int IdResultado)
         {
@@ -134,19 +135,19 @@ namespace WebApplicationTemplate.Web.PublicPages
             lblErrorCarrera.Text = string.Empty;
             if (IdCarreraProperty > 0)
             {
-				ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
-				ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
-				ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
-				crFinder.IdCarrera = IdCarreraProperty;
+                ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+                ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+                ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
+                crFinder.IdCarrera = IdCarreraProperty;
 
-				if (IdCategoriaProperty > 0)
-				{
-					crFinder.IdCategoria = IdCategoriaProperty;
-				}
+                if (IdCategoriaProperty > 0)
+                {
+                    crFinder.IdCategoria = IdCategoriaProperty;
+                }
 
-				crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
+                crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 
-                if (crOBJ != null &&  resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
+                if (crOBJ != null && resultadosBLL.VerificarResultadoDeCarrera(crOBJ.IdConfiguracionResultados))
                 {
                     if (IdCategoriaProperty <= 0)
                     {
@@ -187,25 +188,25 @@ namespace WebApplicationTemplate.Web.PublicPages
             ddlCarrera.Items.Insert(0, new ListItem() { Text = "--------", Value = "-1" });
         }
 
-		private void CargarResultados(int idCarrera, int? IdCategoria)
-		{
-			try
-			{
+        private void CargarResultados(int idCarrera, int? IdCategoria)
+        {
+            try
+            {
                 lblErrorCarrera.Text = string.Empty;
-				string query = GetConsulta(idCarrera, IdCategoria);
+                string query = GetConsulta(idCarrera, IdCategoria);
 
                 if (!string.IsNullOrEmpty(query))
                 {
                     DataTable dt = GetDataTable(query);
                     repeater.DataSource = dt;
-                    repeater.DataBind();                    
+                    repeater.DataBind();
                 }
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (Exception ex)
+            {
                 lblErrorCarrera.Text = ex.Message;
-			}
-		}
+            }
+        }
 
         // Este metodo se moverá a una clase que ejecute consultas con SqlClient.
         private DataTable GetDataTable(string strQuery)
@@ -230,102 +231,104 @@ namespace WebApplicationTemplate.Web.PublicPages
             return dt;
         }
 
-		private string GetConsulta(int idCarrera, int? IdCategoria)
-		{
-			ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
-			ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
-			ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
+        private string GetConsulta(int idCarrera, int? IdCategoria)
+        {
+            ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+            ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+            ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 
-			crFinder.IdCarrera = idCarrera;
+            crFinder.IdCarrera = idCarrera;
 
-			if(IdCategoriaProperty > 0)
-			{
-				crFinder.IdCategoria = IdCategoriaProperty;
-			}
+            if (IdCategoriaProperty > 0)
+            {
+                crFinder.IdCategoria = IdCategoriaProperty;
+            }
 
-			crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
+            crOBJ = crBLL.SeleccionarConfiguracionByIdCarreraIdCategoria(crFinder);
 
             if (crOBJ == null)
             {
                 return null;
             }
 
-			string query = string.Empty;
+            string query = string.Empty;
 
-			query = "SELECT R.IdResultado, CR.IdCarrera,";
+            query = "SELECT R.IdResultado, CR.IdCarrera,";
 
-			//if(crOBJ.Numero)
-			//{
-				query += "R.Numero,";
-			// }
-			//if (crOBJ.Paterno)
-			//{
-				query += "R.Paterno,";
-			// }
-			//if (crOBJ.Materno)
-			//{
-				query += "R.Materno,";
-			// }
-			//if (crOBJ.Nombres)
-			//{
-				query += "R.Nombres,";
-			//}
-			//if (crOBJ.Folio)
-			//{
-				query += "R.Folio,";
-			// }
-			//if (crOBJ.Sexo)
-			//{
-				query += "R.Sexo,";
-			//}
-			//if (crOBJ.Categoria)
-			//{
-				query += "R.Categoria,";
-			//}
-			//if (crOBJ.Procedencia)
-			//{
-				query += "R.Procedencia,";
-			//}
-			//if (crOBJ.Equipo)
-			//{
-				query += "R.Equipo,";
-			//}
-			//if (crOBJ.Telefono)
-			//{
-				query += "R.Telefono,";
-			//}
-			//if (crOBJ.T_Chip)
-			//{
-				query += "R.T_Chip,";
-			//}
-			//if (crOBJ.T_Oficial)
-			//{
-				query += "R.T_Oficial,";
-			//}
-			//if (crOBJ.Lug_Cat)
-			//{
-				query += "R.Lug_Cat,";
-			//}
-			//if (crOBJ.Lug_Rama)
-			//{
-				query += "R.Lug_Rama,";
-			//}
-			//if (crOBJ.Vel)
-			//{
-				query += "R.Vel,";
-			//}
-			//if (crOBJ.Lug_Gral)
-			//{
-				query += "R.Lug_Gral,";
-			//}
-			//if (crOBJ.Rama)
-			//{
-				query += "R.Rama,";
-			// }
+            //if(crOBJ.Numero)
+            //{
+            query += "R.Numero,";
+            // }
+            //if (crOBJ.Paterno)
+            //{
+            query += "R.Paterno,";
+            // }
+            //if (crOBJ.Materno)
+            //{
+            query += "R.Materno,";
+            // }
+            //if (crOBJ.Nombres)
+            //{
+            query += "R.Nombres,";
+            //}
+            //if (crOBJ.Folio)
+            //{
+            query += "R.Folio,";
+            // }
+            query += "R.Edad,";
+            //if (crOBJ.Sexo)
+            //{
+            query += "R.Sexo,";
+            //}
+            //if (crOBJ.Categoria)
+            //{
+            query += "R.Categoria,";
+            //}
+            //if (crOBJ.Procedencia)
+            //{
+            query += "R.Procedencia,";
+            //}
+            //if (crOBJ.Equipo)
+            //{
+            query += "R.Equipo,";
+            //}
+            //if (crOBJ.Telefono)
+            //{
+            query += "R.Telefono,";
+            //}
+            query += "R.T_Intermedio,";
+            //if (crOBJ.T_Chip)
+            //{
+            query += "R.T_Chip,";
+            //}
+            //if (crOBJ.T_Oficial)
+            //{
+            query += "R.T_Oficial,";
+            //}
+            //if (crOBJ.Lug_Cat)
+            //{
+            query += "R.Lug_Cat,";
+            //}
+            //if (crOBJ.Lug_Rama)
+            //{
+            query += "R.Lug_Rama,";
+            //}
+            //if (crOBJ.Vel)
+            //{
+            query += "R.Vel,";
+            //}
+            //if (crOBJ.Lug_Gral)
+            //{
+            query += "R.Lug_Gral,";
+            //}
+            //if (crOBJ.Rama)
+            //{
+            query += "R.Rama,";
+            // }
 
-			query = query.Remove(query.Length - 1, 1);//Elimina la coma de al final de la cadena.
+            query = query.Remove(query.Length - 1, 1);//Elimina la coma de al final de la cadena.
 
-			query += @" FROM RESULTADOS R 
+            query += @" FROM RESULTADOS R 
 				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 				WHERE CR.IdCarrera=" + idCarrera;
 
@@ -333,13 +336,13 @@ namespace WebApplicationTemplate.Web.PublicPages
             {
                 query += " AND CR.IdCategoria IS NULL";
             }
-			else
-			{
-				query += " AND CR.IdCategoria = " + IdCategoria;
-			}
+            else
+            {
+                query += " AND CR.IdCategoria = " + IdCategoria;
+            }
 
-			return query;
-		}
+            return query;
+        }
 
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -378,7 +381,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             ddlCategoria.DataValueField = "IdCategoria";
             ddlCategoria.DataBind();
 
-            ddlCategoria.Items.Insert(0, new ListItem() { Text="------", Value = "-1" });
+            ddlCategoria.Items.Insert(0, new ListItem() { Text = "------", Value = "-1" });
         }
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -443,11 +446,13 @@ namespace WebApplicationTemplate.Web.PublicPages
                     e.Item.FindControl("thPaterno").Visible = objCR.Paterno;
                     e.Item.FindControl("thMaterno").Visible = objCR.Materno;
                     e.Item.FindControl("thFolio").Visible = objCR.Folio;
+                    e.Item.FindControl("thEdad").Visible = objCR.Edad;
                     e.Item.FindControl("thSexo").Visible = objCR.Sexo;
                     e.Item.FindControl("thCategoria").Visible = objCR.Categoria;
                     e.Item.FindControl("thProcedencia").Visible = objCR.Procedencia;
                     e.Item.FindControl("thEquipo").Visible = objCR.Equipo;
                     e.Item.FindControl("thTelefono").Visible = objCR.Telefono;
+                    e.Item.FindControl("thTiempoIntermedio").Visible = objCR.T_Intermedio;
                     e.Item.FindControl("thTiempoChip").Visible = objCR.T_Chip;
                     e.Item.FindControl("thTiempoOficial").Visible = objCR.T_Oficial;
                     e.Item.FindControl("thLugarCategoria").Visible = objCR.Lug_Cat;
@@ -466,11 +471,13 @@ namespace WebApplicationTemplate.Web.PublicPages
                     e.Item.FindControl("tdPaterno").Visible = objCR.Paterno;
                     e.Item.FindControl("tdMaterno").Visible = objCR.Materno;
                     e.Item.FindControl("tdFolio").Visible = objCR.Folio;
+                    e.Item.FindControl("tdEdad").Visible = objCR.Edad;
                     e.Item.FindControl("tdSexo").Visible = objCR.Sexo;
                     e.Item.FindControl("tdCategoria").Visible = objCR.Categoria;
                     e.Item.FindControl("tdProcedencia").Visible = objCR.Procedencia;
                     e.Item.FindControl("tdEquipo").Visible = objCR.Equipo;
                     e.Item.FindControl("tdTelefono").Visible = objCR.Telefono;
+                    e.Item.FindControl("tdTiempoIntermedio").Visible = objCR.T_Intermedio;
                     e.Item.FindControl("tdTiempoChip").Visible = objCR.T_Chip;
                     e.Item.FindControl("tdTiempoOficial").Visible = objCR.T_Oficial;
                     e.Item.FindControl("tdLugarCategoria").Visible = objCR.Lug_Cat;

@@ -12,6 +12,8 @@ BEGIN
 	, R.T_Chip AS [TiempoChip]
 	, R.Lug_Cat AS [PosicionPorCategoria]
 	, R.Lug_Rama AS [PosicionSexo]
+	, R.Edad AS [Edad]
+	, R.T_Intermedio AS [TiempoIntermedio]
 	FROM Resultados R
 	INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 	WHERE CR.IdCarrera = @IdCarrera
