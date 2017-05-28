@@ -97,9 +97,8 @@ namespace WebApplicationTemplate.Web.PublicPages
         public string URLRedirectImprimirCertificado
         {
             get
-            {
-                string url = "~/PublicPages/ConsultaResultados.aspx";
-                return Tools.Urls.Abs(url);
+            {               
+                return Tools.Urls.ConsultaResultados();
             }
         }
 
@@ -252,84 +251,8 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
 
             string query = string.Empty;
-
-            query = "SELECT R.IdResultado, CR.IdCarrera,";
-
-            //if(crOBJ.Numero)
-            //{
-            query += "R.Numero,";
-            // }
-            //if (crOBJ.Paterno)
-            //{
-            query += "R.Paterno,";
-            // }
-            //if (crOBJ.Materno)
-            //{
-            query += "R.Materno,";
-            // }
-            //if (crOBJ.Nombres)
-            //{
-            query += "R.Nombres,";
-            //}
-            //if (crOBJ.Folio)
-            //{
-            query += "R.Folio,";
-            // }
-            query += "R.Edad,";
-            //if (crOBJ.Sexo)
-            //{
-            query += "R.Sexo,";
-            //}
-            //if (crOBJ.Categoria)
-            //{
-            query += "R.Categoria,";
-            //}
-            //if (crOBJ.Procedencia)
-            //{
-            query += "R.Procedencia,";
-            //}
-            //if (crOBJ.Equipo)
-            //{
-            query += "R.Equipo,";
-            //}
-            //if (crOBJ.Telefono)
-            //{
-            query += "R.Telefono,";
-            //}
-            query += "R.T_Intermedio,";
-            //if (crOBJ.T_Chip)
-            //{
-            query += "R.T_Chip,";
-            //}
-            //if (crOBJ.T_Oficial)
-            //{
-            query += "R.T_Oficial,";
-            //}
-            //if (crOBJ.Lug_Cat)
-            //{
-            query += "R.Lug_Cat,";
-            //}
-            //if (crOBJ.Lug_Rama)
-            //{
-            query += "R.Lug_Rama,";
-            //}
-            //if (crOBJ.Vel)
-            //{
-            query += "R.Vel,";
-            //}
-            //if (crOBJ.Lug_Gral)
-            //{
-            query += "R.Lug_Gral,";
-            //}
-            //if (crOBJ.Rama)
-            //{
-            query += "R.Rama,";
-            // }
-            query += "R.Ruta,";
-
-            query = query.Remove(query.Length - 1, 1);//Elimina la coma de al final de la cadena.
-
-            query += @" FROM RESULTADOS R 
+            query = @"SELECT R.*, CR.IdCarrera 
+                FROM RESULTADOS R 
 				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 				WHERE CR.IdCarrera=" + idCarrera;
 
