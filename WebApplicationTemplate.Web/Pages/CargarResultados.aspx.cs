@@ -84,6 +84,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             try
             {
+                cargaItemsChkBoxListConfiguracionResultados();
                 lblError.Text = string.Empty;
                 int idCarrera = 0;
                 if (int.TryParse(ddlCarrera.SelectedValue, out idCarrera))
@@ -329,6 +330,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             try
             {
+                cargaItemsChkBoxListConfiguracionResultados();
                 lblError.Text = string.Empty;
 
                 ResultadosBLL resultadosBLL = new ResultadosBLL();
@@ -405,8 +407,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
         private void CargarConfiguracionResultados()
-        {
-            cargaItemsChkBoxListConfiguracionResultados();
+        {            
 
             ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
             ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
