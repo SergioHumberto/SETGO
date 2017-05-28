@@ -32,6 +32,7 @@
       ,Rama
       ,Edad
       ,T_Intermedio
+      ,Ruta
       )
       VALUES
       (
@@ -56,6 +57,7 @@
       ,#Rama#
       ,#Edad#
       ,#T_Intermedio#
+      ,#Ruta#
       )
 
       <selectKey type="post" resultClass="int" property="IdResultado">

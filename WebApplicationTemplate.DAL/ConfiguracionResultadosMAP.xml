@@ -31,6 +31,7 @@
       ,Rama
       ,Edad
       ,T_Intermedio
+      ,Ruta
       )
       VALUES(
       #IdCarrera#
@@ -54,6 +55,7 @@
       ,#Rama#
       ,#Edad#
       ,#T_Intermedio#
+      ,#Ruta#
       )
 
       <selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
@@ -98,6 +100,7 @@
       ,Rama = #Rama#
       ,Edad = #Edad#
       ,T_Intermedio = #T_Intermedio#
+      ,Ruta = #Ruta#
       WHERE IdCarrera = #IdCarrera#
       AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
     </update>

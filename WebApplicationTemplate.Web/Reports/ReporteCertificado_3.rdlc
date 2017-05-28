@@ -54,7 +54,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Edad.Value</Value>
+                <Value>=Fields!Edicion.Value</Value>
                 <Style>
                   <FontSize>14pt</FontSize>
                 </Style>
@@ -269,10 +269,14 @@
           <DataField>NombreCompleto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="Edicion">
+          <DataField>Edicion</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ReporteCertificado_3DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Lenovo\Desktop\Proyectos\ProyectoPepe\trunk\WebApplicationTemplate.Web\Reports\XSD\ReporteCertificado_3DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\castillo.erik\Source\SETGO\WebApplicationTemplate.Web\Reports\XSD\ReporteCertificado_3DS.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

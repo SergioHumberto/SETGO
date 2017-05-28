@@ -9,7 +9,7 @@
 	[Nombres]		VARCHAR(50) NULL,
 	[Folio]			INT NULL,
 	[Sexo]			VARCHAR(10) NULL,
-	[Categoria]		VARCHAR(10) NULL,
+	[Categoria]		VARCHAR(50) NULL,
 	[Procedencia]	VARCHAR(50) NULL,
 	[Equipo]		VARCHAR(50) NULL,
 	[Telefono]		VARCHAR(20) NULL,
@@ -21,5 +21,6 @@
 	[Lug_Gral]		INT NULL,
 	[Rama]			VARCHAR(20) NULL, 
     [Edad] INT NULL, 
-    [T_Intermedio] VARCHAR(10) NULL
+    [T_Intermedio] VARCHAR(10) NULL, 
+    [Ruta] VARCHAR(100) NULL
 )

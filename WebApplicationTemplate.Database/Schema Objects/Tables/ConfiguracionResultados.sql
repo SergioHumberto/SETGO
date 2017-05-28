@@ -21,5 +21,6 @@
 	[Lug_Gral]		BIT NOT NULL,
 	[Rama]			BIT NOT NULL, 
     [Edad] BIT NOT NULL DEFAULT 1, 
-    [T_Intermedio] BIT NOT NULL DEFAULT 1
+    [T_Intermedio] BIT NOT NULL DEFAULT 1, 
+    [Ruta] BIT NOT NULL DEFAULT 1
 )

@@ -127,6 +127,7 @@
                                             <th id="thVel" class="Titulo" runat="server">Vel</th>
                                             <th id="thLugarGeneral" class="Titulo" runat="server">Lugar general</th>
                                             <th id="thRama" class="Titulo" runat="server">Lugar general</th>
+                                            <th id="thRuta" class="Titulo" runat="server">Ruta</th>
                                             <th class="Titulo">Imprime</th>
                                         </tr>
                                     </thead>
@@ -153,6 +154,7 @@
                                     <td id="tdVel" runat="server"><%# Eval("Vel") %></td>
                                     <td id="tdLugarGeneral" runat="server"><%# Eval("Lug_Gral") %></td>
                                     <td id="tdRama" runat="server"><%# Eval("Rama") %></td>
+                                    <td id="tdRuta" runat="server"><%# Eval("Ruta") %></td>
                                     <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %>?IdCarrera=<%# Eval("IdCarrera") %>&IdResultado=<%# Eval("IdResultado") %>">Imprime </a></td>
                                 </tr>
                             </ItemTemplate>

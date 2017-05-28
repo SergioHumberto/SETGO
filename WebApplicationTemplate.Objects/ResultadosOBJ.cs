@@ -29,5 +29,6 @@ namespace WebApplicationTemplate.Objects
 		public string Rama { get; set; }
         public int Edad { get; set; }
         public string T_Intermedio { get; set; }
+        public string Ruta { get; set; }
 	}
 }

@@ -29,5 +29,6 @@ namespace WebApplicationTemplate.Objects
 		public bool Vel { get; set; }
 		public bool Lug_Gral { get; set; }
 		public bool Rama { get; set; }                
+        public bool Ruta { get; set; }
 	}
 }

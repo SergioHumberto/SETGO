@@ -277,6 +277,9 @@ namespace WebApplicationTemplate.Web.PublicPages
                     if (int.TryParse(row["Edad"].ToString(), out edad))
                         resultadosOBJ.Edad = edad;
                 }
+                if (row.Table.Columns.Contains("Ruta"))
+                    resultadosOBJ.Ruta = row["Ruta"].ToString();
+
                 resultadosBLL.InsertarCarrera(resultadosOBJ);
             }
         }

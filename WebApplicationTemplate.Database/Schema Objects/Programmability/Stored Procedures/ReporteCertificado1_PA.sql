@@ -14,6 +14,7 @@ BEGIN
 	, R.Lug_Rama AS [PosicionSexo]
 	, R.Edad AS [Edad]
 	, R.T_Intermedio AS [TiempoIntermedio]
+	, R.Ruta AS [Edicion]
 	FROM Resultados R
 	INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 	WHERE CR.IdCarrera = @IdCarrera
