@@ -222,51 +222,76 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                 resultadosOBJ.IdConfiguracionResultados = idConfiguracionResultados;
 
-                int numero = 0;
-                if (int.TryParse(row["Numero"].ToString(), out numero))
+                if (row.Table.Columns.Contains("Numero"))
                 {
-                    resultadosOBJ.Numero = numero;
+                    int numero = 0;
+                    if (int.TryParse(row["Numero"].ToString(), out numero))
+                        resultadosOBJ.Numero = numero;
                 }
 
-                resultadosOBJ.Paterno = row["Paterno"].ToString();
-                resultadosOBJ.Materno = row["Materno"].ToString();
-                resultadosOBJ.Nombres = row["Nombres"].ToString();
+                if (row.Table.Columns.Contains("Paterno"))
+                    resultadosOBJ.Paterno = row["Paterno"].ToString();
 
-                int folio = 0;
-                if (int.TryParse(row["Folio"].ToString(), out folio))
+                if (row.Table.Columns.Contains("Materno"))
+                    resultadosOBJ.Materno = row["Materno"].ToString();
+
+                if (row.Table.Columns.Contains("Nombres"))
+                    resultadosOBJ.Nombres = row["Nombres"].ToString();
+
+                if (row.Table.Columns.Contains("Folio"))
                 {
-                    resultadosOBJ.Folio = folio;
+                    int folio = 0;
+                    if (int.TryParse(row["Folio"].ToString(), out folio))
+                        resultadosOBJ.Folio = folio;
                 }
 
-                resultadosOBJ.Sexo = row["Sexo"].ToString();
-                resultadosOBJ.Categoria = row["Categoria"].ToString();
-                resultadosOBJ.Procedencia = row["Proceden"].ToString();
-                resultadosOBJ.Equipo = row["Equipo"].ToString();
-                resultadosOBJ.Telefono = row["Telefono"].ToString();
-                resultadosOBJ.T_Chip = row["T_Chip"].ToString();
-                resultadosOBJ.T_Oficial = row["T_Oficial"].ToString();
+                if (row.Table.Columns.Contains("Sexo"))
+                    resultadosOBJ.Sexo = row["Sexo"].ToString();
 
-                int lug_cat = 0;
-                if (int.TryParse(row["Lug_Cat"].ToString(), out lug_cat))
+                if (row.Table.Columns.Contains("Categoria"))
+                    resultadosOBJ.Categoria = row["Categoria"].ToString();
+
+                if (row.Table.Columns.Contains("Proceden"))
+                    resultadosOBJ.Procedencia = row["Proceden"].ToString();
+
+                if (row.Table.Columns.Contains("Equipo"))
+                    resultadosOBJ.Equipo = row["Equipo"].ToString();
+
+                if (row.Table.Columns.Contains("Telefono"))
+                    resultadosOBJ.Telefono = row["Telefono"].ToString();
+
+                if (row.Table.Columns.Contains("T_Chip"))
+                    resultadosOBJ.T_Chip = row["T_Chip"].ToString();
+
+                if (row.Table.Columns.Contains("T_Oficial"))
+                    resultadosOBJ.T_Oficial = row["T_Oficial"].ToString();
+
+                if (row.Table.Columns.Contains("Lug_Rama"))
                 {
-                    resultadosOBJ.Lug_Cat = lug_cat;
+                    int lug_cat = 0;
+                    if (int.TryParse(row["Lug_Rama"].ToString(), out lug_cat))
+                        resultadosOBJ.Lug_Cat = lug_cat;
                 }
 
-                int lug_rama = 0;
-                if (int.TryParse(row["Lug_Rama"].ToString(), out lug_rama))
+                if (row.Table.Columns.Contains("Lug_Rama"))
                 {
-                    resultadosOBJ.Lug_Rama = lug_rama;
+                    int lug_rama = 0;
+                    if (int.TryParse(row["Lug_Rama"].ToString(), out lug_rama))
+                        resultadosOBJ.Lug_Rama = lug_rama;
                 }
 
-                resultadosOBJ.Vel = row["Vel"].ToString();
+                if (row.Table.Columns.Contains("Vel"))
+                    resultadosOBJ.Vel = row["Vel"].ToString();
 
-                int lug_gral = 0;
-                if (int.TryParse(row["Lug_Gral"].ToString(), out lug_gral))
+                if (row.Table.Columns.Contains("Lug_Gral"))
                 {
-                    resultadosOBJ.Lug_Gral = lug_gral;
+                    int lug_gral = 0;
+                    if (int.TryParse(row["Lug_Gral"].ToString(), out lug_gral))
+                        resultadosOBJ.Lug_Gral = lug_gral;
                 }
 
-                resultadosOBJ.Rama = row["Rama"].ToString();
+                if (row.Table.Columns.Contains("Rama"))
+                    resultadosOBJ.Rama = row["Rama"].ToString();
 
                 // added by Erik C    
                 if (row.Table.Columns.Contains("T_Intermedio"))
@@ -325,7 +350,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                 if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
                     prop.SetValue(crOBJ, chklstCampos.Items.FindByText(prop.Name).Selected);
             }
-            
+
             return crOBJ;
         }
 
@@ -410,7 +435,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
         private void CargarConfiguracionResultados()
-        {            
+        {
 
             ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
             ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();

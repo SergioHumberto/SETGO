@@ -119,13 +119,13 @@
                                             <th id="thProcedencia" class="Titulo" runat="server">Procedencia</th>
                                             <th id="thEquipo" class="Titulo" runat="server">Equipo</th>
                                             <th id="thTelefono" class="Titulo" runat="server">Telefono</th>
-                                            <th id="thTiempoIntermedio" class="Titulo" runat="server">Tiempo Intermedio</th>
-                                            <th id="thTiempoChip" class="Titulo" runat="server">Tiempo chip</th>
-                                            <th id="thTiempoOficial" class="Titulo" runat="server">Tiempo oficial</th>
-                                            <th id="thLugarCategoria" class="Titulo" runat="server">Lugar categoria</th>
-                                            <th id="thLugarRama" class="Titulo" runat="server">Lugar rama</th>
+                                            <th id="thT_Intermedio" class="Titulo" runat="server">Tiempo Intermedio</th>
+                                            <th id="thT_Chip" class="Titulo" runat="server">Tiempo chip</th>
+                                            <th id="thT_Oficial" class="Titulo" runat="server">Tiempo oficial</th>
+                                            <th id="thLug_Cat" class="Titulo" runat="server">Lugar categoria</th>
+                                            <th id="thLug_Rama" class="Titulo" runat="server">Lugar rama</th>
                                             <th id="thVel" class="Titulo" runat="server">Vel</th>
-                                            <th id="thLugarGeneral" class="Titulo" runat="server">Lugar general</th>
+                                            <th id="thLug_Gral" class="Titulo" runat="server">Lugar general</th>
                                             <th id="thRama" class="Titulo" runat="server">Lugar general</th>
                                             <th id="thRuta" class="Titulo" runat="server">Ruta</th>
                                             <th class="Titulo">Imprime</th>
@@ -146,13 +146,13 @@
                                     <td id="tdProcedencia" runat="server"><%# Eval("Procedencia") %></td>
                                     <td id="tdEquipo" runat="server"><%# Eval("Equipo") %></td>
                                     <td id="tdTelefono" runat="server"><%# Eval("Telefono") %></td>
-                                    <td id="tdTiempoIntermedio" runat="server"><%# Eval("T_Intermedio") %></td>
-                                    <td id="tdTiempoChip" runat="server"><%# Eval("T_Chip") %></td>
-                                    <td id="tdTiempoOficial" runat="server"><%# Eval("T_Oficial") %></td>
-                                    <td id="tdLugarCategoria" runat="server"><%# Eval("Lug_Cat") %></td>
-                                    <td id="tdLugarRama" runat="server"><%# Eval("Lug_Rama") %></td>
+                                    <td id="tdT_Intermedio" runat="server"><%# Eval("T_Intermedio") %></td>
+                                    <td id="tdT_Chip" runat="server"><%# Eval("T_Chip") %></td>
+                                    <td id="tdT_Oficial" runat="server"><%# Eval("T_Oficial") %></td>
+                                    <td id="tdLug_Cat" runat="server"><%# Eval("Lug_Cat") %></td>
+                                    <td id="tdLug_Rama" runat="server"><%# Eval("Lug_Rama") %></td>
                                     <td id="tdVel" runat="server"><%# Eval("Vel") %></td>
-                                    <td id="tdLugarGeneral" runat="server"><%# Eval("Lug_Gral") %></td>
+                                    <td id="tdLug_Gral" runat="server"><%# Eval("Lug_Gral") %></td>
                                     <td id="tdRama" runat="server"><%# Eval("Rama") %></td>
                                     <td id="tdRuta" runat="server"><%# Eval("Ruta") %></td>
                                     <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %>?IdCarrera=<%# Eval("IdCarrera") %>&IdResultado=<%# Eval("IdResultado") %>">Imprime </a></td>
