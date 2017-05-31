@@ -67,6 +67,31 @@
 				SELECT 0
 			END
 		</select>
+
+		<select id="SeleccionarUsuarios" resultClass="User">
+			SELECT * FROM [User]
+			WHERE Username != 'Admin'
+		</select>
+
+		<delete id="EliminarUsuarioByIdUser" parameterClass="int">
+			DELETE FROM [User] WHERE IdUser = #value#
+		</delete>
+
+		<select id="SeleccionarUsuarioByIdUser" parameterClass="int" resultClass="User">
+			SELECT * FROM [User] WHERE IdUser = #value#
+		</select>
+
+		<update id="ModificarUsuario" parameterClass="User">
+			UPDATE [User]
+			SET Username = #Username#
+					,Nombre = #Nombre#
+					,ApellidoPaterno = #ApellidoPaterno#
+					,ApellidoMaterno = #ApellidoMaterno#
+					,Email = #Email#
+					,Password = #Password#
+					,IsSuperUser = #IsSuperUser#
+			WHERE IdUser = #IdUser#
+		</update>
 		
 	</statements>
 </sqlMap>

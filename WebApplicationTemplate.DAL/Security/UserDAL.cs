@@ -51,5 +51,25 @@ namespace WebApplicationTemplate.DAL.Security
 			return Mapper.Instance().QueryForObject<int>("ExisteUsername", user);
 		}
 
+
+		public static IList<User> SeleccionarUsuarios()
+		{
+			return Mapper.Instance().QueryForList<User>("SeleccionarUsuarios", null);
+		}
+
+		public static void EliminarUsuarioByIdUser(int idUser)
+		{
+			Mapper.Instance().Delete("EliminarUsuarioByIdUser",idUser);
+		}
+
+		public static User SeleccionarUsuarioByIdUser(int idUser)
+		{
+			return Mapper.Instance().QueryForObject<User>("SeleccionarUsuarioByIdUser", idUser);
+		}
+
+		public static void ModificarUsuario(User u)
+		{
+			Mapper.Instance().Update("ModificarUsuario", u);
+		}
 	}
 }

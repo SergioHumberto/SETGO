@@ -78,5 +78,25 @@ namespace WebApplicationTemplate.BLL.Security
 			}
 		}
 
+		public IList<User> SeleccionarUsuarios()
+		{
+			return UserDAL.SeleccionarUsuarios();
+		}
+
+		public void EliminarUsuarioByIdUser(int idUser)
+		{
+			UserDAL.EliminarUsuarioByIdUser(idUser);
+		}
+
+		public User SeleccionarUsuarioByIdUser(int idUser)
+		{
+			return UserDAL.SeleccionarUsuarioByIdUser(idUser);
+		}
+
+		public void ModificarUsuario(User u)
+		{
+			UserDAL.ModificarUsuario(u);
+		}
+
 	}
 }
