@@ -14,7 +14,7 @@ namespace WebApplicationTemplate.Web.Pages
 		{
 			HttpSecurity.SignOut();
 
-			HttpTool.Redirect(Urls.Default());
+			HttpTool.Redirect(Urls.Home());
 		}
 	}
 }
