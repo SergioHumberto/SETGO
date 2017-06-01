@@ -95,7 +95,7 @@
                             <div class="form-group" style="width: 30%">
                                 <div class="input-group">
                                   <span class="input-group-addon">
-                                    <input name="superuser" id="superuser" runat="server" type="checkbox"/>
+                                    <input name="superuser" id="superuser" class="check" runat="server" type="checkbox"/>
                                   </span>
                                   <input type="text" class="form-control" readonly="readonly" value="Administrador"/>
                                 </div>
@@ -120,6 +120,11 @@
                                             CssClass="btn btn-default" Visible="false" OnClick="btnCancelarEdicion_Click"/>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
+                                </td>
+                                <td>&nbsp &nbsp</td>
+                                <td>
+                                    <input id="btnLimpiarCampos" class="btn btn-default" value="Limpiar" type="button"
+                                        onclick="limpiaForm(this)"/>
                                 </td>
                             </tr>
                         </table>
@@ -215,6 +220,41 @@
                 if (tecla.charCode == 32) return false;
             });
         });
+
+        function limpiaForm() {
+            $('#Content_username').val('');
+            $('#Content_username').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_username').closest('.form-group').find('.help-block').html('');
+
+            $('#Content_nombre').val('');
+            $('#Content_nombre').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_nombre').closest('.form-group').find('.help-block').html('');
+
+            $('#Content_paterno').val('');
+            $('#Content_paterno').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_paterno').closest('.form-group').find('.help-block').html('');
+
+            $('#Content_materno').val('');
+            $('#Content_materno').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_materno').closest('.form-group').find('.help-block').html('');
+
+            $('#Content_email').val('');
+            $('#Content_email').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_email').closest('.form-group').find('.help-block').html('');
+
+            $('#Content_password').val('');
+            $('#Content_password').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_password').closest('.form-group').find('.help-block').html('');
+
+            $('#Content_cpassword').val('');
+            $('#Content_cpassword').closest('.form-group').removeClass('has-error').removeClass('has-success');
+            $('#Content_cpassword').closest('.form-group').find('.help-block').html('');
+
+            $(".check").each(function () {
+                $(this).prop('checked', false);
+            });
+            $('#Content_superuser').closest('.form-group').removeClass('has-error').removeClass('has-success');
+        }
 
         $('document').ready(function () {
 
