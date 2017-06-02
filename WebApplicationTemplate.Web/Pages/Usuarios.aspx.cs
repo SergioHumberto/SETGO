@@ -168,6 +168,19 @@ namespace WebApplicationTemplate.Web.Pages
 		{
 			if (!IsPostBack)
 			{
+				UserSession currentSession = HttpSecurity.CurrentSession;
+				UserBLL userBLL = new UserBLL(currentSession);
+				User currentUser = new User();
+
+				//obtiene el usuario que está logueado.
+				currentUser = userBLL.SeleccionarUsuarioByIdUser(currentSession.IdUser);
+
+				//Si no es administrador no debería entrar al formulario
+				if (!currentUser.IsSuperUser)
+				{
+					HttpTool.Redirect(Urls.Home());
+				}
+
 				LimpiarEtiquetas();
 				ConsultarUsuarios();
 

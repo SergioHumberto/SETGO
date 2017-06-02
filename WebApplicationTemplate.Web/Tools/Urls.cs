@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Text;
 
+using WebApplicationTemplate.BLL.Security;
+using WebApplicationTemplate.Objects.Security;
+using WebApplicationTemplate.BLL;
+
 namespace WebApplicationTemplate.Web.Tools
 {
 	public static class Urls
@@ -111,7 +115,24 @@ namespace WebApplicationTemplate.Web.Tools
 
 		public static String Usuarios()
 		{
-			return Abs("~/Pages/Usuarios.aspx");
+			UserSession currentSession = HttpSecurity.CurrentSession;
+			UserBLL userBLL = new UserBLL(currentSession);
+			User currentUser = new User();
+
+			//Obtiene el usuario que está logueado.
+			currentUser = userBLL.SeleccionarUsuarioByIdUser(currentSession.IdUser);
+
+			//Si el usuario es administrador
+			if (currentUser.IsSuperUser)
+			{
+				//se redirecciona al formulario de Usuarios.
+				return Abs("~/Pages/Usuarios.aspx");
+			}
+			else//Si no es administrador
+			{
+				//No hace ninguna acción.
+				return string.Empty;
+			}
 		}
 	}
 }
