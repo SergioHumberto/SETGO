@@ -130,8 +130,7 @@ namespace WebApplicationTemplate.Web.Tools
 			}
 			else//Si no es administrador
 			{
-				//No hace ninguna acción.
-				return string.Empty;
+				return Home() + "?A=0";
 			}
 		}
 	}

@@ -178,7 +178,7 @@ namespace WebApplicationTemplate.Web.Pages
 				//Si no es administrador no debería entrar al formulario
 				if (!currentUser.IsSuperUser)
 				{
-					HttpTool.Redirect(Urls.Home());
+					HttpTool.Redirect(Urls.Home() + "?A=0");
 				}
 
 				LimpiarEtiquetas();
