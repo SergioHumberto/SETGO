@@ -347,7 +347,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             foreach (System.Reflection.PropertyInfo prop in props)
             {
-                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
                     prop.SetValue(crOBJ, chklstCampos.Items.FindByText(prop.Name).Selected);
             }
 
@@ -430,7 +430,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             foreach (System.Reflection.PropertyInfo prop in props)
             {
-                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
                     chklstCampos.Items.Add(new ListItem(prop.Name, "true"));
             }
         }
@@ -462,7 +462,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                         foreach (System.Reflection.PropertyInfo prop in props)
                         {
-                            if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                            if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
                                 chklstCampos.Items.FindByText(prop.Name).Selected = (bool)prop.GetValue(crOBJ);
                         }
                     }
