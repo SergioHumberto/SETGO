@@ -22,6 +22,7 @@
               <xs:element name="TiempoChip" msprop:Generator_ColumnVarNameInTable="columnTiempoChip" msprop:Generator_ColumnPropNameInRow="TiempoChip" msprop:Generator_ColumnPropNameInTable="TiempoChipColumn" msprop:Generator_UserColumnName="TiempoChip" type="xs:string" minOccurs="0" />
               <xs:element name="NombreCompleto" msprop:Generator_ColumnVarNameInTable="columnNombreCompleto" msprop:Generator_ColumnPropNameInRow="NombreCompleto" msprop:Generator_ColumnPropNameInTable="NombreCompletoColumn" msprop:Generator_UserColumnName="NombreCompleto" type="xs:string" minOccurs="0" />
               <xs:element name="Edicion" msprop:Generator_ColumnVarNameInTable="columnEdicion" msprop:Generator_ColumnPropNameInRow="Edicion" msprop:Generator_ColumnPropNameInTable="EdicionColumn" msprop:Generator_UserColumnName="Edicion" type="xs:string" minOccurs="0" />
+              <xs:element name="PosicionCategoria" msprop:Generator_ColumnVarNameInTable="columnPosicionCategoria" msprop:Generator_ColumnPropNameInRow="PosicionCategoria" msprop:Generator_ColumnPropNameInTable="PosicionCategoriaColumn" msprop:Generator_UserColumnName="PosicionCategoria" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

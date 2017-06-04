@@ -88,7 +88,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!PosicionPorCategoria.Value</Value>
+                <Value>=Fields!PosicionCategoria.Value</Value>
                 <Style>
                   <FontSize>18pt</FontSize>
                 </Style>
@@ -205,7 +205,7 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>443f64b9-a7fc-4aee-9ec0-9d306ec5897b</rd:DataSourceID>
+      <rd:DataSourceID>3ce7c7bf-92f4-47da-82ac-1b390352edf2</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -223,8 +223,8 @@
           <DataField>PosicionGeneral</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="PosicionPorCategoria">
-          <DataField>PosicionPorCategoria</DataField>
+        <Field Name="PosicionCategoria">
+          <DataField>PosicionCategoria</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Sexo">
@@ -238,7 +238,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ReporteCertificado_2DS</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Lenovo\Desktop\ProyectoPepe\trunk\WebApplicationTemplate.Web\Reports\XSD\ReporteCertificado_2DS.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\castillo.erik\Source\SETGO\WebApplicationTemplate.Web\Reports\XSD\ReporteCertificado_2DS.xsd</rd:SchemaPath>
         <rd:TableName>DataTable1</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

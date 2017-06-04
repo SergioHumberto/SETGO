@@ -398,6 +398,7 @@
     <Content Include="Reports\Images\imgCertificado1.jpg" />
     <Content Include="Reports\Images\imgCertificado2.jpg" />
     <Content Include="Reports\Images\imgCertificado3.jpg" />
+    <Content Include="Reports\Images\imgCertificado4.jpg" />
     <Content Include="Resources\Images\Calendar.png" />
     <Content Include="Resources\Images\footer-background.gif" />
     <Content Include="Resources\Images\header-background.gif" />
@@ -700,6 +701,7 @@
     <Compile Include="Reports\Classes\ReporteCertificado_3.cs" />
     <Compile Include="Reports\Classes\ReporteCertificado_1.cs" />
     <Compile Include="Reports\Classes\ReporteCertificado_2.cs" />
+    <Compile Include="Reports\Classes\ReporteCertificado_4.cs" />
     <Compile Include="Reports\Classes\ReporteRegistrados.cs" />
     <Compile Include="Reports\XSD\ReporteCertificado_1DS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -803,6 +805,11 @@
     <Content Include="Reports\ReporteCertificado_1.rdlc" />
     <Content Include="Reports\ReporteCertificado_2.rdlc" />
     <Content Include="Reports\ReporteCertificado_3.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\ReporteCertificado_4.rdlc">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>

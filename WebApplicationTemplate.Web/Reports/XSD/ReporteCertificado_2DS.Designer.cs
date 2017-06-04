@@ -283,7 +283,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             private global::System.Data.DataColumn columnPosicionGeneral;
             
-            private global::System.Data.DataColumn columnPosicionPorCategoria;
+            private global::System.Data.DataColumn columnPosicionCategoria;
             
             private global::System.Data.DataColumn columnSexo;
             
@@ -340,9 +340,9 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn PosicionPorCategoriaColumn {
+            public global::System.Data.DataColumn PosicionCategoriaColumn {
                 get {
-                    return this.columnPosicionPorCategoria;
+                    return this.columnPosicionCategoria;
                 }
             }
             
@@ -399,12 +399,12 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string NombreCompleto, string PosicionGeneral, string PosicionPorCategoria, string Sexo, string TiempoChip) {
+            public DataTable1Row AddDataTable1Row(string NombreCompleto, string PosicionGeneral, string PosicionCategoria, string Sexo, string TiempoChip) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NombreCompleto,
                         PosicionGeneral,
-                        PosicionPorCategoria,
+                        PosicionCategoria,
                         Sexo,
                         TiempoChip};
                 rowDataTable1Row.ItemArray = columnValuesArray;
@@ -431,7 +431,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             internal void InitVars() {
                 this.columnNombreCompleto = base.Columns["NombreCompleto"];
                 this.columnPosicionGeneral = base.Columns["PosicionGeneral"];
-                this.columnPosicionPorCategoria = base.Columns["PosicionPorCategoria"];
+                this.columnPosicionCategoria = base.Columns["PosicionCategoria"];
                 this.columnSexo = base.Columns["Sexo"];
                 this.columnTiempoChip = base.Columns["TiempoChip"];
             }
@@ -443,8 +443,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 base.Columns.Add(this.columnNombreCompleto);
                 this.columnPosicionGeneral = new global::System.Data.DataColumn("PosicionGeneral", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPosicionGeneral);
-                this.columnPosicionPorCategoria = new global::System.Data.DataColumn("PosicionPorCategoria", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPosicionPorCategoria);
+                this.columnPosicionCategoria = new global::System.Data.DataColumn("PosicionCategoria", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPosicionCategoria);
                 this.columnSexo = new global::System.Data.DataColumn("Sexo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSexo);
                 this.columnTiempoChip = new global::System.Data.DataColumn("TiempoChip", typeof(string), null, global::System.Data.MappingType.Element);
@@ -623,18 +623,17 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string PosicionPorCategoria {
+            public string PosicionCategoria {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.PosicionPorCategoriaColumn]));
+                        return ((string)(this[this.tableDataTable1.PosicionCategoriaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PosicionPorCategoria\' de la tabla \'DataTable1\' es DBNull." +
-                                "", e);
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'PosicionCategoria\' de la tabla \'DataTable1\' es DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.PosicionPorCategoriaColumn] = value;
+                    this[this.tableDataTable1.PosicionCategoriaColumn] = value;
                 }
             }
             
@@ -696,14 +695,14 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPosicionPorCategoriaNull() {
-                return this.IsNull(this.tableDataTable1.PosicionPorCategoriaColumn);
+            public bool IsPosicionCategoriaNull() {
+                return this.IsNull(this.tableDataTable1.PosicionCategoriaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPosicionPorCategoriaNull() {
-                this[this.tableDataTable1.PosicionPorCategoriaColumn] = global::System.Convert.DBNull;
+            public void SetPosicionCategoriaNull() {
+                this[this.tableDataTable1.PosicionCategoriaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

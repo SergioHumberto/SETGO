@@ -140,7 +140,12 @@ namespace WebApplicationTemplate.Web.PublicPages
             Tools.ReportControl reportCertificado;
 
             switch (IdCert)
-            {
+            { 
+                /*
+                 * 
+                 * Se debe agregar un CASE por cada nuevo formato de certificado
+                 * 
+                 */
                 case 1:
                     reportCertificado = new ReporteCertificado_1();
                     ((ReporteCertificado_1)reportCertificado).IdCarrera = IdCarreraProperty;
@@ -154,6 +159,11 @@ namespace WebApplicationTemplate.Web.PublicPages
                     reportCertificado = new ReporteCertificado_3();
                     ((ReporteCertificado_3)reportCertificado).IdCarrera = IdCarreraProperty;
                     ((ReporteCertificado_3)reportCertificado).IdResultado = IdResultado;
+                    break;
+                case 4:
+                    reportCertificado = new ReporteCertificado_4();
+                    ((ReporteCertificado_4)reportCertificado).IdCarrera = IdCarreraProperty;
+                    ((ReporteCertificado_4)reportCertificado).IdResultado = IdResultado;
                     break;
                 default:
                     reportCertificado = new ReporteCertificado_3();
