@@ -155,7 +155,7 @@
                                     <td id="tdLug_Gral" runat="server"><%# Eval("Lug_Gral") %></td>
                                     <td id="tdRama" runat="server"><%# Eval("Rama") %></td>
                                     <td id="tdRuta" runat="server"><%# Eval("Ruta") %></td>
-                                    <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %>?IdCarrera=<%# Eval("IdCarrera") %>&IdResultado=<%# Eval("IdResultado") %>">Imprime </a></td>
+                                    <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %>?IdCarrera=<%# Eval("IdCarrera") %>&IdResultado=<%# Eval("IdResultado") %>&IdCert=<%# Eval("IdCertificado") %>">Imprime </a></td>
                                 </tr>
                             </ItemTemplate>
                             <FooterTemplate>

@@ -32,6 +32,7 @@
       ,Edad
       ,T_Intermedio
       ,Ruta
+      ,IdCertificado
       )
       VALUES(
       #IdCarrera#
@@ -56,6 +57,7 @@
       ,#Edad#
       ,#T_Intermedio#
       ,#Ruta#
+      ,#IdCertificado#
       )
 
       <selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
@@ -101,6 +103,7 @@
       ,Edad = #Edad#
       ,T_Intermedio = #T_Intermedio#
       ,Ruta = #Ruta#
+      ,IdCertificado = #IdCertificado#
       WHERE IdCarrera = #IdCarrera#
       AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
     </update>

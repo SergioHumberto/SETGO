@@ -14,6 +14,7 @@ using WebApplicationTemplate.DAL;
 using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
 using System.Web.Services;
+using WebApplicationTemplate.Web.Reports.Classes;
 
 namespace WebApplicationTemplate.Web.PublicPages
 {
@@ -93,6 +94,22 @@ namespace WebApplicationTemplate.Web.PublicPages
                 return -1;
             }
         }
+        public int IdCertProperty
+        {
+            get
+            {
+                int IdCert;
+                if (Request.QueryString["IdCert"] != null)
+                {
+                    if (int.TryParse(Request.QueryString["IdCert"], out IdCert))
+                    {
+                        return IdCert;
+                    }
+                }
+
+                return -1;
+            }
+        }
 
         public string URLRedirectImprimirCertificado
         {
@@ -109,7 +126,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             {
                 if (IdResultadoProperty > 0)
                 {
-                    GeneraCertificado(IdResultadoProperty);
+                    GeneraCertificado(IdResultadoProperty, IdCertProperty);
                 }
                 else
                 {
@@ -118,12 +135,33 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
 
-        private void GeneraCertificado(int IdResultado)
+        private void GeneraCertificado(int IdResultado, int IdCert)
         {
-            Reports.Classes.ReporteCertificado_3 reportCertificado = new Reports.Classes.ReporteCertificado_3();
+            Tools.ReportControl reportCertificado;
 
-            reportCertificado.IdCarrera = IdCarreraProperty;
-            reportCertificado.IdResultado = IdResultado;
+            switch (IdCert)
+            {
+                case 1:
+                    reportCertificado = new ReporteCertificado_1();
+                    ((ReporteCertificado_1)reportCertificado).IdCarrera = IdCarreraProperty;
+                    ((ReporteCertificado_1)reportCertificado).IdResultado = IdResultado;
+                    break;
+                case 2:
+                    reportCertificado = new ReporteCertificado_2();
+                    ((ReporteCertificado_2)reportCertificado).IdCarrera = IdCarreraProperty;                    
+                    break;
+                case 3:
+                    reportCertificado = new ReporteCertificado_3();
+                    ((ReporteCertificado_3)reportCertificado).IdCarrera = IdCarreraProperty;
+                    ((ReporteCertificado_3)reportCertificado).IdResultado = IdResultado;
+                    break;
+                default:
+                    reportCertificado = new ReporteCertificado_3();
+                    ((ReporteCertificado_3)reportCertificado).IdCarrera = IdCarreraProperty;
+                    ((ReporteCertificado_3)reportCertificado).IdResultado = IdResultado;
+                    break;
+            }
+
             reportCertificado.GenerateReport();
         }
 
@@ -251,7 +289,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
 
             string query = string.Empty;
-            query = @"SELECT R.*, CR.IdCarrera 
+            query = @"SELECT R.*, CR.IdCarrera, CR.IdCertificado
                 FROM RESULTADOS R 
 				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 				WHERE CR.IdCarrera=" + idCarrera;
@@ -368,8 +406,8 @@ namespace WebApplicationTemplate.Web.PublicPages
                     System.Reflection.PropertyInfo[] props = objCR.GetType().GetProperties();
 
                     foreach (System.Reflection.PropertyInfo prop in props)
-                    {
-                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                    {                        
+                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
                         {
                             Control th = e.Item.FindControl("th" + prop.Name);
                             if (th != null)
@@ -387,7 +425,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                     foreach (System.Reflection.PropertyInfo prop in props)
                     {
-                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria")
+                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
                         {
                             Control th = e.Item.FindControl("td" + prop.Name);
                             if (th != null)
