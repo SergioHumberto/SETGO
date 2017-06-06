@@ -120,12 +120,15 @@ namespace WebApplicationTemplate.Web.PublicPages
 
         private void Import_To_Grid(string FilePath, string Extension, string isHDR)
         {
+
             string conStr = "";
             switch (Extension)
             {
+                case ".XLS":
                 case ".xls": //Excel 97-03
                     conStr = ConfigurationManager.AppSettings["Excel03ConString"];
                     break;
+                case ".XLSX":
                 case ".xlsx": //Excel 07
                     conStr = ConfigurationManager.AppSettings["Excel07ConString"];
                     break;
@@ -135,29 +138,30 @@ namespace WebApplicationTemplate.Web.PublicPages
             OleDbCommand cmdExcel = new OleDbCommand();
             OleDbDataAdapter oda = new OleDbDataAdapter();
             DataTable dt = new DataTable();
-            cmdExcel.Connection = connExcel;
-
-            //Get the name of First Sheet
-            connExcel.Open();
-            DataTable dtExcelSchema;
-            dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-            string SheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
-            connExcel.Close();
-
-            //Read Data from First Sheet
-            connExcel.Open();
-            cmdExcel.CommandText = "SELECT * From [" + SheetName + "]";
-            oda.SelectCommand = cmdExcel;
-            oda.Fill(dt);
-            connExcel.Close();
-
-            //Bind Data to GridView
-            grdResultados.Caption = Path.GetFileName(FilePath);
-            grdResultados.DataSource = dt;
-            grdResultados.DataBind();
-
             try
             {
+                cmdExcel.Connection = connExcel;
+
+                //Get the name of First Sheet
+                connExcel.Open();
+                DataTable dtExcelSchema;
+                dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                string SheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                connExcel.Close();
+
+                //Read Data from First Sheet
+                connExcel.Open();
+                cmdExcel.CommandText = "SELECT * From [" + SheetName + "]";
+                oda.SelectCommand = cmdExcel;
+                oda.Fill(dt);
+                connExcel.Close();
+
+                //Bind Data to GridView
+                grdResultados.Caption = Path.GetFileName(FilePath);
+                grdResultados.DataSource = dt;
+                grdResultados.DataBind();
+
+
                 ResultadosBLL resultadosBLL = new ResultadosBLL();
                 ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
                 ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
@@ -207,8 +211,13 @@ namespace WebApplicationTemplate.Web.PublicPages
                 GuardarCarrera(crOBJ.IdConfiguracionResultados, dt);
             }
             catch (Exception ex)
-            {
+            {                
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+                connExcel.Close();
+                connExcel.Dispose();
             }
         }
 
@@ -266,10 +275,10 @@ namespace WebApplicationTemplate.Web.PublicPages
                 if (row.Table.Columns.Contains("T_Oficial"))
                     resultadosOBJ.T_Oficial = row["T_Oficial"].ToString();
 
-                if (row.Table.Columns.Contains("Lug_Rama"))
+                if (row.Table.Columns.Contains("Lug_Cat"))
                 {
                     int lug_cat = 0;
-                    if (int.TryParse(row["Lug_Rama"].ToString(), out lug_cat))
+                    if (int.TryParse(row["Lug_Cat"].ToString(), out lug_cat))
                         resultadosOBJ.Lug_Cat = lug_cat;
                 }
 
