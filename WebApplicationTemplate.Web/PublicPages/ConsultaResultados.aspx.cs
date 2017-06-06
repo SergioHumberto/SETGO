@@ -137,7 +137,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
         private void GeneraCertificado(int IdResultado, int IdCert)
         {
-            Tools.ReportControl reportCertificado;
+            ReporteCertificado reportCertificado;
 
             switch (IdCert)
             { 
@@ -145,32 +145,40 @@ namespace WebApplicationTemplate.Web.PublicPages
                  * 
                  * Se debe agregar un CASE por cada nuevo formato de certificado
                  * 
+                 * TODO: Modificar para estos parámetros traerlos de la BD y consultaros por configuracionResultados, 
+                 * no debería ser necesario un case, dado que la linea de código sería exactamente igual
+                 * 
+                 * by Erik C
+                 * 
                  */
                 case 1:
-                    reportCertificado = new ReporteCertificado_1();
-                    ((ReporteCertificado_1)reportCertificado).IdCarrera = IdCarreraProperty;
-                    ((ReporteCertificado_1)reportCertificado).IdResultado = IdResultado;
+                    reportCertificado = new ReporteCertificado(
+                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
+                        , "~/Reports/Images/imgCertificado1.jpg");                    
                     break;
                 case 2:
-                    reportCertificado = new ReporteCertificado_2();
-                    ((ReporteCertificado_2)reportCertificado).IdCarrera = IdCarreraProperty;                    
+                    reportCertificado = new ReporteCertificado(
+                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
+                        , "~/Reports/Images/imgCertificado2.jpg");
                     break;
                 case 3:
-                    reportCertificado = new ReporteCertificado_3();
-                    ((ReporteCertificado_3)reportCertificado).IdCarrera = IdCarreraProperty;
-                    ((ReporteCertificado_3)reportCertificado).IdResultado = IdResultado;
+                    reportCertificado = new ReporteCertificado(
+                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
+                        , "~/Reports/Images/imgCertificado3.jpg");
                     break;
                 case 4:
-                    reportCertificado = new ReporteCertificado_4();
-                    ((ReporteCertificado_4)reportCertificado).IdCarrera = IdCarreraProperty;
-                    ((ReporteCertificado_4)reportCertificado).IdResultado = IdResultado;
+                    reportCertificado = new ReporteCertificado(
+                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
+                        , "~/Reports/Images/imgCertificado4.jpg");
                     break;
                 default:
-                    reportCertificado = new ReporteCertificado_3();
-                    ((ReporteCertificado_3)reportCertificado).IdCarrera = IdCarreraProperty;
-                    ((ReporteCertificado_3)reportCertificado).IdResultado = IdResultado;
+                    reportCertificado = new ReporteCertificado(
+                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), 1)
+                        , "~/Reports/Images/imgCertificado1.jpg");
                     break;
             }
+            reportCertificado.IdCarrera = IdCarreraProperty;
+            reportCertificado.IdResultado = IdResultado;
 
             reportCertificado.GenerateReport();
         }

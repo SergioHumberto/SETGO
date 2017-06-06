@@ -698,10 +698,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Classes\ReporteCertificado_3.cs" />
-    <Compile Include="Reports\Classes\ReporteCertificado_1.cs" />
-    <Compile Include="Reports\Classes\ReporteCertificado_2.cs" />
-    <Compile Include="Reports\Classes\ReporteCertificado_4.cs" />
+    <Compile Include="Reports\Classes\ReporteCertificado.cs" />
     <Compile Include="Reports\Classes\ReporteRegistrados.cs" />
     <Compile Include="Reports\XSD\ReporteCertificado_1DS.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -34,33 +34,33 @@ namespace WebApplicationTemplate.Web.PublicPages
 
         protected void btnGenerarCertificado1_Click(object sender, EventArgs e)
         {
-            Reports.Classes.ReporteCertificado_1 reportCertificado = new Reports.Classes.ReporteCertificado_1();
+            //Reports.Classes.ReporteCertificado_1 reportCertificado = new Reports.Classes.ReporteCertificado_1();
 
-            int IdCarrera;
-            int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
+            //int IdCarrera;
+            //int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
 
-            reportCertificado.IdCarrera = IdCarrera;
-            reportCertificado.GenerateReport();
+            //reportCertificado.IdCarrera = IdCarrera;
+            //reportCertificado.GenerateReport();
         }
 
         protected void btnGenerarCertificado2_Click(object sender, EventArgs e)
         {
-            Reports.Classes.ReporteCertificado_2 reporte = new Reports.Classes.ReporteCertificado_2();
-            int IdCarrera;
-            int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
+            //Reports.Classes.ReporteCertificado_2 reporte = new Reports.Classes.ReporteCertificado_2();
+            //int IdCarrera;
+            //int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
 
-            reporte.IdCarrera = IdCarrera;
-            reporte.GenerateReport();
+            //reporte.IdCarrera = IdCarrera;
+            //reporte.GenerateReport();
         }
 
         protected void btnGenerarCertificado3_Click(object sender, EventArgs e)
         {
-            Reports.Classes.ReporteCertificado_3 reporte = new Reports.Classes.ReporteCertificado_3();
-            int IdCarrera;
-            int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
+            //Reports.Classes.ReporteCertificado_3 reporte = new Reports.Classes.ReporteCertificado_3();
+            //int IdCarrera;
+            //int.TryParse(ddlCarrera.SelectedValue, out IdCarrera);
 
-            reporte.IdCarrera = IdCarrera;
-            reporte.GenerateReport();
+            //reporte.IdCarrera = IdCarrera;
+            //reporte.GenerateReport();
         }
     }
 }
