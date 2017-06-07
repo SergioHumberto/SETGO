@@ -15,5 +15,22 @@ namespace WebApplicationTemplate.DAL
             DAL.Insert("InsertEquipo", p_Equipo);
             return p_Equipo.IdEquipo;
         }
+
+        public static IList<EquipoOBJ> SelectEquipos(EquipoOBJ equipoFinder)
+        {
+            IList<EquipoOBJ> lstEquipos = DAL.QueryForList<EquipoOBJ>("SelectEquipos", equipoFinder);
+            return lstEquipos;
+        }
+
+        public static void UpdateEquipo(EquipoOBJ p_Equipo)
+        {
+            DAL.Update("UpdateEquipo", p_Equipo);
+        }
+
+        public static EquipoOBJ SelectEquipoObject(int IdEquipo)
+        {
+            EquipoOBJ equipoResult = DAL.QueryForObject<EquipoOBJ>("SelectEquipoObject", IdEquipo);
+            return equipoResult;
+        }
     }
 }

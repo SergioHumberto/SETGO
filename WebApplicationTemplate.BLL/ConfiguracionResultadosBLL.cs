@@ -41,5 +41,11 @@ namespace WebApplicationTemplate.BLL
 		{
 			ConfiguracionResultadosMAP.EliminarConfiguracionByIdCarreraIdCategoria(crOBJ);
 		}
-	}
+
+        public ConfiguracionResultadosOBJ SelectConfiguracionResultadosObject(int IdConfiguracionResultados)
+        {
+            return ConfiguracionResultadosMAP.SelectConfiguracionResultadosObject(IdConfiguracionResultados);
+        }
+
+    }
 }

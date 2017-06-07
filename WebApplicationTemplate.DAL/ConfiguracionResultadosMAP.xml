@@ -123,6 +123,10 @@
 			WHERE IdCarrera = #IdCarrera#
 			AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
 		</delete>
+
+        <select id="SelectConfiguracionResultadosObject" parameterClass="int" resultClass="ConfiguracionResultadosOBJ" >
+            SELECT CR.* FROM ConfiguracionResultados CR WHERE CR.IdConfiguracionResultados = #value#
+        </select>
 		
 	</statements>
 

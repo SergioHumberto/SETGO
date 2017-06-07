@@ -10,15 +10,45 @@
             INSERT INTO [Equipo]
             (
                 IdTipoEquipo
+                , EmailsParticipantes
+                , IdCarrera
+                , CantidadRegistrados
+                , Guid
             )
             VALUES
             (
                 #IdTipoEquipo#
+                , #EmailsParticipantes#
+                , #IdCarrera#
+                , #CantidadRegistrados#
+                , NEWID()
             )
             <selectKey type="post" resultClass="int" property="IdEquipo">
                 SELECT @@IDENTITY
             </selectKey>
         </insert>
+
+        <select id="SelectEquipos" parameterClass="EquipoOBJ" resultClass="EquipoOBJ">
+            <![CDATA[
+            
+                SELECT 
+                * 
+                FROM Equipo E
+                WHERE (#IdEquipo# <= 0 OR E.IdEquipo = #IdEquipo#)
+                    AND (#EmailsParticipantes# IS NULL OR E.EmailsParticipantes LIKE '%' + #EmailsParticipantes# + '%')
+                    AND (#IdCarrera# IS NULL OR E.IdCarrera = #IdCarrera#)
+                    AND (#Guid# = '00000000-0000-0000-0000-000000000000' OR E.Guid = #Guid#)
+            ]]>
+        </select>
+
+        <update id="UpdateEquipo" parameterClass="EquipoOBJ">
+            UPDATE Equipo SET CantidadRegistrados = #CantidadRegistrados# WHERE IdEquipo = #IdEquipo#
+        </update>
+
+        <select id="SelectEquipoObject" parameterClass="int" resultClass="EquipoOBJ">
+            SELECT E.* FROM Equipo E WHERE E.IdEquipo = #value#
+        </select>
+        
     </statements>
 
 </sqlMap>

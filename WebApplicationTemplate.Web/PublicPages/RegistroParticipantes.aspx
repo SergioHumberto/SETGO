@@ -1,21 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistroParticipantes.aspx.cs" Inherits="WebApplicationTemplate.Web.Pages.RegistroParticipantes" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistroParticipantes.aspx.cs" 
+    Inherits="WebApplicationTemplate.Web.Pages.RegistroParticipantes" EnableEventValidation="true" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript">
-        function removeWhitespaces(txtbox) {
-            //Get the value from textbox
-            var txtbox = document.getElementById(txtbox);
-            //Remove all white spaces from textbox using the regex
-            txtbox.value = txtbox.value.replace(/\D/g, "");
-        }
-    </script>
-</head>
-<body>
-    <form runat="server">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
@@ -23,7 +14,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-        <style>
+    <style>
             .AlertaRequerido {
                 color: red;
             }
@@ -31,9 +22,53 @@
             .LetraEtiqueta {
                 font-size: 14px;
             }
+
+            #disablingDiv
+            {
+                /* Do not display it on entry */
+                display: block; 
+ 
+                /* Display it on the layer with index 1001.
+                   Make sure this is the highest z-index value
+                   used by layers on that page */
+                z-index:1001;
+     
+                /* make it cover the whole screen */
+                position: absolute; 
+                top: 0%; 
+                left: 0%; 
+                width: 100%; 
+                height: 100%; 
+ 
+                /* make it white but fully transparent */
+                background-color: white; 
+                opacity:.00; 
+                filter: alpha(opacity=00);
+            }
+
         </style>
 
+    <script type="text/javascript">
+        function removeWhitespaces(txtbox) {
+            //Get the value from textbox
+            var txtbox = document.getElementById(txtbox);
+            //Remove all white spaces from textbox using the regex
+            txtbox.value = txtbox.value.replace(/\D/g, "");
+        }
+
+        $(document).ready(function () {
+            $("#disablingDiv").hide();
+            console.log("hide");
+        });
+
+    </script>
+</head>
+<body>
+    <form runat="server">
+
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+        <div id="disablingDiv"></div>
 
         <div id="divHtmlRender" runat="server">
         </div>
@@ -46,24 +81,6 @@
             </ContentTemplate>
         </asp:UpdatePanel>
 
-        <div style="width: 60%; display: none;" class="row">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <label class="">Tipo de registro</label>
-                    <asp:DropDownList ID="ddlTipoRegistro" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoRegistro_SelectedIndexChanged" runat="server">
-                        <asp:ListItem Text="Individual" Value="Individual"></asp:ListItem>
-                        <asp:ListItem Text="Equipo" Value="Equipo"></asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-            </div>
-            <div class="col-md-6" id="divTipoEquipo" runat="server" visible="false">
-                <div class="input-group">
-                    <label class="">Cantidad de participantes</label>
-                    <asp:DropDownList ID="ddlTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEquipo_SelectedIndexChanged" CssClass="form-control" runat="server">
-                    </asp:DropDownList>
-                </div>
-            </div>
-        </div>
         <br />
 
         <asp:PlaceHolder ID="phInformacionPersonal" runat="server">
@@ -424,8 +441,6 @@
             </div>
         </asp:PlaceHolder>
 
-        <asp:Button ID="btnGuardarParticipante" CssClass="btn btn-default" Text="Guardar y continuar" OnClick="btnGuardarParticipante_Click" runat="server" Visible="false" />
-
         <asp:PlaceHolder runat="server" ID="phRamaCategoriaRuta">
 
             <asp:PlaceHolder ID="phRamas" Visible="false" runat="server">
@@ -478,7 +493,7 @@
                 </asp:UpdatePanel>
             </asp:PlaceHolder>
 
-            <asp:PlaceHolder ID="phClasificacion" runat="server">
+            <asp:PlaceHolder ID="phClasificacion" Visible="false" runat="server">
 
                 <asp:Repeater ID="rptClasificacion" OnItemDataBound="rptClasificacion_ItemDataBound" runat="server">
                     <ItemTemplate>
@@ -496,6 +511,66 @@
             </asp:PlaceHolder>
 
             <br />
+
+                <asp:UpdatePanel ID="upTipoRegistro" runat="server" UpdateMode="Always">
+                    <ContentTemplate>
+                        <div style="width: 60%; display: block;" class="row">
+                                <div class="col-md-6">
+                                <div class="input-group">
+                                    <label>Tipo de registro</label>
+                                    <asp:RadioButtonList ID="rblTipoRegistro" AutoPostBack="true" Enabled="false" CssClass="LetraEtiqueta" OnSelectedIndexChanged="rblTipoRegistro_SelectedIndexChanged" runat="server">
+                                        <asp:ListItem Text="Individual" Value="I" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="Equipo" Value="E"></asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </div>
+                            </div>
+                        </div>
+
+                        <asp:PlaceHolder ID="phTipoRegistro" runat="server" Visible="false">
+                        <div style="width: 60%;" class="row">
+                            <div class="col-md-6" id="divTipoEquipo" runat="server">
+                                <div class="input-group">
+                                    <label class="">Cantidad de participantes</label>
+                                    <asp:DropDownList ID="ddlTipoEquipo" AutoPostBack="true" OnSelectedIndexChanged="ddlTipoEquipo_SelectedIndexChanged" CssClass="form-control" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>           
+                        
+                        <asp:Repeater ID="repeaterEmailParticipanteXEquipo" runat="server">
+                            <HeaderTemplate>
+                                <label>Correo de los participantes</label>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <label>Correo</label>
+
+                                            <table>
+                                                <tr>
+                                                    <td><asp:TextBox ID="txtEmailParticipanteXEquipo" CssClass="form-control" runat="server"></asp:TextBox></td>
+                                                    <td>
+                                                        <asp:RequiredFieldValidator ID="reqEmailParticipanteXEquipo" ControlToValidate="txtEmailParticipanteXEquipo" SetFocusOnError="true"
+                                                            CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
+
+                                                        <asp:RegularExpressionValidator ID="revEmailParticipanteXEquipo" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
+                                                            ControlToValidate="txtEmailParticipanteXEquipo" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        </asp:PlaceHolder>
+                                  
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
 
             <asp:PlaceHolder ID="phPoliticas" runat="server">
                 <div class="row">

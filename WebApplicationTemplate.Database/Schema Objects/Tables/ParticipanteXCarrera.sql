@@ -5,5 +5,6 @@
 	[IdCarrera] INT NULL FOREIGN KEY REFERENCES [Carrera](IdCarrera),
 	[IdRama] INT NULL FOREIGN KEY REFERENCES [Rama](IdRama),
 	[IdCategoria] INT NULL FOREIGN KEY REFERENCES [Categoria](IdCategoria),
-	[IdRuta] INT NULL FOREIGN KEY REFERENCES [Ruta](IdRuta)
+	[IdRuta] INT NULL FOREIGN KEY REFERENCES [Ruta](IdRuta), 
+    [IdEquipo] INT NULL CONSTRAINT FK_ParticipanteXCarrera_Equipo_IdEquipo FOREIGN KEY REFERENCES [Equipo](IdEquipo)
 )

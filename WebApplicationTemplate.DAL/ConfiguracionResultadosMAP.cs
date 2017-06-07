@@ -34,5 +34,12 @@ namespace WebApplicationTemplate.DAL
 		{
 			Mapper.Instance().Delete("EliminarConfiguracionByIdCarreraIdCategoria", crOBJ);
 		}
+
+        public static ConfiguracionResultadosOBJ SelectConfiguracionResultadosObject(int IdConfiguracionResultados)
+        {
+            ConfiguracionResultadosOBJ result = DAL.QueryForObject<ConfiguracionResultadosOBJ>("SelectConfiguracionResultadosObject", IdConfiguracionResultados);
+            return result;
+        }
+
 	}
 }

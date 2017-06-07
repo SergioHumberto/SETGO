@@ -94,17 +94,68 @@ namespace WebApplicationTemplate.Web.Pages
 
         public bool RegistroEnEquipo
         {
-            get { return ddlTipoRegistro.SelectedValue == "Equipo"; }
+            get { return rblTipoRegistro.SelectedValue == "E"; }
+        }
+
+        public int IdCategoriaProperty
+        {
+            get
+            {
+                int IdCategoria;
+
+                if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
+                {
+                    if (IdCategoria > 0)
+                    {
+                        return IdCategoria;
+                    }
+                }
+
+                return -1;
+            }
+        }
+        
+        public enum ETipoRegistro
+        {
+            Individual = 'I'
+            , Equipo = 'E'
+        }
+
+        private int IdEquipoPropertyVS
+        {
+            get
+            {
+                if (ViewState["IdEquipo"] != null)
+                {
+                    return int.Parse(ViewState["IdEquipo"].ToString());
+                }
+
+                return -1;
+            }
+
+            set { ViewState["IdEquipo"] = value; }
         }
 
         protected void Page_Load(object sender, EventArgs e)
-			{
+        {
             if (!IsPostBack)
             {
                 EliminaVariablesDeSession();
                 if (IdCarreraProperty > 0)
                 {
                     LoadCarrera(IdCarreraProperty);
+
+                    if (Request.QueryString["UEQ"] != null)
+                    {
+                        string emailTo = string.Empty;
+
+                        if (Request.QueryString["emailTo"] != null)
+                        {
+                            emailTo = Request.QueryString["emailTo"];
+                        }
+
+                        LoadEquipoSettings(IdCarreraProperty, Request.QueryString["UEQ"], emailTo);
+                    }
                 }
                 else
                 {
@@ -117,6 +168,89 @@ namespace WebApplicationTemplate.Web.Pages
 
 				lblRuta.Visible = false;
 			}
+        }
+
+        private void LoadEquipoSettings(int IdCarrera, string strUEQ, string emailTo)
+        {
+            try
+            {
+                Guid UEQ = new Guid(strUEQ);
+                UserSession session = Tools.HttpSecurity.CurrentSession;
+                EquipoBLL objEquipoBLL = new EquipoBLL(session);
+                IList<EquipoOBJ> lstEquipos = objEquipoBLL.SelectEquipos(new EquipoOBJ() { IdCarrera = IdCarrera, Guid = UEQ });
+
+                if (lstEquipos.Count == 0)
+                {
+                    throw new Exception("No se encontró el equipo con la carrera indicada");
+                }
+                else if (lstEquipos.Count == 1)
+                {
+                    EquipoOBJ objEquipo = lstEquipos[0];
+                    TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+
+                    if (objEquipo.IdTipoEquipo.HasValue)
+                    {
+                        TipoEquipoOBJ objTipoEquipo = objTipoEquipoBLL.SelectTipoEquipoObject(objEquipo.IdTipoEquipo.Value);
+                        if (objTipoEquipo != null)
+                        {
+                            BloqueaCategoriaRbl(objTipoEquipo.IdCategoria);
+                            BloqueaTipoRegistroRbl(ETipoRegistro.Equipo);
+
+                            if (!string.IsNullOrEmpty(emailTo))
+                            {
+                                txtEmail.Text = emailTo;
+                            }
+                        }
+                    }
+                }
+                else if(lstEquipos.Count > 1)
+                {
+                    throw new Exception("Se encontró mas de un equipo registrado");
+                }
+            }
+            catch(Exception ex)
+            {
+                cusError.ErrorMessage = "Error: " + ex.Message;
+                cusError.IsValid = false;
+            }
+        }
+
+        private void BloqueaTipoRegistroRbl(ETipoRegistro eTipoRegistro)
+        {
+            char value = (char)eTipoRegistro;
+            ListItem item = BuscaEnRbl(rblTipoRegistro, value.ToString());
+            if (item != null)
+            {
+                item.Selected = true;
+                rblTipoRegistro.SelectedValue = item.Value;
+                rblTipoRegistro.Enabled = false;
+            }
+        }
+
+        private void BloqueaCategoriaRbl(int IdCategoria)
+        {
+            ListItem item = BuscaEnRbl(rblCategoria, IdCategoria.ToString());
+            if (item != null)
+            {
+                item.Selected = true;
+                rblCategoria.Enabled = false;
+            }
+        }
+
+        private ListItem BuscaEnRbl(RadioButtonList rblControl, string value)
+        {
+            if (rblControl.Items.Count > 0)
+            {
+                foreach (ListItem item in rblControl.Items)
+                {
+                    if(item.Value.CompareTo(value) == 0)
+                    {
+                        return item;
+                    }
+                }
+            }
+
+            return null;
         }
 
         public static Control[] FlattenHierachy(Control root)
@@ -245,7 +379,7 @@ namespace WebApplicationTemplate.Web.Pages
                 rblRamas.DataBind();
 
                 LoadCategoriasRbl(IdCarrera);
-                LoadTipoEquipoDdl();
+                // LoadTipoEquipoDdl();
 
                 LoadValoresFechas();
 
@@ -268,15 +402,21 @@ namespace WebApplicationTemplate.Web.Pages
             rptClasificacion.DataBind();
         }
 
-        private void LoadTipoEquipoDdl()
+        private void LoadTipoEquipoDdl(int IdCategoria)
         {
             UserSession session = HttpSecurity.CurrentSession;
             TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
-            IList<TipoEquipoOBJ> lstTipoEquipo = objTipoEquipoBLL.SelectTipoEquipo(new TipoEquipoOBJ() { }); // Todos los tipos de equipo
+            IList<TipoEquipoOBJ> lstTipoEquipo = objTipoEquipoBLL.SelectTipoEquipo(new TipoEquipoOBJ() { Activo = true, IdCategoria = IdCategoria }); // Todos los tipos de equipo
             ddlTipoEquipo.DataSource = lstTipoEquipo;
             ddlTipoEquipo.DataTextField = "CantidadParticipantes";
             ddlTipoEquipo.DataValueField = "IdTipoEquipo";
             ddlTipoEquipo.DataBind();
+
+            int IdTipoEquipo;
+            if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))
+            {
+                LoadEmailParticipanteXEquipo(IdTipoEquipo);
+            }
         }
 
         private void LoadCategoriasRbl(int IdCarrera)
@@ -333,143 +473,82 @@ namespace WebApplicationTemplate.Web.Pages
             return lstCategoriasResult;
         }
 
-
-        public bool EstaEquipoCompleto()
-        {
-            if (Session["lstParticipantesCache"] != null)
-            {
-                int cantidadEquipo;
-                int.TryParse(ddlTipoEquipo.SelectedItem.Text, out cantidadEquipo);
-
-                List<ParticipantesOBJ> lstParticipantes = (List<ParticipantesOBJ>)Session["lstParticipantesCache"];
-
-                if (cantidadEquipo == lstParticipantes.Count)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private bool EsUltimoParticipanteEnEquipo()
-        {
-            if (Session["lstParticipantesCache"] != null)
-            {
-                int cantidadEquipo;
-                int.TryParse(ddlTipoEquipo.SelectedItem.Text, out cantidadEquipo);
-
-                List<ParticipantesOBJ> lstParticipantes = (List<ParticipantesOBJ>)Session["lstParticipantesCache"];
-
-                if (lstParticipantes.Count == cantidadEquipo)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-            if (RegistroEnEquipo)
+            try
             {
-                FillRamaCategoriaRutaDeEquipo();
-            }
+				InsertarParticipante();
 
-            if (!RegistroEnEquipo || EstaEquipoCompleto())
-            {
-                try
+                decimal Amount = 0;
+                if (RegistroEnEquipo)
                 {
-					if (!RegistroEnEquipo)
-                    {
-                        InsertarParticipante();
-                    }
-                    else
-                    {
-                        InsertarEquipo();
-                    }
+                    Amount = GetPrecioEquipoXCategoria();
+                }
+                else
+                {
+                    ParticipanteXCarreraBLL objpxcbll = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+                    ParticipanteXCarreraOBJ objpxc = objpxcbll.SelectParticipanteXCarrera(IdParticipanteXCarreraProperty);
 
-                    // lblMessage.Text = "Se guardó la informacion del participante";
-                    // LimpiarCampos();    
-                    decimal Amount = 0;
-                    if (RegistroEnEquipo)
+                    if (objpxc != null)
                     {
-                        Amount = GetPrecioEquipoXCategoria();
-                        //int IdTipoEquipo;
-                        //if (Session["IdTipoEquipo"] != null)
-                        //{
-                        //    int.TryParse(Session["IdTipoEquipo"].ToString(), out IdTipoEquipo);
-                        //    Amount = GetPrecioXEquipo(IdTipoEquipo);
-                        //}
-                    }
-                    else
-                    {
-                        ParticipanteXCarreraBLL objpxcbll = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
-                        ParticipanteXCarreraOBJ objpxc = objpxcbll.SelectParticipanteXCarrera(IdParticipanteXCarreraProperty);
-
-                        if (objpxc != null)
+                        if (objpxc.IdCategoria.HasValue)
                         {
-                            if (objpxc.IdCategoria.HasValue)
-                            {
-                                Amount = GetPrecioXCategoria(objpxc.IdCategoria.Value);
-                            }
+                            Amount = GetPrecioXCategoria(objpxc.IdCategoria.Value);
+                        }
+                    }
+                }
+
+				CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+				CarreraOBJ carreraOBJ = new CarreraOBJ();
+
+				carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+
+				//Si existe un correo de Paypal, ingresa al método de pago.
+				//Si no, el pago es en efectivo u otro tipo de pago y no entra a Paypal.
+				if(!string.IsNullOrEmpty(carreraOBJ.PayPalEmail))
+				{
+                    bool bPrimeroEnRegistrar = false;
+                    UserSession session = HttpSecurity.CurrentSession;
+                    EquipoBLL objEquipoBLL = new EquipoBLL(session);
+
+                    EquipoOBJ objEquipoOBJ = objEquipoBLL.SelectEquipoObject(IdEquipoPropertyVS);
+                    if (objEquipoOBJ != null)
+                    {
+                        if (objEquipoOBJ.CantidadRegistrados == 1)
+                        {
+                            bPrimeroEnRegistrar = true;
                         }
                     }
 
-					CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-					CarreraOBJ carreraOBJ = new CarreraOBJ();
+                    // Si es registro individual o si es el primero en registar el equipo entonces manda a la pantalla de paypal
+                    if (!RegistroEnEquipo || bPrimeroEnRegistrar)
+                    {
+                        PaypalDelegateForm(Amount);
+                    }
+                    else
+                    {
+                        LimpiarCampos();
 
-					carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+                        lblModalTitle.Text = "¡Registro con éxito!";
+                        lblModalBody.Text = "¡Gracias por registrarte!";
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                        upModal.Update();
+                    }
+				}
+				else
+				{
+					LimpiarCampos();
 
-					//Si existe un correo de Paypal, ingresa al método de pago.
-					//Si no, el pago es en efectivo u otro tipo de pago y no entra a Paypal.
-					if(!string.IsNullOrEmpty(carreraOBJ.PayPalEmail))
-					{
-						PaypalDelegateForm(Amount);
-					}
-					else
-					{
-						LimpiarCampos();
-
-						lblModalTitle.Text = "¡Registro con éxito!";
-						lblModalBody.Text = "¡Gracias por registrarte!";
-						ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
-						upModal.Update();
-					}
-                }
-                catch (Exception ex)
-                {
-                    cusError.ErrorMessage = ex.Message;
-                    cusError.IsValid = false;
-                }
+					lblModalTitle.Text = "¡Registro con éxito!";
+					lblModalBody.Text = "¡Gracias por registrarte!";
+					ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+					upModal.Update();
+				}
             }
-        }
-
-        private void FillRamaCategoriaRutaDeEquipo()
-        {
-            int IdRama;
-            int.TryParse(rblRamas.SelectedValue, out IdRama);
-
-            int IdCategoria;
-            int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
-
-            int? IdRuta = null;
-
-            List<ParticipantesOBJ> lstParticipantes = new List<ParticipantesOBJ>();
-
-            if (Session["lstParticipantesCache"] != null)
+            catch (Exception ex)
             {
-                lstParticipantes = (List<ParticipantesOBJ>)Session["lstParticipantesCache"];
-
-                foreach (ParticipantesOBJ objParticipante in lstParticipantes)
-                {
-                    objParticipante.ParticipanteXCarrera.IdRama = IdRama;
-                    objParticipante.ParticipanteXCarrera.IdCategoria = IdCategoria;
-                    objParticipante.ParticipanteXCarrera.IdRuta = IdRuta;
-                }
-
-                Session.Add("lstParticipantesCache", lstParticipantes);
+                cusError.ErrorMessage = ex.Message;
+                cusError.IsValid = false;
             }
         }
 
@@ -495,45 +574,6 @@ namespace WebApplicationTemplate.Web.Pages
 			ddlAnio.ClearSelection();
 		}
 
-        private void InsertarEquipo()
-        {
-            try
-            {
-                UserSession session = HttpSecurity.CurrentSession;
-
-                if (Session["lstParticipantesCache"] != null)
-                {
-                    List<ParticipantesOBJ> lstParticipantes = (List<ParticipantesOBJ>)Session["lstParticipantesCache"];
-
-                    DAL.DAL.BeginTransaction();
-
-                    EquipoBLL objEquipoBLL = new EquipoBLL(session);
-
-                    int IdTipoEquipo = -1;
-                    if (Session["IdTipoEquipo"] != null)
-                    {
-                        int.TryParse(Session["IdTipoEquipo"].ToString(), out IdTipoEquipo);
-                    }
-
-                    int IdEquipo = objEquipoBLL.InsertEquipo(new EquipoOBJ() { IdTipoEquipo = IdTipoEquipo });
-                    Session.Add("IdEquipo", IdEquipo);
-
-                    foreach (ParticipantesOBJ objParticipante in lstParticipantes)
-                    {
-                        ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(session);
-                        objParticipante.IdEquipo = IdEquipo;
-                        objParticipanteBLL.InsertParticipanteConCarrera(objParticipante);
-                    }
-                    DAL.DAL.CommitTransaction();
-                }
-            }
-            catch (Exception ex)
-            {
-                DAL.DAL.RollbackTransaction();
-                throw new Exception("Hubo un error al registrar equipo");
-            }
-        }
-
         private void validaParticipante(ParticipantesOBJ participanteOBJ)
         {
             if (participanteOBJ.FechaNacimiento < new DateTime(1900, 1, 1))
@@ -555,7 +595,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                 int IdParticipante = objParticipanteBLL.InsertParticipante(objParticipante);
 
-                InsertaParticipanteXCarrera(IdParticipante, IdCarreraProperty);
+                InsertaParticipanteXCarrera(IdParticipante, IdCarreraProperty, objParticipante.Email);
                 InsertarClasificacionXParticipante(IdParticipante);
 
                 DAL.DAL.CommitTransaction();
@@ -592,7 +632,7 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
-        private void InsertaParticipanteXCarrera(int IdParticipante, int IdCarrera)
+        private void InsertaParticipanteXCarrera(int IdParticipante, int IdCarrera, string Email)
         {
             UserSession session = HttpSecurity.CurrentSession;
             ParticipanteXCarreraBLL objPxCBLL = new ParticipanteXCarreraBLL(session);
@@ -618,10 +658,93 @@ namespace WebApplicationTemplate.Web.Pages
 				objParticipanteXCarreraOBJ.IdRuta = IdRuta;
 			}
 
+            EquipoBLL objEquipoBLL = new EquipoBLL(session);
+            IList<EquipoOBJ> lstEquipos = objEquipoBLL.SelectEquipos(
+                new EquipoOBJ() { IdCarrera = IdCarreraProperty, EmailsParticipantes = Email });
+
+            int? IdEquipo = null;
+            if (RegistroEnEquipo)
+            {
+                if (lstEquipos.Count == 0)
+                {
+                    // insertar nuevo equipo
+                    EquipoOBJ nuevoEquipo = new EquipoOBJ();
+                    nuevoEquipo.EmailsParticipantes = GetEmailsParticipantes();
+                    nuevoEquipo.IdCarrera = IdCarreraProperty;
+                    nuevoEquipo.CantidadRegistrados = 1;
+
+                    int IdTipoEquipo;
+                    if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))
+                    {
+                        nuevoEquipo.IdTipoEquipo = IdTipoEquipo;
+                    }
+
+                    IdEquipo = objEquipoBLL.InsertEquipo(nuevoEquipo);
+                }
+            }
+
+            if (lstEquipos.Count == 1)
+            {
+                IdEquipo = lstEquipos[0].IdEquipo;
+                EquipoOBJ oldEquipo = lstEquipos[0];
+
+                // comparar con el equipo registrado anteriormente
+                TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+                TipoEquipoOBJ objTipoEquipo = objTipoEquipoBLL.SelectTipoEquipoObject(oldEquipo.IdTipoEquipo.Value);
+
+                if (objTipoEquipo != null)
+                {
+                    if (oldEquipo.CantidadRegistrados >= objTipoEquipo.CantidadParticipantes)
+                    {
+                        throw new Exception("Se ha alcanzado el cupo máximo en el equipo");
+                    }
+                    else
+                    {
+                        oldEquipo.CantidadRegistrados += 1;
+                    }
+                }
+
+                objEquipoBLL.UpdateEquipo(oldEquipo);
+            }
+
+            objParticipanteXCarreraOBJ.IdEquipo = IdEquipo;
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
 
             IdParticipanteXCarreraProperty = objParticipanteXCarreraOBJ.IdParticipanteXCarrera;
+
+            if (IdEquipo.HasValue)
+            {
+                IdEquipoPropertyVS = IdEquipo.Value;
+            }
         }
+
+
+        public string GetEmailsParticipantes()
+        {
+            StringBuilder strBuilder = new StringBuilder();
+
+            if (repeaterEmailParticipanteXEquipo != null && repeaterEmailParticipanteXEquipo.Items.Count > 0)
+            {
+                for(int i = 0; i < repeaterEmailParticipanteXEquipo.Items.Count; i++)
+                {
+                    RepeaterItem itemRepeater = repeaterEmailParticipanteXEquipo.Items[i];
+                    TextBox txtEmailParticipanteXEquipo = itemRepeater.FindControl("txtEmailParticipanteXEquipo") as TextBox;
+
+                    if (txtEmailParticipanteXEquipo != null)
+                    {
+                        strBuilder.Append(txtEmailParticipanteXEquipo.Text.Trim());
+                    }
+
+                    if (i + 1 < repeaterEmailParticipanteXEquipo.Items.Count)
+                    {
+                        strBuilder.Append(";");
+                    }
+                }
+            }
+
+            return strBuilder.ToString();
+        }
+
 
         private ParticipantesOBJ FillParticipanteOBJ()
         {
@@ -758,40 +881,6 @@ namespace WebApplicationTemplate.Web.Pages
             return 0;
         }
 
-        protected void ddlTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!RegistroEnEquipo) // individual
-            {
-                divNumParticipante.Visible = false;
-                lblNumParticipante.Text = "1"; // Cuando seleccione otra vez individual entonces se pierden los registros gruardados de equipos
-                divTipoEquipo.Visible = false;
-
-                if (ddlTipoEquipo.Items.Count > 0)
-                {
-                    ddlTipoEquipo.SelectedIndex = 0;
-                }
-
-                EliminaVariablesDeSession();
-
-                btnGuardarParticipante.Visible = false;
-                btnEnviar.Visible = true;
-                phRamaCategoriaRuta.Visible = true;
-            }
-            else // equipo
-            {
-                divNumParticipante.Visible = true;
-                lblNumParticipante.Text = "1";
-                divTipoEquipo.Visible = true;
-
-                phRamaCategoriaRuta.Visible = false;
-                btnGuardarParticipante.Visible = true;
-                btnEnviar.Visible = false;
-            }
-
-            lblTotal.InnerText = "0.00";
-            LoadCategoriasRbl(IdCarreraProperty);
-        }
-
         private void EliminaVariablesDeSession()
         {
             Session.Remove("lstParticipantesCache");
@@ -832,9 +921,9 @@ namespace WebApplicationTemplate.Web.Pages
 
             // Urls.Abs("~/Pages/PaymentProcess.aspx")
             //string strURLReturn = "http://localhost:61880/WebApplicationTemplate/PublicPages/PaymentProcess.aspx?IdCarrera={0}&IdParticipante={1}";
-            string strURLReturn = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx?IdCarrera={0}&IdParticipante={1}");
+            string strURLReturn = Urls.Abs("~/PublicPages/PayPalRestAPI.aspx?IdCarrera={0}&IdParticipante={1}&IdEquipo={2}");
 
-            strURLReturn = string.Format(strURLReturn, IdCarreraProperty, IdParticipanteVSProperty);
+            strURLReturn = string.Format(strURLReturn, IdCarreraProperty, IdParticipanteVSProperty, IdEquipoPropertyVS);
 
             // Urls.Abs("~/Pages/RegistroParticipantes.aspx")
             // string strCancelURL = "http://localhost:61880/WebApplicationTemplate/PublicPages/RegistroParticipantes.aspx?IdCarrera={0}";
@@ -957,7 +1046,7 @@ namespace WebApplicationTemplate.Web.Pages
             //        }
             //    }
             //}
-            ddlTipoRegistro.Enabled = false; // una vez guardado un registro de un participante de equipo
+            rblTipoRegistro.Enabled = false; // una vez guardado un registro de un participante de equipo
                                              // no podrá cambiar a registro individual
 
             LimpiarCampos();
@@ -973,37 +1062,43 @@ namespace WebApplicationTemplate.Web.Pages
 
         protected void ddlTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-        }
-
-        protected void btnGuardarParticipante_Click(object sender, EventArgs e)
-        {
-            GuardarRegistroParticipante();
-            if (EsUltimoParticipanteEnEquipo()) 
+            int IdTipoEquipo;
+            if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))
             {
-                btnEnviar.Visible = true;
-                btnGuardarParticipante.Visible = false;
-                phInformacionPersonal.Visible = false;
-                phRamaCategoriaRuta.Visible = true;
-                LoadCategoriasRbl(IdCarreraProperty);
+                LoadEmailParticipanteXEquipo(IdTipoEquipo);
             }
         }
 
         protected void rblCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!RegistroEnEquipo)
+            int IdCategoria;
+            int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
+
+            rblTipoRegistro.SelectedValue = "" +  (char)ETipoRegistro.Individual;
+            phTipoRegistro.Visible = false;
+
+            if (IdCategoria > 0)
             {
-                int IdCategoria;
-                if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
+                LoadTipoEquipoDdl(IdCategoria);
+
+                if (ddlTipoEquipo.Items.Count > 0)
+                {
+                    rblTipoRegistro.Enabled = true;
+                }
+                else
+                {
+                    rblTipoRegistro.Enabled = false;
+                }
+
+                if (!RegistroEnEquipo)
                 {
                     lblTotal.InnerText = "" + GetPrecioXCategoria(IdCategoria);
-
-					CargarRutasByIdCategoria(IdCategoria);
-				}
-            }
-            else
-            {
-                lblTotal.InnerText = "" + GetPrecioEquipoXCategoria();
+                    CargarRutasByIdCategoria(IdCategoria);
+                }
+                else
+                {
+                    lblTotal.InnerText = "" + GetPrecioEquipoXCategoria();
+                }
             }
         }
 
@@ -1014,17 +1109,13 @@ namespace WebApplicationTemplate.Web.Pages
             int IdTipoEquipo;
             if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))
             {
-                int IdCategoria;
-                if (int.TryParse(rblCategoria.SelectedValue, out IdCategoria))
-                {
-                    TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
-                    IList<TipoEquipoOBJ> lstTiposEquipo = objTipoEquipoBLL.SelectTipoEquipo(
-                        new TipoEquipoOBJ() { IdTipoEquipo = IdTipoEquipo, IdCategoria = IdCategoria });
+                TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+                IList<TipoEquipoOBJ> lstTiposEquipo = objTipoEquipoBLL.SelectTipoEquipo(
+                    new TipoEquipoOBJ() { IdTipoEquipo = IdTipoEquipo, IdCategoria = IdCategoriaProperty, Activo = true });
 
-                    if (lstTiposEquipo.Count == 1)
-                    {
-                        return lstTiposEquipo[0].Precio;
-                    }
+                if (lstTiposEquipo.Count == 1)
+                {
+                    return lstTiposEquipo[0].Precio;
                 }
             }
 
@@ -1143,5 +1234,60 @@ namespace WebApplicationTemplate.Web.Pages
 			}
 		}
 
+        private void LoadEmailParticipanteXEquipo(int IdTipoEquipo)
+        {
+            UserSession session = new UserSession();
+            TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+            TipoEquipoOBJ objTipoEquipo = objTipoEquipoBLL.SelectTipoEquipoObject(IdTipoEquipo);
+
+            if (objTipoEquipo != null)
+            {
+                int cantidad = objTipoEquipo.CantidadParticipantes;
+
+                int[] data = new int[cantidad];
+
+                for (int i = 0; i < cantidad; i++)
+                {
+                    data[i] = i;
+                }
+
+                repeaterEmailParticipanteXEquipo.Visible = true;
+                repeaterEmailParticipanteXEquipo.DataSource = data;
+                repeaterEmailParticipanteXEquipo.DataBind();
+
+                if (repeaterEmailParticipanteXEquipo.Items.Count > 0)
+                {
+                    TextBox txtEmailParticipanteXEquipo = repeaterEmailParticipanteXEquipo.Items[0].FindControl("txtEmailParticipanteXEquipo") as TextBox;
+                    if (txtEmailParticipanteXEquipo != null)
+                    {
+                        txtEmailParticipanteXEquipo.Enabled = false;
+                        txtEmailParticipanteXEquipo.Text = txtEmail.Text;
+                    }
+                }
+            }
+        }
+
+        protected void rblTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rblTipoRegistro.SelectedValue == "I")
+            {
+                phTipoRegistro.Visible = false;
+                repeaterEmailParticipanteXEquipo.DataSource = null;
+                repeaterEmailParticipanteXEquipo.DataBind();
+
+                lblTotal.InnerText = "" + GetPrecioXCategoria(IdCategoriaProperty);
+                CargarRutasByIdCategoria(IdCategoriaProperty);
+            }
+            else if (rblTipoRegistro.SelectedValue == "E")
+            {
+                phTipoRegistro.Visible = true;
+                if (IdCategoriaProperty > 0)
+                {
+                    LoadTipoEquipoDdl(IdCategoriaProperty);
+                }
+
+                lblTotal.InnerText = "" + GetPrecioEquipoXCategoria();
+            }
+        }
     }
 }

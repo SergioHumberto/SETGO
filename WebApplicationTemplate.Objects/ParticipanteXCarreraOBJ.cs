@@ -13,5 +13,6 @@ namespace WebApplicationTemplate.Objects
         public int? IdRama { get; set; }
         public int? IdCategoria { get; set; }
         public int? IdRuta { get; set; }
+        public int? IdEquipo { get; set; }
     }
 }

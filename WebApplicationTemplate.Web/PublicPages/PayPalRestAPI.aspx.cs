@@ -11,6 +11,7 @@ using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
 using PayPal.PayPalAPIInterfaceService.Model;
 using PayPal.PayPalAPIInterfaceService;
+using System.Configuration;
 
 namespace WebApplicationTemplate.Web.Pages
 {
@@ -93,16 +94,117 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 int IdParticipante;
                 int IdCarrera;
+                int IdEquipo;
+
                 int.TryParse(Request.QueryString["IdParticipante"], out IdParticipante);
                 int.TryParse(Request.QueryString["IdCarrera"], out IdCarrera);
+                int.TryParse(Request.QueryString["IdEquipo"], out IdEquipo);
+
                 string strStatus = doECResponse.Ack.Value.ToString();
                 status = strStatus;
 
-                LoadParticipanteDetails(IdParticipante, IdCarrera, strToken, requestDetails.PaymentDetails, strStatus);
+                LoadParticipanteDetails(IdParticipante, IdCarrera, IdEquipo, strToken, requestDetails.PaymentDetails, strStatus);
+
+                if (IdEquipo > 0)
+                {
+                    SendInvitacionesAlEquipo(IdEquipo, IdParticipante, IdCarrera);
+                }
             }
         }
 
-        private void LoadParticipanteDetails(int IdParticipante, int IdCarrera, string strToken, List<PaymentDetailsType> lstPaymentDetails, string strStatus)
+
+        private void SendInvitacionesAlEquipo(int IdEquipo, int IdParticipante, int IdCarrera)
+        {
+            List<string> lstEmailsXEquipo = GetListEmailsXEquipo(IdEquipo);
+            if (lstEmailsXEquipo.Count > 0)
+            {
+                Email emailClass = new Email();
+
+                UserSession session = Tools.HttpSecurity.CurrentSession;
+                ParticipantesBLL objParticipantesBLL = new ParticipantesBLL(session);
+                ParticipantesOBJ objParticipante = objParticipantesBLL.SelectParticipanteObject(IdParticipante);
+
+                if (objParticipante == null)
+                {
+                    return;
+                }
+
+                // string modalidad = GetModalidad(IdParticipante);
+
+                EquipoBLL objEquipoBLL = new EquipoBLL(session);
+                EquipoOBJ objEquipo = objEquipoBLL.SelectEquipoObject(IdEquipo);
+
+                foreach (string itemEmail in lstEmailsXEquipo)
+                {
+                    if (itemEmail.CompareTo(objParticipante.Email) != 0) // Cualquier email, menos el que está registrando.
+                    {
+                        string body = @"
+						<table>
+                            <tr><td>El participante {0} te ha invitado a formar parte de su equipo</td></tr>
+                            <tr><td>Haz click <a target='_blank' href='{1}'>aqui</a> para completar tu registro.</td></tr>
+                        </table>
+						";
+
+                        string strURLRegistrarEquipo = ConfigurationManager.AppSettings["URLRedirectRegistrarEquipo"];
+                        strURLRegistrarEquipo = string.Format(strURLRegistrarEquipo, IdCarrera, objEquipo.Guid, itemEmail);
+
+                        body = string.Format(body
+                            , objParticipante.Nombre + " " +
+                                objParticipante.ApellidoPaterno + " " +
+                                objParticipante.ApellidoMaterno             //Nombre
+                           , strURLRegistrarEquipo                         // Url to return to register team
+                        );
+
+                        emailClass.SendEmail(body, itemEmail, "Te han enviado una invitación a participar en equipo");
+
+                        
+
+                    }
+                }
+            }
+        }
+
+        private string GetModalidad(int IdParticipante)
+        {
+            string modalidad = string.Empty;
+
+            RamaBLL ramaBLL = new RamaBLL(HttpSecurity.CurrentSession);
+            RamaOBJ ramaOBJ = new RamaOBJ();
+
+            CategoriaBLL categoriaBLL = new CategoriaBLL(HttpSecurity.CurrentSession);
+            CategoriaOBJ categoria = categoriaBLL.SelectCategoriaByIdParticipante(IdParticipante);
+
+            RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
+            RutaOBJ ruta = rutaBLL.SelectRutaByIdParticipante(IdParticipante);
+
+            ramaOBJ = ramaBLL.SelectRamaByIdParticipante(IdParticipante);
+            modalidad = (ramaOBJ != null) ? ramaOBJ.Nombre : string.Empty;
+            modalidad += ((modalidad == string.Empty || categoria == null) ? string.Empty : ", ") + ((categoria != null) ? categoria.Nombre : string.Empty);
+            modalidad += ((modalidad == string.Empty || ruta == null) ? string.Empty : ", ") + ((ruta != null) ? ruta.Nombre : string.Empty);
+
+            return modalidad;
+        }
+
+        private List<string> GetListEmailsXEquipo(int IdEquipo)
+        {
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            EquipoBLL objEquipoBLL = new EquipoBLL(session);
+            EquipoOBJ objEquipo = objEquipoBLL.SelectEquipoObject(IdEquipo);
+
+            List<string> lstEmailsXEquipo = new List<string>();
+
+            if (objEquipo != null)
+            {
+                char[] arrSeparator = { ';' };
+                string[] arrEmails = objEquipo.EmailsParticipantes.Split(arrSeparator);
+
+                lstEmailsXEquipo.AddRange(arrEmails);
+            }
+
+            return lstEmailsXEquipo;
+        }
+
+        private void LoadParticipanteDetails(int IdParticipante, int IdCarrera, int IdEquipo, string strToken, List<PaymentDetailsType> lstPaymentDetails, string strStatus)
         {
             if (IdParticipante > 0 && IdCarrera > 0)
             {
@@ -147,6 +249,7 @@ namespace WebApplicationTemplate.Web.Pages
 							<tr><td style='font-weight:bold;background:#9FD0FF;'>Status:</td><td style='background:#9FD0FF;'>{10}</td></tr>
 							<tr><td style='font-weight:bold;'>Payment ID:</td><td>{11}</td></tr>
 							<tr><td style='font-weight:bold; background:#9FD0FF;'>Payment Date:</td><td style='background:#9FD0FF;'>{12}</td></tr>
+                            <tr><td style='font-weight:bold;'>Tipo de registro:</td><td>{13}</td></tr>
 						</table>
 						";
 
@@ -167,6 +270,13 @@ namespace WebApplicationTemplate.Web.Pages
                 modalidad += ((modalidad == string.Empty || categoria == null) ? string.Empty : ", " ) + ((categoria != null) ? categoria.Nombre : string.Empty);
                 modalidad += ((modalidad == string.Empty || ruta == null) ? string.Empty : ", ") + ((ruta != null) ? ruta.Nombre : string.Empty);
 
+                string strTipoRegistro = "Individual";
+
+                if (IdEquipo > 0)
+                {
+                    strTipoRegistro = "Equipo";
+                }
+
                 body = string.Format(body
                     , objParticipante.Folio                         //Folio
                     , modalidad                                //Modalidad
@@ -183,6 +293,7 @@ namespace WebApplicationTemplate.Web.Pages
                     , status                                        //Status
                     , objParticipante.TransactionNumber             //PaymentID
                     , DateTime.Now.ToString()                       //Payment Date
+                    , strTipoRegistro                               // tipo de registro
                     );
 
                 tablaNotificacion.InnerHtml = body;

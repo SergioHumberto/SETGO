@@ -16,5 +16,22 @@ namespace WebApplicationTemplate.BLL
         {
             return EquipoDAL.InsertEquipo(p_Equipo);
         }
-	}
+
+        public IList<EquipoOBJ> SelectEquipos(EquipoOBJ equipoFinder)
+        {
+            return EquipoDAL.SelectEquipos(equipoFinder);
+        }
+
+        public void UpdateEquipo(EquipoOBJ p_Equipo)
+        {
+            EquipoDAL.UpdateEquipo(p_Equipo);
+        }
+
+        public EquipoOBJ SelectEquipoObject(int IdEquipo)
+        {
+            return EquipoDAL.SelectEquipoObject(IdEquipo);
+        }
+
+
+    }
 }

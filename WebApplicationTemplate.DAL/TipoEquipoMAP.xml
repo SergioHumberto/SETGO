@@ -25,7 +25,7 @@
       TE.*
       FROM TipoEquipo TE
       WHERE TE.IdTipoEquipo = #value#
-      AND (TE.Activo = #Activo#)
+      <!--AND (TE.Activo = #Activo#)-->
     </select>
 
     <insert id="InsertarTipoEquipo" parameterClass="TipoEquipoOBJ">

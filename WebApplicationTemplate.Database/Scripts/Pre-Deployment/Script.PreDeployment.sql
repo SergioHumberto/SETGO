@@ -22,3 +22,4 @@
 :r .\Resultados.0.sql
 :r .\ConfiguracionResultados.0.sql
 :r .\User.1.sql
+:r .\Equipo.0.sql

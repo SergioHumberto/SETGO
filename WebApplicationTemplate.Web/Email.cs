@@ -57,5 +57,28 @@ namespace WebApplicationTemplate.Web
                 SmtpServer.Send(mail);
             }
         }
+
+        public void SendEmail(string body, string emailTo, string subject)
+        {
+            SMTPConfigBLL SMTPConfigBLL = new SMTPConfigBLL();
+            SMTPConfigOBJ SMTPConfigOBJ = SMTPConfigBLL.SelectSMTPConfig();
+
+            if (SMTPConfigOBJ != null)
+            {
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(SMTPConfigOBJ.User);
+                mail.To.Add(emailTo);
+                mail.Subject = subject;
+                mail.IsBodyHtml = true;
+                mail.Body = body;
+
+
+                SmtpClient SmtpServer = new SmtpClient(SMTPConfigOBJ.Server);
+                SmtpServer.Port = SMTPConfigOBJ.Port;
+                SmtpServer.Credentials = new System.Net.NetworkCredential(SMTPConfigOBJ.User, SMTPConfigOBJ.Password);
+                SmtpServer.EnableSsl = false;
+                SmtpServer.Send(mail);
+            }
+        }
     }
 }
