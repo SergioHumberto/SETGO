@@ -31,5 +31,6 @@ namespace WebApplicationTemplate.Objects
 		public bool Rama { get; set; }                
         public bool Ruta { get; set; }
         public int IdCertificado { get; set; }
+        public string ImgCertificado { get; set; }
 	}
 }

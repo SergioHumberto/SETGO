@@ -23,5 +23,6 @@
     [Edad] BIT NOT NULL DEFAULT 1, 
     [T_Intermedio] BIT NOT NULL DEFAULT 1, 
     [Ruta] BIT NOT NULL DEFAULT 1, 
-    [IdCertificado] INT NULL
+    [IdCertificado] INT NULL, 
+    [ImgCertificado] VARCHAR(MAX) NULL 
 )

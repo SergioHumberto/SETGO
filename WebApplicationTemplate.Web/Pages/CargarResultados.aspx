@@ -73,7 +73,7 @@
     <div class="input-group" style="width: 100%">
         <asp:UpdatePanel ID="upURL" runat="server" UpdateMode="Always">
             <ContentTemplate>
-                <label class="control-label" for="txtURL">URL</label>
+                <label class="control-label" for="txtURL">URL para visualizar los resultados</label>
                 <div class="clearfix"></div>
                 <div>
                     <asp:TextBox CssClass="form-control" runat="server" ID="txtURL" TextMode="Url" ReadOnly="true"></asp:TextBox>
@@ -108,26 +108,43 @@
 
     <asp:UpdatePanel ID="updLstConfigCarrera" runat="server" UpdateMode="Always">
         <ContentTemplate>
-            <div class="input-group" style="width: 60%">
-                <fieldset class="form-group">
-                    <h3>
-                        <asp:Label runat="server" ID="lblConfiguracion" Text="Marque los campos que desea que se muestren en Resultados."></asp:Label>
-                    </h3>
-                    <div class="checkbox checkbox-primary">
-                        <asp:CheckBoxList ID="chklstCampos" runat="server" CssClass="styled">                            
-                        </asp:CheckBoxList>
-                        <br />
-                        <br />
-                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-default" Text="Guardar" OnClick="btnSubmit_Click" />
-                    </div>
-                </fieldset>
+            <div class="col-md-12 alert alert-success" runat="server" id="lblSuccessConfig" visible="false"></div>
+            <div class="input-group" style="width: 100%" runat="server" id="divConfig">
+                <asp:Label runat="server" CssClass="control-label" ID="lblConfiguracion" Text="Marque los campos que desea que se muestren en Resultados." AssociatedControlID="chklstCampos"></asp:Label>
+                <div>
+                    <asp:CheckBoxList ID="chklstCampos" runat="server" RepeatColumns="4" Width="100%" Font-Size="Small" Font-Bold="false">
+                    </asp:CheckBoxList>
+                    <br />
+                </div>
+                <div class="input-group" style="width: 60%">
+                    <label class="control-label" for="upldImgCertf">Imagen de fondo para el certificado</label>
+                    <asp:FileUpload ID="upldImgCertf" runat="server" AllowMultiple="false" />
+                    <asp:Button ID="btnUpldImgCertf" runat="server" Text="Cargar Imagen"
+                        OnClick="btnUpldImgCertf_Click" Style="display: none" />
+                </div>
+                <br />
+                <div class="form-group" style="width: 100%">
+                    <label class="control-label" for="upldImgCertf">Imagen guardada como</label>
+                    <asp:TextBox CssClass="form-control col-md-12" runat="server" ID="txtImgFileName" ReadOnly="true" />
+                </div>
+                <br /><br />
+                <div class="form-group" style="width: 50%">
+                    <label class="control-label" for="upldImgCertf">Formato de Certificado</label>
+                    <asp:DropDownList runat="server" ID="ddlFormatoCert" CssClass="form-control"></asp:DropDownList>
+                </div>
+                <br /><br />
+                <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-default" Text="Guardar" OnClick="btnSubmit_Click" />
             </div>
         </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnUpldImgCertf" />
+            <asp:AsyncPostBackTrigger ControlID="btnSubmit" />
+        </Triggers>
     </asp:UpdatePanel>
 
     <br />
 
-    <div class="input-group" style="width: 60%">
+    <div class="input-group" style="width: 100%">
         <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     </div>
 
@@ -135,6 +152,12 @@
         function UploadFile(fileUpload) {
             if (fileUpload.value != '') {
                 document.getElementById("<%=btnUpload.ClientID %>").click();
+            }
+        }
+
+        function UploadImageCertf(fileUpload) {
+            if (fileUpload.value != '') {
+                document.getElementById("<%=btnUpldImgCertf.ClientID %>").click();
             }
         }
     </script>

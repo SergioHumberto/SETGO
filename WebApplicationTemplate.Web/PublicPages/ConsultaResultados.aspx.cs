@@ -94,16 +94,16 @@ namespace WebApplicationTemplate.Web.PublicPages
                 return -1;
             }
         }
-        public int IdCertProperty
+        public int IdCRProperty
         {
             get
             {
-                int IdCert;
-                if (Request.QueryString["IdCert"] != null)
+                int IdCR;
+                if (Request.QueryString["IdCR"] != null)
                 {
-                    if (int.TryParse(Request.QueryString["IdCert"], out IdCert))
+                    if (int.TryParse(Request.QueryString["IdCR"], out IdCR))
                     {
-                        return IdCert;
+                        return IdCR;
                     }
                 }
 
@@ -114,7 +114,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         public string URLRedirectImprimirCertificado
         {
             get
-            {               
+            {
                 return Tools.Urls.ConsultaResultados();
             }
         }
@@ -126,7 +126,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             {
                 if (IdResultadoProperty > 0)
                 {
-                    GeneraCertificado(IdResultadoProperty, IdCertProperty);
+                    GeneraCertificado(IdResultadoProperty, IdCRProperty);
                 }
                 else
                 {
@@ -135,48 +135,33 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
 
-        private void GeneraCertificado(int IdResultado, int IdCert)
+        private void GeneraCertificado(int IdResultado, int IdConfiguracionResultados)
         {
             ReporteCertificado reportCertificado;
 
-            switch (IdCert)
-            { 
-                /*
-                 * 
-                 * Se debe agregar un CASE por cada nuevo formato de certificado
-                 * 
-                 * TODO: Modificar para estos parámetros traerlos de la BD y consultaros por configuracionResultados, 
-                 * no debería ser necesario un case, dado que la linea de código sería exactamente igual
-                 * 
-                 * by Erik C
-                 * 
-                 */
-                case 1:
+            ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
+            ConfiguracionResultadosOBJ crOBJ = new ConfiguracionResultadosOBJ();
+
+            crOBJ = crBLL.SelectConfiguracionResultadosObject(IdConfiguracionResultados);
+            if (crOBJ != null && crOBJ.IdCertificado > 0)
+            {
+                if (crOBJ.ImgCertificado != null)
+                {
                     reportCertificado = new ReporteCertificado(
-                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
-                        , "~/Reports/Images/imgCertificado1.jpg");                    
-                    break;
-                case 2:
+                                (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), crOBJ.IdCertificado)
+                                , crOBJ.ImgCertificado);
+                }
+                else
+                {
                     reportCertificado = new ReporteCertificado(
-                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
-                        , "~/Reports/Images/imgCertificado2.jpg");
-                    break;
-                case 3:
-                    reportCertificado = new ReporteCertificado(
-                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
-                        , "~/Reports/Images/imgCertificado3.jpg");
-                    break;
-                case 4:
-                    reportCertificado = new ReporteCertificado(
-                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), IdCert)
-                        , "~/Reports/Images/imgCertificado4.jpg");
-                    break;
-                default:
-                    reportCertificado = new ReporteCertificado(
-                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), 1)
-                        , "~/Reports/Images/imgCertificado1.jpg");
-                    break;
+                        (ReporteCertificado.FormatoCertificado)Enum.ToObject(typeof(ReporteCertificado.FormatoCertificado), crOBJ.IdCertificado));
+                }
             }
+            else
+            {
+                reportCertificado = new ReporteCertificado();
+            }
+
             reportCertificado.IdCarrera = IdCarreraProperty;
             reportCertificado.IdResultado = IdResultado;
 
@@ -307,7 +292,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
 
             string query = string.Empty;
-            query = @"SELECT R.*, CR.IdCarrera, CR.IdCertificado
+            query = @"SELECT R.*, CR.IdCarrera, CR.IdConfiguracionResultados
                 FROM RESULTADOS R 
 				INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 				WHERE CR.IdCarrera=" + idCarrera;
@@ -424,15 +409,15 @@ namespace WebApplicationTemplate.Web.PublicPages
                     System.Reflection.PropertyInfo[] props = objCR.GetType().GetProperties();
 
                     foreach (System.Reflection.PropertyInfo prop in props)
-                    {                        
-                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
+                    {
+                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado" && prop.Name != "ImgCertificado")
                         {
                             Control th = e.Item.FindControl("th" + prop.Name);
                             if (th != null)
                                 th.Visible = (bool)prop.GetValue(objCR);
                         }
                     }
-                  
+
                 }
             }
             else if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -443,13 +428,13 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                     foreach (System.Reflection.PropertyInfo prop in props)
                     {
-                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
+                        if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado" && prop.Name != "ImgCertificado")
                         {
                             Control th = e.Item.FindControl("td" + prop.Name);
                             if (th != null)
                                 th.Visible = (bool)prop.GetValue(objCR);
                         }
-                    }                    
+                    }
                 }
             }
         }

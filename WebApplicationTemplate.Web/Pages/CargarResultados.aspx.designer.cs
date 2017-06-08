@@ -175,6 +175,24 @@ namespace WebApplicationTemplate.Web.PublicPages {
         protected global::System.Web.UI.UpdatePanel updLstConfigCarrera;
         
         /// <summary>
+        /// Control lblSuccessConfig.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSuccessConfig;
+        
+        /// <summary>
+        /// Control divConfig.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divConfig;
+        
+        /// <summary>
         /// Control lblConfiguracion.
         /// </summary>
         /// <remarks>
@@ -191,6 +209,42 @@ namespace WebApplicationTemplate.Web.PublicPages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList chklstCampos;
+        
+        /// <summary>
+        /// Control upldImgCertf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload upldImgCertf;
+        
+        /// <summary>
+        /// Control btnUpldImgCertf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpldImgCertf;
+        
+        /// <summary>
+        /// Control txtImgFileName.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtImgFileName;
+        
+        /// <summary>
+        /// Control ddlFormatoCert.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFormatoCert;
         
         /// <summary>
         /// Control btnSubmit.

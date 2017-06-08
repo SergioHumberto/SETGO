@@ -53,6 +53,7 @@ namespace WebApplicationTemplate.Web.Reports.Classes
         };
         /**************************************************************************************/
          
+
         public override string ReportPath()
         {
             string reportPath;

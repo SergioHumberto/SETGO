@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using WebApplicationTemplate.Web.Tools;
 using WebApplicationTemplate.BLL;
 using WebApplicationTemplate.Objects;
+using WebApplicationTemplate.Web.Reports.Classes;
 
 namespace WebApplicationTemplate.Web.PublicPages
 {
@@ -52,12 +53,12 @@ namespace WebApplicationTemplate.Web.PublicPages
                 lblErrorCarrera.Text = string.Empty;
 
                 LoadCarreras();
+                BindDataToDDlFormatosCert();
 
-                chklstCampos.Visible = false;
-                lblConfiguracion.Visible = false;
-                btnSubmit.Visible = false;
+                divConfig.Visible = false;
 
                 FileUpload1.Attributes["onchange"] = "UploadFile(this)";
+                upldImgCertf.Attributes["onchange"] = "UploadImageCertf(this)";
             }
         }
 
@@ -122,13 +123,11 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
 
             string conStr = "";
-            switch (Extension)
-            {
-                case ".XLS":
+            switch (Extension.ToLower())
+            {               
                 case ".xls": //Excel 97-03
                     conStr = ConfigurationManager.AppSettings["Excel03ConString"];
                     break;
-                case ".XLSX":
                 case ".xlsx": //Excel 07
                     conStr = ConfigurationManager.AppSettings["Excel07ConString"];
                     break;
@@ -199,10 +198,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                     resultadosBLL.EliminarResultadosByIdConfiguracionResultados(crOBJ.IdConfiguracionResultados);
                     crBLL.EliminarConfiguracionByIdCarreraIdCategoria(crOBJ);
                 }
-
-                chklstCampos.Visible = true;
-                lblConfiguracion.Visible = true;
-                btnSubmit.Visible = true;
+                divConfig.Visible = true;
 
                 crBLL.InsertarConfiguracionResultado(GetConfiguracionResultados());
 
@@ -211,7 +207,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                 GuardarCarrera(crOBJ.IdConfiguracionResultados, dt);
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
             }
             finally
@@ -339,6 +335,8 @@ namespace WebApplicationTemplate.Web.PublicPages
                 crOBJ = GetConfiguracionResultados();
 
                 crBLL.ActualizarConfiguracion(crOBJ);
+                lblSuccessConfig.InnerText = "!Los cambios han sido guardados!";
+                lblSuccessConfig.Visible = true;
             }
             catch (Exception ex)
             {
@@ -356,9 +354,14 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             foreach (System.Reflection.PropertyInfo prop in props)
             {
-                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
+                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado" && prop.Name != "ImgCertificado")
                     prop.SetValue(crOBJ, chklstCampos.Items.FindByText(prop.Name).Selected);
             }
+
+            crOBJ.ImgCertificado = txtImgFileName.Text;
+            int idCert;
+            int.TryParse(ddlFormatoCert.SelectedValue, out idCert);
+            crOBJ.IdCertificado = idCert;
 
             return crOBJ;
         }
@@ -395,9 +398,8 @@ namespace WebApplicationTemplate.Web.PublicPages
                                 grdResultados.DataSource = resultadosBLL.SeleccionarResultadosByConfiguracionResultados(crOBJ.IdConfiguracionResultados);
                                 grdResultados.DataBind();
 
-                                chklstCampos.Visible = true;
-                                lblConfiguracion.Visible = true;
-                                btnSubmit.Visible = true;
+                                divConfig.Visible = true;
+
                                 lblErrorCarrera.Text = string.Empty;
 
                                 CargarConfiguracionResultados();
@@ -416,9 +418,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                     {
                         grdResultados.Visible = false;
 
-                        chklstCampos.Visible = false;
-                        lblConfiguracion.Visible = false;
-                        btnSubmit.Visible = false;
+                        divConfig.Visible = false;
 
                         lblErrorCarrera.Text = "Debe seleccionar una carrera.";
                         ddlCarrera.Focus();
@@ -439,7 +439,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             foreach (System.Reflection.PropertyInfo prop in props)
             {
-                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
+                if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado" && prop.Name != "ImgCertificado")
                     chklstCampos.Items.Add(new ListItem(prop.Name, "true"));
             }
         }
@@ -449,9 +449,7 @@ namespace WebApplicationTemplate.Web.PublicPages
             ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
             ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 
-            lblConfiguracion.Visible = true;
-            btnSubmit.Visible = true;
-            chklstCampos.Visible = true;
+            divConfig.Visible = true;
 
             int idCarrera = 0;
             if (int.TryParse(ddlCarrera.SelectedValue.ToString(), out idCarrera))
@@ -471,10 +469,13 @@ namespace WebApplicationTemplate.Web.PublicPages
 
                         foreach (System.Reflection.PropertyInfo prop in props)
                         {
-                            if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado")
+                            if (prop.Name != "IdConfiguracionResultados" && prop.Name != "IdCarrera" && prop.Name != "IdCategoria" && prop.Name != "IdCertificado" && prop.Name != "ImgCertificado")
                                 chklstCampos.Items.FindByText(prop.Name).Selected = (bool)prop.GetValue(crOBJ);
                         }
                     }
+
+                    txtImgFileName.Text = crOBJ.ImgCertificado;
+                    ddlFormatoCert.SelectedValue = crOBJ.IdCertificado.ToString();
                 }
             }
         }
@@ -550,12 +551,59 @@ namespace WebApplicationTemplate.Web.PublicPages
 
         private void LimpiarGrid()
         {
-            lblConfiguracion.Visible = false;
-            btnSubmit.Visible = false;
-            chklstCampos.Visible = false;
+            divConfig.Visible = false;
+            txtImgFileName.Text = string.Empty;
+            lblSuccessConfig.InnerText = string.Empty;
+            lblSuccessConfig.Visible = false;
 
             grdResultados.DataSource = null;
             grdResultados.DataBind();
+        }
+
+        protected void btnUpldImgCertf_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lblSuccessConfig.InnerText = string.Empty;
+                lblSuccessConfig.Visible = false;
+                if (upldImgCertf.HasFile)
+                {
+                    if (upldImgCertf.PostedFile.FileName.ToLower().EndsWith(".jpg"))
+                    {
+                        string FileName = "img_"
+                            + DateTime.Now.Year.ToString()
+                            + DateTime.Now.Month.ToString()
+                            + DateTime.Now.Day.ToString()
+                            + DateTime.Now.Hour.ToString()
+                            + DateTime.Now.Minute.ToString()
+                            + DateTime.Now.Second.ToString()
+                            + DateTime.Now.Millisecond.ToString()
+                            + ".jpg";
+                        string Extension = Path.GetExtension(upldImgCertf.PostedFile.FileName);
+                        string FolderPath = ConfigurationManager.AppSettings["ReportImagesPath"];
+
+                        string FilePath = Server.MapPath(FolderPath + FileName);
+                        upldImgCertf.SaveAs(FilePath);
+                        txtImgFileName.Text = FolderPath + FileName;
+                    }
+                    else
+                        throw new Exception("Formato no válido, solo se aceptan imagenes en formato JPG.");
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+        }
+
+        protected void BindDataToDDlFormatosCert()
+        {            
+            IDictionary<int,string> data = Tools.Enumeration.GetAll<ReporteCertificado.FormatoCertificado>();
+            data.Add(new KeyValuePair<int, string>(0, "(----)"));
+            ddlFormatoCert.DataSource = data;
+            ddlFormatoCert.DataTextField = "Value";
+            ddlFormatoCert.DataValueField = "Key";
+            ddlFormatoCert.DataBind();
         }
     }
 }
