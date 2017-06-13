@@ -736,7 +736,7 @@
     <Compile Include="Services\MacrolynkAuthentication.ashx.cs">
       <DependentUpon>MacrolynkAuthentication.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Tools\Class1.cs" />
+    <Compile Include="Tools\Enumeration.cs" />
     <Compile Include="Tools\DataSetHelper.cs" />
     <Compile Include="Tools\HttpTool.cs" />
     <Compile Include="Tools\ReportControl.cs" />

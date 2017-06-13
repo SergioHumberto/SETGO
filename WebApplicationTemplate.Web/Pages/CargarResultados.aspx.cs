@@ -445,7 +445,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         }
         private void CargarConfiguracionResultados()
         {
-
+            limpiaMensajes();
             ConfiguracionResultadosBLL crBLL = new ConfiguracionResultadosBLL();
             ConfiguracionResultadosOBJ crFinder = new ConfiguracionResultadosOBJ();
 
@@ -549,12 +549,17 @@ namespace WebApplicationTemplate.Web.PublicPages
             }
         }
 
+        private void limpiaMensajes()
+        {
+            lblSuccessConfig.InnerText = string.Empty;
+            lblSuccessConfig.Visible = false;
+        }
+
         private void LimpiarGrid()
         {
             divConfig.Visible = false;
             txtImgFileName.Text = string.Empty;
-            lblSuccessConfig.InnerText = string.Empty;
-            lblSuccessConfig.Visible = false;
+            limpiaMensajes();
 
             grdResultados.DataSource = null;
             grdResultados.DataBind();
@@ -564,8 +569,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             try
             {
-                lblSuccessConfig.InnerText = string.Empty;
-                lblSuccessConfig.Visible = false;
+                limpiaMensajes();
                 if (upldImgCertf.HasFile)
                 {
                     if (upldImgCertf.PostedFile.FileName.ToLower().EndsWith(".jpg"))
