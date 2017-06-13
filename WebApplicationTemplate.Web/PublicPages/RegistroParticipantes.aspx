@@ -481,7 +481,7 @@
                         <div style="width: 60%" class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label id="lblRuta" runat="server">Ruta:</label>
+                                    <label id="lblRuta" visible="false" runat="server">Ruta:</label>
                                     <asp:RadioButtonList ID="rblRuta" AutoPostBack="true" runat="server">
                                     </asp:RadioButtonList>
                                     <asp:RequiredFieldValidator ID="reqRuta" ControlToValidate="rblRuta" SetFocusOnError="true"

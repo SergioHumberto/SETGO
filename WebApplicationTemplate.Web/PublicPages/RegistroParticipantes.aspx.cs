@@ -166,7 +166,7 @@ namespace WebApplicationTemplate.Web.Pages
 
 				PagoOffline();
 
-				lblRuta.Visible = false;
+				// lblRuta.Visible = false;
 			}
         }
 
@@ -195,6 +195,7 @@ namespace WebApplicationTemplate.Web.Pages
                         {
                             BloqueaCategoriaRbl(objTipoEquipo.IdCategoria);
                             BloqueaTipoRegistroRbl(ETipoRegistro.Equipo);
+                            CargarRutasByIdCategoria(objTipoEquipo.IdCategoria);
 
                             if (!string.IsNullOrEmpty(emailTo))
                             {
@@ -528,6 +529,7 @@ namespace WebApplicationTemplate.Web.Pages
                     else
                     {
                         LimpiarCampos();
+                        lblRuta.Visible = false; // To see how to load invisibility
 
                         lblModalTitle.Text = "¡Registro con éxito!";
                         lblModalBody.Text = "¡Gracias por registrarte!";
@@ -887,6 +889,7 @@ namespace WebApplicationTemplate.Web.Pages
             Session.Remove("IdEquipo");
             Session.Remove("IdTipoEquipo");
             Session.Remove("objSessionPayPal");
+            Session.Remove("IdEquipo");
         }
 
         private decimal GetPrecioXCategoria(int IdCategoria)
@@ -1218,12 +1221,13 @@ namespace WebApplicationTemplate.Web.Pages
 
 			lstRutas = rutaBLL.SeleccionarRutasByIdCategoria(ruta);
 
-			lblRuta.Visible = false;
+			// lblRuta.Visible = false;
 
-			if(lstRutas != null && lstRutas.Count > 0)
+		    if(lstRutas != null && lstRutas.Count > 0)
 			{
-				lblRuta.Visible = true;
-				rblRuta.DataSource = lstRutas;
+                lblRuta.Visible = true;
+                phRuta.Visible = true;
+                rblRuta.DataSource = lstRutas;
 				rblRuta.DataTextField = "Nombre";
 				rblRuta.DataValueField = "IdRuta";
 				rblRuta.DataBind();
