@@ -1201,6 +1201,33 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoEquipo;
         
         /// <summary>
+        /// Control divNombreEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNombreEquipo;
+        
+        /// <summary>
+        /// Control txtNombreEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreEquipo;
+        
+        /// <summary>
+        /// Control reqNombreEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNombreEquipo;
+        
+        /// <summary>
         /// Control repeaterEmailParticipanteXEquipo.
         /// </summary>
         /// <remarks>

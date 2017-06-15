@@ -14,6 +14,7 @@
                 , IdCarrera
                 , CantidadRegistrados
                 , Guid
+                , Nombre
             )
             VALUES
             (
@@ -22,6 +23,7 @@
                 , #IdCarrera#
                 , #CantidadRegistrados#
                 , NEWID()
+                , #Nombre#
             )
             <selectKey type="post" resultClass="int" property="IdEquipo">
                 SELECT @@IDENTITY

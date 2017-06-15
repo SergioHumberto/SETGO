@@ -536,7 +536,20 @@
                                 </div>
                             </div>
                         </div>           
+
+                        <br />
+                        <div style="width: 60%;" class="row">
+                            <div class="col-md-6" id="divNombreEquipo" runat="server">
+                                <div class="input-group">
+                                    <label class="">Nombre equipo</label>
+                                    <asp:TextBox ID="txtNombreEquipo" MaxLength="255" CssClass="form-control" runat="server" />
+                                    <asp:RequiredFieldValidator ID="reqNombreEquipo" ControlToValidate="txtNombreEquipo" SetFocusOnError="true"
+                                        CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un nombre de equipo" runat="server" />
+                                </div>
+                            </div>
+                        </div>
                         
+                        <br />
                         <asp:Repeater ID="repeaterEmailParticipanteXEquipo" runat="server">
                             <HeaderTemplate>
                                 <label>Correo de los participantes</label>

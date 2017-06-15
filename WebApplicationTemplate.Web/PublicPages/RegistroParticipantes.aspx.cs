@@ -674,6 +674,7 @@ namespace WebApplicationTemplate.Web.Pages
                     nuevoEquipo.EmailsParticipantes = GetEmailsParticipantes();
                     nuevoEquipo.IdCarrera = IdCarreraProperty;
                     nuevoEquipo.CantidadRegistrados = 1;
+                    nuevoEquipo.Nombre = txtNombreEquipo.Text.Trim();
 
                     int IdTipoEquipo;
                     if (int.TryParse(ddlTipoEquipo.SelectedValue, out IdTipoEquipo))

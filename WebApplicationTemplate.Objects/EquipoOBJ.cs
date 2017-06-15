@@ -13,5 +13,6 @@ namespace WebApplicationTemplate.Objects
         public int? IdCarrera { get; set; }
         public int? CantidadRegistrados { get; set; }
         public Guid Guid { get; set; }
+        public string Nombre { get; set; }
     }
 }
