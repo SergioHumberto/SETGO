@@ -32,6 +32,8 @@ namespace WebApplicationTemplate.Web.Pages
                         BindDataToCategorias(getDataCategorias(idCarrera));
                         BindDataToRutas(getDataRutas(idCarrera));
                         BindDataToClasificacion(getDataClasificaciones(idCarrera));
+                        BindDataToEquiposGridView(getDataTipoEquipos(idCarrera));
+                        
                     }
                     else
                     {
@@ -42,6 +44,7 @@ namespace WebApplicationTemplate.Web.Pages
                     lnkShowInactiveRamas.Text = getTextlnkShowInactiveRama();
                     lnkShowInactiveCategoria.Text = getTextlnkShowInactiveCategoria();
                     lnkShowInactiveRutas.Text = getTextlnkShowInactiveRutas();
+                    lnkShowInactiveEquipos.Text = getTextlnkShowInactiveEquipos();
                 }
             }
             catch (Exception ex)
@@ -80,6 +83,9 @@ namespace WebApplicationTemplate.Web.Pages
 
             lblErrorClasificaciones.InnerText = string.Empty;
             lblErrorClasificaciones.Visible = false;
+
+            lblErrorEquipos.InnerText = string.Empty;
+            lblErrorEquipos.Visible = false;
         }
         #region DatosGenerales
         protected void BindDataToGenerales(int idCarrera)
@@ -1234,7 +1240,7 @@ namespace WebApplicationTemplate.Web.Pages
                 BindDataToClasificacion(getDataClasificaciones(getIdCarrera()));
             }
             catch (Exception ex)
-            { 
+            {
                 if (ex.Message.Contains("FK_ValorClasificacion_Clasificacion_IdClasificacion"))
                 {
                     lblErrorClasificaciones.InnerText = "Primero se deben borrar todos los valores de la clasificacion seleccionada";
@@ -1296,12 +1302,269 @@ namespace WebApplicationTemplate.Web.Pages
                 BindDataToValorClasificacion(getDataValores(idClasificacion));
             }
             catch (Exception ex)
-            { 
+            {
                 lblErrorClasificaciones.InnerText = ex.Message;
                 lblErrorClasificaciones.Visible = true;
             }
         }
         #endregion
 
+        #region Equipos
+        protected string getTextlnkShowInactiveEquipos()
+        {
+            return (ViewState["ShowInactiveEquipos"] != null && (bool)ViewState["ShowInactiveEquipos"]) ? "Mostrar Activos" : "Mostrar Inactivos";
+        }
+
+        protected IList<TipoEquipoOBJ> getDataTipoEquipos( int idCarrera)
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+            TipoEquipoBLL objTipoEquipoBll = new TipoEquipoBLL(session);
+
+            TipoEquipoOBJ tipoEquipoOBJ = new TipoEquipoOBJ();
+            tipoEquipoOBJ.Activo = (ViewState["ShowInactiveEquipos"] != null && (bool)ViewState["ShowInactiveEquipos"]) ? false : true;
+            tipoEquipoOBJ.IdCarrera = idCarrera;
+
+            return objTipoEquipoBll.SelectTipoEquipo(tipoEquipoOBJ);
+        }
+
+        protected void BindDataToEquiposGridView(IList<TipoEquipoOBJ> lstTipoEquipos)
+        {
+            grdEquipos.DataSource = lstTipoEquipos;
+            grdEquipos.DataBind();
+        }
+
+        protected void btnAddNewEquipment_Click(object sender, EventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                ViewState.Add("Nuevo", true);
+                grdEquipos.SetEditRow(grdEquipos.Rows.Count);
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void grdEquipos_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                grdEquipos.EditIndex = e.NewEditIndex;
+                if (ViewState["Nuevo"] != null && (bool)ViewState["Nuevo"])
+                {
+                    IList<TipoEquipoOBJ> lstTipoEquipos = getDataTipoEquipos(getIdCarrera());
+
+                    lstTipoEquipos.Add(new TipoEquipoOBJ());
+                    BindDataToEquiposGridView(lstTipoEquipos);
+                }
+                else
+                    BindDataToEquiposGridView(getDataTipoEquipos(getIdCarrera()));
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected bool validaTipoEquipo(TipoEquipoOBJ p_tipoEquipoObj)
+        {
+            string errores = string.Empty;
+            if (p_tipoEquipoObj.CantidadParticipantes <= 0)
+            {
+                errores += (errores == string.Empty) ? "" : ", ";
+                errores += "La cantidad de participantes debe ser mayor a cero";
+            }
+            if (p_tipoEquipoObj.Precio < 0)
+            {
+                errores += (errores == string.Empty) ? "" : ", ";
+                errores += "El Precio debe ser mayor a cero";
+            }
+
+            if (errores != string.Empty)
+            {
+                lblError.InnerText = errores;
+                lblError.Visible = true;
+                return false;
+            }
+            else
+                return true;
+        }
+
+        protected void grdEquipos_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                GridViewRow grdRow = (GridViewRow)grdEquipos.Rows[e.RowIndex];
+
+                int IdTipoEquipo;
+                int.TryParse(grdRow.Cells[0].Text, out IdTipoEquipo);
+                int CantidadParticipantes;
+                int.TryParse(e.NewValues["CantidadParticipantes"].ToString(), out CantidadParticipantes);
+                decimal precio;
+                decimal.TryParse(e.NewValues["Precio"].ToString(), out precio);
+
+                DropDownList ddlCategoria = grdRow.FindControl("ddlCategoria") as DropDownList;
+                int IdCategoria;
+                int.TryParse(ddlCategoria.SelectedItem.Value, out IdCategoria);
+
+                TipoEquipoOBJ tipoEquipoObj = new TipoEquipoOBJ();
+                tipoEquipoObj.IdTipoEquipo = IdTipoEquipo;
+                tipoEquipoObj.CantidadParticipantes = CantidadParticipantes;
+                tipoEquipoObj.Precio = precio;
+                tipoEquipoObj.IdCategoria = IdCategoria;
+                tipoEquipoObj.Activo = (bool)e.NewValues["Activo"];
+
+                if (!validaTipoEquipo(tipoEquipoObj)) return;
+
+                UserSession session = HttpSecurity.CurrentSession;
+                TipoEquipoBLL objTipoEquipoBll = new TipoEquipoBLL(session);
+
+                if (ViewState["Nuevo"] != null && (bool)ViewState["Nuevo"])
+                {
+                    objTipoEquipoBll.InsertaTipoEquipo(tipoEquipoObj);
+                    ViewState.Remove("Nuevo");
+                }
+                else
+                    objTipoEquipoBll.UpdateTipoEquipo(tipoEquipoObj);
+
+                grdEquipos.EditIndex = -1;
+                BindDataToEquiposGridView(getDataTipoEquipos(getIdCarrera()));
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void grdEquipos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                UserSession session = HttpSecurity.CurrentSession;
+                TipoEquipoBLL objTipoEquipoBll = new TipoEquipoBLL(session);
+
+                int IdTipoEquipo;
+                int.TryParse(e.Values["IdTipoEquipo"].ToString(), out IdTipoEquipo);
+
+                TipoEquipoOBJ tipoEquipoObj = new TipoEquipoOBJ();
+                tipoEquipoObj.IdTipoEquipo = IdTipoEquipo;
+
+                objTipoEquipoBll.DeleteTipoEquipo(tipoEquipoObj);
+                BindDataToEquiposGridView(getDataTipoEquipos(getIdCarrera()));
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void grdEquipos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            LimpiaMensajes();
+            try
+            {
+                grdEquipos.EditIndex = -1;
+                ViewState.Remove("Nuevo");
+                BindDataToEquiposGridView(getDataTipoEquipos(getIdCarrera()));
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+       
+        protected void obtieneDatosCategorias()
+        {
+            UserSession session = HttpSecurity.CurrentSession;
+            CategoriaBLL categoriaBLL = new CategoriaBLL(session);
+            CategoriaOBJ finder = new CategoriaOBJ();
+            finder.IdCarrera = getIdCarrera();
+            IList<CategoriaOBJ> lstCategorias = categoriaBLL.SelectCategoria(finder);
+            ViewState.Remove("lstCategorias");
+            ViewState.Add("lstCategorias", lstCategorias);
+        }
+
+        protected void grdEquipos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    DropDownList ddlCountries = (e.Row.FindControl("ddlCategoria") as DropDownList);
+                    if (ddlCountries != null)
+                    {
+                        IList<CategoriaOBJ> lstCategorias = (IList<CategoriaOBJ>)ViewState["lstCategorias"];
+                        if (lstCategorias.Count > 0)
+                        {
+                            ddlCountries.DataSource = lstCategorias;
+                            ddlCountries.DataTextField = "Nombre";
+                            ddlCountries.DataValueField = "IdCategoria";
+                            ddlCountries.DataBind();
+                        }
+                        ddlCountries.Items.Insert(0, new ListItem("< Seleccionar >"));
+                        string IdCategoria = (e.Row.FindControl("hdnIdCategoria") as HiddenField).Value;
+                        ListItem selectedItem = ddlCountries.Items.FindByValue(IdCategoria);
+                        if (selectedItem != null)
+                            selectedItem.Selected = true;
+                    }
+
+                    Label lblCategoria = (e.Row.FindControl("lblCategoria") as Label);
+                    if (lblCategoria != null)
+                    {
+                        IList<CategoriaOBJ> lstCategorias = (IList<CategoriaOBJ>)ViewState["lstCategorias"];
+                        int IdCategoria;
+                        int.TryParse((e.Row.FindControl("hdnIdCategoria") as HiddenField).Value, out IdCategoria);
+                        if (lstCategorias.Count > 0)
+                        {
+                            CategoriaOBJ categoria = lstCategorias.Where(i => i.IdCategoria == IdCategoria).FirstOrDefault();
+                            lblCategoria.Text = categoria.Nombre;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void grdEquipos_DataBinding(object sender, EventArgs e)
+        {
+            try
+            {
+                obtieneDatosCategorias();
+            }
+            catch (Exception ex)
+            {
+                lblError.InnerText = ex.Message;
+                lblError.Visible = true;
+            }
+        }
+
+        protected void lnkShowInactiveEquipos_Click(object sender, EventArgs e)
+        {
+            if (ViewState["ShowInactiveEquipos"] == null)
+            {
+                ViewState.Add("ShowInactiveEquipos", true);
+            }
+            else
+            {
+                ViewState.Add("ShowInactiveEquipos", !(bool)ViewState["ShowInactiveEquipos"]);
+            }
+            lnkShowInactiveEquipos.Text = getTextlnkShowInactiveEquipos();
+            BindDataToEquiposGridView(getDataTipoEquipos(getIdCarrera()));
+        }
+        #endregion
     }
 }

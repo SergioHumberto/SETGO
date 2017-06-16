@@ -421,7 +421,67 @@
                                 <asp:ListBox runat="server" ID="lstBxValores" CssClass="form-control" Rows="10"></asp:ListBox>
                             </div>
                         </div>
-                    </ContentTemplate>                                     
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Equipos
+            </div>
+            <div class="panel-body">
+                <asp:UpdatePanel runat="server" ID="updEquipos">
+                    <ContentTemplate>
+                        <div class="alert alert-danger" runat="server" id="lblErrorEquipos" visible="false"></div>
+                        <div class="text-right">
+                            <asp:LinkButton CssClass="" runat="server" ID="lnkShowInactiveEquipos" OnClick="lnkShowInactiveEquipos_Click"></asp:LinkButton>
+                        </div>
+                        <asp:GridView runat="server" ID="grdEquipos" AutoGenerateColumns="false" CssClass="table table-bordered" OnRowCancelingEdit="grdEquipos_RowCancelingEdit" OnRowDeleting="grdEquipos_RowDeleting" OnRowEditing="grdEquipos_RowEditing" OnRowUpdating="grdEquipos_RowUpdating" ShowHeaderWhenEmpty="true" OnRowDataBound="grdEquipos_RowDataBound" OnDataBinding="grdEquipos_DataBinding">
+                            <Columns>
+                                <asp:BoundField DataField="IdTipoEquipo" HeaderText="Id" ReadOnly="true" ItemStyle-Width="5%" ControlStyle-CssClass="form-control" />
+                                <asp:TemplateField HeaderText="Categoría" ItemStyle-Width="20%">
+                                    <ItemTemplate>
+                                        <asp:HiddenField ID="hdnIdCategoria" runat="server" Value='<%#Bind("IdCategoria") %>' />
+                                        <asp:Label ID="lblCategoria" runat="server" Text='<%#Bind("IdCategoria") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:HiddenField ID="hdnIdCategoria" runat="server" Value='<%#Bind("IdCategoria") %>' />
+                                        <asp:DropDownList ID="ddlCategoria" runat="server" class="form-control"></asp:DropDownList>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="CantidadParticipantes" HeaderText="Cant. Participantes" ItemStyle-Width="20%" ControlStyle-CssClass="form-control" />
+                                <asp:TemplateField ItemStyle-Width="20%" HeaderText="Precio">
+                                    <ItemTemplate>
+                                        <div class="input-group">
+                                            <span>$&nbsp;</span>
+                                            <asp:Label ID="lblPrecio" runat="server" Text='<%#Bind("Precio") %>'></asp:Label>
+                                        </div>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">$</span>
+                                            <asp:TextBox ID="txtPrecio" runat="server" Text='<%#Bind("Precio") %>' class="form-control"></asp:TextBox>
+                                        </div>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-Width="5%" HeaderText="Activo">
+                                    <ItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Enabled="false" Checked='<%#Bind("Activo") %>' />
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Checked='<%#Bind("Activo") %>' />
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:CommandField ShowEditButton="true" ItemStyle-Width="20%" />
+                                <asp:CommandField ShowDeleteButton="true" ItemStyle-Width="10%" />
+                            </Columns>
+                        </asp:GridView>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <asp:Button runat="server" ID="btnAddNewEquipment" CssClass="btn btn-default" Text="Agregar nuevo" OnClick="btnAddNewEquipment_Click" />
+                            </div>
+                        </div>
+                    </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
         </div>

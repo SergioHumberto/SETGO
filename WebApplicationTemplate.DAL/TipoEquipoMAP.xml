@@ -13,10 +13,12 @@
                 SELECT 
                 TE.* 
                 FROM TipoEquipo TE 
+                INNER JOIN Categoria c ON TE.IdCategoria = c.IdCategoria
                 WHERE ( #IdTipoEquipo# <= 0 OR TE.IdTipoEquipo = #IdTipoEquipo#)
                 AND ( #CantidadParticipantes# <= 0 OR TE.CantidadParticipantes = #CantidadParticipantes#)
                 AND (#IdCategoria# <= 0 OR TE.IdCategoria = #IdCategoria#)
                 AND (TE.Activo = #Activo#)
+                AND (#IdCarrera# <= 0 OR c.IdCarrera = #IdCarrera#)                    
             ]]>
     </select>
 

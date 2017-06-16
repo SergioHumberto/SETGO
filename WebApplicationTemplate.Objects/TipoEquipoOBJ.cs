@@ -9,12 +9,13 @@ namespace WebApplicationTemplate.Objects
     {
         public TipoEquipoOBJ()
         {
-            Activo = true;                        
+            Activo = true;
         }
         public int IdTipoEquipo { get; set; }
         public int CantidadParticipantes { get; set; }
         public Decimal Precio { get; set; }
-        public int IdCategoria { get; set; }        
+        public int IdCategoria { get; set; }
         public bool Activo { get; set; }
+        public int IdCarrera { get; set; }
     }
 }

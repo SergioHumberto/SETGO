@@ -23,8 +23,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a href="<%= Urls.AdmonCatEquipos() %>">Equipos</a></li>                    
+                <ul class="dropdown-menu">                    
                     <li><a href="<%= Urls.BuscaCarrera() %>">Carreras</a></li>
                     <li><a href="<%= Urls.Usuarios() %>">Usuarios</a></li>
                     <%--<li class="divider"></li>--%>                    
