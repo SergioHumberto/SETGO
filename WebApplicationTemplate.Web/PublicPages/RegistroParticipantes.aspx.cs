@@ -1249,15 +1249,15 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 int cantidad = objTipoEquipo.CantidadParticipantes;
 
-                int[] data = new int[cantidad];
+                Dictionary<string, int> dictionaryData = new Dictionary<string, int>();
 
                 for (int i = 0; i < cantidad; i++)
                 {
-                    data[i] = i;
+                    dictionaryData.Add("Correo participante # " + (i + 1), i + 1);
                 }
 
                 repeaterEmailParticipanteXEquipo.Visible = true;
-                repeaterEmailParticipanteXEquipo.DataSource = data;
+                repeaterEmailParticipanteXEquipo.DataSource = dictionaryData;
                 repeaterEmailParticipanteXEquipo.DataBind();
 
                 if (repeaterEmailParticipanteXEquipo.Items.Count > 0)

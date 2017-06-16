@@ -569,7 +569,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                            <label>Correo</label>
+                                            <label><%# Eval("Key") %></label>
 
                                             <table>
                                                 <tr>
