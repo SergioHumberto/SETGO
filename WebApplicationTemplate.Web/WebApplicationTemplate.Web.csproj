@@ -373,7 +373,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Masters\PublicPage.Master" />
     <Content Include="Masters\PrivatePage.Master" />
-    <Content Include="Pages\AdmonCatEquiposXX.aspx" />
     <Content Include="Pages\assets\bootstrap.min.js" />
     <Content Include="Pages\assets\jquery-1.11.2.min.js" />
     <Content Include="Pages\assets\jquery.validate.min.js" />
@@ -565,13 +564,6 @@
     </Compile>
     <Compile Include="Masters\PrivatePage.Master.designer.cs">
       <DependentUpon>PrivatePage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\AdmonCatEquiposXX.aspx.cs">
-      <DependentUpon>AdmonCatEquiposXX.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\AdmonCatEquiposXX.aspx.designer.cs">
-      <DependentUpon>AdmonCatEquiposXX.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\BuscaCarrera.aspx.cs">
       <DependentUpon>BuscaCarrera.aspx</DependentUpon>
