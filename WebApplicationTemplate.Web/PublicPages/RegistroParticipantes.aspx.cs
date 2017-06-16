@@ -1294,5 +1294,30 @@ namespace WebApplicationTemplate.Web.Pages
                 lblTotal.InnerText = "" + GetPrecioEquipoXCategoria();
             }
         }
+
+        protected void txtNombreEquipo_TextChanged(object sender, EventArgs e)
+        {
+            TextBox txtNombreEquipo = sender as TextBox;
+
+            if (!EsValidoNombreEquipo(txtNombreEquipo.Text.Trim(), IdCarreraProperty))
+            {
+                cusNombreEquipo.IsValid = false;
+                cusNombreEquipo.ErrorMessage = "El nombre de equipo ya se encuentra registrado";
+            }
+        }
+
+        private bool EsValidoNombreEquipo(string NombreEquipo, int IdCarrera)
+        {
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            EquipoBLL objEquipoBLL = new EquipoBLL(session);
+
+            IList<EquipoOBJ> lstEquipos = objEquipoBLL.SelectEquipos(new EquipoOBJ() { Nombre = NombreEquipo, IdCarrera = IdCarrera });
+
+            if (lstEquipos.Count == 0)
+                return true;
+
+            return false;
+        }
+
     }
 }

@@ -40,6 +40,7 @@
                     AND (#EmailsParticipantes# IS NULL OR E.EmailsParticipantes LIKE '%' + #EmailsParticipantes# + '%')
                     AND (#IdCarrera# IS NULL OR E.IdCarrera = #IdCarrera#)
                     AND (#Guid# = '00000000-0000-0000-0000-000000000000' OR E.Guid = #Guid#)
+                    AND (#Nombre# IS NULL OR E.Nombre = #Nombre#)
             ]]>
         </select>
 

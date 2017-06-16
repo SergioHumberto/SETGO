@@ -541,10 +541,21 @@
                         <div style="width: 60%;" class="row">
                             <div class="col-md-6" id="divNombreEquipo" runat="server">
                                 <div class="input-group">
-                                    <label class="">Nombre equipo</label>
-                                    <asp:TextBox ID="txtNombreEquipo" MaxLength="255" CssClass="form-control" runat="server" />
-                                    <asp:RequiredFieldValidator ID="reqNombreEquipo" ControlToValidate="txtNombreEquipo" SetFocusOnError="true"
-                                        CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un nombre de equipo" runat="server" />
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label class="">Nombre equipo</label>
+                                                <asp:TextBox ID="txtNombreEquipo" MaxLength="255" CssClass="form-control" 
+                                                    runat="server" AutoPostBack="true" OnTextChanged="txtNombreEquipo_TextChanged" />
+                                            </td>
+                                            <td>
+                                                <asp:RequiredFieldValidator ID="reqNombreEquipo" ControlToValidate="txtNombreEquipo" SetFocusOnError="true"
+                                                    CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un nombre de equipo" runat="server" />
+                                                <asp:CustomValidator ID="cusNombreEquipo" CssClass="AlertaRequerido" Display="Dynamic" runat="server"></asp:CustomValidator>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
