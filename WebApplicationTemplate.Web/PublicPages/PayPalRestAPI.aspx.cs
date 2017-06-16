@@ -138,11 +138,28 @@ namespace WebApplicationTemplate.Web.Pages
                 {
                     if (itemEmail.CompareTo(objParticipante.Email) != 0) // Cualquier email, menos el que está registrando.
                     {
+                        //                  string body = @"
+                        //<table>
+                        //                      <tr><td><h1></h1></td></tr>
+                        //                      <tr><td>{0} te ha invitado a formar parte de su equipo</td></tr>
+                        //                      <tr><td>Haz click <a target='_blank' href='{1}'>aqui</a> para completar tu registro.</td></tr>
+                        //                  </table>
+                        //";
                         string body = @"
-						<table>
-                            <tr><td>El participante {0} te ha invitado a formar parte de su equipo</td></tr>
-                            <tr><td>Haz click <a target='_blank' href='{1}'>aqui</a> para completar tu registro.</td></tr>
-                        </table>
+						<div style='background-color:#1eadff;padding-left:20px;'>
+                            <h1 style='color:white;font-family:Calibri;'>Invitación de Registro</h1>
+                        </div>
+                        <div style='font-family:Calibri; font-size:14pt; padding-left:20px;'>
+                            <span>{0} te ha invitado a formar parte de su equipo '{2}'</span>
+                            <br />
+                            <br />
+                            <span>Haz click </span><a target='_blank' href='{1}'>&lt;AQU&Iacute;&gt;</a><span> para completar tu registro.</span>
+                            <br /><br />
+                        </div>
+                        <div style='background-color:#4A4A4A;padding-left:20px; width:100%;'>
+                            <img src='http://setgo.mx/wp-content/uploads/2016/05/Logo_footer2.png' width='100'>
+                            <span style='color:#9B9B9B;font-family:Roboto;font-size:13px;'> © 2017 Todos los derechos reservados&nbsp;</span><a style='color:white;font-family:Roboto;font-size:13px;' href='http://setgo.mx/' target='_blank'>SetGo</a></span>
+                        </div>
 						";
 
                         string strURLRegistrarEquipo = ConfigurationManager.AppSettings["URLRedirectRegistrarEquipo"];
@@ -153,11 +170,10 @@ namespace WebApplicationTemplate.Web.Pages
                                 objParticipante.ApellidoPaterno + " " +
                                 objParticipante.ApellidoMaterno             //Nombre
                            , strURLRegistrarEquipo                         // Url to return to register team
+                           , objEquipo.Nombre
                         );
 
-                        emailClass.SendEmail(body, itemEmail, "Te han enviado una invitación a participar en equipo");
-
-                        
+                        emailClass.SendEmail(body, itemEmail, "Te han enviado una invitación de registro al equipo " + objEquipo.Nombre);
 
                     }
                 }
@@ -227,10 +243,10 @@ namespace WebApplicationTemplate.Web.Pages
                     objParticipante.StatusPaypal = strStatus;
                     objParticipante.TransactionNumber = strToken;
 
-					//Actualiza en la tabla de participante, la fecha de pago de paypal
-					objParticipante.FechaPago = DateTime.Now;
+                    //Actualiza en la tabla de participante, la fecha de pago de paypal
+                    objParticipante.FechaPago = DateTime.Now;
 
-					objParticipanteBLL.UpdateParticipante(objParticipante);
+                    objParticipanteBLL.UpdateParticipante(objParticipante);
                 }
 
                 //Cadena para enviar el correo.
@@ -267,7 +283,7 @@ namespace WebApplicationTemplate.Web.Pages
                 string modalidad = string.Empty;
 
                 modalidad = (ramaOBJ != null) ? ramaOBJ.Nombre : string.Empty;
-                modalidad += ((modalidad == string.Empty || categoria == null) ? string.Empty : ", " ) + ((categoria != null) ? categoria.Nombre : string.Empty);
+                modalidad += ((modalidad == string.Empty || categoria == null) ? string.Empty : ", ") + ((categoria != null) ? categoria.Nombre : string.Empty);
                 modalidad += ((modalidad == string.Empty || ruta == null) ? string.Empty : ", ") + ((ruta != null) ? ruta.Nombre : string.Empty);
 
                 string strTipoRegistro = "Individual";
@@ -598,7 +614,7 @@ namespace WebApplicationTemplate.Web.Pages
             paymentDetails.SellerDetails.PayPalAccountID = GetBuyerEmail(objSessionPayPal.IdCarrera);
 
             ecDetails.PaymentDetails.Add(paymentDetails);
-           
+
             CurrencyCodeType currency = CurrencyCodeType.MXN; // moneda nacional mexicana
 
             paymentDetails.PaymentAction = PaymentActionCodeType.SALE;

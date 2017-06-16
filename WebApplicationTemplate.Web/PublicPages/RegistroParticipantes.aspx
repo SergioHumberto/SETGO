@@ -527,6 +527,7 @@
                         </div>
 
                         <asp:PlaceHolder ID="phTipoRegistro" runat="server" Visible="false">
+                        <br />
                         <div style="width: 60%;" class="row">
                             <div class="col-md-6" id="divTipoEquipo" runat="server">
                                 <div class="input-group">
@@ -535,8 +536,7 @@
                                     </asp:DropDownList>
                                 </div>
                             </div>
-                        </div>           
-
+                        </div>                                    
                         <br />
                         <div style="width: 60%;" class="row">
                             <div class="col-md-6" id="divNombreEquipo" runat="server">
@@ -559,11 +559,11 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <br />
+                        <br />                        
                         <asp:Repeater ID="repeaterEmailParticipanteXEquipo" runat="server">
                             <HeaderTemplate>
-                                <label>Correo de los participantes</label>
+                                <label class="text-primary">Ingresa la dirección de correo electrónico de los participantes para que reciban una invitación por correo electrónico</label>
+                                <br /><br />
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="row">
@@ -595,7 +595,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
 
-
+            <br /><br />
             <asp:PlaceHolder ID="phPoliticas" runat="server">
                 <div class="row">
                     <div class="col-md-12">
