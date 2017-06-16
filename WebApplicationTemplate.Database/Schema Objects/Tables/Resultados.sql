@@ -22,5 +22,12 @@
 	[Rama]			VARCHAR(20) NULL, 
     [Edad] INT NULL, 
     [T_Intermedio] VARCHAR(10) NULL, 
-    [Ruta] VARCHAR(100) NULL
+    [Ruta] VARCHAR(100) NULL, 
+    [T_5K] VARCHAR(10) NULL, 
+    [T_10K] VARCHAR(10) NULL, 
+    [T_15K] VARCHAR(10) NULL, 
+    [T_21K] VARCHAR(10) NULL, 
+    [T_25K] VARCHAR(10) NULL, 
+    [T_30K] VARCHAR(10) NULL, 
+    [T_35K] VARCHAR(10) NULL
 )

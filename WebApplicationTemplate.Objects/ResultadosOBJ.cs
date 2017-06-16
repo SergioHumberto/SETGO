@@ -30,5 +30,12 @@ namespace WebApplicationTemplate.Objects
         public int Edad { get; set; }
         public string T_Intermedio { get; set; }
         public string Ruta { get; set; }
-	}
+        public string T_5K { get; set; }
+        public string T_10K { get; set; }
+        public string T_15K { get; set; }
+        public string T_21K { get; set; }
+        public string T_25K { get; set; }
+        public string T_30K { get; set; }
+        public string T_35K { get; set; }
+    }
 }

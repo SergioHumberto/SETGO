@@ -128,6 +128,13 @@
                                             <th id="thLug_Gral" class="Titulo" runat="server">Lugar general</th>
                                             <th id="thRama" class="Titulo" runat="server">Lugar general</th>
                                             <th id="thRuta" class="Titulo" runat="server">Ruta</th>
+                                            <th id="thT_5K" class="Titulo" runat="server">Tiempo 5K</th>
+                                            <th id="thT_10K" class="Titulo" runat="server">Tiempo 10K</th>
+                                            <th id="thT_15K" class="Titulo" runat="server">Tiempo 15K</th>
+                                            <th id="thT_21K" class="Titulo" runat="server">Tiempo 21K</th>
+                                            <th id="thT_25K" class="Titulo" runat="server">Tiempo 25K</th>
+                                            <th id="thT_30K" class="Titulo" runat="server">Tiempo 30K</th>
+                                            <th id="thT_35K" class="Titulo" runat="server">Tiempo 35K</th>
                                             <th class="Titulo">Imprime</th>
                                         </tr>
                                     </thead>
@@ -155,6 +162,13 @@
                                     <td id="tdLug_Gral" runat="server"><%# Eval("Lug_Gral") %></td>
                                     <td id="tdRama" runat="server"><%# Eval("Rama") %></td>
                                     <td id="tdRuta" runat="server"><%# Eval("Ruta") %></td>
+                                    <td id="tdT_5K" runat="server"><%# Eval("T_5K") %></td>
+                                    <td id="tdT_10K" runat="server"><%# Eval("T_10K") %></td>
+                                    <td id="tdT_15K" runat="server"><%# Eval("T_15K") %></td>
+                                    <td id="tdT_21K" runat="server"><%# Eval("T_21K") %></td>
+                                    <td id="tdT_25K" runat="server"><%# Eval("T_25K") %></td>
+                                    <td id="tdT_30K" runat="server"><%# Eval("T_30K") %></td>
+                                    <td id="tdT_35K" runat="server"><%# Eval("T_35K") %></td>
                                     <td><a target="_blank" href="<%= URLRedirectImprimirCertificado %>?IdCarrera=<%# Eval("IdCarrera") %>&IdResultado=<%# Eval("IdResultado") %>&IdCR=<%# Eval("IdConfiguracionResultados") %>">Imprime </a></td>
                                 </tr>
                             </ItemTemplate>

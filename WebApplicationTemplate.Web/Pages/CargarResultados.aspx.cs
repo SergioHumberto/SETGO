@@ -124,7 +124,7 @@ namespace WebApplicationTemplate.Web.PublicPages
 
             string conStr = "";
             switch (Extension.ToLower())
-            {               
+            {
                 case ".xls": //Excel 97-03
                     conStr = ConfigurationManager.AppSettings["Excel03ConString"];
                     break;
@@ -301,14 +301,35 @@ namespace WebApplicationTemplate.Web.PublicPages
                 // added by Erik C    
                 if (row.Table.Columns.Contains("T_Intermedio"))
                     resultadosOBJ.T_Intermedio = row["T_Intermedio"].ToString();
-                if (row.Table.Columns.Contains("Edad"))
+                if (row.Table.Columns.Contains("Edad"))// added by Erik C
                 {
                     int edad = 0;
                     if (int.TryParse(row["Edad"].ToString(), out edad))
                         resultadosOBJ.Edad = edad;
                 }
-                if (row.Table.Columns.Contains("Ruta"))
+                if (row.Table.Columns.Contains("Ruta"))// added by Erik C
                     resultadosOBJ.Ruta = row["Ruta"].ToString();
+                
+                if (row.Table.Columns.Contains("T_5K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_5K"].ToString();
+
+                if (row.Table.Columns.Contains("T_10K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_10K"].ToString();
+
+                if (row.Table.Columns.Contains("T_15K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_15K"].ToString();
+
+                if (row.Table.Columns.Contains("T_21K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_21K"].ToString();
+
+                if (row.Table.Columns.Contains("T_25K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_25K"].ToString();
+
+                if (row.Table.Columns.Contains("T_30K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_30K"].ToString();
+
+                if (row.Table.Columns.Contains("T_35K"))// added by Erik C
+                    resultadosOBJ.Ruta = row["T_35K"].ToString();
 
                 resultadosBLL.InsertarCarrera(resultadosOBJ);
             }
@@ -601,8 +622,8 @@ namespace WebApplicationTemplate.Web.PublicPages
         }
 
         protected void BindDataToDDlFormatosCert()
-        {            
-            IDictionary<int,string> data = Tools.Enumeration.GetAll<ReporteCertificado.FormatoCertificado>();
+        {
+            IDictionary<int, string> data = Tools.Enumeration.GetAll<ReporteCertificado.FormatoCertificado>();
             data.Add(new KeyValuePair<int, string>(0, "(----)"));
             ddlFormatoCert.DataSource = data;
             ddlFormatoCert.DataTextField = "Value";

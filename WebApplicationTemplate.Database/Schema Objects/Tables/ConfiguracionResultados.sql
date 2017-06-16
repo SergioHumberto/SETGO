@@ -24,5 +24,12 @@
     [T_Intermedio] BIT NOT NULL DEFAULT 1, 
     [Ruta] BIT NOT NULL DEFAULT 1, 
     [IdCertificado] INT NULL, 
-    [ImgCertificado] VARCHAR(MAX) NULL 
+    [ImgCertificado] VARCHAR(MAX) NULL, 
+    [T_5K] BIT NOT NULL DEFAULT 1, 
+    [T_10K] BIT NOT NULL DEFAULT 1, 
+    [T_15K] BIT NOT NULL DEFAULT 1, 
+    [T_21K] BIT NOT NULL DEFAULT 1, 
+    [T_25K] BIT NOT NULL DEFAULT 1, 
+    [T_30K] BIT NOT NULL DEFAULT 1, 
+    [T_35K] BIT NOT NULL DEFAULT 1 
 )

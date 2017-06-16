@@ -34,6 +34,13 @@
       ,Ruta
       ,IdCertificado
       ,ImgCertificado
+      ,T_5K
+      ,T_10K
+      ,T_15K
+      ,T_21K
+      ,T_25K
+      ,T_30K
+      ,T_35K
       )
       VALUES(
       #IdCarrera#
@@ -60,6 +67,13 @@
       ,#Ruta#
       ,#IdCertificado#
       ,#ImgCertificado#
+      ,#T_5K#
+      ,#T_10K#
+      ,#T_15K#
+      ,#T_21K#
+      ,#T_25K#
+      ,#T_30K#
+      ,#T_35K#
       )
 
       <selectKey type="post" resultClass="int" property="IdConfiguracionResultados">
@@ -107,6 +121,13 @@
       ,Ruta = #Ruta#
       ,IdCertificado = #IdCertificado#
       ,ImgCertificado = #ImgCertificado#
+      ,T_5K = #T_5K#
+      ,T_10K = #T_10K#
+      ,T_15K = #T_15K#
+      ,T_21K = #T_21K#
+      ,T_25K = #T_25K#
+      ,T_30K = #T_30K#
+      ,T_35K = #T_35K#
       WHERE IdCarrera = #IdCarrera#
       AND (#IdCategoria# is null or IdCategoria = #IdCategoria#)
     </update>

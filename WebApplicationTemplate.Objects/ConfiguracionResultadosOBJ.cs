@@ -32,5 +32,12 @@ namespace WebApplicationTemplate.Objects
         public bool Ruta { get; set; }
         public int IdCertificado { get; set; }
         public string ImgCertificado { get; set; }
-	}
+        public bool T_5K { get; set; }
+        public bool T_10K { get; set; }
+        public bool T_15K { get; set; }
+        public bool T_21K { get; set; }
+        public bool T_25K { get; set; }
+        public bool T_30K { get; set; }
+        public bool T_35K { get; set; }
+    }
 }
