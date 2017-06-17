@@ -76,7 +76,7 @@
         <asp:UpdatePanel ID="upCusError" runat="server" UpdateMode="Always">
             <ContentTemplate>
                 <div class="has-error">
-                    <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" CssClass="AlertaRequerido"></asp:CustomValidator>
+                    <asp:CustomValidator ID="cusError" runat="server" Display="Dynamic" SetFocusOnError="true" CssClass="AlertaRequerido"></asp:CustomValidator>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -475,9 +475,10 @@
                 </asp:UpdatePanel>
             </asp:PlaceHolder>
 
-            <asp:PlaceHolder ID="phRuta" Visible="false" runat="server">
-                <asp:UpdatePanel ID="upRuta" UpdateMode="Always" runat="server">
-                    <ContentTemplate>
+            
+            <asp:UpdatePanel ID="upRuta" UpdateMode="Always" runat="server">
+                <ContentTemplate>
+                    <asp:PlaceHolder ID="phRuta" Visible="false" runat="server">
                         <div style="width: 60%" class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -489,9 +490,9 @@
                                 </div>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </asp:PlaceHolder>
+                    </asp:PlaceHolder>
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
             <asp:PlaceHolder ID="phClasificacion" Visible="false" runat="server">
 
@@ -512,9 +513,16 @@
 
             <br />
 
+            <asp:UpdatePanel ID="upErrorEquipo" runat="server" UpdateMode="Always">
+                <ContentTemplate>
+                    <div class="has-error">
+                        <asp:CustomValidator ID="cusErrorEquipo" runat="server" Display="Dynamic" SetFocusOnError="true" CssClass="AlertaRequerido"></asp:CustomValidator>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+
                 <asp:UpdatePanel ID="upTipoRegistro" runat="server" UpdateMode="Always">
                     <ContentTemplate>
-
                         <asp:PlaceHolder ID="phTipoRegistro" Visible="false" runat="server">
                             <div style="width: 60%; display: block;" class="row">
                                     <div class="col-md-6">

@@ -1291,6 +1291,14 @@ namespace WebApplicationTemplate.Web.Pages
 
         protected void rblTipoRegistro_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (IsNullOrEmptyEmailParticipante())
+            {
+                rblTipoRegistro.SelectedValue = "I";
+                cusErrorEquipo.ErrorMessage = "Debe indicar un correo antes de seleccionar el equipo";
+                cusErrorEquipo.IsValid = false;
+                return;
+            }
+
             if (rblTipoRegistro.SelectedValue == "I")
             {
                 phTipoEquipo.Visible = false;
@@ -1310,6 +1318,16 @@ namespace WebApplicationTemplate.Web.Pages
 
                 lblTotal.InnerText = "" + GetPrecioEquipoXCategoria();
             }
+        }
+
+        private bool IsNullOrEmptyEmailParticipante()
+        {
+            if (string.IsNullOrEmpty(txtEmail.Text.Trim()))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         protected void txtNombreEquipo_TextChanged(object sender, EventArgs e)

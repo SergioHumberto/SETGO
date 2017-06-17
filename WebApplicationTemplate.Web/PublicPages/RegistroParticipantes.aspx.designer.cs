@@ -1093,15 +1093,6 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCategoria;
         
         /// <summary>
-        /// Control phRuta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phRuta;
-        
-        /// <summary>
         /// Control upRuta.
         /// </summary>
         /// <remarks>
@@ -1109,6 +1100,15 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upRuta;
+        
+        /// <summary>
+        /// Control phRuta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phRuta;
         
         /// <summary>
         /// Control lblRuta.
@@ -1154,6 +1154,24 @@ namespace WebApplicationTemplate.Web.Pages {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptClasificacion;
+        
+        /// <summary>
+        /// Control upErrorEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upErrorEquipo;
+        
+        /// <summary>
+        /// Control cusErrorEquipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cusErrorEquipo;
         
         /// <summary>
         /// Control upTipoRegistro.
