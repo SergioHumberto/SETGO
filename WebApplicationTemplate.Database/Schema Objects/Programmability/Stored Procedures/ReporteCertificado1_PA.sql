@@ -6,7 +6,7 @@
 AS
 BEGIN
 	SELECT 
-	R.Paterno + ' ' + R.Materno + ' ' + R.Nombres AS [NombreCompleto]
+	isnull(R.Paterno,'') + ' ' + isnull(R.Materno,'') + ' ' + isnull(R.Nombres,'') AS [NombreCompleto]
 	, R.Lug_Gral AS [PosicionGeneral]
 	, R.Sexo AS [Sexo]
 	, R.T_Chip AS [TiempoChip]
@@ -15,6 +15,7 @@ BEGIN
 	, R.Edad AS [Edad]
 	, R.T_Intermedio AS [TiempoIntermedio]
 	, R.Ruta AS [Edicion]	
+	, R.Equipo AS [Equipo]
 	FROM Resultados R
 	INNER JOIN ConfiguracionResultados CR ON CR.IdConfiguracionResultados = R.IdConfiguracionResultados
 	WHERE CR.IdCarrera = @IdCarrera

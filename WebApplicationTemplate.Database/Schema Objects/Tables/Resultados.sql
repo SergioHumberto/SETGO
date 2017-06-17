@@ -6,7 +6,7 @@
 	[Numero]		INT NULL,
 	[Paterno]		VARCHAR(50) NULL,
 	[Materno]		VARCHAR(50) NULL,
-	[Nombres]		VARCHAR(50) NULL,
+	[Nombres]		VARCHAR(MAX) NULL,
 	[Folio]			INT NULL,
 	[Sexo]			VARCHAR(10) NULL,
 	[Categoria]		VARCHAR(50) NULL,

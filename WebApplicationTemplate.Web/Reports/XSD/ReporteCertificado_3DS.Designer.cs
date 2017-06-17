@@ -295,6 +295,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             private global::System.Data.DataColumn columnPosicionCategoria;
             
+            private global::System.Data.DataColumn columnEquipo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public DataTable1DataTable() {
@@ -394,6 +396,14 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EquipoColumn {
+                get {
+                    return this.columnEquipo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +439,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string Edad, string PosicionGeneral, string Sexo, string TiempoIntermedio, string TiempoChip, string NombreCompleto, string Edicion, string PosicionCategoria) {
+            public DataTable1Row AddDataTable1Row(string Edad, string PosicionGeneral, string Sexo, string TiempoIntermedio, string TiempoChip, string NombreCompleto, string Edicion, string PosicionCategoria, string Equipo) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Edad,
@@ -439,7 +449,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                         TiempoChip,
                         NombreCompleto,
                         Edicion,
-                        PosicionCategoria};
+                        PosicionCategoria,
+                        Equipo};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -470,6 +481,7 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 this.columnNombreCompleto = base.Columns["NombreCompleto"];
                 this.columnEdicion = base.Columns["Edicion"];
                 this.columnPosicionCategoria = base.Columns["PosicionCategoria"];
+                this.columnEquipo = base.Columns["Equipo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -491,6 +503,8 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
                 base.Columns.Add(this.columnEdicion);
                 this.columnPosicionCategoria = new global::System.Data.DataColumn("PosicionCategoria", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPosicionCategoria);
+                this.columnEquipo = new global::System.Data.DataColumn("Equipo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEquipo);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -761,6 +775,22 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Equipo {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable1.EquipoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'Equipo\' de la tabla \'DataTable1\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable1.EquipoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEdadNull() {
                 return this.IsNull(this.tableDataTable1.EdadColumn);
             }
@@ -853,6 +883,18 @@ namespace WebApplicationTemplate.Web.Reports.XSD {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPosicionCategoriaNull() {
                 this[this.tableDataTable1.PosicionCategoriaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsEquipoNull() {
+                return this.IsNull(this.tableDataTable1.EquipoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetEquipoNull() {
+                this[this.tableDataTable1.EquipoColumn] = global::System.Convert.DBNull;
             }
         }
         

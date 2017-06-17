@@ -41,7 +41,8 @@ namespace WebApplicationTemplate.Web.Reports.Classes
             Formato1 = 1,
             Formato2 = 2,
             Formato3 = 3,
-            Formato4 = 4
+            Formato4 = 4,
+            Formato5 = 5
         }
 
         Dictionary<FormatoCertificado, string> RutasRdlc = new Dictionary<FormatoCertificado, string>
@@ -50,6 +51,7 @@ namespace WebApplicationTemplate.Web.Reports.Classes
             {FormatoCertificado.Formato2, "~/Reports/ReporteCertificado_2.rdlc"},
             {FormatoCertificado.Formato3, "~/Reports/ReporteCertificado_3.rdlc"},
             {FormatoCertificado.Formato4, "~/Reports/ReporteCertificado_4.rdlc"},
+            {FormatoCertificado.Formato5, "~/Reports/ReporteCertificado_5.rdlc"},
         };
         /**************************************************************************************/
          
