@@ -387,6 +387,23 @@ namespace WebApplicationTemplate.Web.Pages
                 LoadClasificaciones(IdCarrera);
 
                 lblPoliticas.Text = objCarrera.DescripcionPoliticas;
+
+                SetVisibilityTipoRegistro();    
+            }
+        }
+
+        private void SetVisibilityTipoRegistro()
+        {
+            // En caso de que la carrera tenga un tipo de equipo entonces se debe habilitar la opcion
+            // de  que se registre por equipo, de otra manera entonces permanecerá invisible.
+
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+            IList<TipoEquipoOBJ> lstTipoEquipo = objTipoEquipoBLL.SelectTipoEquipo(new TipoEquipoOBJ() { IdCarrera = IdCarreraProperty });
+
+            if (lstTipoEquipo.Count > 0)
+            {
+                phTipoRegistro.Visible = true;
             }
         }
 
@@ -1079,7 +1096,7 @@ namespace WebApplicationTemplate.Web.Pages
             int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
 
             rblTipoRegistro.SelectedValue = "" +  (char)ETipoRegistro.Individual;
-            phTipoRegistro.Visible = false;
+            phTipoEquipo.Visible = false;
 
             if (IdCategoria > 0)
             {
@@ -1276,7 +1293,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             if (rblTipoRegistro.SelectedValue == "I")
             {
-                phTipoRegistro.Visible = false;
+                phTipoEquipo.Visible = false;
                 repeaterEmailParticipanteXEquipo.DataSource = null;
                 repeaterEmailParticipanteXEquipo.DataBind();
 
@@ -1285,7 +1302,7 @@ namespace WebApplicationTemplate.Web.Pages
             }
             else if (rblTipoRegistro.SelectedValue == "E")
             {
-                phTipoRegistro.Visible = true;
+                phTipoEquipo.Visible = true;
                 if (IdCategoriaProperty > 0)
                 {
                     LoadTipoEquipoDdl(IdCategoriaProperty);

@@ -514,19 +514,22 @@
 
                 <asp:UpdatePanel ID="upTipoRegistro" runat="server" UpdateMode="Always">
                     <ContentTemplate>
-                        <div style="width: 60%; display: block;" class="row">
-                                <div class="col-md-6">
-                                <div class="input-group">
-                                    <label>Tipo de registro</label>
-                                    <asp:RadioButtonList ID="rblTipoRegistro" AutoPostBack="true" Enabled="false" CssClass="LetraEtiqueta" OnSelectedIndexChanged="rblTipoRegistro_SelectedIndexChanged" runat="server">
-                                        <asp:ListItem Text="Individual" Value="I" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="Equipo" Value="E"></asp:ListItem>
-                                    </asp:RadioButtonList>
+
+                        <asp:PlaceHolder ID="phTipoRegistro" Visible="false" runat="server">
+                            <div style="width: 60%; display: block;" class="row">
+                                    <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label>Tipo de registro</label>
+                                        <asp:RadioButtonList ID="rblTipoRegistro" AutoPostBack="true" Enabled="false" CssClass="LetraEtiqueta" OnSelectedIndexChanged="rblTipoRegistro_SelectedIndexChanged" runat="server">
+                                            <asp:ListItem Text="Individual" Value="I" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text="Equipo" Value="E"></asp:ListItem>
+                                        </asp:RadioButtonList>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </asp:PlaceHolder>
 
-                        <asp:PlaceHolder ID="phTipoRegistro" runat="server" Visible="false">
+                        <asp:PlaceHolder ID="phTipoEquipo" runat="server" Visible="false">
                         <br />
                         <div style="width: 60%;" class="row">
                             <div class="col-md-6" id="divTipoEquipo" runat="server">
@@ -545,7 +548,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <label class="">Nombre equipo</label>
+                                                <label class="LetraEtiqueta">Nombre equipo</label>
                                                 <asp:TextBox ID="txtNombreEquipo" MaxLength="255" CssClass="form-control" 
                                                     runat="server" AutoPostBack="true" OnTextChanged="txtNombreEquipo_TextChanged" />
                                             </td>

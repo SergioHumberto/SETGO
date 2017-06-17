@@ -1165,6 +1165,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.UpdatePanel upTipoRegistro;
         
         /// <summary>
+        /// Control phTipoRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phTipoRegistro;
+        
+        /// <summary>
         /// Control rblTipoRegistro.
         /// </summary>
         /// <remarks>
@@ -1174,13 +1183,13 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.WebControls.RadioButtonList rblTipoRegistro;
         
         /// <summary>
-        /// Control phTipoRegistro.
+        /// Control phTipoEquipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phTipoRegistro;
+        protected global::System.Web.UI.WebControls.PlaceHolder phTipoEquipo;
         
         /// <summary>
         /// Control divTipoEquipo.
