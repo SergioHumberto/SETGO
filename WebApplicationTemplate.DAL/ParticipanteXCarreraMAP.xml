@@ -38,10 +38,10 @@
       </selectKey>
     </insert>
 
-      <select id="SelectParticipanteXCarrera" resultClass="ParticipanteXCarreraOBJ">
+      <select id="SelectParticipanteXCarreraObject" resultClass="ParticipanteXCarreraOBJ">
           SELECT 
           PxC.* 
-          FROM ParticipanteXCarrera PxC 
+          FROM ParticipanteXCarrera PxC
           WHERE PxC.IdParticipanteXCarrera = #value#
       </select>
 
@@ -60,7 +60,7 @@
 			WHERE IdParticipanteXCarrera = #IdParticipanteXCarrera#
 		</update>
 
-		<select id="SelectParticipante" parameterClass="ParticipanteXCarreraOBJ" resultClass="ParticipanteXCarreraOBJ">
+		<!--<select id="SelectParticipante" parameterClass="ParticipanteXCarreraOBJ" resultClass="ParticipanteXCarreraOBJ">
 			<![CDATA[
           
               SELECT 
@@ -70,8 +70,24 @@
               AND (#IdParticipante# <= 0 OR PXC.IdParticipante = #IdParticipante#)
               
           ]]>
-		</select>
+		</select>-->
 		
+
+      <select id="SelectParticipanteXCarrera" parameterClass="ParticipanteXCarreraOBJ" resultClass="ParticipanteXCarreraOBJ" >
+          <![CDATA[
+          
+          SELECT PxC.* 
+          FROM ParticipanteXCarrera PxC
+          INNER JOIN Carrera C ON C.IdCarrera = PxC.IdCarrera
+          INNER JOIN Participante P ON P.IdParticipante = PxC.IdParticipante
+          WHERE (#IdCarrera# <= 0 OR C.IdCarrera = #IdCarrera#)
+          AND (#Email# IS NULL OR P.Email = #Email#)
+          AND (#IdEquipo# <= 0 OR PxC.IdEquipo = #IdEquipo#)
+          
+          ]]>
+          
+      </select>
+    
   </statements>
 
 </sqlMap>

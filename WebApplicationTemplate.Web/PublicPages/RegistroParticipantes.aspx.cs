@@ -505,7 +505,7 @@ namespace WebApplicationTemplate.Web.Pages
                 else
                 {
                     ParticipanteXCarreraBLL objpxcbll = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
-                    ParticipanteXCarreraOBJ objpxc = objpxcbll.SelectParticipanteXCarrera(IdParticipanteXCarreraProperty);
+                    ParticipanteXCarreraOBJ objpxc = objpxcbll.SelectParticipanteXCarreraObject(IdParticipanteXCarreraProperty);
 
                     if (objpxc != null)
                     {
@@ -1364,6 +1364,51 @@ namespace WebApplicationTemplate.Web.Pages
                 return true;
 
             return false;
+        }
+
+        protected void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+            string strEmail = txtEmail.Text.Trim();
+
+            if (!string.IsNullOrEmpty(strEmail))
+            {
+                LoadInformationEquipoByEmail(strEmail);
+            }
+        }
+
+        private void LoadInformationEquipoByEmail(string emailParticipante)
+        {
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            EquipoBLL objEquipoBLL = new EquipoBLL(session);
+
+            IList<EquipoOBJ> lstEquipos = objEquipoBLL.SelectEquipos(
+            new EquipoOBJ() { IdCarrera = IdCarreraProperty, EmailsParticipantes = emailParticipante });
+
+            if (lstEquipos.Count == 1)
+            {
+                EquipoOBJ equipoOBJ = lstEquipos[0];
+
+                // Se encontro el equipo al que pertenece el email.
+                ParticipanteXCarreraBLL objParticipanteXCarreraBLL = new ParticipanteXCarreraBLL(session);
+                IList<ParticipanteXCarreraOBJ> lstParticipanteXCarrera = objParticipanteXCarreraBLL.SelectParticipanteXCarrera(
+                    new ParticipanteXCarreraOBJ() { Email = emailParticipante, IdCarrera = IdCarreraProperty, IdEquipo = equipoOBJ.IdEquipo });
+
+                if (lstParticipanteXCarrera.Count == 0)
+                {
+                    // El participante aun no se encuentra registrado
+                    TipoEquipoBLL objTipoEquipoBLL = new TipoEquipoBLL(session);
+                    TipoEquipoOBJ objTipoEquipo = objTipoEquipoBLL.SelectTipoEquipoObject(equipoOBJ.IdTipoEquipo.Value);
+
+                    phTipoEquipo.Visible = true;
+                    divTipoEquipo.Visible = false;
+                    txtNombreEquipo.Text = equipoOBJ.Nombre;
+                    txtNombreEquipo.Enabled = false;
+
+                    BloqueaCategoriaRbl(objTipoEquipo.IdCategoria);
+                    BloqueaTipoRegistroRbl(ETipoRegistro.Equipo);
+                    CargarRutasByIdCategoria(objTipoEquipo.IdCategoria);
+                }
+            }
         }
 
     }

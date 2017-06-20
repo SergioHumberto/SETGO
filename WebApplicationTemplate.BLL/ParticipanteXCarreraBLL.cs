@@ -17,9 +17,14 @@ namespace WebApplicationTemplate.BLL
             ParticipanteXCarreraDAL.InsertParticipanteXCarrera(p_ParticipanteXCarrera);
         }
 
-        public ParticipanteXCarreraOBJ SelectParticipanteXCarrera(int IdParticipanteXCarrera)
+        public ParticipanteXCarreraOBJ SelectParticipanteXCarreraObject(int IdParticipanteXCarrera)
         {
-            return ParticipanteXCarreraDAL.SelectParticipanteXCarrera(IdParticipanteXCarrera);
+            return ParticipanteXCarreraDAL.SelectParticipanteXCarreraObject(IdParticipanteXCarrera);
+        }
+
+        public IList<ParticipanteXCarreraOBJ> SelectParticipanteXCarrera(ParticipanteXCarreraOBJ participanteXCarrera)
+        {
+            return ParticipanteXCarreraDAL.SelectParticipanteXCarrera(participanteXCarrera);
         }
 
 		public ParticipanteXCarreraOBJ SelectParticipanteXCarreraByIdParticipante(int IdParticipante)

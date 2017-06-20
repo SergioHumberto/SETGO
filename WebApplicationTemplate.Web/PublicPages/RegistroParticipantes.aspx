@@ -227,7 +227,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label id="lblEmail" runat="server">Email *</label>
-                            <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" AutoPostBack="true" OnTextChanged="txtEmail_TextChanged" runat="server"></asp:TextBox>
 
                             <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true"
                                 CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>

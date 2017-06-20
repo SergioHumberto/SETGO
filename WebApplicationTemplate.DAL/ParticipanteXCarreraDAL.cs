@@ -15,9 +15,9 @@ namespace WebApplicationTemplate.DAL
             Mapper.Instance().Insert("InsertParticipanteXCarrera", p_ParticipanteXCarrera);
         }
 
-        public static ParticipanteXCarreraOBJ SelectParticipanteXCarrera(int IdParticipanteXCarrera)
+        public static ParticipanteXCarreraOBJ SelectParticipanteXCarreraObject(int IdParticipanteXCarrera)
         {
-            ParticipanteXCarreraOBJ objParticipanteXCarreraOBJ = Mapper.Instance().QueryForObject<ParticipanteXCarreraOBJ>("SelectParticipanteXCarrera", IdParticipanteXCarrera);
+            ParticipanteXCarreraOBJ objParticipanteXCarreraOBJ = Mapper.Instance().QueryForObject<ParticipanteXCarreraOBJ>("SelectParticipanteXCarreraObject", IdParticipanteXCarrera);
             return objParticipanteXCarreraOBJ;
         }
 		
@@ -37,5 +37,12 @@ namespace WebApplicationTemplate.DAL
 			IList<ParticipanteXCarreraOBJ> lstParticipantes = DAL.QueryForList<ParticipanteXCarreraOBJ>("SelectParticipante", p_ParticipanteOBJ);
 			return lstParticipantes;
 		}
-	}
+
+        public static IList<ParticipanteXCarreraOBJ> SelectParticipanteXCarrera(ParticipanteXCarreraOBJ participanteXCarrera)
+        {
+            IList<ParticipanteXCarreraOBJ> lstParticipanteXCarrera = DAL.QueryForList<ParticipanteXCarreraOBJ>("SelectParticipanteXCarrera", participanteXCarrera);
+            return lstParticipanteXCarrera;
+        }
+
+    }
 }

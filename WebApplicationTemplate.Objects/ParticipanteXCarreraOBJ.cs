@@ -19,5 +19,6 @@ namespace WebApplicationTemplate.Objects
 		public int Folio { get; set; }
 		public DateTime? FechaPago { get; set; }
 		public string FolioOffline { get; set; }
-	}
+        public string Email { get; set; }
+    }
 }
