@@ -16,6 +16,9 @@
         , IdRama
         , IdRuta
         , IdEquipo
+				, Folio
+				, FechaPago
+				, FolioOffline
         )
         VALUES
         (
@@ -25,6 +28,9 @@
         , #IdRama#
         , #IdRuta#
         , #IdEquipo#
+				, #Folio#
+				, #FechaPago#
+				, #FolioOffline#
         )
 
         <selectKey type="post" resultClass="int" property="IdParticipanteXCarrera">
@@ -38,7 +44,34 @@
           FROM ParticipanteXCarrera PxC 
           WHERE PxC.IdParticipanteXCarrera = #value#
       </select>
-    
+
+		<select id="SelectParticipanteXCarreraByIdParticipante" resultClass="ParticipanteXCarreraOBJ">
+			SELECT
+			PxC.*
+			FROM ParticipanteXCarrera PxC
+			WHERE PxC.IdParticipante = #value#
+		</select>
+
+		<update id="UpdateInfoPagoParticipante" parameterClass="ParticipanteXCarreraOBJ">
+			UPDATE ParticipanteXCarrera
+			SET TransactionNumber = #TransactionNumber#
+			, StatusPaypal = #StatusPaypal#
+			, FechaPago = #FechaPago#
+			WHERE IdParticipanteXCarrera = #IdParticipanteXCarrera#
+		</update>
+
+		<select id="SelectParticipante" parameterClass="ParticipanteXCarreraOBJ" resultClass="ParticipanteXCarreraOBJ">
+			<![CDATA[
+          
+              SELECT 
+              PXC.* 
+              FROM ParticipanteXCarrera PXC
+              WHERE (#IdEquipo# <= 0 OR PXC.IdEquipo = #IdEquipo#)
+              AND (#IdParticipante# <= 0 OR PXC.IdParticipante = #IdParticipante#)
+              
+          ]]>
+		</select>
+		
   </statements>
 
 </sqlMap>

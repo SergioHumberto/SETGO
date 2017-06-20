@@ -14,10 +14,10 @@
 	[TelefonoEmergencia] VARCHAR(12) NULL,
 	[IdEquipo] INT NULL  FOREIGN KEY REFERENCES [Equipo](IdEquipo),
 	[Socio] VARCHAR(100) NULL,
-	[TransactionNumber] VARCHAR(MAX) NULL,
-	[StatusPaypal] VARCHAR(MAX),
+	--[TransactionNumber] VARCHAR(MAX) NULL,
+	--[StatusPaypal] VARCHAR(MAX),
 	[Club] VARCHAR(50) NULL,
-	[Folio] INT NOT NULL,
+	--[Folio] INT NOT NULL,
 	[Generic01] VARCHAR(255) NULL,
 	[Generic02] VARCHAR(255) NULL,
 	[Generic03] VARCHAR(255) NULL,
@@ -28,7 +28,7 @@
 	[Generic08] VARCHAR(255) NULL,
 	[Generic09] VARCHAR(255) NULL,
 	[Generic10] VARCHAR(255) NULL,
-	[FechaRegistro] DATETIME NOT NULL,
-	[FechaPago] DATETIME NULL,
-	[FolioOffline] VARCHAR(255) NULL
+	[FechaRegistro] DATETIME NOT NULL
+	--[FechaPago] DATETIME NULL,
+	--[FolioOffline] VARCHAR(255) NULL
 )

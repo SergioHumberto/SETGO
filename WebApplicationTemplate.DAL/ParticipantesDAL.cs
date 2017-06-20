@@ -21,16 +21,5 @@ namespace WebApplicationTemplate.DAL
             ParticipantesOBJ objParticipante = DAL.QueryForObject<ParticipantesOBJ>("SelectParticipanteObject", IdParticipante);
             return objParticipante;
         }
-
-        public static void UpdateParticipante(ParticipantesOBJ objParticipante)
-        {
-            DAL.Update("UpdateParticipante", objParticipante);
-        }
-
-        public static IList<ParticipantesOBJ> SelectParticipante(ParticipantesOBJ p_ParticipanteOBJ)
-        {
-            IList<ParticipantesOBJ> lstParticipantes = DAL.QueryForList<ParticipantesOBJ>("SelectParticipante", p_ParticipanteOBJ);
-            return lstParticipantes;
-        }
     }
 }

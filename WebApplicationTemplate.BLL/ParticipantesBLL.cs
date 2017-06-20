@@ -28,15 +28,5 @@ namespace WebApplicationTemplate.BLL
         {
             return ParticipantesDAL.SelectParticipanteObject(IdParticipante);
         }
-
-        public void UpdateParticipante(ParticipantesOBJ objParticipante)
-        {
-            ParticipantesDAL.UpdateParticipante(objParticipante);
-        }
-
-        public IList<ParticipantesOBJ> SelectParticipante(ParticipantesOBJ p_ParticipanteOBJ)
-        {
-            return ParticipantesDAL.SelectParticipante(p_ParticipanteOBJ);
-        }
     }
 }

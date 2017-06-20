@@ -21,5 +21,20 @@ namespace WebApplicationTemplate.BLL
         {
             return ParticipanteXCarreraDAL.SelectParticipanteXCarrera(IdParticipanteXCarrera);
         }
-    }
+
+		public ParticipanteXCarreraOBJ SelectParticipanteXCarreraByIdParticipante(int IdParticipante)
+		{
+			return ParticipanteXCarreraDAL.SelectParticipanteXCarreraByIdParticipante(IdParticipante);
+		}
+
+		public void UpdateInfoPagoParticipante(ParticipanteXCarreraOBJ PxC)
+		{
+			ParticipanteXCarreraDAL.UpdateInfoPagoParticipante(PxC);
+		}
+
+		public IList<ParticipanteXCarreraOBJ> SelectParticipante(ParticipanteXCarreraOBJ p_ParticipanteOBJ)
+		{
+			return ParticipanteXCarreraDAL.SelectParticipante(p_ParticipanteOBJ);
+		}
+	}
 }

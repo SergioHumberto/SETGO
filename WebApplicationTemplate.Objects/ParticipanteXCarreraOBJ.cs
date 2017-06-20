@@ -14,5 +14,10 @@ namespace WebApplicationTemplate.Objects
         public int? IdCategoria { get; set; }
         public int? IdRuta { get; set; }
         public int? IdEquipo { get; set; }
-    }
+		public string TransactionNumber { get; set; }
+		public string StatusPaypal { get; set; }
+		public int Folio { get; set; }
+		public DateTime? FechaPago { get; set; }
+		public string FolioOffline { get; set; }
+	}
 }

@@ -16,7 +16,7 @@
     <Name>WebApplicationTemplate.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <ShowWizard>True</ShowWizard>
     <OutputType>Database</OutputType>
@@ -262,6 +262,7 @@
     <None Include="Scripts\Pre-Deployment\Resultados.0.sql" />
     <None Include="Scripts\Pre-Deployment\ConfiguracionResultados.0.sql" />
     <None Include="Scripts\Pre-Deployment\User.1.sql" />
+    <None Include="Scripts\Pre-Deployment\InformacionPago.0.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />

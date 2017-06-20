@@ -23,7 +23,7 @@
       , IdEquipo      
       , Socio
       , Club
-			, Folio
+			<!--, Folio-->
             , Generic01
             , Generic02
             , Generic03
@@ -35,8 +35,8 @@
             , Generic09
             , Generic10
 			, FechaRegistro
-			, FechaPago
-			, FolioOffline
+			<!--, FechaPago-->
+			<!--, FolioOffline-->
       )
       VALUES
       (
@@ -53,7 +53,7 @@
       , #IdEquipo#      
       , #Socio#
       , #Club#
-			, #Folio#
+			<!--, #Folio#-->
             , #Generic01#
             , #Generic02#
             , #Generic03#
@@ -65,8 +65,8 @@
             , #Generic09#
             , #Generic10#
 			, #FechaRegistro#
-			, #FechaPago#
-			, #FolioOffline#
+			<!--, #FechaPago#-->
+			<!--, #FolioOffline#-->
       )
 
       <selectKey type="post" resultClass="int" property="IdParticipante">
@@ -76,26 +76,6 @@
       
       <select id="SelectParticipanteObject" resultClass="ParticipantesOBJ"  parameterClass="int">
           SELECT P.* FROM Participante P WHERE P.IdParticipante = #value#
-      </select>
-
-      <update id="UpdateParticipante" parameterClass="ParticipantesOBJ"  >
-          UPDATE Participante 
-          SET TransactionNumber = #TransactionNumber#
-          , StatusPaypal = #StatusPaypal#
-					, FechaPago = #FechaPago#
-          WHERE IdParticipante = #IdParticipante#
-      </update>
-
-      <select id="SelectParticipante" parameterClass="ParticipantesOBJ" resultClass="ParticipantesOBJ">
-          <![CDATA[
-          
-              SELECT 
-              P.* 
-              FROM Participante P
-              WHERE (#IdEquipo# <= 0 OR P.IdEquipo = #IdEquipo#)
-              AND (#IdParticipante# <= 0 OR P.IdParticipante = #IdParticipante#)
-              
-          ]]>
       </select>
       
   </statements>

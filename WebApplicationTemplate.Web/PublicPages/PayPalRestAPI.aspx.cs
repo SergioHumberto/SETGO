@@ -233,20 +233,23 @@ namespace WebApplicationTemplate.Web.Pages
                 ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
                 ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(IdParticipante);
 
-                CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+				ParticipanteXCarreraBLL participanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+				ParticipanteXCarreraOBJ participanteXCarreraOBJ = participanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(IdParticipante);
+
+				CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
                 CarreraOBJ carreraOBJ = new CarreraOBJ();
 
                 carreraOBJ = carreraBLL.SelectCarreraObject(IdCarrera);
 
-                if (objParticipante != null)
+                if (participanteXCarreraOBJ != null)
                 {
-                    objParticipante.StatusPaypal = strStatus;
-                    objParticipante.TransactionNumber = strToken;
+					participanteXCarreraOBJ.StatusPaypal = strStatus;
+					participanteXCarreraOBJ.TransactionNumber = strToken;
 
-                    //Actualiza en la tabla de participante, la fecha de pago de paypal
-                    objParticipante.FechaPago = DateTime.Now;
+					//Actualiza en la tabla de participante, la fecha de pago de paypal
+					participanteXCarreraOBJ.FechaPago = DateTime.Now;
 
-                    objParticipanteBLL.UpdateParticipante(objParticipante);
+                    participanteXCarreraBLL.UpdateInfoPagoParticipante(participanteXCarreraOBJ);
                 }
 
                 //Cadena para enviar el correo.
@@ -294,7 +297,7 @@ namespace WebApplicationTemplate.Web.Pages
                 }
 
                 body = string.Format(body
-                    , objParticipante.Folio                         //Folio
+                    , participanteXCarreraOBJ.Folio                         //Folio
                     , modalidad                                //Modalidad
                     , objParticipante.Nombre + " " +
                         objParticipante.ApellidoPaterno + " " +
@@ -307,7 +310,7 @@ namespace WebApplicationTemplate.Web.Pages
                     , "Acepto"                                      //Terminos
                     , precio.ToString()                             //Total
                     , status                                        //Status
-                    , objParticipante.TransactionNumber             //PaymentID
+                    , participanteXCarreraOBJ.TransactionNumber             //PaymentID
                     , DateTime.Now.ToString()                       //Payment Date
                     , strTipoRegistro                               // tipo de registro
                     );
@@ -315,7 +318,7 @@ namespace WebApplicationTemplate.Web.Pages
                 tablaNotificacion.InnerHtml = body;
 
                 Email email = new Email();
-                email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC, objParticipante.Folio);
+                email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC, participanteXCarreraOBJ.Folio);
             }
 
             Session.Remove("paymentId");
@@ -351,17 +354,19 @@ namespace WebApplicationTemplate.Web.Pages
                     ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
                     ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(idParticipante);
 
-                    CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+					ParticipanteXCarreraBLL participanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+					ParticipanteXCarreraOBJ participanteXCarreraOBJ = participanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(idParticipante);
+
+					CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
                     CarreraOBJ carreraOBJ = new CarreraOBJ();
 
                     carreraOBJ = carreraBLL.SelectCarreraObject(idCarrera);
 
-                    if (objParticipante != null)
+                    if (participanteXCarreraOBJ != null)
                     {
-                        objParticipante.StatusPaypal = status;
-                        objParticipante.TransactionNumber = numeroTransaccion;
-
-                        objParticipanteBLL.UpdateParticipante(objParticipante);
+						participanteXCarreraOBJ.StatusPaypal = status;
+						participanteXCarreraOBJ.TransactionNumber = numeroTransaccion;
+						participanteXCarreraBLL.UpdateInfoPagoParticipante(participanteXCarreraOBJ);
                     }
 
                     //Cadena para enviar el correo.
@@ -400,14 +405,14 @@ namespace WebApplicationTemplate.Web.Pages
                         , "Acepto"                                      //Terminos
                         , precio.ToString()                             //Total
                         , status                                        //Status
-                        , objParticipante.TransactionNumber             //PaymentID
+                        , participanteXCarreraOBJ.TransactionNumber             //PaymentID
                         , DateTime.Now.ToString()                       //Payment Date
                         );
 
                     tablaNotificacion.InnerHtml = body;
 
                     Email email = new Email();
-                    email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC, objParticipante.Folio);
+                    email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC, participanteXCarreraOBJ.Folio);
                 }
 
                 Session.Remove("paymentId");

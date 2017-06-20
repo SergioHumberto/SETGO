@@ -20,8 +20,8 @@ namespace WebApplicationTemplate.Objects
         public string TelefonoEmergencia { get; set; }
         public int? IdEquipo { get; set; }
         public string Socio { get; set; }
-        public string TransactionNumber { get; set; }
-        public string StatusPaypal { get; set; }
+        //public string TransactionNumber { get; set; }
+        //public string StatusPaypal { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Club { get; set; }
 
@@ -29,7 +29,7 @@ namespace WebApplicationTemplate.Objects
         public ParticipanteXCarreraOBJ ParticipanteXCarrera { get; set; }
         public int IdTipoEquipo { get; set; }
 
-		public int Folio { get; set; }
+		//public int Folio { get; set; }
         public string Generic01 { get; set; }
         public string Generic02 { get; set; }
         public string Generic03 { get; set; }
@@ -42,8 +42,8 @@ namespace WebApplicationTemplate.Objects
         public string Generic10 { get; set; }
 
 		public DateTime FechaRegistro { get; set; }
-		public DateTime? FechaPago { get; set; }
+		//public DateTime? FechaPago { get; set; }
 
-		public string FolioOffline { get; set; }
+		//public string FolioOffline { get; set; }
 	}
 }

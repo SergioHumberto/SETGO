@@ -727,7 +727,19 @@ namespace WebApplicationTemplate.Web.Pages
                 objEquipoBLL.UpdateEquipo(oldEquipo);
             }
 
-            objParticipanteXCarreraOBJ.IdEquipo = IdEquipo;
+
+			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+			CarreraOBJ carreraOBJ = new CarreraOBJ();
+			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+
+			if (carreraOBJ != null)
+			{
+				objParticipanteXCarreraOBJ.Folio = carreraOBJ.SiguienteFolio;
+				carreraOBJ.SiguienteFolio++;
+				carreraBLL.UpdateSiguienteFolio(carreraOBJ);
+			}
+
+			objParticipanteXCarreraOBJ.IdEquipo = IdEquipo;
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
 
             IdParticipanteXCarreraProperty = objParticipanteXCarreraOBJ.IdParticipanteXCarrera;
@@ -845,17 +857,17 @@ namespace WebApplicationTemplate.Web.Pages
 
 			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
 
-			if(carreraOBJ != null)
-			{
-				objParticipante.Folio = carreraOBJ.SiguienteFolio;
+			//if(carreraOBJ != null)
+			//{
+			//	objParticipanteXCarreraOBJ.Folio = carreraOBJ.SiguienteFolio;
 
-				carreraOBJ.SiguienteFolio++;
+			//	carreraOBJ.SiguienteFolio++;
 
-				carreraBLL.UpdateSiguienteFolio(carreraOBJ);
-			}
+			//	carreraBLL.UpdateSiguienteFolio(carreraOBJ);
+			//}
 
-            // Fill 10 generic fields
-            objParticipante.Generic01 = !string.IsNullOrEmpty(txtGeneric01.Text.Trim()) ? txtGeneric01.Text.Trim() : null;
+			// Fill 10 generic fields
+			objParticipante.Generic01 = !string.IsNullOrEmpty(txtGeneric01.Text.Trim()) ? txtGeneric01.Text.Trim() : null;
             objParticipante.Generic02 = !string.IsNullOrEmpty(txtGeneric02.Text.Trim()) ? txtGeneric02.Text.Trim() : null;
             objParticipante.Generic03 = !string.IsNullOrEmpty(txtGeneric03.Text.Trim()) ? txtGeneric03.Text.Trim() : null;
             objParticipante.Generic04 = !string.IsNullOrEmpty(txtGeneric04.Text.Trim()) ? txtGeneric04.Text.Trim() : null;
@@ -870,7 +882,7 @@ namespace WebApplicationTemplate.Web.Pages
 
 			if (string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
 			{
-				objParticipante.FolioOffline = txtFolioOffline.Text;
+				objParticipanteXCarreraOBJ.FolioOffline = txtFolioOffline.Text;
 			}
 
             return objParticipante;
@@ -1001,12 +1013,12 @@ namespace WebApplicationTemplate.Web.Pages
                 int IdParticipante;
                 if (int.TryParse(strIdParticipante, out IdParticipante))
                 {
-                    ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
-                    ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(IdParticipante);
-                    if (objParticipante != null)
+                    ParticipanteXCarreraBLL objParticipanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+                    ParticipanteXCarreraOBJ objParticipanteXCarrera = objParticipanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(IdParticipante);
+                    if (objParticipanteXCarrera != null)
                     {
-                        //objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14 
-                        objParticipanteBLL.UpdateParticipante(objParticipante);
+						//objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14 
+						objParticipanteXCarreraBLL.UpdateInfoPagoParticipante(objParticipanteXCarrera);
                     }
                 }
             }
@@ -1016,13 +1028,13 @@ namespace WebApplicationTemplate.Web.Pages
                 int IdEquipo;
                 if (int.TryParse(strIdEquipo, out IdEquipo))
                 {
-                    ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
-                    IList<ParticipantesOBJ> lstParticipantes = objParticipanteBLL.SelectParticipante(new ParticipantesOBJ() { IdEquipo = IdEquipo });
+                    ParticipanteXCarreraBLL objParticipanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+                    IList<ParticipanteXCarreraOBJ> lstParticipantes = objParticipanteXCarreraBLL.SelectParticipante(new ParticipanteXCarreraOBJ() { IdEquipo = IdEquipo });
 
-                    foreach (ParticipantesOBJ objParticipante in lstParticipantes)
+                    foreach (ParticipanteXCarreraOBJ objParticipante in lstParticipantes)
                     {
                         //objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14
-                        objParticipanteBLL.UpdateParticipante(objParticipante);
+                        objParticipanteXCarreraBLL.UpdateInfoPagoParticipante(objParticipante);
                     }
                 }
             }

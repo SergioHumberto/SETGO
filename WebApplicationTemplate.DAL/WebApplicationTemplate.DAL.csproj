@@ -131,10 +131,14 @@
     <EmbeddedResource Include="EquipoMAP.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ParticipantesMAP.xml" />
+    <EmbeddedResource Include="ParticipantesMAP.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ParticipanteXCarreraMAP.xml" />
+    <EmbeddedResource Include="ParticipanteXCarreraMAP.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="RamaMAP.xml" />
