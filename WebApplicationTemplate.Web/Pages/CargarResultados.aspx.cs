@@ -496,6 +496,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                     }
 
                     txtImgFileName.Text = crOBJ.ImgCertificado;
+                    lnkVerImagen.NavigateUrl = Tools.Urls.Abs(crOBJ.ImgCertificado);
                     ddlFormatoCert.SelectedValue = crOBJ.IdCertificado.ToString();
                 }
             }

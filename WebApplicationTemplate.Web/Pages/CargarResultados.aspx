@@ -126,6 +126,9 @@
                 <div class="form-group" style="width: 100%">
                     <label class="control-label" for="upldImgCertf">Imagen guardada como</label>
                     <asp:TextBox CssClass="form-control col-md-12" runat="server" ID="txtImgFileName" ReadOnly="true" />
+                    <div class="text-right">
+                        <asp:HyperLink runat="server" Target="_blank" ID="lnkVerImagen" CssClass="btn btn-link" Text="Ver Imagen"></asp:HyperLink>
+                    </div>
                 </div>
                 <br /><br />
                 <div class="form-group" style="width: 50%">
