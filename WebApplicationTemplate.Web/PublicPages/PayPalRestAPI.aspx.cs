@@ -34,6 +34,15 @@ namespace WebApplicationTemplate.Web.Pages
                     // TestMethod();
                     CallWSExpressCheckOut();
                 }
+                else if (Session["SessionIdParticipanteXCarrera"] != null)
+                {
+                    int IdParticipanteXCarrera;
+                    int.TryParse(Session["SessionIdParticipanteXCarrera"].ToString(), out IdParticipanteXCarrera);
+                    LoadInformationParticipanteXCarrera(IdParticipanteXCarrera);
+
+                    // eliminar despues de utilizar la variable de session
+                    Session.Remove("SessionIdParticipanteXCarrera");
+                }
             }
         }
 
@@ -220,7 +229,7 @@ namespace WebApplicationTemplate.Web.Pages
             return lstEmailsXEquipo;
         }
 
-        private void LoadParticipanteDetails(int IdParticipante, int IdCarrera, int IdEquipo, string strToken, List<PaymentDetailsType> lstPaymentDetails, string strStatus)
+        private void LoadParticipanteDetails(int IdParticipante, int IdCarrera, int IdEquipo, string strToken, List<PaymentDetailsType> lstPaymentDetails, string strStatus, bool SendEmail = true)
         {
             if (IdParticipante > 0 && IdCarrera > 0)
             {
@@ -317,8 +326,11 @@ namespace WebApplicationTemplate.Web.Pages
 
                 tablaNotificacion.InnerHtml = body;
 
-                Email email = new Email();
-                email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC, participanteXCarreraOBJ.Folio);
+                if (SendEmail)
+                {
+                    Email email = new Email();
+                    email.SendEmail(body, objParticipante.Email, carreraOBJ.CC, carreraOBJ.BCC, participanteXCarreraOBJ.Folio);
+                }
             }
 
             Session.Remove("paymentId");
@@ -648,6 +660,25 @@ namespace WebApplicationTemplate.Web.Pages
             }
 
             return string.Empty;
+        }
+
+        private void LoadInformationParticipanteXCarrera(int IdParticipanteXCarrera)
+        {
+            UserSession session = Tools.HttpSecurity.CurrentSession;
+            ParticipanteXCarreraBLL objParticipanteXCarreraBLL = new ParticipanteXCarreraBLL(session);
+            ParticipanteXCarreraOBJ objParticipanteXCarrera = objParticipanteXCarreraBLL.SelectParticipanteXCarreraObject(IdParticipanteXCarrera);
+
+            if (objParticipanteXCarrera != null)
+            {
+                int IdParticipante = objParticipanteXCarrera.IdParticipante.Value;
+                int IdCarrera = objParticipanteXCarrera.IdCarrera.Value;
+                int IdEquipo = objParticipanteXCarrera.IdEquipo.Value;
+                string strToken = objParticipanteXCarrera.TransactionNumber;
+                string strStatus = objParticipanteXCarrera.StatusPaypal;
+                bool SendEmail = true;
+
+                LoadParticipanteDetails(IdParticipante,IdCarrera , IdEquipo, strToken, new List<PaymentDetailsType>(), strStatus, SendEmail);
+            }
         }
 
     }

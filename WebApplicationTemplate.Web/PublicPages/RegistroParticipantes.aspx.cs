@@ -548,10 +548,17 @@ namespace WebApplicationTemplate.Web.Pages
                         LimpiarCampos();
                         lblRuta.Visible = false; // To see how to load invisibility
 
-                        lblModalTitle.Text = "¡Registro con éxito!";
-                        lblModalBody.Text = "¡Gracias por registrarte!";
-                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
-                        upModal.Update();
+                        //lblModalTitle.Text = "¡Registro con éxito!";
+                        //lblModalBody.Text = "¡Gracias por registrarte!";
+                        //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
+                        //upModal.Update();
+
+
+                        string urlToRedirect = Urls.PayPalPage();
+                        Session.Add("SessionIdParticipanteXCarrera", IdParticipanteXCarreraProperty);
+
+                        Response.Redirect(urlToRedirect, false);
+                        Context.ApplicationInstance.CompleteRequest();
                     }
 				}
 				else
