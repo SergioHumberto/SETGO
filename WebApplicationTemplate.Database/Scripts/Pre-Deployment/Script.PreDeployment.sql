@@ -24,3 +24,4 @@
 :r .\User.1.sql
 :r .\Equipo.0.sql
 :r .\InformacionPago.0.sql
+:r .\InformacionPago.1.sql

@@ -263,6 +263,7 @@
     <None Include="Scripts\Pre-Deployment\ConfiguracionResultados.0.sql" />
     <None Include="Scripts\Pre-Deployment\User.1.sql" />
     <None Include="Scripts\Pre-Deployment\InformacionPago.0.sql" />
+    <None Include="Scripts\Pre-Deployment\InformacionPago.1.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />

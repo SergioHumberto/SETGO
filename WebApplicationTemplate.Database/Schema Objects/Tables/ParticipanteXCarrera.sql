@@ -12,4 +12,5 @@
 	,[Folio] INT NOT NULL
 	,[FechaPago] DATETIME NULL
 	,[FolioOffline] VARCHAR(255) NULL
+	,[FechaRegistro] DATETIME NOT NULL
 )

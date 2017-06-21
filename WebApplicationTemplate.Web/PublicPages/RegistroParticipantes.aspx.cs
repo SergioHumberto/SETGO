@@ -746,6 +746,8 @@ namespace WebApplicationTemplate.Web.Pages
 				carreraBLL.UpdateSiguienteFolio(carreraOBJ);
 			}
 
+			objParticipanteXCarreraOBJ.FechaRegistro = DateTime.Now;
+
 			objParticipanteXCarreraOBJ.IdEquipo = IdEquipo;
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
 
