@@ -255,6 +255,31 @@ namespace WebApplicationTemplate.Web.Pages
 					participanteXCarreraOBJ.StatusPaypal = strStatus;
 					participanteXCarreraOBJ.TransactionNumber = strToken;
 
+                    // Si el participante fue registrado en equipo
+                    if (IdEquipo > 0)
+                    {
+                        IList<ParticipanteXCarreraOBJ> lstParticipantesXCarrera = 
+                            participanteXCarreraBLL.SelectParticipanteXCarrera( new ParticipanteXCarreraOBJ() {
+                                IdEquipo = IdEquipo
+                                , IdCarrera = IdCarrera
+                            });
+
+                        if (lstParticipantesXCarrera.Count > 0)
+                        {
+                            participanteXCarreraOBJ.StatusPaypal = "EQUIPMENT_PAY";
+                            status = "EQUIPMENT_PAY";
+
+                            // El siguiente ciclo obtiene el numero de transaccion del participante que pagó.
+                            foreach (ParticipanteXCarreraOBJ itemPxC in lstParticipantesXCarrera)
+                            {
+                                if (!string.IsNullOrEmpty(itemPxC.TransactionNumber))
+                                {
+                                    participanteXCarreraOBJ.TransactionNumber = itemPxC.TransactionNumber;
+                                }
+                            }
+                        }
+                    }
+
 					//Actualiza en la tabla de participante, la fecha de pago de paypal
 					participanteXCarreraOBJ.FechaPago = DateTime.Now;
 

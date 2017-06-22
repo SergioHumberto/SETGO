@@ -200,6 +200,7 @@ namespace WebApplicationTemplate.Web.Pages
                             if (!string.IsNullOrEmpty(emailTo))
                             {
                                 txtEmail.Text = emailTo;
+                                LoadInformationEquipoByEmail(emailTo);
                             }
                         }
                     }
