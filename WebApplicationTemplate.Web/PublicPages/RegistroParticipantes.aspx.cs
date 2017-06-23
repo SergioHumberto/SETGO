@@ -1384,6 +1384,19 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 LoadInformationEquipoByEmail(strEmail);
             }
+
+            // Cuando se esté registrando por equipo y cambie su email se debe actualizar tambien en el campo de repeater
+            if (phTipoEquipo.Visible)
+            {
+                if (repeaterEmailParticipanteXEquipo.Items.Count > 0)
+                {
+                    TextBox txtEmailParticipanteXEquipo = repeaterEmailParticipanteXEquipo.Items[0].FindControl("txtEmailParticipanteXEquipo") as TextBox;
+                    if (txtEmailParticipanteXEquipo != null)
+                    {
+                        txtEmailParticipanteXEquipo.Text = strEmail;
+                    }
+                }
+            }
         }
 
         private void LoadInformationEquipoByEmail(string emailParticipante)
