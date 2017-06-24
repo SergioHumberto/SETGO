@@ -222,22 +222,29 @@
                 </div>
             </asp:PlaceHolder>
 
-            <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
-                <div style="width: 60%" class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label id="lblEmail" runat="server">Email *</label>
-                            <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" AutoPostBack="true" OnTextChanged="txtEmail_TextChanged" runat="server"></asp:TextBox>
+           
 
-                            <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true"
-                                CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
+                    <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
+                        <div style="width: 60%" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label id="lblEmail" runat="server">Email *</label>
 
-                            <asp:RegularExpressionValidator ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
-                                ControlToValidate="txtEmail" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
+                                    <asp:UpdatePanel runat="server" UpdateMode="Always">
+                                    <ContentTemplate>
+                                          <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" AutoPostBack="true" OnTextChanged="txtEmail_TextChanged" runat="server"></asp:TextBox>
+                                    </ContentTemplate>
+                                    </asp:UpdatePanel>
+
+                                    <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true"
+                                        CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
+
+                                    <asp:RegularExpressionValidator ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
+                                        ControlToValidate="txtEmail" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </asp:PlaceHolder>
+                    </asp:PlaceHolder>
 
             <asp:PlaceHolder ID="phTelefonoPersonal" Visible="false" runat="server">
                 <div style="width: 60%" class="row">
