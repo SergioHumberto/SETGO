@@ -575,6 +575,7 @@ namespace WebApplicationTemplate.Web.PublicPages
         {
             lblSuccessConfig.InnerText = string.Empty;
             lblSuccessConfig.Visible = false;
+            lblError.Text = string.Empty;            
         }
 
         private void LimpiarGrid()
@@ -611,6 +612,7 @@ namespace WebApplicationTemplate.Web.PublicPages
                         string FilePath = Server.MapPath(FolderPath + FileName);
                         upldImgCertf.SaveAs(FilePath);
                         txtImgFileName.Text = FolderPath + FileName;
+                        lnkVerImagen.NavigateUrl = Tools.Urls.Abs(FolderPath + FileName); ;
                     }
                     else
                         throw new Exception("Formato no válido, solo se aceptan imagenes en formato JPG.");

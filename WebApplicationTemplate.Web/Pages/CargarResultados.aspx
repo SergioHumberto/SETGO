@@ -118,7 +118,7 @@
                 </div>
                 <div class="input-group" style="width: 60%">
                     <label class="control-label" for="upldImgCertf">Imagen de fondo para el certificado</label>
-                    <asp:FileUpload ID="upldImgCertf" runat="server" AllowMultiple="false" />
+                    <asp:FileUpload ID="upldImgCertf" runat="server" AllowMultiple="false"/>
                     <asp:Button ID="btnUpldImgCertf" runat="server" Text="Cargar Imagen"
                         OnClick="btnUpldImgCertf_Click" Style="display: none" />
                 </div>
@@ -139,9 +139,9 @@
                 <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-default" Text="Guardar" OnClick="btnSubmit_Click" />
             </div>
         </ContentTemplate>
-        <Triggers>
+        <Triggers>            
             <asp:PostBackTrigger ControlID="btnUpldImgCertf" />
-            <asp:AsyncPostBackTrigger ControlID="btnSubmit" />
+            <asp:AsyncPostBackTrigger ControlID="btnSubmit" />            
         </Triggers>
     </asp:UpdatePanel>
 
