@@ -28,16 +28,7 @@
                     <li><a href="<%= Urls.Usuarios() %>">Usuarios</a></li>
                     <%--<li class="divider"></li>--%>                    
                 </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registro<b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="<%= Urls.RegistroParticipantes() %>">Registro (Sin iFrame)</a></li>        
-                    <li><a href="<%= Urls.TestIFrame() %>">Registro (Con iFrame)</a></li>                                 
-                    <%--<li class="divider"></li>--%>                    
-                </ul>
-            </li>
+            </li>           
             <li><a href="<%= Urls.ReporteRegistrados() %>">Reporte Registrados</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resultados<b class="caret"></b>
