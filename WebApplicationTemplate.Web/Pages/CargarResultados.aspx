@@ -116,9 +116,10 @@
                     </asp:CheckBoxList>
                     <br />
                 </div>
-                <div class="input-group" style="width: 60%">
+                <div class="input-group" style="width: 100%">
                     <label class="control-label" for="upldImgCertf">Imagen de fondo para el certificado</label>
                     <asp:FileUpload ID="upldImgCertf" runat="server" AllowMultiple="false"/>
+                    <span class="help-block">Deben cargarse imagenes en formato JPG de 1056 x 816 pixeles, a 199pp, en Calidad Alta (8).</span>
                     <asp:Button ID="btnUpldImgCertf" runat="server" Text="Cargar Imagen"
                         OnClick="btnUpldImgCertf_Click" Style="display: none" />
                 </div>
@@ -129,8 +130,7 @@
                     <div class="text-right">
                         <asp:HyperLink runat="server" Target="_blank" ID="lnkVerImagen" CssClass="btn btn-link" Text="Ver Imagen"></asp:HyperLink>
                     </div>
-                </div>
-                <br /><br />
+                </div>                
                 <div class="form-group" style="width: 50%">
                     <label class="control-label" for="upldImgCertf">Formato de Certificado</label>
                     <asp:DropDownList runat="server" ID="ddlFormatoCert" CssClass="form-control"></asp:DropDownList>

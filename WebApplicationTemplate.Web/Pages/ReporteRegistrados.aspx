@@ -65,7 +65,7 @@
 
     <br />
 
-    <asp:Button ID="btnGenerar" Text="Generar reporte" CssClass="btn btn-default" OnClick="btnGenerar_Click" runat="server" />
+    <asp:Button ID="btnGenerar" Text="Exportar a Excel" CssClass="btn btn-default" OnClick="btnGenerar_Click" runat="server" />
 
     <br />
     <br />

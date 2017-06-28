@@ -472,8 +472,8 @@
                                         <asp:CheckBox class="checkbox-inline" runat="server" ID="chkActivo" Checked='<%#Bind("Activo") %>' />
                                     </EditItemTemplate>
                                 </asp:TemplateField>
-                                <asp:CommandField ShowEditButton="true" ItemStyle-Width="20%" />
-                                <asp:CommandField ShowDeleteButton="true" ItemStyle-Width="10%" />
+                                <asp:CommandField ShowEditButton="true" ButtonType="Image" EditImageUrl="~/Resources/Images/icon-edit.png" CancelImageUrl="~/Resources/Images/icon-cancel.png" UpdateImageUrl="~/Resources/Images/icon-apply.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None"/>
+                                <asp:CommandField ShowDeleteButton="true" ButtonType="Image" DeleteImageUrl="~/Resources/Images/icon-delete.png" ItemStyle-Width="5%" ControlStyle-BorderStyle="None" />
                             </Columns>
                         </asp:GridView>
                         <div class="form-group">
