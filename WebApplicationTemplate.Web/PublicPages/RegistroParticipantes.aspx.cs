@@ -1383,6 +1383,30 @@ namespace WebApplicationTemplate.Web.Pages
 
             if (!string.IsNullOrEmpty(strEmail))
             {
+                rblCategoria.Enabled = true;
+                phTipoEquipo.Visible = false;
+                rblTipoRegistro.Enabled = true;
+                // divTipoEquipo.Visible = false;
+                txtNombreEquipo.Text = string.Empty;
+                // txtNombreEquipo.Enabled = false;
+                txtNombreEquipo.Enabled = true;
+
+                char value = (char)ETipoRegistro.Individual;
+                ListItem item = BuscaEnRbl(rblTipoRegistro, value.ToString());
+
+                if (item != null)
+                {
+                    item.Selected = true;
+                    rblTipoRegistro.SelectedValue = item.Value;
+                    rblTipoRegistro.Enabled = false;
+                }
+
+                if (rblCategoria.SelectedIndex > -1)
+                {
+                    rblCategoria.SelectedIndex = -1;
+                    phRuta.Visible = false;
+                }
+
                 LoadInformationEquipoByEmail(strEmail);
             }
 
