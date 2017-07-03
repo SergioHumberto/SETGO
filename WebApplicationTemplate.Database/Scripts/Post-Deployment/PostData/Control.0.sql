@@ -63,6 +63,7 @@ USING (
 	,('phFechaNacimiento')
 	,('phFolioOffline')
 	,('phRuta')
+	,('phClasificacion')
 	) AS S (NameControl)  
 ON T.IdControlASP = S.NameControl 
 
