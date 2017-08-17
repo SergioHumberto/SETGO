@@ -16,7 +16,7 @@
     <Name>WebApplicationTemplate.Database</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <ShowWizard>True</ShowWizard>
     <OutputType>Database</OutputType>
@@ -249,6 +249,7 @@
     <Build Include="Schema Objects\Tables\ClasificacionXParticipante.sql" />
     <Build Include="Schema Objects\Programmability\Functions\GetClasificacionesXParticipante.sql" />
     <None Include="Scripts\Post-Deployment\ControlXCarrera.1.sql" />
+    <Build Include="Schema Objects\Tables\CodigoXCarrera.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

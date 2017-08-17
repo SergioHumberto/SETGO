@@ -43,6 +43,13 @@ namespace WebApplicationTemplate.Web.Pages
                     // eliminar despues de utilizar la variable de session
                     Session.Remove("SessionIdParticipanteXCarrera");
                 }
+                else if (Request.QueryString["IdParticipanteXCarrera"] != null)
+                { // Si entra a este IF significa que no pagó por Paypal y uso FOLIO_OFFLINE
+                    int IdParticipanteXCarrera;
+                    int.TryParse(Request.QueryString["IdParticipanteXCarrera"], out IdParticipanteXCarrera);
+                    lblTitle.InnerText = "¡Gracias, tu registro ha sido procesado!";
+                    LoadInformationParticipanteXCarrera(IdParticipanteXCarrera);
+                }
             }
         }
 
@@ -242,26 +249,28 @@ namespace WebApplicationTemplate.Web.Pages
                 ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
                 ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(IdParticipante);
 
-				ParticipanteXCarreraBLL participanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
-				ParticipanteXCarreraOBJ participanteXCarreraOBJ = participanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(IdParticipante);
+                ParticipanteXCarreraBLL participanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+                ParticipanteXCarreraOBJ participanteXCarreraOBJ = participanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(IdParticipante);
 
-				CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+                CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
                 CarreraOBJ carreraOBJ = new CarreraOBJ();
 
                 carreraOBJ = carreraBLL.SelectCarreraObject(IdCarrera);
 
                 if (participanteXCarreraOBJ != null)
                 {
-					participanteXCarreraOBJ.StatusPaypal = strStatus;
-					participanteXCarreraOBJ.TransactionNumber = strToken;
+                    participanteXCarreraOBJ.StatusPaypal = strStatus;
+                    participanteXCarreraOBJ.TransactionNumber = strToken;
 
                     // Si el participante fue registrado en equipo
                     if (IdEquipo > 0)
                     {
-                        IList<ParticipanteXCarreraOBJ> lstParticipantesXCarrera = 
-                            participanteXCarreraBLL.SelectParticipanteXCarrera( new ParticipanteXCarreraOBJ() {
+                        IList<ParticipanteXCarreraOBJ> lstParticipantesXCarrera =
+                            participanteXCarreraBLL.SelectParticipanteXCarrera(new ParticipanteXCarreraOBJ()
+                            {
                                 IdEquipo = IdEquipo
-                                , IdCarrera = IdCarrera
+                                ,
+                                IdCarrera = IdCarrera
                             });
 
                         if (lstParticipantesXCarrera.Count > 0)
@@ -280,8 +289,8 @@ namespace WebApplicationTemplate.Web.Pages
                         }
                     }
 
-					//Actualiza en la tabla de participante, la fecha de pago de paypal
-					participanteXCarreraOBJ.FechaPago = DateTime.Now;
+                    //Actualiza en la tabla de participante, la fecha de pago de paypal
+                    participanteXCarreraOBJ.FechaPago = DateTime.Now;
 
                     participanteXCarreraBLL.UpdateInfoPagoParticipante(participanteXCarreraOBJ);
                 }
@@ -391,19 +400,19 @@ namespace WebApplicationTemplate.Web.Pages
                     ParticipantesBLL objParticipanteBLL = new ParticipantesBLL(HttpSecurity.CurrentSession);
                     ParticipantesOBJ objParticipante = objParticipanteBLL.SelectParticipanteObject(idParticipante);
 
-					ParticipanteXCarreraBLL participanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
-					ParticipanteXCarreraOBJ participanteXCarreraOBJ = participanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(idParticipante);
+                    ParticipanteXCarreraBLL participanteXCarreraBLL = new ParticipanteXCarreraBLL(HttpSecurity.CurrentSession);
+                    ParticipanteXCarreraOBJ participanteXCarreraOBJ = participanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(idParticipante);
 
-					CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+                    CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
                     CarreraOBJ carreraOBJ = new CarreraOBJ();
 
                     carreraOBJ = carreraBLL.SelectCarreraObject(idCarrera);
 
                     if (participanteXCarreraOBJ != null)
                     {
-						participanteXCarreraOBJ.StatusPaypal = status;
-						participanteXCarreraOBJ.TransactionNumber = numeroTransaccion;
-						participanteXCarreraBLL.UpdateInfoPagoParticipante(participanteXCarreraOBJ);
+                        participanteXCarreraOBJ.StatusPaypal = status;
+                        participanteXCarreraOBJ.TransactionNumber = numeroTransaccion;
+                        participanteXCarreraBLL.UpdateInfoPagoParticipante(participanteXCarreraOBJ);
                     }
 
                     //Cadena para enviar el correo.
@@ -695,14 +704,14 @@ namespace WebApplicationTemplate.Web.Pages
 
             if (objParticipanteXCarrera != null)
             {
-                int IdParticipante = objParticipanteXCarrera.IdParticipante.Value;
-                int IdCarrera = objParticipanteXCarrera.IdCarrera.Value;
-                int IdEquipo = objParticipanteXCarrera.IdEquipo.Value;
+                int IdParticipante = (objParticipanteXCarrera.IdParticipante != null) ? objParticipanteXCarrera.IdParticipante.Value : -1;
+                int IdCarrera = (objParticipanteXCarrera.IdCarrera != null) ? objParticipanteXCarrera.IdCarrera.Value : -1;
+                int IdEquipo = (objParticipanteXCarrera.IdEquipo != null) ? objParticipanteXCarrera.IdEquipo.Value : -1;
                 string strToken = objParticipanteXCarrera.TransactionNumber;
                 string strStatus = objParticipanteXCarrera.StatusPaypal;
                 bool SendEmail = true;
 
-                LoadParticipanteDetails(IdParticipante,IdCarrera , IdEquipo, strToken, new List<PaymentDetailsType>(), strStatus, SendEmail);
+                LoadParticipanteDetails(IdParticipante, IdCarrera, IdEquipo, strToken, new List<PaymentDetailsType>(), strStatus, SendEmail);
             }
         }
 

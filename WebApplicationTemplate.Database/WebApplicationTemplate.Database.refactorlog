@@ -35,4 +35,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Port" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="01eafe0f-a0d5-4cfb-9929-c2b8565461c7" ChangeDateTime="08/15/2017 20:46:30">
+    <Property Name="ElementName" Value="[dbo].[CodigoXCarrera].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CodigoXCarrera]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdCodigoXCarrera" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8d15455c-86bf-4e38-a51b-b2c6055cbd93" ChangeDateTime="08/15/2017 20:48:34">
+    <Property Name="ElementName" Value="[dbo].[CodigoXCarrera].[Usado]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CodigoXCarrera]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IdParticipanteXCarrera" />
+  </Operation>
 </Operations>

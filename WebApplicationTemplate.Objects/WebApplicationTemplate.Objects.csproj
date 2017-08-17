@@ -43,6 +43,7 @@
     <Compile Include="CategoriaOBJ.cs" />
     <Compile Include="ClasificacionOBJ.cs" />
     <Compile Include="ClasificacionXParticipanteOBJ.cs" />
+    <Compile Include="CodigoXCarreraOBJ.cs" />
     <Compile Include="ConfiguracionResultadosOBJ.cs" />
     <Compile Include="ControlOBJ.cs" />
     <Compile Include="ControlXCarreraOBJ.cs" />

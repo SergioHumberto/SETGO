@@ -107,8 +107,13 @@ namespace WebApplicationTemplate.Web.Tools
         {
             return Abs("~/Pages/ConsultaResultadosIFrame.aspx");
         }
+      
+        public static String PayPalRestAPI()
+        {
+            return Abs("~/PublicPages/PayPalRestAPI.aspx");
+        }
 
-		public static String Usuarios()
+        public static String Usuarios()
 		{
 			UserSession currentSession = HttpSecurity.CurrentSession;
 			UserBLL userBLL = new UserBLL(currentSession);

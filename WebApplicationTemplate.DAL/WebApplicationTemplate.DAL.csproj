@@ -51,6 +51,7 @@
     <Compile Include="CategoriaDAL.cs" />
     <Compile Include="ClasificacionDAL.cs" />
     <Compile Include="ClasificacionXParticipanteDAL.cs" />
+    <Compile Include="CodigoXCarreraDAL.cs" />
     <Compile Include="ConfiguracionResultadosMAP.cs" />
     <Compile Include="ControlDAL.cs" />
     <Compile Include="ControlXCarreraDAL.cs" />
@@ -179,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClasificacionXParticipanteMAP.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CodigoXCarreraMAP.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

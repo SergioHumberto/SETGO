@@ -18,7 +18,7 @@
             <img src="http://setgo.mx/wp-content/uploads/2016/05/Logo-trans2x-1.png" height="50" />
         </div>
         <div>
-            <label class="h2">¡Gracias, su pago está siendo procesado!</label>
+            <label runat="server" id="lblTitle" class="h2">¡Gracias, su pago está siendo procesado!</label>
             <br />
             <br />
         </div>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistroParticipantes.aspx.cs" 
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RegistroParticipantes.aspx.cs"
     Inherits="WebApplicationTemplate.Web.Pages.RegistroParticipantes" EnableEventValidation="true" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,45 +8,40 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <style>
-            .AlertaRequerido {
-                color: red;
-            }
+        .AlertaRequerido {
+            color: red;
+        }
 
-            .LetraEtiqueta {
-                font-size: 14px;
-            }
+        .LetraEtiqueta {
+            font-size: 14px;
+        }
 
-            #disablingDiv
-            {
-                /* Do not display it on entry */
-                display: block; 
- 
-                /* Display it on the layer with index 1001.
+        #disablingDiv {
+            /* Do not display it on entry */
+            display: block;
+            /* Display it on the layer with index 1001.
                    Make sure this is the highest z-index value
                    used by layers on that page */
-                z-index:1001;
-     
-                /* make it cover the whole screen */
-                position: absolute; 
-                top: 0%; 
-                left: 0%; 
-                width: 100%; 
-                height: 100%; 
- 
-                /* make it white but fully transparent */
-                background-color: white; 
-                opacity:.00; 
-                filter: alpha(opacity=00);
-            }
-
-        </style>
+            z-index: 1001;
+            /* make it cover the whole screen */
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            /* make it white but fully transparent */
+            background-color: white;
+            opacity: .00;
+            filter: alpha(opacity=00);
+        }
+    </style>
 
     <script type="text/javascript">
         function removeWhitespaces(txtbox) {
@@ -222,29 +217,29 @@
                 </div>
             </asp:PlaceHolder>
 
-           
 
-                    <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
-                        <div style="width: 60%" class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label id="lblEmail" runat="server">Email *</label>
 
-                                    <asp:UpdatePanel runat="server" UpdateMode="Always">
-                                    <ContentTemplate>
-                                          <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" AutoPostBack="true" OnTextChanged="txtEmail_TextChanged" runat="server"></asp:TextBox>
-                                    </ContentTemplate>
-                                    </asp:UpdatePanel>
+            <asp:PlaceHolder ID="phEmail" Visible="false" runat="server">
+                <div style="width: 60%" class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label id="lblEmail" runat="server">Email *</label>
 
-                                    <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true"
-                                        CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
+                            <asp:UpdatePanel runat="server" UpdateMode="Always">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="txtEmail" CssClass="form-control" MaxLength="100" AutoPostBack="true" OnTextChanged="txtEmail_TextChanged" runat="server"></asp:TextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
 
-                                    <asp:RegularExpressionValidator ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
-                                        ControlToValidate="txtEmail" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
-                                </div>
-                            </div>
+                            <asp:RequiredFieldValidator ID="reqEmail" ControlToValidate="txtEmail" SetFocusOnError="true"
+                                CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
+
+                            <asp:RegularExpressionValidator ID="revEmail" runat="server" SetFocusOnError="true" ErrorMessage="Correo electronico invalido"
+                                ControlToValidate="txtEmail" Display="Dynamic" CssClass="AlertaRequerido" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$" />
                         </div>
-                    </asp:PlaceHolder>
+                    </div>
+                </div>
+            </asp:PlaceHolder>
 
             <asp:PlaceHolder ID="phTelefonoPersonal" Visible="false" runat="server">
                 <div style="width: 60%" class="row">
@@ -482,7 +477,7 @@
                 </asp:UpdatePanel>
             </asp:PlaceHolder>
 
-            
+
             <asp:UpdatePanel ID="upRuta" UpdateMode="Always" runat="server">
                 <ContentTemplate>
                     <asp:PlaceHolder ID="phRuta" Visible="false" runat="server">
@@ -528,23 +523,23 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-                <asp:UpdatePanel ID="upTipoRegistro" runat="server" UpdateMode="Always">
-                    <ContentTemplate>
-                        <asp:PlaceHolder ID="phTipoRegistro" Visible="false" runat="server">
-                            <div style="width: 60%; display: block;" class="row">
-                                    <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label>Tipo de registro</label>
-                                        <asp:RadioButtonList ID="rblTipoRegistro" AutoPostBack="true" Enabled="false" CssClass="LetraEtiqueta" OnSelectedIndexChanged="rblTipoRegistro_SelectedIndexChanged" runat="server">
-                                            <asp:ListItem Text="Individual" Value="I" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Text="Equipo" Value="E"></asp:ListItem>
-                                        </asp:RadioButtonList>
-                                    </div>
+            <asp:UpdatePanel ID="upTipoRegistro" runat="server" UpdateMode="Always">
+                <ContentTemplate>
+                    <asp:PlaceHolder ID="phTipoRegistro" Visible="false" runat="server">
+                        <div style="width: 60%; display: block;" class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <label>Tipo de registro</label>
+                                    <asp:RadioButtonList ID="rblTipoRegistro" AutoPostBack="true" Enabled="false" CssClass="LetraEtiqueta" OnSelectedIndexChanged="rblTipoRegistro_SelectedIndexChanged" runat="server">
+                                        <asp:ListItem Text="Individual" Value="I" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="Equipo" Value="E"></asp:ListItem>
+                                    </asp:RadioButtonList>
                                 </div>
                             </div>
-                        </asp:PlaceHolder>
+                        </div>
+                    </asp:PlaceHolder>
 
-                        <asp:PlaceHolder ID="phTipoEquipo" runat="server" Visible="false">
+                    <asp:PlaceHolder ID="phTipoEquipo" runat="server" Visible="false">
                         <br />
                         <div style="width: 60%;" class="row">
                             <div class="col-md-6" id="divTipoEquipo" runat="server">
@@ -554,7 +549,7 @@
                                     </asp:DropDownList>
                                 </div>
                             </div>
-                        </div>                                    
+                        </div>
                         <br />
                         <div style="width: 60%;" class="row">
                             <div class="col-md-6" id="divNombreEquipo" runat="server">
@@ -564,7 +559,7 @@
                                         <tr>
                                             <td>
                                                 <label class="LetraEtiqueta">Nombre equipo</label>
-                                                <asp:TextBox ID="txtNombreEquipo" MaxLength="255" CssClass="form-control" 
+                                                <asp:TextBox ID="txtNombreEquipo" MaxLength="255" CssClass="form-control"
                                                     runat="server" AutoPostBack="true" OnTextChanged="txtNombreEquipo_TextChanged" />
                                             </td>
                                             <td>
@@ -577,11 +572,12 @@
                                 </div>
                             </div>
                         </div>
-                        <br />                        
+                        <br />
                         <asp:Repeater ID="repeaterEmailParticipanteXEquipo" runat="server">
                             <HeaderTemplate>
                                 <label class="text-primary">Ingresa la dirección de correo electrónico de los participantes para que reciban una invitación por correo electrónico</label>
-                                <br /><br />
+                                <br />
+                                <br />
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <div class="row">
@@ -591,7 +587,8 @@
 
                                             <table>
                                                 <tr>
-                                                    <td><asp:TextBox ID="txtEmailParticipanteXEquipo" CssClass="form-control" runat="server"></asp:TextBox></td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtEmailParticipanteXEquipo" CssClass="form-control" runat="server"></asp:TextBox></td>
                                                     <td>
                                                         <asp:RequiredFieldValidator ID="reqEmailParticipanteXEquipo" ControlToValidate="txtEmailParticipanteXEquipo" SetFocusOnError="true"
                                                             CssClass="AlertaRequerido" Display="Dynamic" ErrorMessage="Se requiere un correo electronico" runat="server"></asp:RequiredFieldValidator>
@@ -608,12 +605,31 @@
                                 </div>
                             </ItemTemplate>
                         </asp:Repeater>
-                        </asp:PlaceHolder>
-                                  
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                    </asp:PlaceHolder>
 
-            <br /><br />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <br />
+            
+            <asp:UpdatePanel runat="server" ID="upFormaPago" UpdateMode="Always">
+                <ContentTemplate>
+                    <asp:PlaceHolder ID="phFolioOffline" Visible="false" runat="server">
+                        <div style="width: 80%" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label id="lblFolioOffline" runat="server">Código de Pago</label>
+                                    <asp:TextBox ID="txtFolioOffline" Enabled="true" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <label id="lblFoliOfflineMsg" runat="server" visible="false" class="AlertaRequerido"></label>
+                                    <asp:RequiredFieldValidator ID="reqFolioOffline" ControlToValidate="txtFolioOffline" SetFocusOnError="true"
+                                        CssClass="AlertaRequerido" ErrorMessage="Se requiere folio" runat="server" Display="Dynamic"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:PlaceHolder>
+                </ContentTemplate>
+            </asp:UpdatePanel>            
+            <br />
             <asp:PlaceHolder ID="phPoliticas" runat="server">
                 <div class="row">
                     <div class="col-md-12">
@@ -622,7 +638,6 @@
                     </div>
                 </div>
             </asp:PlaceHolder>
-
             <asp:PlaceHolder ID="phAcepto" Visible="false" runat="server">
                 <div style="width: 60%" class="row">
                     <div class="col-md-6">
@@ -636,25 +651,6 @@
             </asp:PlaceHolder>
 
             <br />
-
-            <asp:UpdatePanel runat="server" ID="upFormaPago" UpdateMode="Always">
-                <ContentTemplate>
-                    <asp:PlaceHolder ID="phFolioOffline" Visible="false" runat="server">
-                        <div style="width: 80%" class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-
-                                    <label id="lblFolioOffline" runat="server">Código de Pago</label>
-                                    <asp:TextBox ID="txtFolioOffline" Enabled="true" MaxLength="255" CssClass="form-control" runat="server"></asp:TextBox>
-
-                                    <asp:RequiredFieldValidator ID="reqFolioOffline" ControlToValidate="txtFolioOffline" SetFocusOnError="true"
-                                        CssClass="AlertaRequerido" ErrorMessage="Se requiere folio" runat="server" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </div>
-                            </div>
-                        </div>
-                    </asp:PlaceHolder>
-                </ContentTemplate>
-            </asp:UpdatePanel>
 
             <asp:UpdatePanel runat="server" ID="upTotal" UpdateMode="Always">
                 <ContentTemplate>

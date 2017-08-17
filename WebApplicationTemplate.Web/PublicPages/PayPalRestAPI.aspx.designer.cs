@@ -22,6 +22,15 @@ namespace WebApplicationTemplate.Web.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// Control lblTitle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblTitle;
+        
+        /// <summary>
         /// Control tablaNotificacion.
         /// </summary>
         /// <remarks>

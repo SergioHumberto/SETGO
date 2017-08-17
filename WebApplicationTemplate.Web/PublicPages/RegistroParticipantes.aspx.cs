@@ -114,7 +114,7 @@ namespace WebApplicationTemplate.Web.Pages
                 return -1;
             }
         }
-        
+
         public enum ETipoRegistro
         {
             Individual = 'I'
@@ -164,10 +164,10 @@ namespace WebApplicationTemplate.Web.Pages
                     btnEnviar.Visible = false;
                 }
 
-				PagoOffline();
+                PagoOffline();
 
-				// lblRuta.Visible = false;
-			}
+                // lblRuta.Visible = false;
+            }
         }
 
         private void LoadEquipoSettings(int IdCarrera, string strUEQ, string emailTo)
@@ -206,12 +206,12 @@ namespace WebApplicationTemplate.Web.Pages
                         }
                     }
                 }
-                else if(lstEquipos.Count > 1)
+                else if (lstEquipos.Count > 1)
                 {
                     throw new Exception("Se encontró mas de un equipo registrado");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 cusError.ErrorMessage = "Error: " + ex.Message;
                 cusError.IsValid = false;
@@ -246,7 +246,7 @@ namespace WebApplicationTemplate.Web.Pages
             {
                 foreach (ListItem item in rblControl.Items)
                 {
-                    if(item.Value.CompareTo(value) == 0)
+                    if (item.Value.CompareTo(value) == 0)
                     {
                         return item;
                     }
@@ -372,7 +372,8 @@ namespace WebApplicationTemplate.Web.Pages
 
                 RamaBLL objRamaBLL = new RamaBLL(session);
 
-                IList<RamaOBJ> lstRamas = objRamaBLL.SelectRama(new RamaOBJ() {
+                IList<RamaOBJ> lstRamas = objRamaBLL.SelectRama(new RamaOBJ()
+                {
                     IdCarrera = IdCarrera
                 });
 
@@ -390,7 +391,7 @@ namespace WebApplicationTemplate.Web.Pages
 
                 lblPoliticas.Text = objCarrera.DescripcionPoliticas;
 
-                SetVisibilityTipoRegistro();    
+                SetVisibilityTipoRegistro();
             }
         }
 
@@ -452,11 +453,11 @@ namespace WebApplicationTemplate.Web.Pages
                 foreach (CategoriaOBJ itemCategoria in lstCategorias)
                 {
                     int numParticipantes = 0;
-                    if(!string.IsNullOrEmpty(ddlTipoEquipo.SelectedValue))
+                    if (!string.IsNullOrEmpty(ddlTipoEquipo.SelectedValue))
                     {
                         int.TryParse(ddlTipoEquipo.SelectedItem.Text, out numParticipantes);
                     }
-                    
+
 
                     IList<TipoEquipoOBJ> lstTipoEquipos = objTipoEquipoBLL.SelectTipoEquipo(
                         new TipoEquipoOBJ() { IdCategoria = itemCategoria.IdCategoria, CantidadParticipantes = numParticipantes });
@@ -497,7 +498,7 @@ namespace WebApplicationTemplate.Web.Pages
         {
             try
             {
-				InsertarParticipante();
+                InsertarParticipante();
 
                 decimal Amount = 0;
                 if (RegistroEnEquipo)
@@ -518,15 +519,15 @@ namespace WebApplicationTemplate.Web.Pages
                     }
                 }
 
-				CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-				CarreraOBJ carreraOBJ = new CarreraOBJ();
+                CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+                CarreraOBJ carreraOBJ = new CarreraOBJ();
 
-				carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+                carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
 
-				//Si existe un correo de Paypal, ingresa al método de pago.
-				//Si no, el pago es en efectivo u otro tipo de pago y no entra a Paypal.
-				if(!string.IsNullOrEmpty(carreraOBJ.PayPalEmail))
-				{
+                //Si existe un correo de Paypal, ingresa al método de pago.
+                //Si no, el pago es en efectivo u otro tipo de pago y no entra a Paypal.
+                if (!string.IsNullOrEmpty(carreraOBJ.PayPalEmail))
+                { // Pago PayPal
                     bool bPrimeroEnRegistrar = false;
                     UserSession session = HttpSecurity.CurrentSession;
                     EquipoBLL objEquipoBLL = new EquipoBLL(session);
@@ -562,21 +563,65 @@ namespace WebApplicationTemplate.Web.Pages
                         Response.Redirect(urlToRedirect, false);
                         Context.ApplicationInstance.CompleteRequest();
                     }
-				}
-				else
-				{
-					LimpiarCampos();
+                }
+                else
+                { // Pago Offline
 
-					lblModalTitle.Text = "¡Registro con éxito!";
-					lblModalBody.Text = "¡Gracias por registrarte!";
-					ScriptManager.RegisterStartupScript(Page, Page.GetType(), "myModal", "$('#myModal').modal();", true);
-					upModal.Update();
-				}
+                    if (tomaCodigoValido(txtFolioOffline.Text, IdCarreraProperty))
+                    {
+                        string url = Urls.PayPalRestAPI() + "?IdParticipanteXCarrera=" + IdParticipanteXCarreraProperty;
+                        Response.Redirect(url);
+                    }                   
+                }
             }
             catch (Exception ex)
             {
                 cusError.ErrorMessage = ex.Message;
                 cusError.IsValid = false;
+            }
+        }
+
+        private bool tomaCodigoValido(string codigo, int idCarrera)
+        {
+            try
+            {
+                UserSession session = HttpSecurity.CurrentSession;
+                CodigoXCarreraBLL objCodigoXCarreraBLL = new CodigoXCarreraBLL(session);
+
+                CodigoXCarreraOBJ objCC = new CodigoXCarreraOBJ();
+                objCC.Codigo = codigo;
+                objCC.IdCarrera = idCarrera;
+
+                IList<CodigoXCarreraOBJ> lstCC = objCodigoXCarreraBLL.SelectCodigoXCarrera(objCC);
+
+                if (lstCC != null && lstCC.Count > 0) // si encontró almenos un coincidente
+                {
+                    foreach (CodigoXCarreraOBJ cc in lstCC) // recorre cada elemento
+                    {
+                        if (cc.Codigo == codigo && cc.UsoMaximo > 0 && cc.Usados < cc.UsoMaximo) //Verifica si el código coincide y aún tiene usos disponibles
+                        {
+                            cc.Usados++;
+                            objCodigoXCarreraBLL.UpdateUso(cc); // Incrementa el numero de usos
+                            return true; // y regresa verdadero por que encontró un coincidente
+                        }
+                        else if (cc.Codigo == codigo && cc.UsoMaximo <= 0 && cc.IdParticipanteXCarrera <= 0) //Verifica si el código coincide y no ha sido usado por un IdParticipanteXCarrera
+                        {
+                            cc.IdParticipanteXCarrera = IdParticipanteXCarreraProperty;
+                            objCodigoXCarreraBLL.UpdateUso(cc); // Actualiza el código como "USADO", agregando la referencia al IdParticipanteXCarrera
+                            return true; // y regresa verdadero por que encontró un coincidente
+                        }
+                    }
+                }
+                lblFoliOfflineMsg.InnerText = "Código de pago No válido.";
+                lblFoliOfflineMsg.Visible = true;
+                btnEnviar.Focus();
+                return false; // sino regresó elementos en la lista de búsqueda o sino encontró coincidente regresa falso                
+            }
+            catch (Exception ex)
+            {
+                cusError.ErrorMessage = ex.Message;
+                cusError.IsValid = false;
+                return false;
             }
         }
 
@@ -595,12 +640,14 @@ namespace WebApplicationTemplate.Web.Pages
             rblCategoria.ClearSelection();
             rblRamas.ClearSelection();
             chkAcepto.Checked = false;
-			txtFolioOffline.Text = string.Empty;
-			rblRuta.Items.Clear();
-			ddlDia.ClearSelection();
-			ddlMes.ClearSelection();
-			ddlAnio.ClearSelection();
-		}
+            txtFolioOffline.Text = string.Empty;
+            rblRuta.Items.Clear();
+            ddlDia.ClearSelection();
+            ddlMes.ClearSelection();
+            ddlAnio.ClearSelection();
+            lblFoliOfflineMsg.InnerText = string.Empty;
+            lblFoliOfflineMsg.Visible = false;
+        }
 
         private void validaParticipante(ParticipantesOBJ participanteOBJ)
         {
@@ -629,9 +676,9 @@ namespace WebApplicationTemplate.Web.Pages
                 DAL.DAL.CommitTransaction();
 
                 IdParticipanteVSProperty = objParticipante.IdParticipante;
-			}
+            }
             catch (Exception ex)
-            {                
+            {
                 DAL.DAL.RollbackTransaction();
                 throw new Exception("Hubo un error al guardar participante, detalle del error: " + ex.Message);
             }
@@ -669,7 +716,7 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipanteXCarreraOBJ.IdParticipante = IdParticipante;
 
             int IdRama;
-            if(int.TryParse(rblRamas.SelectedValue, out IdRama))
+            if (int.TryParse(rblRamas.SelectedValue, out IdRama))
             {
                 objParticipanteXCarreraOBJ.IdRama = IdRama;
             }
@@ -681,10 +728,10 @@ namespace WebApplicationTemplate.Web.Pages
             }
 
             int IdRuta;
-			if (int.TryParse(rblRuta.SelectedValue, out IdRuta))
-			{
-				objParticipanteXCarreraOBJ.IdRuta = IdRuta;
-			}
+            if (int.TryParse(rblRuta.SelectedValue, out IdRuta))
+            {
+                objParticipanteXCarreraOBJ.IdRuta = IdRuta;
+            }
 
             EquipoBLL objEquipoBLL = new EquipoBLL(session);
             IList<EquipoOBJ> lstEquipos = objEquipoBLL.SelectEquipos(
@@ -737,20 +784,21 @@ namespace WebApplicationTemplate.Web.Pages
             }
 
 
-			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-			CarreraOBJ carreraOBJ = new CarreraOBJ();
-			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+            CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+            CarreraOBJ carreraOBJ = new CarreraOBJ();
+            carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
 
-			if (carreraOBJ != null)
-			{
-				objParticipanteXCarreraOBJ.Folio = carreraOBJ.SiguienteFolio;
-				carreraOBJ.SiguienteFolio++;
-				carreraBLL.UpdateSiguienteFolio(carreraOBJ);
-			}
+            if (carreraOBJ != null)
+            {
+                objParticipanteXCarreraOBJ.Folio = carreraOBJ.SiguienteFolio;
+                carreraOBJ.SiguienteFolio++;
+                carreraBLL.UpdateSiguienteFolio(carreraOBJ);
+            }
 
-			objParticipanteXCarreraOBJ.FechaRegistro = DateTime.Now;
+            objParticipanteXCarreraOBJ.FechaRegistro = DateTime.Now;
 
-			objParticipanteXCarreraOBJ.IdEquipo = IdEquipo;
+            objParticipanteXCarreraOBJ.IdEquipo = IdEquipo;
+            objParticipanteXCarreraOBJ.FolioOffline = txtFolioOffline.Text;            
             objPxCBLL.InsertParticipanteXCarrera(objParticipanteXCarreraOBJ);
 
             IdParticipanteXCarreraProperty = objParticipanteXCarreraOBJ.IdParticipanteXCarrera;
@@ -768,7 +816,7 @@ namespace WebApplicationTemplate.Web.Pages
 
             if (repeaterEmailParticipanteXEquipo != null && repeaterEmailParticipanteXEquipo.Items.Count > 0)
             {
-                for(int i = 0; i < repeaterEmailParticipanteXEquipo.Items.Count; i++)
+                for (int i = 0; i < repeaterEmailParticipanteXEquipo.Items.Count; i++)
                 {
                     RepeaterItem itemRepeater = repeaterEmailParticipanteXEquipo.Items[i];
                     TextBox txtEmailParticipanteXEquipo = itemRepeater.FindControl("txtEmailParticipanteXEquipo") as TextBox;
@@ -861,24 +909,24 @@ namespace WebApplicationTemplate.Web.Pages
 
             objParticipante.ParticipanteXCarrera = objParticipanteXCarreraOBJ;
 
-			//Asigna el folio correspondiente
+            //Asigna el folio correspondiente
 
-			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-			CarreraOBJ carreraOBJ = new CarreraOBJ();
+            CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+            CarreraOBJ carreraOBJ = new CarreraOBJ();
 
-			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+            carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
 
-			//if(carreraOBJ != null)
-			//{
-			//	objParticipanteXCarreraOBJ.Folio = carreraOBJ.SiguienteFolio;
+            //if(carreraOBJ != null)
+            //{
+            //	objParticipanteXCarreraOBJ.Folio = carreraOBJ.SiguienteFolio;
 
-			//	carreraOBJ.SiguienteFolio++;
+            //	carreraOBJ.SiguienteFolio++;
 
-			//	carreraBLL.UpdateSiguienteFolio(carreraOBJ);
-			//}
+            //	carreraBLL.UpdateSiguienteFolio(carreraOBJ);
+            //}
 
-			// Fill 10 generic fields
-			objParticipante.Generic01 = !string.IsNullOrEmpty(txtGeneric01.Text.Trim()) ? txtGeneric01.Text.Trim() : null;
+            // Fill 10 generic fields
+            objParticipante.Generic01 = !string.IsNullOrEmpty(txtGeneric01.Text.Trim()) ? txtGeneric01.Text.Trim() : null;
             objParticipante.Generic02 = !string.IsNullOrEmpty(txtGeneric02.Text.Trim()) ? txtGeneric02.Text.Trim() : null;
             objParticipante.Generic03 = !string.IsNullOrEmpty(txtGeneric03.Text.Trim()) ? txtGeneric03.Text.Trim() : null;
             objParticipante.Generic04 = !string.IsNullOrEmpty(txtGeneric04.Text.Trim()) ? txtGeneric04.Text.Trim() : null;
@@ -889,12 +937,12 @@ namespace WebApplicationTemplate.Web.Pages
             objParticipante.Generic09 = !string.IsNullOrEmpty(txtGeneric09.Text.Trim()) ? txtGeneric09.Text.Trim() : null;
             objParticipante.Generic10 = !string.IsNullOrEmpty(txtGeneric10.Text.Trim()) ? txtGeneric10.Text.Trim() : null;
 
-			objParticipante.FechaRegistro = DateTime.Now;
+            objParticipante.FechaRegistro = DateTime.Now;
 
-			if (string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
-			{
-				objParticipanteXCarreraOBJ.FolioOffline = txtFolioOffline.Text;
-			}
+            if (string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
+            {
+                objParticipanteXCarreraOBJ.FolioOffline = txtFolioOffline.Text;
+            }
 
             return objParticipante;
         }
@@ -991,22 +1039,28 @@ namespace WebApplicationTemplate.Web.Pages
                 strNombreCarrera = objCarrera.Nombre;
                 strCancelURL = objCarrera.URLRegistro; //Se obtiene desde la BD, la URL de registro ya trae el IdCarrera o la URL que enmascara e identifica la carrera
             }
-			Session.Remove("objSessionPayPal");
-			SessionPayPal objSessionPayPal = new SessionPayPal()
+            Session.Remove("objSessionPayPal");
+            SessionPayPal objSessionPayPal = new SessionPayPal()
             {
                 IdCarrera = IdCarreraProperty
-                , amount = p_Amount
-                , custom = strCustom
-                , item_name = strNombreCarrera
-                , returnURL = strURLReturn
-                , cancelURL = strCancelURL
-				, IdParticipante = this.IdParticipanteVSProperty
+                ,
+                amount = p_Amount
+                ,
+                custom = strCustom
+                ,
+                item_name = strNombreCarrera
+                ,
+                returnURL = strURLReturn
+                ,
+                cancelURL = strCancelURL
+                ,
+                IdParticipante = this.IdParticipanteVSProperty
             };
 
             Session.Add("objSessionPayPal", objSessionPayPal);
 
             string url = Urls.PayPalPage();
-            
+
             // string s = "window.open('" + url + "', 'popup_window', 'width=500,height=800,left=100,top=100,resizable=yes');";
             // ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
 
@@ -1014,7 +1068,7 @@ namespace WebApplicationTemplate.Web.Pages
             Context.ApplicationInstance.CompleteRequest();
         }
 
-        
+
 
         private void UpdatePayment(string customVariable)
         {
@@ -1028,12 +1082,12 @@ namespace WebApplicationTemplate.Web.Pages
                     ParticipanteXCarreraOBJ objParticipanteXCarrera = objParticipanteXCarreraBLL.SelectParticipanteXCarreraByIdParticipante(IdParticipante);
                     if (objParticipanteXCarrera != null)
                     {
-						//objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14 
-						objParticipanteXCarreraBLL.UpdateInfoPagoParticipante(objParticipanteXCarrera);
+                        //objParticipante.Pagado = true; Se elimina el campo Pagado by ECM T#14 
+                        objParticipanteXCarreraBLL.UpdateInfoPagoParticipante(objParticipanteXCarrera);
                     }
                 }
             }
-            else if(customVariable.Contains("IdEquipo"))
+            else if (customVariable.Contains("IdEquipo"))
             {
                 string strIdEquipo = customVariable.Replace("IdEquipo%3D", "");
                 int IdEquipo;
@@ -1118,7 +1172,7 @@ namespace WebApplicationTemplate.Web.Pages
             int IdCategoria;
             int.TryParse(rblCategoria.SelectedValue, out IdCategoria);
 
-            rblTipoRegistro.SelectedValue = "" +  (char)ETipoRegistro.Individual;
+            rblTipoRegistro.SelectedValue = "" + (char)ETipoRegistro.Individual;
             phTipoEquipo.Visible = false;
 
             if (IdCategoria > 0)
@@ -1230,54 +1284,54 @@ namespace WebApplicationTemplate.Web.Pages
             }
         }
 
-		/// <summary>
-		/// Revisa el modo de pago (Paypal o Offline), y oculta o muestra el txtFolioOffline.
-		/// </summary>
-		private void PagoOffline()
-		{
-			CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
-			CarreraOBJ carreraOBJ = new CarreraOBJ();
-			carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
+        /// <summary>
+        /// Revisa el modo de pago (Paypal o Offline), y oculta o muestra el txtFolioOffline.
+        /// </summary>
+        private void PagoOffline()
+        {
+            CarreraBLL carreraBLL = new CarreraBLL(HttpSecurity.CurrentSession);
+            CarreraOBJ carreraOBJ = new CarreraOBJ();
+            carreraOBJ = carreraBLL.SelectCarreraObject(IdCarreraProperty);
 
-			if(carreraOBJ != null)
-			{
-				if (!string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
-				{
-					phFolioOffline.Visible = false;
-				}
-				else
-				{
-					phFolioOffline.Visible = true;
-				}
-			}
-		}
+            if (carreraOBJ != null)
+            {
+                if (!string.IsNullOrWhiteSpace(carreraOBJ.PayPalEmail))
+                {
+                    phFolioOffline.Visible = false;
+                }
+                else
+                {
+                    phFolioOffline.Visible = true;
+                }
+            }
+        }
 
-		private void CargarRutasByIdCategoria(int idCategoria)
-		{
-			RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
-			IList<RutaOBJ> lstRutas;
+        private void CargarRutasByIdCategoria(int idCategoria)
+        {
+            RutaBLL rutaBLL = new RutaBLL(HttpSecurity.CurrentSession);
+            IList<RutaOBJ> lstRutas;
 
             RutaOBJ ruta = new RutaOBJ();
             ruta.IdCategoria = idCategoria;
 
-			lstRutas = rutaBLL.SeleccionarRutasByIdCategoria(ruta);
+            lstRutas = rutaBLL.SeleccionarRutasByIdCategoria(ruta);
 
-			// lblRuta.Visible = false;
+            // lblRuta.Visible = false;
 
-		    if(lstRutas != null && lstRutas.Count > 0)
-			{
+            if (lstRutas != null && lstRutas.Count > 0)
+            {
                 lblRuta.Visible = true;
                 phRuta.Visible = true;
                 rblRuta.DataSource = lstRutas;
-				rblRuta.DataTextField = "Nombre";
-				rblRuta.DataValueField = "IdRuta";
-				rblRuta.DataBind();
-			}
-			else
-			{
-				phRuta.Visible = false;
-			}
-		}
+                rblRuta.DataTextField = "Nombre";
+                rblRuta.DataValueField = "IdRuta";
+                rblRuta.DataBind();
+            }
+            else
+            {
+                phRuta.Visible = false;
+            }
+        }
 
         private void LoadEmailParticipanteXEquipo(int IdTipoEquipo)
         {

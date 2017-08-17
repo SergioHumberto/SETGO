@@ -55,12 +55,13 @@
 		</select>
 
 		<update id="UpdateInfoPagoParticipante" parameterClass="ParticipanteXCarreraOBJ">
-			UPDATE ParticipanteXCarrera
-			SET TransactionNumber = #TransactionNumber#
-			, StatusPaypal = #StatusPaypal#
-			, FechaPago = #FechaPago#
-			WHERE IdParticipanteXCarrera = #IdParticipanteXCarrera#
-		</update>
+      UPDATE ParticipanteXCarrera
+      SET TransactionNumber = #TransactionNumber#
+      , StatusPaypal = #StatusPaypal#
+      , FechaPago = #FechaPago#
+      , FolioOffline = #FolioOffline#
+      WHERE IdParticipanteXCarrera = #IdParticipanteXCarrera#
+    </update>
 
 		<!--<select id="SelectParticipante" parameterClass="ParticipanteXCarreraOBJ" resultClass="ParticipanteXCarreraOBJ">
 			<![CDATA[
